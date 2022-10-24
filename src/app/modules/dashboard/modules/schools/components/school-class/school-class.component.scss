@@ -1,0 +1,47 @@
+@import '../../../../../../../assets/css/utils/variables.scss';
+@import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/breadcrumb';
+@import '../../../../../../../assets/css/components/accordion';
+@import '../../../../../../../assets/css/components/model';
+
+.class{
+
+    
+    .submit-btn {
+        top: -8rem;
+        inset-inline-end: 0;
+    }
+
+    &__form{
+        // border: 1px solid $color-gray-200;
+        min-height: 100vh;
+
+        // label{font-size: 1.4rem;}
+
+        .subjects{
+
+            li.subject{
+                border-top: 1px solid $color-gray-100;
+            }
+        }
+
+        .tracks{
+            .track{
+                border-top: 1px solid $color-gray-100;
+                &__head{
+
+                    background-color: $color-gray-30;
+                    padding: 1.2rem 2rem;
+                    margin-bottom: 3rem;
+                    border-radius: 15px;
+                }
+
+                li.subject:not(:last-child){
+                    margin-bottom: 2.75rem;
+                }
+            }
+        }
+    }
+
+
+}

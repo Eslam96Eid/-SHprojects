@@ -1,0 +1,49 @@
+@import '../utils/variables.scss';
+
+
+::ng-deep p-breadcrumb{
+   
+
+    .p-breadcrumb{
+        background: transparent;
+        border: 0;
+        padding-right: 0;
+
+
+        .p-breadcrumb-home{
+            .pi{font-size: 1.3rem;}
+
+        }
+
+        .p-breadcrumb-chevron{
+            transform: rotate(180deg);
+        };
+
+        ul li .p-menuitem-link{
+
+            .p-menuitem-text{
+                color: $color-gray-300;
+                transition: all .3s ease-out;
+                &:hover{
+                    color: $color-primary;
+                }
+            }
+            .p-menuitem-icon{
+                margin-inline-end: .75rem;
+            }
+
+            &.p-menuitem-link-active .p-menuitem-text{color: $color-primary;}
+
+            &:focus{ background-color: transparent;}
+        }
+
+        // ul li .p-menuitem-link .p-menuitem-text{
+        //     color: $color-gray-300;
+        //     transition: all .3s ease-out;
+        //     &:hover{
+        //         color: #333;
+        //     }
+        // }
+        
+    }
+}

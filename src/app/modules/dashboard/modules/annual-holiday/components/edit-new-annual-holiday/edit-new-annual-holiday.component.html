@@ -1,0 +1,156 @@
+
+
+
+<div  style="overflow-x: hidden;">
+     
+    <div class="d-flex ">
+   
+    <div id="content" >
+      
+   
+    
+  
+      
+          <div class=" mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
+              <form [formGroup]=" annualHolidayFormGrp" (ngSubmit)="saveMe()" >
+               
+                  <div class="row gx-5 form-set container-fluid" >
+                      <div class="col-xs-2 col-lg-4" >
+                          <label for="PID" class="label">{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}</label>
+                          <input type="text" pInputText formControlName="smester"  [(ngModel)]="annualHolidayAddedList[0].annualCalendarName" class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
+                      <div>
+                          <div [hidden]="smester.valid || smester.untouched">
+                              <small *ngIf="smester.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                {{'shared.This Field is Required'|translate}}
+                                 <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                             
+                              <small *ngIf="smester.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                  {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
+                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                           </div>
+                              
+                          </div>
+                     
+                         
+                      </div>
+                      <div class="col-xs-2 col-lg-4">
+                          <label for="PName" class="label">{{'dashboard.AnnualHoliday.Year'|translate}}</label>
+                            <p-dropdown [options]=" yearList" optionLabel="year" optionValue="year"  [(ngModel)]="annualHolidayAddedList[0].year" formControlName="year" placeholder="{{'dashboard.AnnualHoliday.Select Year'|translate}}"   name="PName" id="PName" class="form-control" appValidation  ></p-dropdown>
+                            <div [hidden]="year.valid||year.untouched">
+                              <small *ngIf="year.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>
+                          </div>
+                        
+                      </div>
+   
+                      <div class="col-xs-2 col-lg-4  "  *ngIf="urlParameter">
+                        <div class="btn btn-outline-primary copy " role="button" (click)="addNew()">
+                            <img src="assets/images/shared/copy.svg">
+                            {{'dashboard.AnnualHoliday.copy content'|translate}}
+                            
+                          </div>
+                      
+                    </div>
+                      
+                    
+                    
+                  </div>
+                <hr > 
+              <div formArrayName="holiday" >
+                  <div *ngFor="let item of holiday.controls ; let i=index" [formGroupName]="i">
+                
+                  <div class="row gx-5 form-set container-fluid ">
+                      <div class="col-xs-2 col-lg-4">
+                          <label for="PP + {{i}}" class="label">{{'dashboard.AnnualHoliday.curriculum'|translate}}</label>
+                            <!-- <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate}}"  [(ngModel)]="annualHolidayAddedList[i].curriculumName" *ngIf="!urlParameter"  formControlName="curriculumName"   id="PP + {{i}}" name="PPO + {{i}}" class="form-control" appValidation   ></p-dropdown> -->
+                            <p-multiSelect  [options]="curriculumList"  optionLabel="name.ar" optionValue="id" display="chip" *ngIf="urlParameter" [(ngModel)]="annualHolidayAddedList[i].curriculumName"  formControlName="curriculumName"   id="PP + {{i}}" name="PPO + {{i}}" class="form-control" styleClass="p-multiselect" appValidation   ></p-multiSelect>
+                            <p-multiSelect [options]="curriculumList" optionLabel="name.ar" optionValue="id" display="chip" formControlName="curriculumName" class="form-control" [(ngModel)]="annualHolidayAddedList[i].curriculumName" appValidation  id="PP + {{i}}" name="PPO + {{i}}" styleClass="p-multiselect" *ngIf="!urlParameter" defaultLabel="{{'dashboard.AnnualHoliday.Select curriculum'|translate}}"></p-multiSelect>
+                            <div [hidden]="item.get('curriculumName').valid||item.get('curriculumName').untouched">
+                              <small *ngIf="item.get('curriculumName').errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>
+                          </div>
+                         
+                      </div>
+                      <div class="col-xs-2 col-lg-4">
+                          
+                          <label for="cal3 + {{i}}" class="label">{{'dashboard.AnnualHoliday.DateFrom'|translate}}</label>  
+                          <p-calendar formControlName="dateFrom" [(ngModel)]="annualHolidayAddedList[i].dateFrom" [showIcon]="true" inputId="icon" name="cal3O + {{i}}" id="cal3 + {{i}}"  class="form-control" appValidation    placeholder="dd/mm"   [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
+                          <span [hidden]="item.get('dateFrom').valid|| item.get('dateFrom').untouched" class="errorcalender">
+                              <small *ngIf="item.get('dateFrom').errors?.['required'] " id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                             
+                          </span>
+                          
+                         
+                      
+                     </div>
+                     
+                      <div class="col-xs-2 col-lg-4">
+                          <label for="cal4 + {{i}}" class="label">{{'dashboard.AnnualHoliday.DateTo'|translate}}</label>
+                          <p-calendar name="calO4 + {{i}}"  [showIcon]="true" inputId="icon" [(ngModel)]="annualHolidayAddedList[i].dateTo" id="cal4 + {{i}}"  formControlName="dateTo"    placeholder="dd/mm" class="form-control" appValidation   [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
+                          <span [hidden]="item.get('dateTo').valid|| item.get('dateTo').untouched" class="errorcalender">
+                              <small *ngIf="item.get('dateTo').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                              
+                          </span>
+                         
+                    
+                     </div>
+                  </div>
+                  <div class="row gx-5 form-set container-fluid ">
+                      <div class="col-xs-4 col-lg-4">
+                          <label for="ID + {{i}}" class="label">{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</label>
+                            <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="id" [(ngModel)]="annualHolidayAddedList[i].flexibilityStatus" *ngIf="!urlParameter" formControlName="flexibilityStatus" placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate}}"  id="ID + {{i}}" name="IDO + {{i}}" class="form-control" appValidation   ></p-dropdown>
+                            <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="id" [(ngModel)]="annualHolidayAddedList[i].flexibilityStatus" *ngIf="urlParameter" formControlName="flexibilityStatus"   id="ID + {{i}}" name="IDO + {{i}}" class="form-control" appValidation   ></p-dropdown>
+                            <div [hidden]="item.get('flexibilityStatus').valid||item.get('flexibilityStatus').untouched">
+                              <small *ngIf="item.get('flexibilityStatus').errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>
+                          </div>
+                        
+                      </div>
+                      
+                      <div class="col-xs-4 col-lg-4">
+                          <label for="PN + {{i}}" class="label"  >{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</label>
+                          <input type="text" pInputText formControlName="arabicName" [(ngModel)]="annualHolidayAddedList[i].arabicName" class="form-control basicinput" appValidatorsInput  placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" name="PNO + {{i}}" id="PN + {{i}}"> 
+                          <div [hidden]="item.get('arabicName').valid|| item.get('arabicName').untouched">
+                              <small *ngIf="item.get('arabicName').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                            
+                              <small *ngIf="item.get('arabicName').errors?.['maxength']" id="helpId2" class="form-text text-muted d-block" class="alert-danger" >
+                                  {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
+                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                          </div>
+                        
+
+                        
+                      </div>
+                   
+                  </div>
+                  <div class="btn btn-outline-primary Addnew mb-5" role="button" (click)="addNew()">
+                    <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
+                    {{'dashboard.AnnualHoliday.Add Annual Holiday'|translate}}
+                    
+                   </div>
+              </div>
+          </div>
+         
+                <div class=" d-flex align-items-center justify-content-end ">
+                  <div class="Btn-group d-flex">
+                    <button type="submit" class="btn  btn-primary" [disabled]="annualHolidayFormGrp.invalid">{{'shared.save'|translate}}</button>
+                  </div>
+                </div>
+              </form>
+            </div>                   
+     
+    </div>
+  </div>
+  
+  </div>
+
+    

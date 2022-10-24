@@ -1,0 +1,40 @@
+<div class="dropdown">
+
+    <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+        <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
+    </div>
+    <ul class="dropdown-menu " aria-labelledby="dropdownMenuButton1">
+        <ng-container *ngFor="let item of items; let i=index">
+            <li class=" dropdown-item" (click)="onClick(i)">
+                <a class="link" [routerLink]="item.routerLink">
+                    <img [src]="item.icon" alt="">
+                    <p class="">{{item.label}}</p>
+                </a>
+            </li>
+        </ng-container>
+        <!-- <li class="dropdown-item">
+            <a class="link" routerLink="division/1">
+              <img src="assets/images/dropdown/pen.svg" alt="">
+              <p>{{'shared.edit' |translate}}</p>
+            </a>
+        </li>
+        <li class=" dropdown-item">
+            <a class="link" routerLink="division/1/absence-records">
+                <img src="assets/images/dropdown/person-marked.svg" alt="">
+                <p class="">{{'dashboard.schools.raseAttendance' |translate}}</p>
+            </a>
+        </li>
+        <li class="dropdown-item">
+            <a class="link">
+                <img src="assets/images/dropdown/calender.svg" alt="">
+                <p>{{'dashboard.schools.defineSchedule' |translate}}</p>
+            </a>
+        </li>
+        <li class="dropdown-item">
+            <a class="link">
+                <img src="assets/images/dropdown/note.svg" alt="">
+                <p>{{'dashboard.schools.enterGrades' |translate}}</p>
+            </a>
+        </li> -->
+    </ul>
+</div>

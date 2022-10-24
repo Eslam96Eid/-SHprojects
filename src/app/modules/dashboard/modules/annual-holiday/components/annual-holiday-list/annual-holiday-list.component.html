@@ -1,0 +1,121 @@
+
+
+  
+
+ 
+  
+   
+ <app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/educational-settings/annual-holiday/new-holiday'" [content]="'dashboard.AnnualHoliday.Define Annual Holidays Calendar'"></app-add-btn>
+  
+ <div class="prim-table mt-4" *ngIf="holiday.total || holiday.loading">
+    <p-table  #dt [value]="annualHolidayList" (onSort)="sortMe($event)"      >
+     
+
+                <!-- Table Caption -->
+                <ng-template pTemplate="caption">
+                    <app-table-caption 
+                    (onExport)="first=false;onExport($event)" 
+                    (onFilter)="first=false;getAllHolidays()" 
+                    (onSearch)="first=false;filtration.KeyWord = $event; getAllHolidays()"
+                    (onClear)="first=false;clearFilter()"
+                    
+                    >
+    
+                    <div class="row gx-5 form-set">
+                        <div class="col-6">
+                            <label class="label" for="year">{{'dashboard.AnnualHoliday.Year'|translate }} </label>
+                            <p-dropdown [options]="yearList" [(ngModel)]="filtration.year" optionLabel="year" optionValue="year" inputId="year"   placeholder="{{'dashboard.AnnualHoliday.Select Year'|translate }}"></p-dropdown>
+                        </div>
+                        <div class="col-6">
+                            <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
+                            <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="name.ar" [(ngModel)]="filtration.curriculumName" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row gx-5 form-set">
+                        <div class="col-6">
+                            <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
+                            <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="name" [(ngModel)]="filtration.holidayStatus" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                        </div>
+                       
+                    </div>
+                    </app-table-caption>
+    
+                </ng-template>
+
+       
+      
+      
+      <ng-template pTemplate="header"  >
+            <tr >
+              <th   pSortableColumn="annualCalendarName" ><p-sortIcon  field="annualCalendarName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}</th>
+              <th   pSortableColumn="year"><p-sortIcon  field="year" ></p-sortIcon>{{'dashboard.AnnualHoliday.Year'|translate}}</th>
+              <th   pSortableColumn="arabicName" ><p-sortIcon  field="arabicName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
+              <th   pSortableColumn="curriculumName"><p-sortIcon  field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
+              <th   pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
+              <th   pSortableColumn="createdDate" ><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+              <th   pSortableColumn="flexibilityStatus"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
+              <th   pSortableColumn="edit" class="actions"></th>
+            
+
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e  >
+            <tr  >
+                <td  >{{e.annualCalendarName|translate}}</td>
+                <td   >{{e.year|translate}}</td>
+                <td   >{{e.arabicName|translate}}</td>
+                <td  >{{e.curriculumName|translate}}</td>
+                <td   >{{'shared.From'|translate}} {{e.dateFrom|translate}} - {{'shared.To'|translate}} {{e.dateTo|translate}}</td>
+                <td  >{{e.createdDate |date:'yyyy/mm/dd'|translate}}</td>
+                <td>
+                    <div class="d-flex align-items-center gap-4">
+                       
+                        <div [ngClass]="e.flexibilityStatus=='مرنة'?'alerting success':'alerting danger'">{{e.flexibilityStatus|translate}}</div>
+                        
+                    </div>
+                </td>
+              
+        
+                   
+                <td class="edit"> 
+                        <button  routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}">
+                            {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                         </button>
+                </td>
+                
+              
+                
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="holiday.total &&  allHolidayLength == 0">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+                   
+                    <app-loader></app-loader>
+             
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+
+    <div *ngIf="paginationState.rows<allHolidayLength" >
+        <app-pagination [totalItems]="allHolidayLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    </div>
+</div>
+   <!-- emptymessage -->
+   <ng-container *ngIf="!holiday.total && !holiday.loading">
+        <app-informative-block title="{{'emptyList.AnnualHoliday List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+   </ng-container>
+
+
+    
+   
+
+
+
+

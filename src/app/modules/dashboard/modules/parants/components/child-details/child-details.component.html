@@ -1,0 +1,10 @@
+<div class="child">
+    <ng-container *ngIf="regestered ===false">
+        <app-unregister-child></app-unregister-child>
+    </ng-container>
+
+    <ng-container *ngIf="regestered !=false">
+        <app-register-child mode="view"></app-register-child>
+    </ng-container>
+
+</div>

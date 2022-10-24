@@ -1,0 +1,151 @@
+<div class="survey-report">
+
+
+    <div class="survey-report__content my-5 radius-12 box-shadow custom-form">
+        <div class="report mb-5">
+            <div class="row gx-5">
+
+                <div class="col-4">
+                    <div class="grid-container gap-5">
+                        <p class="color-gray-300">عدد الأسئلة</p>
+                        <span class="color-primary">12</span>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="grid-container gap-5">
+                        <p class="color-gray-300">عدد الاجابات</p>
+                        <span class="color-primary">42</span>
+
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="grid-container gap-5">
+                        <p class="color-gray-300">النسبه المئويه</p>
+                        <span>
+                      <p-progressBar [value]="50"></p-progressBar>
+                      40%
+                    </span>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- <div class="details radius-12">
+            <div class="report"> -->
+        <div class="row surveyQuestions" *ngFor="let item of surveyQuestions; let i = index">
+
+
+            <div class="col-md-6">
+                <div class="grid-container gap-5">
+                    <p class="color-gray-300 fs-4">{{'dashboard.surveys.questionText'| translate}} ({{i+1}})</p>
+                    <span class="color-primary mb-2 fw-700 fs-3"> {{item.text}} </span>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="grid-container gap-5">
+                    <p class="color-gray-300 fs-4">{{'dashboard.surveys.questionType'| translate}}</p>
+                    <span class="color-primary mb-2 fw-700 fs-3">{{item.type}}</span>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row mt-5">
+
+            <div class="col-md-3">
+                <label class="label color-gray-300">الخيارات <a class="color-primary mt-2">A</a></label>
+                <span>
+                        <p-progressBar [value]="50"></p-progressBar>
+                        40%
+                      </span>
+            </div>
+            <div class="col-md-3">
+                <label class="label color-gray-300">الخيارات <a class="color-primary mt-2">B</a></label>
+                <span>
+                      <p-progressBar id="optionB"  [value]="50" ></p-progressBar>
+                      40%
+                    </span>
+            </div>
+            <div class="col-md-3">
+                <label class="label color-gray-300">الخيارات<a class="color-primary mt-2">C</a></label>
+                <span>
+                      <p-progressBar id="optionC"  [value]="50" ></p-progressBar>
+                      40%
+                    </span>
+            </div>
+            <div class="col-md-3">
+                <label class="label color-gray-300">الخيارات <a class="color-primary mt-2">D</a></label>
+                <span>
+                      <p-progressBar id="optionD"  [value]="50" ></p-progressBar>
+                      40%
+                    </span>
+            </div>
+        </div>
+
+
+        <!-- Table -->
+        <div class="prim-table mt-4 px-5">
+            <p-table #dt [value]="schoolClasses">
+
+
+                <ng-template pTemplate="header" let-columns="columns">
+                    <tr>
+                        <th pSortableColumn="category">{{'dashboard.surveys.parentName'|translate }}
+                            <p-sortIcon field="category"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="quantity">{{'dashboard.surveys.questionType'|translate }}
+                            <p-sortIcon field="quantity"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="price">{{'shared.options'|translate }}
+                            <p-sortIcon field="price"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="actions">{{'dashboard.surveys.answerDateAndTime'|translate }}
+                            <p-sortIcon field="price"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-columns="columns">
+                    <tr>
+                        <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                                {{product[col.field]}}
+                            </td> -->
+                        <td>{{product.code}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.quantity}}</td>
+
+                    </tr>
+                </ng-template>
+
+            </p-table>
+        </div>
+
+        <div class="px-5 mb-5">
+            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        </div>
+
+        <div class="row surveyQuestions2 mb-3" *ngFor="let item of surveyQuestions2; let i = index">
+
+
+            <div class="col-md-6">
+                <div class="grid-container gap-5">
+                    <p class="color-gray-300 fs-4">{{'dashboard.surveys.questionText'| translate}} ({{i+1}})</p>
+                    <span class="color-primary mb-2 fs-3"> {{item.text}} </span>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="grid-container gap-5">
+                    <p class="color-gray-300 fs-4">{{'dashboard.surveys.questionType'| translate}}</p>
+                    <span class="color-primary mb-2 fs-3">{{item.type}}</span>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

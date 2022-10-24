@@ -1,0 +1,20 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import 'src/assets/css/components/buttons';
+@import 'src/assets/css/components/input';
+@import'src/assets/css/components/forms';
+@import 'src/assets/css/components/_dropdown';
+@import 'src/app/shared/components/table-caption/table-caption.component.scss';
+#paginationdiv {
+    direction: ltr;
+    margin-top: 2.5%;
+}
+
+.pag {
+    color: #A8A6A6;
+}
+
+td.edit-btn {
+    font-weight: 400;
+    color: $color-skyBlue;
+}

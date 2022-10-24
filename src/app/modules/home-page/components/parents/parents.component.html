@@ -1,0 +1,111 @@
+
+<div class="">
+    <div class="swipper">
+
+        <p-galleria [(value)]="swipperData" [responsiveOptions]="responsiveOptions" [containerStyle]="{'max-width': '640px'}" [numVisible]="5"
+        [showThumbnails]="false" [showIndicators]="true" [changeItemOnIndicatorHover]="true" [showIndicatorsOnItem]="true"> 
+            <ng-template pTemplate="item" let-item>
+                <img [src]="item.previewImageSrc" style="width: 100%; display: block;" />
+            </ng-template>
+            <ng-template pTemplate="thumbnail" let-item>
+                <div class="grid grid-nogutter justify-content-center">
+                    <img [src]="item.thumbnailImageSrc" style="display: block;" />
+                </div>
+            </ng-template>
+            <ng-template pTemplate="caption" let-item>
+                <div class="title text-center h-100 d-flex justify-content-center flex-column">
+                    <h1 class="heading heading--primary mb-2">أولياء الأمور المسجلين بهيئة الشارقة للتعليم الخاص </h1>
+                    <p class="paragraph paragraph--lg paragraph--white color-white">أولياء الأمور هم الآباء الذين يقومون بمتابعة أولادهم، تقديم الطلبات، والتحقق من درجاتهم</p>
+                </div>
+                <!-- <h4 style="margin-bottom: .5rem; color: #ffffff;">{{item.title}}</h4>
+                <p>{{item.alt}}</p> -->
+            </ng-template>
+        </p-galleria>
+    </div>
+
+    <div class="action-bar d-flex align-items-baseline justify-content-between">
+        <h3  class="school__subtitle heading heading--primary heading--border-bottom my-4 ps-3">أبناء وطلاب</h3>
+        <div class="actions d-flex align-items-center gap-3">
+            <button class="btn btn-primary ">
+                <img class="icon" src="assets/images/button/certificate.svg" alt="">
+                <span>طلب شهادات</span>
+            </button>
+            <button class="btn btn-primary ">
+                <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+                <span>اضافه ابن جديد</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="content py-5"> 
+        <ng-container *ngIf="students.length > 0; then thenBlock else elseBlock"></ng-container>
+
+        <ng-template #thenBlock>
+            <div class="cards mt-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-md-4 col-xxl-3" *ngFor="let student of students">
+                        <div class="card p-0" >
+                            <div class="card__header px-4 pt-3 d-block">
+                                <div class="card__avatar d-flex align-items-center">
+                                    <div class="">
+                                        <img [src]="student.src" alt="Avatar">
+                                    </div>
+                                    <div class="info ">
+                                        <h4 class="heading heading--tertiary">{{student.name}}</h4>
+                                        <p class="color-green-500">{{student.age}}سنه</p>
+                                    </div>
+                                </div>
+                                <div class="card__badge d-flex justify-content-center align-items-center gap-3 rounded-5 py-2 mt-3" 
+                                [ngClass]="{'bg-blue-100' :!student.regestered , 'bg-skyBlue-300': student.regestered} ">
+                                    <div class=" d-flex align-items-center" >
+                                        <img *ngIf="student.regestered" src="assets/images/home/student/graduation-student.svg" alt="">
+                                        <img *ngIf="!student.regestered" src="assets/images/home/student/student.svg" alt="">
+                                    </div>
+                                    <p class="" [ngClass]="student.regestered ? 'color-skyBlue-500' :''" *ngIf="student.regestered"> مسجل (مدرسه الفتح الخاص)</p>
+                                    <p class="" [ngClass]="!student.regestered ? 'color-primary' :''" *ngIf="!student.regestered">غير مسجل</p>
+                                </div>
+                            </div>
+                            <div class="card__body border-top">
+                                <ul class="card__list p-4">
+                                    <li class="d-flex align-items-center mb-3">
+                                        <div class="icon bg-blue-100 rounded p-2">
+                                            <img src="assets/images/home/student/graduation-cap.svg" alt="">
+                                        </div>
+                                        <h4 class="heading heading--tertiary">المستوى الدراسى:</h4>
+                                        <div class="color-gray-300 me-2">{{student.class}}</div>
+                                    </li>
+                                    <li class="d-flex align-items-center mb-3">
+                                        <div class="icon bg-blue-100 rounded p-2">
+                                            <img src="assets/images/home/student/school.svg" alt="">
+                                        </div>
+                                        <h4 class="heading heading--tertiary">المدرسه : </h4>
+                                        <div class="color-gray-300 me-2">{{student.school}}</div>
+                                    </li>
+                                    <li class="d-flex align-items-center">
+                                        <div class="icon bg-blue-100 rounded p-2">
+                                            <img src="assets/images/home/student/relation.svg" alt="">
+                                        </div>
+                                        <h4 class="heading heading--tertiary">صله القرابه : </h4>
+                                        <div class="color-gray-300 me-2">{{student.relativeRelation}}</div>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="card__actions p-4 py-5">
+                                <button class="btn btn--full btn-outline-primary ">
+                                    <span class="ms-3">تفاصيل</span>
+                                    <fa-icon [icon]="faChevronLeft"></fa-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+        <ng-template #elseBlock>
+            <app-informative-block src="assets/images/empty-list/empty-list.svg"
+              title="لم تقم بإضافة أي أبناء أو طلاب حتى الآن" subTitle='يمكنك إضافة الطلاب عبر الضغط على "إضافة طالب جديد"'></app-informative-block>
+        </ng-template>
+    </div>
+</div>

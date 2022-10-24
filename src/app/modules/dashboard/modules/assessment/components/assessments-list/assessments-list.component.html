@@ -1,0 +1,82 @@
+<app-add-btn bg-primary [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
+    <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
+</app-add-btn>
+<div class="prim-table">
+
+
+    <p-table #dt [value]="assessmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
+
+        <!-- Table Caption -->
+        <ng-template pTemplate="caption">
+
+            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
+
+        </ng-template>
+    </p-table>
+
+    <div class="row">
+        <ng-container *ngIf="rateList.length > 0">
+            <ng-container *ngFor="let rate of rateList">
+                    <div class="col-md-4 ml-3">
+                    <p-card class="p-5 m-4 radius-5">
+                        <ng-template pTemplate="header">
+                            <h3 class="heading color-primary">تقييم الأكاديمي</h3>
+                        </ng-template>
+                        <div class="row gx-5 p-3 bg-gray-50  radius-5">
+                            <div class="col-md-6">
+                                <span class="color-skyBlue-500 fs-3 fw-700">الدرجة الدنيا: {{rate.min}} </span>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="color-skyBlue-500 fs-3 fw-700"> الدرجه العظمي :{{rate.max}}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <ng-container *ngIf="rate.rateScores.length > 0">
+                                <div class="col-md-4">
+                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">رمز التقييم</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول</p>
+                                </div>
+                                <div class="col-md-4">
+                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">حدود الدرجة</p>
+                                </div>
+                                <ng-container *ngFor="let sc of rate.rateScores">
+                                    <div class="col-md-4">
+                                        <ul>
+                                            <li class="symbol-one color-primary m-3 fs-3 fw-700 bg-gray-30 radius-5">{{sc.code}}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul>
+                                            <li class="color-primary m-3 pt-3 fs-4 fw-700">
+                                                {{ 'dashboard.Assessment.' + (sc.isSuccess ? 'successful' : 'unSuccessful') | translate}}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <ul>
+                                            <li class="m-1 pt-2">
+                                                <p class="color-gray-300 fs-4">الدرجة المستحقة</p>
+                                                <span class="color-black mb-4">  من {{sc.from}} ل {{sc.to}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </ng-container>
+                            </ng-container>
+                        </div>
+                        <ng-template pTemplate="footer">
+                            <div class="btn btn-primary " role="button" (click)="navigateToEditAssessment(rate.id)">
+                                <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
+                                {{'shared.Edit'|translate}}
+                            </div>
+                        </ng-template>
+                    </p-card>
+                </div>
+            </ng-container>
+        </ng-container>
+    </div>
+    <div>
+        <app-pagination [totalItems]="assessmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    </div>
+</div>

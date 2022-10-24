@@ -1,0 +1,109 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import 'src/assets/css/components/forms';
+p-card.p-component {
+    height: 100%;
+    min-height: 100%;
+}
+
+.chart-Info {
+    margin-top: 9vh;
+    margin-right: 2rem;
+}
+
+.chart-Info-bar {
+    /* margin-top: 0vh; */
+    margin-left: 5rem;
+    /* position: relative; */
+    display: initial;
+}
+
+#shoolCurriculumChart canvas, #activeSchoolsChar canvas  {
+    height: 160px !important;
+    width: 160px !important;
+}
+
+
+.Bar-char-Info .title {
+    color: #000000;
+    font-weight: 900;
+    font-size: 19px;
+    text-align: justify;
+}
+
+.Bar-char-Info {
+    // z-index: 9999;
+    position: static;
+}
+
+ul li.second::before {
+    content: "\2022";
+    color: #CD578A;
+    font-weight: bold;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 0.6em;
+    font-size: 2rem;
+}
+
+ul li.four::before {
+    content: "\2022";
+    color: #F5F5F5;
+    font-weight: bold;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 0.6em;
+    font-size: 2rem;
+}
+
+ul li.notActive::before {
+    content: "\2022";
+    color: #5BCEDD;
+    font-weight: bold;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 0.6em;
+    font-size: 2rem;
+}
+
+ul li.Active::before {
+    content: "\2022";
+    color: #F8C073;
+    font-weight: bold;
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-left: 0.6em;
+    font-size: 2rem;
+}
+
+h2 {
+    color: #4E5969;
+    font-family: 'Droid Arabic Kufi';
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+}
+
+.number-chart {
+    color: #1D2129
+}
+
+.percentage {
+    font-size: 18px;
+    margin-left: 0.8em;
+    color: #3052A1;
+}
+
+.row>* {
+    flex-shrink: 0;
+    /* width: 100%; */
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+}

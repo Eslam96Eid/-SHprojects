@@ -1,0 +1,109 @@
+
+
+<div class="prim-table mt-4">
+    <p-table #dt [value]="editList" [paginator]="true"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" [(first)]="first">
+        <ng-template pTemplate="caption">
+            <app-table-caption></app-table-caption>
+        </ng-template>
+        
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="code">{{'dashboard.schools.editBy' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="code">{{'dashboard.schools.jobTitle' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'dashboard.schools.editionDate' |translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="category">{{'dashboard.schools.editSummary' |translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                <th class="actions" pSortableColumn="category"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.code}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.date}}</td>
+                <td>
+                    <!-- <a role="button" class="text-decoration-underline color-skyBlue-700 fs-3">{{'dashboard.schools.viewVersionsAfterEdit' |translate}}</a> -->
+                    تعديل في قائمة الموظفين
+
+                </td>
+                <td>
+                    <div class="d-flex align-items-center gap-4" (click)="openEditListModel=true">
+                        <span class="color-skyBlue-400">تفاصيل</span>
+                        <fa-icon class="color-skyBlue-400 fs-6" [icon]="faChevronCircleLeft"></fa-icon>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <div class="">
+        <app-pagination [totalItems]="editList.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    </div>
+</div>
+
+
+
+
+<p-dialog [(visible)]="openEditListModel"  [modal]="true" [style]="{width: '45vw', fontSize:'2rem'}">
+    <ng-template pTemplate="header">
+        <div class="">
+            <div class="fw-bold">{{'dashboard.schools.editDetailsOnEmployee' | translate}}(254555)</div>
+            <p class="paragraph paragraph--sm color-skyBlue-400 mt-3">تم التعديل بواسطة المستخدم <span class="color-primary text-decoration-underline">محمد سمير</span> بتاريخ 17-09-2022 الساعة 10:21 صباحاً</p>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="details">
+
+            <div class="">
+                <form class="custom-form" [formGroup]="employeeForm">
+                    <div class="row gx-5 form-set">
+                        <label class="label color-primary fw-bold fs-3 mb-5"  for="password">{{'shared.editPassword' | translate}}</label>
+                        <div class="col-md-6 d-flex gap-3 align-items-baseline">
+                            <img src="assets/images/shared/bullet.svg" alt="">
+                            <div class="d-flex gap-5  align-items-center">
+                                <span class="fs-3">من</span>
+                                <span class="color-gray-600">***************</span>
+                                <!-- <input type="text" id="day" pInputText placeholder="********" /> -->
+                            </div>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <div class="d-flex gap-5  align-items-center">
+                                <span class="fs-3">الى</span>
+                                <span class="color-gray-600">***************</span>
+                                <!-- <input type="text" id="day" pInputText placeholder="********" /> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="my-6">
+
+                    <div class="row gx-5 form-set">
+                        <label class="label color-primary fw-bold fs-3 mb-5" for="role">{{'dashboard.schools.editJobTitle' | translate}}</label>
+                        <div class="col-md-6 d-flex gap-3 align-items-baseline">
+                            <img src="assets/images/shared/bullet.svg" alt="">
+                            <div class="d-flex gap-5 align-items-center">
+                                <span class="fs-3">من</span>
+                                <span class="color-gray-600">نائب المدرسه</span>
+                                <!-- <input type="text" id="day" pInputText placeholder="نائب المدرسه" /> -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <div class="d-flex gap-5  align-items-center">
+                                <span class="fs-3">الى</span>
+                                <span class="color-gray-600">محاسب</span>
+                                <!-- <input type="text" id="day" pInputText placeholder="نائب المدرسه" /> -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex  align-items-center justify-content-end mt-5">
+                        <button class="btn btn-primary btn--md">
+                            <span>{{'shared.saveChanges'| translate}} </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>

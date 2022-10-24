@@ -1,0 +1,87 @@
+<app-add-btn [backGroundColor]="'btn-primary'" [route]="'/dashboard/manager-tools/user-roles/edit-role/'+urlParameter" [content]="'shared.edit'"></app-add-btn>
+
+<div class="content border">
+
+   <div class="container ">
+                <div class="row mb-5">
+                                <div class="col-4">
+
+                                       <div class="row">
+                                                <div class="col-4 label">{{'shared.Created Date'|translate}}</div>
+                                                <div class="col-7 value late-1"  >{{jobRole.createdDate|translate}}</div>
+                                       </div>
+                                
+                                </div>
+                                <div class="col-3">
+
+                                    <div class="row">
+                                                <div class="col-7 label">{{'dashboard.UserRole.created by'|translate}}</div>
+                                                <div class="col-5 value username">{{jobRole.userName|translate}}</div>
+                                    </div>
+                             
+                               </div>                       
+                                <div class="col-4">
+                                    <div class="row">
+                                        <div class="col-5 label">{{'dashboard.UserRole.Job Role Status'|translate}}</div>
+                                        <div class="col-7 value switch" *ngIf="jobRole.status=='فعال'">
+                                           {{'shared.activated'|translate}}
+                                            <p-inputSwitch readonly="true" [(ngModel)]="notChecked"></p-inputSwitch>
+                                            {{'shared.yes'|translate}}
+                                        </div>
+                                        <div class="col-7 value switch" *ngIf="jobRole.status=='غير فعال'">
+                                            {{'shared.activated'|translate}}
+                                             <p-inputSwitch readonly="true" [(ngModel)]="checked"></p-inputSwitch>
+                                             {{'shared.no'|translate}}
+                                         </div>
+                                          
+                                     </div>
+
+                               </div>
+
+
+                           
+                </div>
+                
+                    <div class="row">
+                                <div class="col-7">
+
+                                    <div class="row mb-5">
+                                            <div class="col-2 label" >{{'dashboard.UserRole.Job Role Description'|translate}}</div>
+                                            <div class="col-10 value late-2" >{{jobRole.description|translate}}</div>
+                                    </div>
+                            
+                                </div>
+                                <div class="col-5">
+
+                                    <div class="col-12 label mb-3">{{'dashboard.UserRole.RolePowers assigned to Role'|translate}}</div>
+                                    <div class="col-4">
+                                            <ng-container  *ngFor="let item of jobRole.rolePowers" >
+                                                        <div class="row value mb-4">  
+                                                            <span class="items"> {{item|translate}}</span> 
+                                                        </div>
+                                            </ng-container>
+                                    </div> 
+                            
+                                </div>
+                              
+
+                    </div>
+                   
+                    <div class="information">
+                                <div class="row">
+                                    <div class="col-4">
+
+                                        <div class="row">
+                                                <div class="col-5 label ">{{'dashboard.UserRole.RestrictedInformation assigned to Role'|translate}}</div>
+                                                <div class="col-7 value">{{jobRole.dataRestrictionLevel|translate}}</div>
+                                        </div>
+                                
+                                    </div>
+
+                                </div>
+                 
+                    </div>
+
+
+  </div>
+</div>

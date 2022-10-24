@@ -1,0 +1,120 @@
+<div  style="overflow-x: hidden;">
+
+  <div class="d-flex ">
+ 
+    <div id="content" >
+   
+
+    
+        <div class="container mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
+            <form [formGroup]="roleFormGrp" class="container-fluid  " (ngSubmit)="succeeded()">
+                <div class=" row gx-4 form-set ">
+                    <div class="col-xs-2 col-lg-4">
+                        <label for="PID" class="label">{{'dashboard.UserRole.JobRole Name'|translate}}</label>
+                        <input type="text" pInputText formControlName="jobRoleName"  class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
+                        <div>
+                          <div [hidden]="jobRoleName.valid || jobRoleName.untouched">
+                              <small *ngIf="jobRoleName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                {{'shared.This Field is Required'|translate}}
+                                 <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                             
+                              <small *ngIf="jobRoleName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                  {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
+                                  <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+
+                            
+                           </div>
+                         
+                              
+                          </div>
+                    </div>
+                    <div class="col-xs-2 col-lg-4  switch">
+                        <label for="PID2" class="label">{{'dashboard.UserRole.JobRole Status'|translate}}</label>
+                        <div class="d-flex status">
+                            <span class="text">{{'shared.activated'|translate}}</span>
+                            <p-inputSwitch  (onChange)="isToggleLabel($event)" formControlName="status"  ></p-inputSwitch>
+                            <span class="Label" *ngIf="!isShown && !urlParameter">{{'shared.no'|translate}}</span>
+                            <span class="Label" *ngIf="isShown && !urlParameter">{{'shared.yes'|translate}}</span>
+                            <span class="Label" *ngIf="(jobRole.status!='فعال'&&jobRole.status!='1') && urlParameter">{{'shared.no'|translate}}</span>
+                            <span class="Label" *ngIf="(jobRole.status=='فعال'||jobRole.status=='1')&& urlParameter">{{'shared.yes'|translate}}</span>
+                        </div>
+                       
+                    </div>
+                    <!-- <div class="col-xs-2 col-lg-4">
+                       
+                      <label for="PID2" class="label">{{'dashboard.UserRole.JobRole Status'|translate}}</label>
+                      <p-dropdown [options]="cities" formControlName="status" [(ngModel)]="jobRole.status" *ngIf="!urlParameter" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate}}" class="form-control" appValidation name="PID2" id="PID2" ></p-dropdown>
+                      <p-dropdown [options]="cities" formControlName="status" [(ngModel)]="jobRole.status" *ngIf="urlParameter" class="form-control" appValidation name="PID2" id="PID2" ></p-dropdown>
+                     
+                  </div> -->
+                    <div class="col-xs-2 col-lg-4">
+                      
+                      <label for="PID3" class="label">{{'dashboard.UserRole.DataRestrictionLevel'|translate}}</label>
+          
+                        <p-dropdown [options]="datarestrictionLevelList" formControlName="datarestrictionLevel"   placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}" class="form-control" appValidation name="PID3" id="PID3"  ></p-dropdown>
+               
+                  </div>
+                </div>
+                <div class=" row gx-4 form-set ">
+                  <div class="col-xs-2 col-lg-4">
+                     
+                      <label for="rolePowers" class="label">{{'dashboard.UserRole.RolePowers'|translate}}</label>
+                      <p-multiSelect [options]="rolePowersList" display="chip"  formControlName="rolePowers" class="form-control" appValidation name="PID4" id="PID4" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserRole.Select Role Powers'|translate}}"></p-multiSelect>
+               
+                      <div>
+                          <div [hidden]="rolePowers.valid || rolePowers.untouched">
+                              <small *ngIf="rolePowers.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                {{'shared.This Field is Required'|translate}}
+                                 <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+                             
+                              
+                           </div>
+                           
+                              
+                      </div>
+                     
+                  </div>
+                  <div class="col-xs-2 col-lg-8">
+                       
+                      <label for="PID5" class="label">{{'dashboard.UserRole.Description'|translate}}</label>
+               
+                      <input type="text" pInputText formControlName="description" class="form-control basicinput"  appValidatorsInput  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
+                      <div>
+                          <div [hidden]="description.valid || description.untouched">
+                             
+                             
+                              <small *ngIf="description.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                {{'shared.Numbres Of Characters Must not More than 256 character'|translate}}
+                                <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                           </div>
+                              
+                      </div>
+                      
+                  </div>
+                 
+              </div>
+              <div class=" d-flex align-items-center justify-content-end ">
+                    <div class="Btn-group d-flex ">
+                      <button class="btn  btn-primary addBtn" [disabled]="roleFormGrp.invalid">{{'shared.save'|translate}}</button>
+                      <button  ><a routerLink="/dashboard/manager-tools/user-roles/user-roles-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+                    </div>
+              </div>
+           
+            
+               
+            </form>
+          </div>                   
+   
+      
+     
+ 
+  </div>
+</div>
+
+</div>
+
+

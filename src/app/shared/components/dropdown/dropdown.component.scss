@@ -1,0 +1,73 @@
+@import '../../../../assets/css/utils/variables.scss';
+
+.dropdown{
+    width: fit-content;
+    #dropdownMenuButton1{
+        cursor: pointer;
+        
+        fa-icon{
+            color: $color-primary;
+            transition:  all .2s ease-in-out;
+        }
+
+        &:hover fa-icon{
+            color: $color-primary;
+        }
+    }
+
+    .dropdown-menu {
+        display: block;
+        transform: translate3d(15px, -20px, 0px) !important;
+        border: 1px solid $color-gray-100;
+        border-radius: 15px;
+        inset: 0 auto auto 0  !important;
+        box-shadow: 0px 5px 21px rgba(0, 0, 0, 0.05);
+        opacity: 0;
+        visibility: hidden;
+        transition: all .3s ease-in-out;
+
+        &.show{
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dropdown-item{
+            .link{
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+                padding: .4rem 0 .4rem 1rem;
+                text-decoration: none;
+
+                img{
+                    min-width: 1.3rem;
+                }
+
+                p{
+                    font-size: 1.3rem;
+                    // font-weight: 500;
+                    color: $color-primary;
+                    transition: all .2s ease-in-out;
+
+                    &.red{
+                        color:$color-red-500
+                    }
+
+                }
+
+                &:hover{
+                    p{color: $color-skyBlue-400;}
+               }
+            }
+            
+            &:not(:last-child){ border-bottom: 1px solid $color-gray-50;}
+
+            &:active{
+                background-color: transparent;
+            }
+        }
+        
+    }
+
+    &.borderless .dropdown-menu .dropdown-item{ border: none;}
+}

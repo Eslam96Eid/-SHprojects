@@ -1,0 +1,55 @@
+$default-font-size: 1.6rem;
+$color-primary:#3052A1;
+$color-primary-dark:#223E81;
+// Black & white
+$color-black: #000;
+$color-white: #fff;
+// Grey
+// new which will be used
+$color-gray-800 :#767676;
+$color-gray-700 :#888888;
+$color-gray-600: #8E8EA9;
+$color-gray-300 :#AFAFAF;
+$color-gray-200 :#B4B4B4;
+$color-gray-150 :#D8D8D8;
+$color-gray-100 :#EEEEEE;
+$color-gray-50 :#F5F5F5;
+$color-gray-30 :#F8FAFB;
+// old which will be ignored
+$color-gray-600 :#848484;
+$color-gray-500:#C6C6C6;
+$color-gray-400:#C6C6C6;
+$color-gray-350:#C6C6C6;
+$color-gray-250 :#B4B4B4;
+// Sky Blue
+$color-skyBlue: #1EB8D5;
+$color-skyBlue-700: #41AEBC;
+$color-skyBlue-600: #5CD0DF;
+$color-skyBlue-500: #5ECBDB;
+$color-skyBlue-400: #5BCEDD;
+$color-skyBlue-300: #9DB1DE;
+
+$color-skyBlue-50:#2e50a329;
+// Blue
+$color-blue-100: lighten($color: $color-primary, $amount: 50);
+// Green
+$color-green-500: #92BE33;
+$color-green-450: #aad450;
+$color-green-600: #1ABB3E;
+// Red
+$color-red-600:#B00020;
+$color-red-500: #EF525B;
+$color-red-400:#FF3D6B;
+// Orange
+$color-orange:#FD7D71;
+$color-orange-200:#EF8071;
+$color-orange-300:#F8C073;
+$color-orange-100: rgba(#FD7D71, .12);
+//pink
+$color-pink-500: #D55891;
+$color-pink-450: #da74a2;
+// Yellow
+$color-yellow-400:#F8C073;
+// fuchsia
+$color-fuchsia-600:#D644B1;
+$color-fuchsia-500:#CC3FA8;

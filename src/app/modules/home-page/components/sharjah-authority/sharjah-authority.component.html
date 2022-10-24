@@ -1,0 +1,33 @@
+
+
+<div class="cards">
+    <ng-container *ngFor="let card of cards let i=index">
+
+        <div class="card col-md-4" ngClass="{{'card--'+i}}">
+            <div class="card__header">
+                <div class="card__header__label">
+                    <div class="card__header__img" [style.backgroundColor]="card.header.iconBgColor">
+                        <img [src]="card.header.icon" alt="" loading="lazy">
+                    </div>
+                    <h4 class="heading heading--secondary">{{card.header.label}}</h4>
+                </div>
+                <div class="card__header__icon">
+                    <fa-icon [icon]="faAngleLeft"></fa-icon>
+                </div>
+            </div>
+            <div class="card__body">
+                <ul class="card__list">
+                    <li class="card__list__item" *ngFor="let item of card.list" [routerLink]="item.url">
+                        <div class="card__body__img">
+                            <img [src]="item.icon" alt="" loading="lazy">
+                        </div>
+                        <p>{{item.label}}</p>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+
+    </ng-container>
+
+</div>

@@ -1,0 +1,65 @@
+<!-- <mat-nav-list>
+    <div class="logo py-4">
+        
+    </div>
+    <mat-divider></mat-divider>
+
+    <button class="btn btn-primary">{{'Home Page' | translate}} <span> &#10229;</span></button>
+    <p>{{'Schools And Students' | translate}}</p>
+
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="schools-and-students/schools">
+        <mat-icon>school</mat-icon> {{'Schools'| translate}}
+    </a>
+    <a mat-list-item routerLinkActive="list-item-active" routerLink="assignments">
+        <mat-icon>school</mat-icon> {{'assignments'| translate}}
+    </a>
+    <a mat-list-item routerLink="students" routerLinkActive="list-item-active">
+        <mat-icon>edit</mat-icon> {{'Students' | translate}}
+    </a>
+    <a mat-list-item>
+        <mat-icon>edit</mat-icon> {{'Parents' | translate}}
+    </a>
+    <a mat-list-item outerLinkActive="active" routerLink="AnnualHoliday/ViewSpecific/:SID">
+        <mat-icon>event_note</mat-icon> {{'dashboard.AnnualHoliday.Annual Holidays' | translate}}
+    </a>
+
+    <a mat-list-item outerLinkActive="active" routerLink="Subjects/ViewSubjectList">
+        <mat-icon>format_paint</mat-icon> {{'dashboard.Subjects.Subjects' | translate}}
+    </a>
+
+    <a mat-list-item outerLinkActive="active" routerLink="UserRoles/ViewUserRoles">
+        <mat-icon>supervised_user_circle</mat-icon> {{'dashboard.UserRole.Job Roles' | translate}}
+    </a>
+    <a mat-list-item outerLinkActive="active" routerLink="UserInformation/ViewUsersList">
+        <mat-icon>person_outline</mat-icon> {{'dashboard.UserInformation.Users' | translate}}
+    </a>
+
+</mat-nav-list> -->
+
+<aside class="sideBar">
+    <div class="sideBar__head">
+        <div class="logo">
+            <img src="assets/images/navBar/sharjah.svg" alt="Company Logo" />
+        </div>
+        <button class="btn btn--full btn-outline-primary">
+            <span>الصفحه الرئيسيه</span>
+            <fa-icon [icon]="faArrowLeft"></fa-icon>
+        </button>
+    </div>
+
+    <div class="sideBar__links">
+
+        <ng-container  *ngFor="let group of sideBarGroups">
+            <div class="" *ngIf="group.name === activGroup">
+                <p>{{group.title | translate}}</p>
+                <ul>
+                    <li *ngFor="let link of group.children" [routerLink]="[link.url]"> 
+                        <img [src]="link.icon" alt="">
+                        <span>{{link.title|translate}}</span>                 
+                    </li>
+                </ul>
+            </div>
+        </ng-container>
+
+    </div>
+</aside>

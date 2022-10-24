@@ -1,0 +1,8 @@
+@import '../.../../../../../assets/css/utils/variables.scss';
+@import 'src/assets/css/components/buttons';
+.leftbtn {
+    width: max-content;
+    position: relative;
+    bottom: 6.5rem;
+    font-family: 'Droid';
+}

@@ -1,0 +1,20 @@
+<app-schools>
+        <div class="">
+
+            <label class="label fw-bold mb-4" for="">{{'dashboard.schools.chooseStudentsToTransfer'|translate}}</label>
+            <div class="col-12 col-md-5 mb-6">
+                <div class="  myInput myInput--full myInput--search p-input-icon-right ms-auto">
+                    <i class="pi pi-search fs-3 "></i>
+                    <input class="input" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" [(ngModel)]="searchText" />
+                </div>
+            </div>
+            <div class="row">
+                <ng-container *ngFor="let item of [1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1]">
+                    <div class="col-12 col-md-4 d-flex align-items-center gap-4 mb-5">
+                        <p-checkbox  name="subjects"  value="1" [(ngModel)]="selectedStudents"></p-checkbox>
+                        <label class="label label--sm" for=""> محمد عامر</label>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+</app-schools>

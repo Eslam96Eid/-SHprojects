@@ -1,0 +1,36 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import'src/assets/css/components/input';
+@import'src/assets/css/components/buttons';
+@import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/validation-form.scss';
+@import 'src/assets/css/components/inputswitch';
+@import 'src/assets/css/components/message.scss';
+
+
+#content{
+    width: 100%;
+    .Btn-group{
+        position: absolute;
+        bottom:100% ;
+        padding-bottom: 3%;
+    }
+
+    .switch{
+       .Label{margin-right: 0.5rem;}
+        .status{color:#AFAFAF;font-weight: 400;margin-left: 1rem;}
+        position: relative;
+        top:5.2rem;
+        right: 9rem;
+    }
+   
+  
+}
+
+
+
+
+   
+ 
+  
+

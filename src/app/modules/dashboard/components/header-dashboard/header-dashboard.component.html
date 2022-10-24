@@ -1,0 +1,49 @@
+
+ <div class="dashboard-header header">
+
+      <!-- Main Title -->
+    <div class="header__title--main d-flex gap-4">
+        <h3 class="heading heading--secondary" *ngIf="mainTitle">
+            {{mainTitle.main}} 
+            <span class="" *ngIf="mainTitle.sub">{{mainTitle.sub}}</span>
+        </h3>
+
+        <!-- <button class="btn btn--sm ntn btn-outline-primary" *ngIf="showContactUs">
+            <span>تواصل معنا</span>
+            <img src="assets/images/shared/contact-us.svg" alt="">
+        </button> -->
+
+        <span class="Notifications color-primary" *ngIf="showNoOfNotifications">({{notificationNumber}})</span>
+        <span class="Notifications color-primary" *ngIf="showNoOfMessages">({{messageNumber}})</span>
+    </div>
+
+    <!-- Sub Title -->
+    <h4 class="fs-3 fw-normal my-3" *ngIf="subTitle">
+        {{subTitle.main}}
+        <span class="color-yellow-400" *ngIf="subTitle.sub">{{subTitle.sub}}</span>
+    </h4>
+    
+
+    <div class="header__breadcrumb d-flex ">
+     
+        <p-breadcrumb [model]="breadCrump" [home]="{label:'الصفحه الرئيسيه',icon: 'pi pi-home', routerLink: '/', routerLinkActiveOptions:{exact: true}}"
+        [style]="{'font-size':'1.6rem','color':'#767676','margin':'.5rem 0 1.5rem 0'}"></p-breadcrumb>
+        
+        <div class="d-flex NotificationsHeader">
+            <button class="btn btn--sm ntn btn-outline-green" *ngIf="showNotificationActionBtn">
+                <fa-icon class="fs-4" [icon]="acceptIcon" ></fa-icon>
+                <span>{{'shared.Accept'|translate}}</span>
+                
+            </button>
+            <button class="btn btn--sm ntn btn-outline-red Rejectbtn " *ngIf="showNotificationActionBtn">
+                <fa-icon class="fs-4" [icon]="rejectIcon" ></fa-icon>
+                <span>{{'shared.Reject'|translate}}</span>
+                
+            </button>
+       
+       </div>
+    </div>
+
+
+ </div>
+

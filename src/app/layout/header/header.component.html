@@ -1,0 +1,207 @@
+<nav class="nav" [ngClass]="classes">
+
+    <ng-container>
+
+        <div class="nav__logo nav__logo--main">
+            <img src="assets/images/navBar/sharjah.svg" alt="">
+        </div>
+        <div class="divider"></div>
+    </ng-container>
+
+    <div class="nav__logo nav__logo--daleel" routerLink="/">
+        <img src="assets/images/navBar/daleel.svg" alt="">
+    </div>
+
+
+
+    <!-- NavBar Menu -->
+
+    <div class="mx-auto" (clickOutside)="atclickOutside()">
+
+        <div class="nav__menu__container ">
+            <ul class="nav__menu">
+
+                <ng-container *ngFor="let item of menuItems; let i= index">
+                    <li class="nav__menu__item" (click)="openMenu(i)">
+                        <a [class.active]="item.enum == (activeRoute$|async)">
+                            <div class="text">{{item.title}}</div>
+                            <div class="icon">
+                                <fa-icon class="" [icon]="faAngleDown"></fa-icon>
+                            </div>
+                        </a>
+
+                    </li>
+                </ng-container>
+
+            </ul>
+        </div>
+
+        <!-- NavBar modal -->
+
+        <div class="menu" [class.show]="isMenuOpend">
+            <div class="w-50">
+                <div class="links" *ngIf="activeMenuItemChanged" @slide>
+                    <h2 class="heading heading--secondary">{{activeMenuItem?.title}}</h2>
+                    <ul>
+                        <li *ngFor="let link of activeMenuItem?.links" (click)="isMenuOpend=false"
+                            [routerLink]="[link.url]">
+                            {{link.name}}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="more-common">
+                <h2 class="heading heading--secondary">الخدمات الاكثر انتشارا</h2>
+                <ul>
+                    <li>
+                        <!-- <div class="icon">
+                            <img src="assets/images/home/comunication-managment/parents.svg" alt="">
+                        </div> -->
+                        <div class="content">
+                            <div class="title">
+                                <h4 class="heading heading--tertiary">تقرير الدرجات</h4>
+                                <fa-icon [icon]="faArrowLeft"></fa-icon>
+                            </div>
+                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه
+                                لهئه الشارقه </p>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- <div class="icon">
+                            <img src="assets/images/home/comunication-managment/parents.svg" alt="">
+                        </div> -->
+                        <div class="content">
+                            <div class="title">
+                                <h4 class="heading heading--tertiary">اعدادات النظام</h4>
+                                <fa-icon [icon]="faArrowLeft"></fa-icon>
+                            </div>
+                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه
+                                لهئه الشارقه </p>
+                        </div>
+                    </li>
+                    <li>
+                        <!-- <div class="icon">
+                            <img src="assets/images/home/comunication-managment/parents.svg" alt="">
+                        </div> -->
+                        <div class="content">
+                            <div class="title">
+                                <h4 class="heading heading--tertiary">الدرجات</h4>
+                                <fa-icon [icon]="faArrowLeft"></fa-icon>
+                            </div>
+                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه
+                                لهئه الشارقه</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- NavBar modal -->
+
+
+    </div>
+    <!-- NavBar Menu -->
+    <div class="nav__messages">
+        <div class="">
+            <div class="dropdown">
+
+                <div class="px-4 message" routerLink="dashboard/messages/messages">
+                    <img src="assets/images/navBar/message.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="nav__notifications">
+        <div class="">
+            <div class="dropdown">
+
+                <div class="" id="dropdownlistbtn" data-bs-toggle="dropdown">
+                    <img src="assets/images/navBar/notification.svg" alt="">
+                </div>
+                <ul class="dropdown-menu">
+                    <li (click)="$event.stopPropagation()">
+                        <div class="dropdown-item first d-flex rightNotification">
+                            <div class="link">
+
+                                <div id="notification-content">
+                                    <div class="Notifications__cards">
+                                        <div class="header-notification d-flex justify-content-between">
+                                            <div class="left d-flex">
+                                                <h2>{{'Notifications.Notifications'|translate}}</h2>
+                                                <select (change)="changeStatus($event.target.value)" class="form-select" aria-label="Default select example">
+                                                    <option  value="0" selected>{{'Notifications.all' | translate}}</option>
+                                                    <option  value="1" >{{'Notifications.Readable' | translate}}</option>
+                                                    <option  value="2">{{'Notifications.Not readable' | translate}}</option>
+                                                </select>
+                                            </div>
+                                            <div *ngIf="isChecked" class="right d-flex align-items-center" (click)="markAsRead()">
+                                                <img class="px-1" src="assets/images/shared/outline.svg" alt="">
+                                                <h5>{{'Notifications.Mark As Read'|translate}}</h5>
+                                            </div>
+                                        </div>
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="p-0 mb-4"
+                                                    *ngFor="let card of notificationsList; let i=index">
+                                                    <div class="name-description" (click)="goToNotificationDetails(card.pageLink)">
+                                                        <div class="title position-relative">
+                                                            <img class="NotReadable"
+                                                                src="assets/images/shared/bluecircle.svg"
+                                                                *ngIf="!card.isRead">
+                                                            <img class="cardimage"
+                                                                src="assets/images/shared/Person.jpg">
+                                                            <span class="tittle"
+                                                                *ngIf="checkLanguage">{{card.userName.ar}}</span>
+                                                            <span class="tittle"
+                                                                *ngIf="!checkLanguage">{{card.userName.en}}</span>
+                                                            <span>{{'Notifications.Ask'|translate}}</span>
+                                                            <span class="headerName"
+                                                                *ngIf="checkLanguage">{{card.title.ar}}</span>
+                                                            <span class="headerName"
+                                                                *ngIf="!checkLanguage">{{card.title.en}}</span>
+                                                        </div>
+                                                        <div class="Description my-2">
+                                                            <span
+                                                                class="tittle">{{'Notifications.Description'|translate}}</span>
+                                                            <p class="paragraph ">{{card.description|translate}}</p>
+                                                        </div>
+                                                        <span class="receviedTime">{{card.createdDate|date
+                                                            |translate}}</span>
+                                                    </div>
+                                                    <hr>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <button class="detail-btn p-relative" routerLink="/notifications/notifications-list">
+                        {{'Notifications.Show All' | translate}}
+                        <img src="assets/images/shared/detail-arrow.png">
+                    </button>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav__calender">
+        <div class="icon arrow" (click)="calendar.toggle()">
+            <fa-icon class="" [icon]="faAngleDown"></fa-icon>
+        </div>
+
+        <p-calendar #calendar [style]="{'font-size': '1.6rem'}" view="year" dateFormat="yy" icon="pi pi-clock"
+            [showIcon]="true" selectionMode="range" rangeSeparator="/" placeholder="2022 / 2023"
+            (onSelect)="onDateSelected($event)"></p-calendar>
+
+        <div class="icon calendar" (click)="calendar.toggle()">
+            <img src="assets/images/navBar/calendar.svg" alt="">
+        </div>
+    </div>
+
+
+
+
+</nav>

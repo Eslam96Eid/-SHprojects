@@ -1,0 +1,133 @@
+
+<!-- <app-header></app-header> -->
+<!-- <div class="home-page container-lg px-5 px-lg-0">
+    <ng-container *ngIf="userType != userEnum.U_PARENTS">
+        <div class="title text-center" *ngIf="userEnum.U_SHARJAH_AUTHORITY === userType">
+            <h1 class="heading heading--primary">الصفحة الرئيسية لموظف هيئة الشارقة للتعليم الخاص </h1>
+            <p class="paragraph paragraph--lg">موظف هيئة الشارقة للتعليم الخاص يقوم بتحكم وادارة العلاقات مع المدارس التابعة لهيئة الشارقة</p>
+        </div>
+        <div class="title text-center" *ngIf="userEnum.U_SCHOOL === userType">
+            <h1 class="heading heading--primary">الصفحة الرئيسية لموظف مدرسة الاهلية  </h1>
+            <p class="paragraph paragraph--lg">موظف مدرسة الاهلية التابعة لهيئة الشارقة للتعليم الخاص</p>
+        </div>
+
+        <div class="search w-50">
+            <div class="p-inputgroup">
+                <input type="text" class="rounded-4 p-3" pInputText placeholder="بحث...">         
+                <button type="button" class="rounded-4" pButton pRipple icon="pi pi-search"></button>
+            </div>
+        </div>
+    </ng-container>
+    <router-outlet></router-outlet>
+</div> -->
+
+<div class="home">
+    <div class="home__header">
+        <div class="home__header__title text-center" >
+            <h1 class="heading heading--primary">الصفحة الرئيسية لموظف هيئة الشارقة للتعليم الخاص </h1>
+            <p class="paragraph paragraph--lg">موظف هيئة الشارقة للتعليم الخاص يقوم بتحكم وادارة العلاقات مع المدارس التابعة لهيئة الشارقة</p>
+        </div>
+    </div>
+
+
+
+    <div class="home__cards">
+        <div class="container" >
+            <div class="row">
+
+                <div class="card col p-0"
+                *ngFor="let card of cards; let i=index"
+                #cardRef
+                [class]="cardsHoverStatus[i].active ? 'hover-' + i : ''"
+                (mouseenter)="onHoverd(i)"
+                (mouseleave)="onLeaved(i)">
+
+                    <div class="card__img">
+                        <img [src]="card.image" alt="">
+                    </div>
+                    <div class="card__content" [class.show]="cardsContentStatus[i].active">
+                        <div class="card__content__header"
+                        [class.reduce-fs]="cardsHoverStatus[i].active" 
+                        [style.backgroundColor]="card.content.header.bgColor"
+                        (click)="cardsContentStatus[i].active= !cardsContentStatus[i].active">
+
+                            <div class="text">{{card.content.header.title}}</div>
+
+                            <fa-icon  [icon]="faChevronUp" *ngIf="cardsContentStatus[i].active"></fa-icon>
+                            <fa-icon 
+                            class="icon-up" 
+                            [class.slideUp]="cardsHoverStatus[i].active" 
+                            [icon]="faChevronDown" 
+                            *ngIf="!cardsContentStatus[i].active " ></fa-icon>
+
+                        </div>
+                        <div class="card__content__body">
+                            <ul class="list">
+                                <li 
+                                class="list__item" 
+                                [class.reduce-fs]="cardsHoverStatus[i].active"
+                                *ngFor="let item of card.content.list" [routerLink]="item.url">
+                                    <div class="img">
+                                        <img [src]="item.icon" alt="" loading="lazy">
+                                    </div>
+                                    <p>{{item.label}}</p>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+    
+                <!-- <div class="card col p-0">
+                    <div class="card__img">
+                        <img src="assets/images/home/performance-managment.png" alt="">
+                    </div>
+                    <div class="card__content">
+                        <div class="card__content__header">
+                            <div class="text">اداره الاداء</div>
+                            <fa-icon [icon]="faChevronUp"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card col p-0">
+                    <div class="card__img">
+                        <img src="assets/images/home/performance-managment.png" alt="">
+                    </div>
+                    <div class="card__content">
+                        <div class="card__content__header">
+                            <div class="text">اداره الاداء</div>
+                            <fa-icon [icon]="faChevronUp"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card col p-0">
+                    <div class="card__img">
+                        <img src="assets/images/home/performance-managment.png" alt="">
+                    </div>
+                    <div class="card__content">
+                        <div class="card__content__header">
+                            <div class="text">اداره الاداء</div>
+                            <fa-icon [icon]="faChevronUp"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card col p-0">
+                    <div class="card__img">
+                        <img src="assets/images/home/performance-managment.png" alt="">
+                    </div>
+                    <div class="card__content">
+                        <div class="card__content__header">
+                            <div class="text">اداره الاداء</div>
+                            <fa-icon [icon]="faChevronUp"></fa-icon>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+
+</div>

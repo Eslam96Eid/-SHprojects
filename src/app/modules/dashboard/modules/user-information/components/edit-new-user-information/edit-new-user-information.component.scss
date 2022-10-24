@@ -1,0 +1,96 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import'src/assets/css/components/input';
+@import'src/assets/css/components/buttons';
+@import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/validation-form.scss';
+#content {
+    width: 100%;
+    .Btn-group {
+        position: absolute;
+        right: 81.5%;
+        bottom: 79.5rem;
+        .addBtn {
+            margin-right: 14.6rem;
+        }
+    }
+}
+
+hr {
+    width: 90%;
+}
+
+.input-group {
+    flex-wrap: nowrap;
+}
+
+#switchbtn {
+    position: absolute;
+    margin-right: 28px;
+    transform: rotate(0deg);
+}
+
+.switch {
+    .Label {
+        margin-right: 0.5rem;
+    }
+    .status {
+        color: #AFAFAF;
+        font-weight: 400;
+        // margin-left: 1rem;
+    }
+    position: relative;
+    top:0.2rem;
+    // right: 9rem;
+}
+
+span.Label.ng-star-inserted {
+    margin-right: 8rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.select2-selection{
+    border: none !important; 
+     background-color: transparent !important;
+  
+  }
+  .select2-container--default .select2-selection--single{
+    border: none !important; 
+     background: transparent !important;
+  }
+  .mat-select-value,.mat-select-arrow {
+    color: #788677 !important;
+  }
+  
+.mat-primary .mat-option.mat-selected:not(.mat-option-disabled){
+    color:#012535 !important
+  }
+  .mat-select-panel .mat-option.mat-selected:not(.mat-option-multiple) {
+    background:rgb(128 140 123 / 69%);
+  }
+  .mat-select-panel {
+    background: #eee;
+  }
+  option.mat-selected:not(.mat-option-disabled) {
+    color: #385254 !important;
+  }
+  .mat-select-panel .mat-input-element{
+    background-color: #fafafa !important;
+    border:  1px solid #cad1d3;
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 92%;
+    box-shadow: inset 2px 2px 6px #e9eae6, inset -2px -2px 6px #e9eae6 ;
+  
+  }

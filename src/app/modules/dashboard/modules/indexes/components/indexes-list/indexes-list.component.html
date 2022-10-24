@@ -1,0 +1,89 @@
+<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/indexes/new-index'" [content]="'dashboard.Indexes.Add Item'">
+</app-add-btn>
+
+<div class="prim-table mt-4" *ngIf="indexes.total || indexes.loading">
+    <p-table #dt [lazy]="true" [value]="indexesList" (onSort)="sortMe($event)">
+
+
+        <ng-template pTemplate="caption">
+            <app-table-caption (onExport)="first=false;onExport($event)" (onFilter)="first=false;getAllIndexes()" (onSearch)="first=false;filtration.KeyWord = $event; getAllIndexes()" (onClear)="first=false;clearFilter()">
+
+                <div class="row gx-5 form-set">
+                    <div class="col-6">
+                        <label class="label" for="indexType">{{'dashboard.Indexes.List Type'|translate }} </label>
+                        <p-dropdown [options]="indexListType" [(ngModel)]="filtration.IndexTypeId" inputId="indexType" optionLabel="indexType.ar" optionValue="id"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
+
+                    </div>
+                    <div class="col-6">
+                        <label class="label" for="indexStatus">{{'dashboard.Indexes.Index Status'|translate }} </label>
+                        <p-dropdown [options]="indexStatusList" [(ngModel)]="filtration.indexStatus" inputId="indexStatus" optionLabel="arabicName" optionValue="id" placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
+                    </div>
+                </div>
+
+            </app-table-caption>
+
+        </ng-template>
+
+
+
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="indexType">
+                    <p-sortIcon field="indexType"></p-sortIcon>{{'dashboard.Indexes.List Type'|translate}}</th>
+                <th class="mediumrow" pSortableColumn=" indexArabicName">
+                    <p-sortIcon field=" indexArabicName"></p-sortIcon>{{'dashboard.Indexes.Index Name'|translate}}</th>
+                <th class="longrow" pSortableColumn="indexStatus">
+                    <p-sortIcon field="indexStatus"></p-sortIcon>{{'dashboard.Indexes.Index Status'|translate}}</th>
+                <th pSortableColumn="edit" class="actions "></th>
+
+
+
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-e  >
+            <tr  >
+                <td  >{{e.indexType.ar|translate}}</td>
+                <td  class="mediumrow" >{{e.indexName.ar|translate}}</td>
+                <td  Class="longrow" >
+
+                    <div class="d-flex align-items-center gap-4">
+
+                        <div [ngClass]="e.indexStatus=='Active'?'alerting success':'alerting danger'">{{e.indexStatus|translate}}</div>
+
+                    </div>
+
+                </td>
+                <td class="edit">
+                    <button routerLink="/dashboard/manager-tools/indexes/edit-index/{{e.id}}">
+                        {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                     </button>
+                </td>
+
+            </tr>
+        </ng-template>
+
+
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="indexes.total &&  allIndexesLength == 0">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+
+                    <app-loader></app-loader>
+
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+
+    <div *ngIf="paginationState.rows<allIndexesLength">
+        <app-pagination [totalItems]="allIndexesLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    </div>
+</div>
+<!-- emptymessage -->
+<ng-container *ngIf="!indexes.total && !indexes.loading">
+    <app-informative-block title="{{'emptyList.Indexes List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>

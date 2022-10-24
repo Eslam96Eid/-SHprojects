@@ -1,0 +1,103 @@
+<div  style="overflow-x: hidden;">
+    
+    <div class="d-flex ">
+   
+    <div id="content" >
+    
+          <div class="container mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
+              <form [formGroup]="indexFormGrp" class="container-fluid "  (ngSubmit)="saveMe()">
+                  
+                <div class="row gx-4 form-set ">
+                    <div class="col-xs-2 col-lg-4">
+                        <label for="PID" class="label">{{'dashboard.Indexes.List Type'|translate}}</label>
+
+                        <p-dropdown  [options]="indexListType" optionLabel="indexType.ar" optionValue="id" formControlName="indexType"      placeholder="{{'dashboard.Indexes.Select Index Type'|translate}}"  class="form-control" appValidation  ></p-dropdown>
+                        <div>
+                            <div [hidden]="indexType.valid || indexType.untouched">
+                                <small *ngIf="indexType.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                             </div>
+                                
+                        </div>
+                          
+                              
+                          
+                    </div>
+             
+                </div> 
+                <div class="row gx-4 form-set ">
+                    <div class="col-xs-2 col-lg-4">
+                        <label for="PID8" class="label">{{'dashboard.Indexes.Index Name (in Arabic)'|translate}}</label>
+                        <input type="text" pInputText formControlName="arabicIndexName"   class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Indexes.Write Index Name'|translate}}"  name="PID" id="PID" >
+                        <div [hidden]="arabicIndexName.valid || arabicIndexName.untouched">
+                            <small *ngIf="arabicIndexName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                              {{'shared.This Field is Required'|translate}}
+                               <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                           
+                            <small *ngIf="arabicIndexName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                {{'shared.Numbres Of Characters must not more than 500 character'|translate}}
+                                <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+
+                          
+                         </div>
+                    </div>
+                    
+                    
+
+                    <div class="col-xs-2 col-lg-4">
+                        <label for="PID8" class="label">{{'dashboard.Indexes.Index Name (in English)'|translate}}</label>
+                        <input type="text" pInputText formControlName="englishIndexName"  class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Indexes.Write Index Name'|translate}}"  name="PID" id="PID" >
+                        <div [hidden]="englishIndexName.valid || englishIndexName.untouched">
+                            <small *ngIf="englishIndexName.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                              {{'shared.This Field is Required'|translate}}
+                               <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                           
+                            <small *ngIf="englishIndexName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                {{'shared.Numbres Of Characters must not more than 500 character'|translate}}
+                                <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+
+                          
+                         </div>
+                    </div>
+
+                    <div class="col-xs-2 col-lg-4 switch" >
+                        <span class="status">{{'dashboard.Indexes.Index Status'|translate}}</span>
+                        {{'shared.activated'|translate}}
+                        <p-inputSwitch  (onChange)="isToggleLabel($event)" formControlName="indexStatus"  ></p-inputSwitch>
+                        <span class="Label" *ngIf="!isShown && !urlParameter">{{'shared.no'|translate}}</span>
+                        <span class="Label" *ngIf="isShown && !urlParameter">{{'shared.yes'|translate}}</span>
+                        <span class="Label" *ngIf="index.indexStatus!='Active'&&index.indexStatus!='1' && urlParameter">{{'shared.no'|translate}}</span>
+                        <span class="Label" *ngIf="(index.indexStatus=='Active'||index.indexStatus=='1')&& urlParameter">{{'shared.yes'|translate}}</span>
+                    </div>
+                  
+                 
+                 
+                </div> 
+                <div class=" d-flex align-items-center justify-content-end ">
+                        <div class="Btn-group d-flex">
+                            <button type="submit" class="btn  btn-primary" [disabled]="indexFormGrp.invalid||isBtnLoading">
+                                {{'shared.save'|translate}}
+                                <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
+                            </button>
+                        </div>
+                </div>
+              
+                 
+              </form>
+            </div>                   
+     
+        
+       
+   
+    </div>
+  </div>
+  
+  </div> 
+

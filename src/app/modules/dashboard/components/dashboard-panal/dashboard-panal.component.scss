@@ -1,0 +1,110 @@
+@import '../../../../../assets/css/utils/variables.scss';
+.panal-wrapper.second {
+    position: relative;
+    // top: 50%;
+    // left: 4rem;
+    // transform: translateY(-40%);
+    z-index: 9;
+    border-radius: 30px;
+    .befor,
+    .after {
+        position: absolute;
+        display: block;
+        width: 11rem;
+        height: 4rem;
+        // right: 50%;
+        background-color: $color-primary;
+        transform: scaleX(0);
+        // transform-origin: right;
+        transition: all .4s ease-out;
+        z-index: -1;
+        &.show {
+            transform: scaleX(1);
+        }
+    }
+    .befor {
+        top: 0;
+    }
+    .after {
+        bottom: 0;
+    }
+}
+
+.panal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 30px;
+    // padding: .5rem 0;
+    &__list {
+        padding: 0 1.1rem;
+        box-shadow: 0px 5px 21px rgba(0, 0, 0, 0.05);
+        border-radius: 30px;
+        &__item {
+            position: relative;
+            padding: 1.55rem .6rem;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            &:not(:last-child) {
+                border-bottom: 1px solid #F5F5F5;
+            }
+            .icon {
+                filter: grayscale(1);
+                opacity: .5;
+                transition: all .2s ease-out;
+                img {
+                    width: 1.75rem;
+                }
+            }
+            &:hover {
+                .icon {
+                    filter: grayscale(0);
+                    opacity: 1;
+                }
+            }
+            .lable {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: absolute;
+                top: 0;
+                // inset-inline-start: calc(100% + 1.1rem);
+                height: 100%;
+                padding: 1.5rem 9rem 1.5rem 11rem;
+                // padding: 1.5rem 5rem;
+                width: auto;
+                color: #fff;
+                background-color: $color-primary;
+                border-radius: 30px 0 0 30px;
+                transform: scaleX(0);
+                // transform-origin: right;
+                transition: all .3s ease-out;
+                z-index: 10;
+                opacity: 0;
+                .myInput {
+                    height: 100%;
+                    input {
+                        height: 100%;
+                        border-radius: 30px;
+                        font-size: 1.6rem;
+                    }
+                }
+                span {
+                    flex-shrink: 0;
+                    margin-right: 4rem;
+                    margin-left: 4rem;
+                }
+            }
+            &:hover {
+                .lable {
+                    opacity: 1;
+                    transform: scaleX(1);
+                }
+            }
+        }
+    }
+}

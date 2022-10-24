@@ -1,0 +1,31 @@
+.bg {
+    position: absolute;
+    top: 10rem;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+    img {
+        width: 100%;
+        object-fit: cover;
+    }
+}
+
+.dashboard {
+    &__content {
+        margin-top: 10rem;
+        // margin-inline-end: 13rem;
+        margin-top: 10rem;
+    }
+    &__loaded-conponent {
+        padding: 2.5rem 0 7rem;
+        width: 83%;
+    }
+    &__panal {
+         ::ng-deep app-dashboard-panal {
+            .panal__list {
+                // padding: 7px 1.1rem;
+            }
+        }
+    }
+}
+

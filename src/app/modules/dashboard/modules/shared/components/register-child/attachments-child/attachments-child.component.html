@@ -1,0 +1,122 @@
+<ng-container *ngIf="mode=='view'">
+    <div class="child__info__section absence">
+        <div class="row ">
+            <div class="col-12 d-flex gap-5 mb-6">
+                <div class="card justify-content-between border-dark p-3">
+                    <span class="paragraph paragraph--sm color-gray-300 fs-5">هويه الطالب</span>
+                    <div class="image-uploader blue-theme">
+                        <!-- <div class="">
+                            <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
+                            <div class="image-uploader__box upload-btn" (click)="upload.click()">
+                                <input type="file" #upload accept="image/*" [hidden]="true" (change)="attachedFile($event)">
+                                <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
+                                <p class="title">{{ 'shared.clickToUploadFiles'|translate }}</p>
+                                <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
+                            </div>
+                        </div> -->
+
+                        <ul class="file__list">
+                            <li class="file__list__item">
+                                <div class="icon--file">
+                                    <img src="assets/images/shared/PDFSEC.svg" alt="">
+                                </div>
+                                <span class="text color-primary">ملف.pdf</span>
+
+                                <div class="icon--delete">
+                                    <img src="assets/images/shared/delete.svg" alt="">
+                                </div>
+                            </li>
+                            <li class="file__list__item" *ngFor="let file of uploadedFiles; let i=index">
+                                <div class="icon--file">
+                                    <img src="assets/images/shared/file.svg" alt="">
+                                </div>
+                                <span class="text color-primary">{{file.name}}</span>
+
+                                <div class="icon--delete" (click)="deleteFile(i)">
+                                    <img src="assets/images/shared/delete.svg" alt="">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+
+
+                        <input hidden type="file" multiple #fileInput (change)="uploadFile($event.target.files)" placeholder=" انقر لإرفاق المستندات">
+                        <div class="icon-upload">
+                            <img class="" src="assets/images/shared/upload.svg" alt="upload">
+                        </div>
+                    </div>
+                    <div class="files-list" *ngFor="let file of files;let i= index">
+                        <div class="fileNameWithIcon d-flex align-items-center">
+                            <img src="assets/images/shared/Folder.svg">
+                            <p class="mx-2"> {{ file }} </p>
+                        </div>
+                        <button class="delete-file" (click)="deleteAttachment(i)">
+                            <img src="assets/images/dropdown/Delete.svg">
+                        </button>
+                    </div> -->
+                </div>
+
+                <div class="card justify-content-between border-dark p-3">
+                    <span class="paragraph paragraph--sm color-gray-300">هويه الطالب</span>
+
+                    <div class="image-uploader blue-theme">
+                        <!-- <div class="">
+                            <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
+                            <div class="image-uploader__box upload-btn" (click)="upload.click()">
+                                <input type="file" #upload accept="image/*" [hidden]="true" (change)="attachedFile($event)">
+                                <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
+                                <p class="title">{{ 'shared.clickToUploadFiles'|translate }}</p>
+                                <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
+                            </div>
+                        </div> -->
+
+                        <ul class="file__list">
+                            <li class="file__list__item">
+                                <div class="icon--file">
+                                    <img src="assets/images/shared/PDFSEC.svg" alt="">
+                                </div>
+                                <span class="text color-primary">ملف.pdf</span>
+
+                                <div class="icon--delete">
+                                    <img src="assets/images/shared/delete.svg" alt="">
+                                </div>
+                            </li>
+                            <li class="file__list__item" *ngFor="let file of uploadedFiles; let i=index">
+                                <div class="icon--file">
+                                    <img src="assets/images/shared/PDFSEC.svg" alt="">
+                                </div>
+                                <span class="text color-primary">{{file.name}}</span>
+
+                                <div class="icon--delete" (click)="deleteFile(i)">
+                                    <img src="assets/images/shared/delete.svg" alt="">
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="child__info__section absence notes">
+                <div class="col-12">
+                    <h3 class="heading heading--tertiary mb-4">{{ 'dashboard.parents.Notes'|translate }}</h3>
+                    <p>لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ..</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+
+
+<ng-container *ngIf="mode=='edit'">
+    <div class="col-md-9 mt-6">
+        <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
+        <app-file-upload (onFileUpload)="onFileUpload($event)" view="rows" label=" انقر لإرفاق ملف"></app-file-upload>
+    </div>
+
+    <div class="mt-5 bg-gray-30 p-5 radius-15">
+        <label class="label" for="trackId">{{'shared.note'|translate}}</label>
+        <input type="text" id="trackId" pInputText placeholder="{{'shared.writeNote'|translate}}" />
+    </div>
+</ng-container>

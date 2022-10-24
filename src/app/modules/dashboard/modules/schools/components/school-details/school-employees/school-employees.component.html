@@ -1,0 +1,127 @@
+<div class="row">
+    <h3 class="heading heading--tertiary ">{{'dashboard.schools.schoolEmployeeList'|translate }}</h3>
+    <div class="prim-table mt-4">
+        <p-table #dt [value]="employees" [paginator]="true" [(rows)]="rows" [(first)]="first">
+            <!-- Table Caption -->
+            <ng-template pTemplate="caption">
+                <app-table-caption></app-table-caption>
+            </ng-template>
+            
+            <ng-template pTemplate="header" let-columns="columns">
+                <tr>
+                    <!-- <th *ngFor="let col of cols">
+                        {{col.header}}
+                    </th>
+                    <th pSortableColumn="actions"></th> -->
+                    <th pSortableColumn="code">
+                        <div class="content">
+                            {{'dashboard.schools.employeeId'|translate }}  
+                            <p-sortIcon field="code"></p-sortIcon>
+                        </div>
+                    </th>
+                    <th pSortableColumn="name">
+                        {{'dashboard.schools.employeeName'|translate }} <p-sortIcon field="name"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="category">{{'dashboard.schools.employeeNickname'|translate }} <p-sortIcon field="category"></p-sortIcon></th>
+                    <th pSortableColumn="category">{{'dashboard.schools.jobTitle'|translate }} <p-sortIcon field="category"></p-sortIcon></th>
+                    <th pSortableColumn="quantity">{{'shared.email'|translate }} <p-sortIcon field="quantity"></p-sortIcon></th>
+                    <th pSortableColumn="price">{{'shared.personalId'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
+                    <th pSortableColumn="actions">{{'dashboard.schools.employeeStatus'|translate }}</th>
+                    <th class="actions"></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product let-columns="columns">
+                <tr>
+                    <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                        {{product[col.field]}}
+                    </td> -->
+                    <td>{{product.code}}</td>
+                    <td>{{product.name}}</td>
+                    <td>
+                      على
+                    </td>
+                    <td>{{product.category}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td>{{product.quantity}}</td>
+                    <td>
+                        <div class="d-flex align-items-center gap-4">
+                            <!-- <input-switch  for="optional" ></input-switch> -->
+                            <!-- <div class="alerting success">{{'shared.activated'|translate}}</div> -->
+                            <div class="alerting danger">{{'shared.deactivated'|translate}}</div>
+                            <!-- <div class="alerting danger">{{'shared.deleted'|translate}}</div> -->
+                        </div>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <app-dropdown [items]="employeesItems" (onItemClicked)="isEmployeeModelOpened=true"></app-dropdown>
+                        </div>
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+
+        <div class="">
+            <app-pagination [totalItems]="employees.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<p-dialog header="{{'dashboard.schools.editSchoolEmployeeInfo' | translate}}" [(visible)]="isEmployeeModelOpened"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
+    <ng-template pTemplate="content">
+        <div class="employee">
+
+            <div class="">
+                <form class="custom-form" [formGroup]="employeeForm">
+                    <div class="row gx-5 form-set">
+                        <div class="col-md-6">
+                            <label class="label"  for="password">{{'shared.password' | translate}}</label>
+                            <p-password iconPos="left" formControlName="password" [feedback]="false" [toggleMask]="true" name="password" placeholder="**************"></p-password>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <label class="label" for="confirmPassword">{{'shared.confirmPassword' | translate}}</label>                    
+                            <p-password 
+                            [ngClass]="{'ng-invalid ng-dirty': f.confirmPassword.errors && f.confirmPassword.errors?.['isMatching']}" 
+                            [feedback]="false" 
+                            formControlName="confirmPassword" 
+                            [toggleMask]="true" 
+                            name="confirmPassword" placeholder="**************"></p-password>
+                            <div class="errors" *ngIf="f.confirmPassword.invalid && (f.confirmPassword.dirty || f.confirmPassword.touched)">
+                                <div class="color-red-500" *ngIf="f.confirmPassword.errors?.['isMatching']">الرقم السر لا يطابق</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row gx-5 form-set">
+                        <div class="col-md-6">
+                            <label class="label" for="role">{{'dashboard.schools.employeeRole' | translate}}</label>
+                            <p-dropdown
+                            [ngClass]="{'ng-invalid ng-dirty': f.role.errors && f.role.errors?.['required']}"
+                             [options]="[null, {'name':'مدرس'},{'name':'مراقب'}]" formControlName="role" inputId="role" placeholder="محاسب" optionLabel="name"></p-dropdown>
+                        </div>
+        
+                        <div class="col-md-4">
+                            <label class="label" for="status">{{'dashboard.schools.employeeStatus' | translate}} </label>
+                            <div class="d-flex align-items-center gap-4">
+                                <p-inputSwitch name="status" [(ngModel)]="checked" formControlName="status"></p-inputSwitch>                
+                                <div class="alerting success">مفعل</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex  align-items-center justify-content-end mt-5">
+                        <button class="btn btn-primary btn--md">
+                            <span>{{'shared.saveChanges'| translate}} </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>

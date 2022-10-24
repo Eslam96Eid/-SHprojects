@@ -1,0 +1,59 @@
+<div  style="overflow-x: hidden;">
+
+
+<div class="notification-header dashboard">
+    <app-header-dashboard></app-header-dashboard>
+</div>
+
+<div id="notification-content" >
+      <div class="container-fluid" >
+        <div class="row">
+          <div class="col-12 p-0 carddd">
+                <div class="card-body d-flex">
+                    <!-- ------------------- -->
+                    <div class="name-description">
+                        <div class="title">
+                            <img class="NotReadable" src="assets/images/shared/bluecircle.svg">
+                            <img class="cardimage" src="assets/images/shared/Person.jpg">
+                            <span class="tittle">{{currentNotification.senderName|translate}}</span>
+                            <span>{{'Notifications.Ask'|translate}}</span>
+                            <span class="headerName ">{{currentNotification.notificationName|translate}}</span>
+                        </div>
+                        <div class="Description">
+                            <span class="tittle">{{'Notifications.Description'|translate}}</span>
+                            <p class="paragraph ">{{currentNotification.description|translate}}</p>
+                        </div>
+                        <span class="receviedTime">{{currentNotification.receivedTime|translate}}</span>
+                    </div>
+
+
+                    <!-- -------------------- -->  
+            
+                </div>
+           </div>
+       </div>
+     </div>
+    
+    </div>
+
+    
+</div>
+
+<div class=" sub-content">
+    <img class="cardimage" src="assets/images/shared/Person.jpg">
+    <span class="tittle">{{currentNotification.senderName|translate}}</span>
+
+    <div class="Description">
+     
+        <p class="paragraph ">{{currentNotification.description|translate}}</p>
+    </div>
+</div>
+<div class="notification-sendreply">
+     <textarea rows="2" placeholder="{{'shared.Wite Your Reply...'|translate}}" id="float-input" cols="85" pInputTextarea autoResize="autoResize"></textarea>
+     <div class="d-flex sendbtn">
+        <button>
+          <span class="color-primary sendtittle">{{'shared.send'|translate}}</span>
+          <img class="sendimg" src="assets/images/shared/blueSend.svg">
+        </button>
+     </div>
+</div>

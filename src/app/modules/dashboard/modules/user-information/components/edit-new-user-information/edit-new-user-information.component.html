@@ -1,0 +1,254 @@
+<app-send-btn [route]="'/dashboard/manager-tools/user-information/users-list'" [content]="userFormGrp" [typeOfAdd]="'AddOrEditUser'"></app-send-btn>
+<div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
+
+</div>
+<div style="overflow-x: hidden;">
+
+    <div class="d-flex">
+        <div id="content">
+            <div class="container mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
+                <form [formGroup]="userFormGrp" class="container-fluid  ">
+                    <div class=" row gx-4 form-set">
+                        <div class="col-xs-2 col-lg-4">
+                            <label for="PID" class="label"><b>{{'shared.User Name'|translate}}</b></label>
+                            <input type="text" pInputText formControlName="fullName" class="form-control basicinput" appValidatorsInput name="PID" id="PID" placeholder="{{'shared.Write User Name'|translate}}">
+                            <div [hidden]="fullName.valid || fullName.untouched">
+                                <small *ngIf="fullName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                                <small *ngIf="fullName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                                    {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col-xs-2 col-lg-4">
+
+                            <label for="PID2" class="label"><b>{{'shared.Nick Name'|translate}}</b></label>
+                            <input type="text" pInputText formControlName="nickName" class="form-control basicinput" appValidatorsInput name="PID2" id="PID2" placeholder="{{'shared.Write Nick Name'|translate}}">
+                            <div [hidden]="nickName.valid || nickName.untouched">
+                                <small *ngIf="nickName.errors?.['required']" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+
+                                <small *ngIf="nickName.errors?.['maxlength']" class="form-text text-muted d-block " class="alert-danger">
+                                    {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+
+                            </div>
+
+                        </div>
+                        <div class="col-xs-2 col-lg-4">
+
+                            <label for="PID3" class="label"><b>{{'shared.phoneNumber'|translate}}</b></label>
+                            <input type="text" pInputText formControlName="phoneNumber" (ngModelChange)="CheckUniquePhoneNumber($event)" class="form-control basicinput" appValidatorsInput name="PID3" id="PID3" placeholder="{{'shared.Write phoneNumber'|translate}}">
+                            <div>
+                                <div [hidden]="phoneNumber.valid || phoneNumber.untouched">
+                                    <small *ngIf="phoneNumber.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+
+                                    <small *ngIf="phoneNumber.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                                    {{'shared.Mobile Must Start With 05 and Contain 10 Numbers Only'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                                </div>
+                                <small *ngIf="isUnique && !phoneNumber.errors?.['maxlength'] && !phoneNumber.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                                {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class=" row gx-4 form-set ">
+                        <div class="col-xs-2 col-lg-4">
+
+                            <label for="PID5" class="label"><b>{{'shared.Identity Number'|translate}}</b></label>
+                            <input type="text" pInputText formControlName="identityNumber" class="form-control basicinput" appValidatorsInput name="PID5" id="PID5" placeholder="{{'shared.Write Identity Number'|translate}}">
+                            <div>
+                                <div [hidden]="identityNumber.valid || identityNumber.untouched">
+                                    <small *ngIf="identityNumber.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+
+                                    <small *ngIf="identityNumber.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                                    {{'dashboard.Subjects.Hours must be more than or equal 1 hour'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xs-4 col-lg-4">
+                            <label for="PID8" class="label"><b>{{'dashboard.UserInformation.Determine Private Roles'|translate}}</b></label>
+
+                                <!-- <select class="form-control" appValidation styleClass="p-multiselect"         formControlName="privateRole" placeholder="Select Private Roles" multiple>
+                                    <option *ngFor="let options of roles" [ngValue]="options.id">{{options.name}}</option>
+                                </select> -->
+
+
+                                
+                            <p-dropdown
+                            (onChange)="onChange($event)"
+                            [(ngModel)]="selectedItems" 
+                            [options]="roles" 
+                            formControlName="privateRole" 
+                            class="form-control"  
+                            optionLabel="name"
+                            placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                           </p-dropdown>
+
+                                <!-- <p-multiSelect 
+                                (onChange)="onChange($event)"
+                                [(ngModel)]="listOfRoles" 
+                                [options]="roles" 
+                                formControlName="privateRole" 
+                                class="form-control"  
+                                styleClass="p-multiselect" 
+                                defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                                <ng-template let-value pTemplate="selectedItems">
+                                        <div class="country-item country-item-value" *ngFor="let option of listOfName">
+                                            <div>{{option}}</div>
+                                        </div>
+                                </ng-template>
+                                <ng-template let-item pTemplate="item">
+                                            {{item.name}}
+                               </ng-template>
+                            </p-multiSelect> -->
+
+                            <!-- <p-multiSelect [options]="roles"  formControlName="privateRole" class="form-control" appValidation styleClass="p-multiselect" defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            </p-multiSelect> -->
+
+                            <div>
+                                <div [hidden]="privateRole.valid || privateRole.untouched">
+                                    <small *ngIf="privateRole.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                {{'shared.This Field is Required'|translate}}
+                                 <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-xs-4 col-lg-4">
+                            <label for="PID8" class="label"><b>{{'dashboard.UserInformation.User Status'|translate}}</b></label>{{'shared.activated'|translate}}
+                            <p-inputSwitch (onChange)="isToggleLabel($event)" [(ngModel)]="checked" id="switchbtn"></p-inputSwitch>
+                            <span class="Label" *ngIf="isShown">{{'shared.no'|translate}}</span>
+                            <span class="Label" *ngIf="!isShown">{{'shared.yes'|translate}}</span>
+                            <!-- <label for="PID8" class="label"><b>{{'dashboard.UserInformation.User Status'|translate}}</b></label>
+                            <p-dropdown [options]="cities" formControlName="userStatus" placeholder="{{'shared.Effective'|translate}}" class="form-control" appValidation></p-dropdown> -->
+                            <div>
+                                <div [hidden]="userStatus.valid || userStatus.untouched">
+                                    <small *ngIf="userStatus.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                {{'shared.This Field is Required'|translate}}
+                                 <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                              </small>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class=" row gx-4 form-set ">
+                        <div class="col-xs-2 col-lg-4">
+
+                            <label for="PID4" class="label"><b>{{'shared.email'|translate}}</b></label>
+                            <input type="text" pInputText formControlName="email" (ngModelChange)="CheckUniqueemail($event)" class="form-control basicinput" appValidatorsInput name="PID4" id="PID4" placeholder="{{'shared.Write email'|translate}}">
+                            <div>
+                                <div [hidden]="email.valid || email.untouched">
+                                    <small *ngIf="email.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                              {{'shared.This Field is Required'|translate}}
+                               <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+
+                                    <small *ngIf="email.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                                {{'shared.Must be Valid Email'|translate}}
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                                </div>
+                                <small *ngIf="isUnique && !email.errors?.['maxlength'] && !email.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                            {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
+                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xs-2 col-lg-4">
+
+                            <label for="password" class="label"><b >{{'shared.password'| translate}}</b></label>
+
+
+                            <p-password iconPos="left" formControlName="password" class="form-control" appValidation [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'shared.Write Password'| translate}}"></p-password>
+                            <div [hidden]="password.valid || password.untouched" class="passerror">
+                                <small *ngIf="password.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+
+                                <small *ngIf="password.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                            {{'shared.Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic'|translate}}
+                            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+                            </div>
+                        </div>
+                        <div class="col-xs-4 col-lg-4">
+
+                            <label for="confirmPassword" class="label"><b> {{'shared.confirmPassword'| translate}}</b></label>
+
+                            <p-password [feedback]="false" formControlName="confirmPassword" [toggleMask]="true" name="confirmPassword" class="form-control" appValidation placeholder="{{'shared.confirmPassword'| translate}}"></p-password>
+
+                            <div [hidden]="confirmPassword.valid || confirmPassword.untouched" class="passerror">
+                                <small *ngIf="confirmPassword.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                         {{'shared.This Field is Required'|translate}}
+                          <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                       </small>
+
+                                <small *ngIf="confirmPassword.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                           {{'shared.Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic'|translate}}
+                           <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                       </small>
+
+
+                            </div>
+                            <small *ngIf=" userFormGrp.errors?.['matching'] && confirmPassword.touched && !confirmPassword.errors?.['required'] && password.valid && !confirmPassword.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                        {{'shared.Confirm Password Must Match Password'|translate}}
+                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                    </small>
+
+                        </div>
+
+
+
+                    </div>
+
+                    <!-- <div class="Btn-group">
+
+                        <button class="btn  btn-primary addBtn">{{'shared.save'|translate}}</button>
+                    </div> -->
+
+                </form>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+</div>

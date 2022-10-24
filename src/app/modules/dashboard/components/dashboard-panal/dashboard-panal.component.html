@@ -1,0 +1,75 @@
+<div class="panal-wrapper second">
+    <div class="befor" [class.show]="firstChildHoverd"></div>
+    <div class="panal">
+        <ul class="panal__list">
+
+            <ng-container *ngFor="let group of panalGroups; ">
+                <ng-container *ngIf="group.id === (activRoute$ | async)">
+                    <li class="panal__list__item" *ngFor="let link of group.children; let isfirst=first; let islast=last" [class.active]="isfirst" [routerLink]="[link.url]" (mouseover)="isfirst ? onFirstChildHoverd(): islast ? onLastChildHoverd(): null" (mouseleave)="isfirst ? onFirstChildLeaved() : islast ? onLastChildLeaved() : null">
+                        <div class="icon">
+                            <img [src]="link.icon" alt="">
+                        </div>
+                        <div class="lable">
+                            <span>{{link.title | translate}}</span>
+                        </div>
+                    </li>
+                </ng-container>
+            </ng-container>
+
+            <!-- <li class="panal__list__item">
+                <div class="icon">
+                    <span>عريى</span>
+                </div>
+                <div class="lable">
+                    <span>اللغه الانجليزيه</span>
+                </div>
+            </li>
+            <li class="panal__list__item">
+                <div class="icon">
+                    <img src="assets/images/home/panal/user.svg" alt="">
+                </div>
+                <div class="lable">
+                    <span>على مصطفى</span>
+                </div>
+            </li>
+
+            <li class="panal__list__item">
+                <div class="icon">
+                    <img src="assets/images/home/panal/setting.svg" alt="">
+                </div>
+                <div class="lable">
+                    <span>الاعدادات</span>
+                </div>
+            </li>
+
+            <li class="panal__list__item">
+                <div class="icon">
+                    <img src="assets/images/home/panal/help.svg" alt="">
+                </div>
+                <div class="lable">
+                    <span>مساعده الطفل</span>
+                </div>
+            </li>
+            <li class="panal__list__item">
+                <div class="icon">
+                    <img src="assets/images/home/panal/folder.svg" alt="">
+                </div>
+                <div class="lable">
+                    <span>الملفات</span>
+                </div>
+            </li>
+
+            <li class="panal__list__item">
+                <div class="icon">
+                    <img src="assets/images/home/panal/logout.svg" alt="">
+                </div>
+                <div class="lable">
+                    <span>تسجيل خروج</span>
+                </div>
+            </li> -->
+
+        </ul>
+        <div class="after" [class.show]="lastChildHoverd"></div>
+
+    </div>
+</div>

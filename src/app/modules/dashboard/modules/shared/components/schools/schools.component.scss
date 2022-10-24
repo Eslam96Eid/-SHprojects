@@ -1,0 +1,17 @@
+
+@import '../../../../../../../assets/css/utils/variables.scss';
+@import '../../../../../../../assets/css/components/forms.scss';
+
+
+.cards{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+    gap: 3rem;
+
+    .card{
+        border: none;
+        cursor: pointer;
+        transition: all .25s ease-in-out;
+        &.checked{border: 1px solid $color-primary !important;}
+    }
+}

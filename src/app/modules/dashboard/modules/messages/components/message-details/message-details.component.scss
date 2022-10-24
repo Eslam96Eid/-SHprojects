@@ -1,0 +1,181 @@
+@import "../../../../../../../assets/css/utils/variables.scss";
+@import "src/assets/css/components/primng-table";
+@import "src/assets/css/components/input";
+@import "src/assets/css/components/buttons";
+@import "../../../../../../../assets/css/components/forms.scss";
+@import "../../../../../../../assets/css/components/validation-form.scss";
+
+.main-message-header {
+  .left {
+    position: absolute;
+    // left: 0;
+    // top: -8rem;
+  }
+}
+.left {
+  margin-left: 12rem;
+  // .btn-primary{
+  //     background-color: transparent;
+  //     color:$color-gray-250 ;
+  //     height: 37px;
+  //     width:120px;
+  //     &:focus{background-color: $color-primary;color: #fff;}
+  // }
+  .custom-btn{
+    border: 1px solid $color-primary;
+    color: $color-primary;
+    &:hover{
+      border: 1px solid $color-primary !important;
+
+    }
+  }
+}
+
+
+#main-message-content {
+    margin-top: 1.5rem;
+    .Readingstatus {
+      font-weight: 500;
+    }
+    .group {
+      height: 44px;
+      .button-group {
+        background-color: $color-gray-50;
+        height: transparent;
+        align-items: center;
+        border-radius: 12px;
+        width: 250px;
+        justify-content: center;
+      }
+      .myInput {
+        width: 92%;
+  
+        &--search {
+          input {
+            height: 39px;
+            margin-top: 0.4rem;
+          }
+        }
+      }
+    }
+}
+
+.custom-form{
+  font-size: 1.5rem;
+  .El-form{
+      .field1{
+          margin-left: 7rem;
+      }
+  }
+}
+
+.dialog-header {
+  ::ng-deep .p-dialog {
+    .p-dialog-header {
+      .p-dialog-title {
+        font-weight: 700 !important;
+      }
+    }
+  }
+}
+
+.uploaded {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.uploadfilecontainer {
+  text-align: center;
+  font-size: 1.3rem;
+  padding: 60px 0;
+  height: 200px;
+  width: 100%;
+  border: 4px dashed #D7D7D7;
+  border-radius: 10px;
+  img{
+    width: 5rem;
+  }
+}
+
+.uploadfilecontainer:hover {
+  cursor: pointer;
+  background-color: #9ecbec !important;
+  opacity: 0.8;
+}
+
+.files-list {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border: 1px solid #44c13c;
+  border-radius: 12px;
+  padding: 5px;
+  margin: 2rem 0;
+
+}
+
+.files-list .delete-file {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.files-list .delete-file img {
+  width: 30px;
+}
+
+.messages{
+  .title{
+    display: flex;
+    margin: 2rem 0;
+    .title-Message{
+      font-weight: 700;
+      // margin-left: 2rem;
+    }
+    .time{
+      color: #AFAFAF;
+    }
+  }
+
+  .first-message{
+    .title{
+      font-weight: 700;
+      color: #5CD0DF;
+    }
+    .body-content{
+      background-color: #F3FBFC;
+      width: 95rem;
+      border-radius: 2rem;
+      p{
+        padding: 2rem 2rem;
+      }
+      .time{
+        color: #AFAFAF;
+      }
+    }
+  }
+  
+  .second-message{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    .title{
+      font-weight: 700;
+      color: #F8C073;
+    }
+    .body-content{
+      background-color: #FFFAF3;
+      width: 95rem;
+      border-radius: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      p{
+        padding: 2rem 2rem;
+      }
+      .time{
+        color: #AFAFAF;
+      }
+    }
+  }
+}

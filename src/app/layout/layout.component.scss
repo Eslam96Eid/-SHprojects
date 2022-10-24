@@ -1,0 +1,30 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+
+
+.layout{
+    // display: grid;
+    // grid-template-columns: 18% 82%;
+    // justify-content: stretch;
+
+    .sideBar-container{
+        position: relative;
+
+    }
+
+    .content-container{
+        background-color: #fff;
+
+        &.dark{
+            background-color: #F5F5F5;
+        }
+        
+        #routeroutlet {
+            padding: 0 2rem 4rem 10rem;;
+        }
+    }
+}

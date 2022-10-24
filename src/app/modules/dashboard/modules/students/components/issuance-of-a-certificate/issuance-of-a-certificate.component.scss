@@ -1,0 +1,43 @@
+@import "../../../../../../../assets/css/utils/variables.scss";
+@import "../../../../../../../assets/css/components/forms.scss";
+
+.custom-form {
+  margin-bottom: 5rem;
+  ::ng-deep {
+    p-dropdown {
+      .p-dropdown {
+        width: 27% !important;
+        margin-top: 2rem;
+        .p-dropdown-label {
+          font-size: 1.3rem;
+          padding: 1.6rem 1rem;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}
+
+.form-set {
+  .col-md-4 {
+    ::ng-deep {
+      p-dropdown {
+        .p-dropdown {
+          width: 100% !important;
+          margin-top: 1rem;
+          border-radius: 15px;
+          .p-dropdown-label {
+            font-size: 1.3rem;
+            padding: 1.6rem 1rem;
+            font-weight: 400;
+          }
+        }
+      }
+    }
+  }
+}
+.submitBtn{
+  position: absolute;
+  top: -65px;
+  left: 5px;
+}

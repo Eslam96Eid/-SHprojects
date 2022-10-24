@@ -1,0 +1,125 @@
+<div class="notification-header dashboard d-flex justify-content-between">
+    <div class="right">
+        <app-header-dashboard></app-header-dashboard>
+    </div>
+    <div class="left d-flex align-items-center ">
+        <button class="btn btn-primary " #notReadBtn (click)="getNotReadable()">{{'Notifications.Not
+            readable'|translate}}</button>
+        <button class="btn btn-primary " (click)="getReadable()"
+            #readBtn>{{'Notifications.Readable'|translate}}</button>
+    </div>
+
+</div>
+<div id="notification-content">
+
+    <div class="d-flex group ">
+        <div class="myInput myInput--md myInput--search p-input-icon-left  ">
+            <i class="pi pi-search fs-3"></i>
+            <input class="input rounded-4" type="text" (keyup)="onSearch($event)" pInputText
+                placeholder="{{'Search...' | translate}}" />
+        </div>
+    </div>
+    <div class="search-results" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500"
+        (scrolled)="onScroll()">
+
+        <div class="Notifications__cards mt-5">
+
+            <div class="container-fluid">
+                <div class="row">
+
+                    <div class=" col-11 p-0 mb-4" *ngFor="let card of notificationsList; let i=index">
+                        <div class="cardd">
+                            <div class="card-body d-flex">
+                                <div class="name-description">
+                                    <div class="title">
+                                        <img class="NotReadable" src="assets/images/shared/bluecircle.svg"
+                                            *ngIf="!card.isRead">
+                                        <img class="cardimage" src="assets/images/shared/Person.jpg">
+                                        <span class="tittle" *ngIf="checkLanguage">{{card.userName.ar}}</span>
+                                        <span class="tittle" *ngIf="!checkLanguage">{{card.userName.en}}</span>
+                                        <span>{{'Notifications.Ask'|translate}}</span>
+                                        <span class="headerName" *ngIf="checkLanguage">{{card.title.ar}}</span>
+                                        <span class="headerName" *ngIf="!checkLanguage">{{card.title.en}}</span>
+                                    </div>
+                                    <div class="Description">
+                                        <span class="tittle">{{'Notifications.Description'|translate}}</span>
+                                        <p class="paragraph ">{{card.description|translate}}</p>
+                                    </div>
+                                    <span class="receviedTime">{{card.createdDate|date |translate}}</span>
+                                </div>
+                                <div class="Details">
+
+                                    <button class="btn btn-primary detail-btn p-relative"
+                                        (click)="showDetails(card.pageLink)">
+                                        {{'shared.Show Details'|translate}}
+                                        <img src="assets/images/shared/detail-arrow.png">
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- <button *ngIf="notificationsList?.length !== notificationTotal && !loading" class="btn btn-primary LoadMore" (click)="loadMore()">
+                        {{'shared.Load More...'|translate}}
+                        ({{notificationTotal - notificationsList?.length}})
+                    </button> -->
+
+                </div>
+            </div>
+        </div>
+
+
+        <button *ngIf="notificationTotal !== notificationsList?.length" class="btn btn-primary LoadMore" type="button"
+            disabled [ngClass]="showSpinner?'shown-spinner':'hidden-spineer'">
+
+            {{notificationTotal}}{{'shared.From'|translate}}{{notificationsList?.length}}
+
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+    </div>
+
+    <div class="Empty">
+        <app-informative-block *ngIf="notificationsList.length==0 && !skeletonLoading "
+            title="{{'emptyList.Notifications List is empty' |translate}}"
+            src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </div>
+
+</div>
+
+<div *ngIf="skeletonLoading" id="notification-content">
+    <div class="Notifications__cards mt-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class=" col-11 p-0 mb-4" *ngFor="let card of [1,2,3] let i=index">
+                    <div class="cardd">
+                        <div class="card-body d-flex">
+                            <div class="name-description">
+                                <div class="title d-flex">
+                                    <p-skeleton width="4rem" height="4rem" shape="circle" class="cardimage">
+                                    </p-skeleton>
+                                    <p-skeleton width="15rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                                    <p-skeleton width="5rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                                    <p-skeleton width="15rem" styleClass="p-mb-2" class="headerName"></p-skeleton>
+                                </div>
+                                <div class="Description">
+                                    <p-skeleton width="7rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                                    <p-skeleton width="62rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                                    <p-skeleton width="50rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                                </div>
+                                <p-skeleton width="10rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                            </div>
+                            <div class="Details">
+
+                                <p-skeleton width="10rem" styleClass="p-mb-2" class="tittle"></p-skeleton>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,63 @@
+@import '../../../../../../../assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import'src/assets/css/components/input';
+@import'src/assets/css/components/buttons';
+@import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/validation-form.scss';
+
+#content{
+    width: 100%;
+    .line{
+        margin-right: 1.2rem;
+        width:98%;
+        color:#a9a9a9;
+    }
+    .custom-form{
+      
+        
+        .inputs{  margin-right: 2rem;margin-top: 4rem;}
+        .saveBtn{margin-right: 55rem;margin-top: 6rem;height: 29px;width: 106px;}
+        ::ng-deep{
+            .p-dialog{
+               
+                background-color: red;
+                 .p-dialog-header {
+                    
+                    .p-dialog-title {
+                        margin-right: 3rem;
+                    font-size: 32px; 
+                    font-family: 'DINNext';
+                    font-weight: 500;}}
+            }
+            
+        .p-button{
+                      &.filerBtn{
+                            background-color: rgba(46, 80, 163, 0.12) ;
+                            height: 40px;
+                            width: 39px;
+                            border-radius: 8px;
+                            margin-left:17px;
+                            justify-content: center;
+                           
+                        }
+  }
+    }
+    
+        }    
+
+        .filterform{
+            ::ng-deep{
+                input{&.p-inputtext:focus{border: none; }}
+             
+                .p-inputwrapper-focus{
+                   
+                    .p-dropdown{box-shadow: inset 0 0 0 1px #3f51b5, inset 0 0 0 1px #3f51b5, inset 0 0 0 1px #3f51b5, inset 0 0 0 1px #3f51b5;}
+                }
+        }
+   
+}
+
+
+}
+
+

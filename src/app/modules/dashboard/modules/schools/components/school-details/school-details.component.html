@@ -1,0 +1,232 @@
+<div class="school position-relative">
+    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100">
+        <button class="btn btn-primary btn--md">
+            <span>{{'dashboard.schools.contactWithShoolManagement'| translate}}</span>
+        </button>
+    </div>
+
+    <div class="tabView"  [class.show-controls]="navListLength > 7">
+
+            <!-- nav Controls -->
+        <div class="arrow-left" (click)="scrollLeft(nav)">
+            <img src="assets/images/shared/chevron-left.svg" alt="">
+        </div>
+        <div class="arrow-right" (click)="scrollRight(nav)" [class.d-none]="hideNavControl">
+            <img src="assets/images/shared/chevron-right.svg" alt="">
+        </div>
+        <!-- Navigations Options -->
+        <ul class="tabView__nav" [class.pe-0]="hideNavControl" #nav>
+            <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.schools.generalInfo'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2"><span>{{ 'dashboard.schools.schoolAddress'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.schools.schoolEmployee'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.schools.schoolClasses'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==5" (click)="step=5"><span>{{ 'dashboard.schools.schoolTracks'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.schools.editableList'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==7" (click)="step=7"><span>{{ 'dashboard.schools.schoolSubjects'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==8" (click)="step=8"><span>{{ 'dashboard.schools.annualHolidays'|translate }}</span></li>
+        </ul>
+         <!-- Navigations Options -->
+
+        <div class="tabView__content">
+
+            <div class=" ">
+                <!-- general Info -->
+                <ng-container *ngIf="step==1">
+                    <div class="general">
+
+                    <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
+                        <div class=" row gx-5">
+                            <div class="col ">
+    
+                                <app-file-upload (onFileUpload)="onLogoFileUpload($event)" [url]="school?.schoolLogoUrl" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
+                            </div>
+                            <div class="col flex-grow-0">
+                                <p-divider layout="vertical"></p-divider>
+                            </div>
+                            <div class="col">
+    
+                                <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" [url]="school?.diplomaLogoUrl" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label=" انقر لإرفاق شعار الاعتماد الخاص بالدبلوم"></app-file-upload>
+                            </div>
+    
+                        </div>
+    
+
+                        <h4 class="heading heading--tertiary my-5">{{'dashboard.schools.schoolInfo'|translate }}</h4>
+
+                        <div class="general__info row ">
+                            <div class="col-md-5 offset-1 grid-container">
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.enSchoolName'|translate }}</span>
+                                <p class="color-primary">{{school?.name.ar}}</p>
+
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.arSchoolName'|translate }}</span>
+                                <p class="color-primary">{{school?.name.en}}</p>
+
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolNumber'|translate }}</span>
+                                <p class="color-primary">{{school?.number}}</p>
+
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolId'|translate }}</span>
+                                <p class="color-primary">{{school?.code}}</p>
+
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolCategory'|translate }}</span>
+                                <p class="color-primary">{{school?.classification?.arabicName}}</p>
+
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolEmail'|translate }} </span>
+                                <p class="color-primary">{{school?.email}}</p>
+
+                            </div>
+                            <div class="col-md-5   grid-container">
+                                
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolType'|translate }}</span>
+                                <p class="color-primary">{{school?.type}}</p>
+
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolLicenceNumber'|translate }}</span>
+                                <p class="color-primary">{{school?.terkhisNumber}}</p>
+
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.course'|translate }}</span>
+                                <p class="color-primary">{{school?.curriculum?.arabicName}}</p>
+
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolStudentNumber'|translate }}</span>
+                                <p class="color-primary">{{school?.studentCount}}</p>
+
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.educationalInstitution'|translate }}</span>
+                                <p class=" color-primary">{{school?.educationalInstitution}}</p>
+                            </div>
+ 
+                        </div>
+                    </div>
+                </ng-container>
+                <!-- general Info -->
+        
+        
+        
+                <!-- school Location -->
+                <div class="row gx-5 " >
+                    <h4 class="heading heading--tertiary mb-5" [class.d-none]="step!=2">{{'dashboard.schools.schoolLocation'|translate }}</h4>
+                    <div class="col-md-6 px-5">
+                        <div class="map-container" [class.hide]="step!=2">
+
+                            <div class="row map-container mb-2" >
+                                <!-- Google Map -->
+                                <div  id="map" class="map"></div>
+                            </div>
+                            <!-- <p class="paragraph mb-5 color-gray-400 fw-normal">الإحداثيات: 25.081622124 - 55.2164479587 </p> -->
+                        </div>
+                    </div>
+            
+                    <ng-container *ngIf="step==2">
+                        <div class="col-md-3 align-self-center grid-container">
+                            <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
+                            <p class="color-primary">{{school?.address?.city}}</p>
+
+                            <span class="paragraph paragraph--sm color-gray-200">{{'shared.state'|translate }}</span>
+                            <p class="color-primary">{{school?.address?.state.name?.ar}}</p>
+
+                            <span class="paragraph paragraph--sm color-gray-200">{{'shared.street'|translate }}</span>
+                            <p class="color-primary">{{school?.address?.name.street?.ar}}</p>
+                        </div>
+    
+                        <div class="col-md-3 align-self-center">
+                            <div class="mb-5 pe-4">
+                                <!-- <img src="assets/images/shared/qrc.svg" alt=""> -->
+                                <!-- https://www.google.com/maps/place/25%C2%B004'53.8%22N+55%C2%B012'59.2%22E/@25.0816221,55.216448,17z/data=!4m4!3m3!8m2!3d25.0816221!4d55.216448 -->
+                                <qr-code [value]="school?.address?.locationURL" size="160" darkColor="#7B7B7B" errorCorrectionLevel="L"></qr-code>
+
+                            </div>
+                            <p class="paragraph paragraph--sm color-gray-800">المرجو قراءة الرمز من الهاتف للحصول على الاتجاهات في خريطة جوجل</p>
+
+                        </div>
+                
+                    </ng-container>
+                </div>
+                <!-- school Location -->
+        
+        
+                <!-- school manager -->
+                <ng-container *ngIf="step==3">
+                    <div class="row align-items-center">
+                        <div class="col-md-8 ">
+                            <div class="profile">
+                                <div class="profile__avatar">
+                                    <img src="assets/images/shared/instractor.png" alt="">
+                                </div>
+
+                                <div class="avatar__info">
+                                    <h3 class="profile__name heading heading--tertiary">محمد علي طارق </h3>
+                                    <span class="profile__job color-primary">مدير المدرسة الشارقة</span>
+                                </div>
+                            </div>
+                            <!-- <div class="icon-wraper p-5 bg-gray-100 rounded-circle d-flex align-items-center justify-content-center">
+                                <fa-icon class="color-gray-700" [icon]="faUser"></fa-icon>
+                                <img src="assets/images/shared/user.svg" alt="">
+                            </div>
+                            <div class="me-4">
+                                <h4 class=""heading heading--tertiary>محمد علي طارق</h4>
+                                <p class="paragraph paragraph--sm color-primary">مدير المدرسة الشارقة</p>
+                            </div> -->
+                        </div>
+                        <div class="col-md-2 color-primary">
+                            <div class="d-flex align-items-center color-primary">
+                                <img src="assets/images/shared/mail.svg" alt="">
+                                <span class="me-2 text-decoration-underline lh-1" role="button"> m.ali@outlook.co</span>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="d-flex align-items-center color-primary ">
+                                <img src="assets/images/shared/phone.svg" alt="">
+                                <span class="me-2 text-decoration-underline lh-1" role="button"> +971 55 173 3879</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <p class="col-md-7 paragraph paragraph--sm color-gray-300">
+                            لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...
+                        </p>
+                    </div>
+        
+                    <hr class="my-6">
+
+                    <app-school-employees [employees]="schoolClasses"></app-school-employees>
+                </ng-container>
+                <!-- school managar -->
+        
+        
+                <!-- school Classes -->
+                <ng-container *ngIf="step==4">
+                    <app-school-grades [students]="schoolClasses"></app-school-grades>
+                </ng-container>
+                <!-- school Classes -->
+        
+        
+                <!-- school Divitions -->
+                <ng-container *ngIf="step==5">
+                    <app-school-divisions [students]="schoolClasses"></app-school-divisions>
+                </ng-container>
+                <!-- School Section -->
+        
+        
+                <!-- Edit list -->
+                <ng-container *ngIf="step==6">
+                    <app-edit-list [editList]="schoolClasses"></app-edit-list>
+                </ng-container>
+                <!-- Edit list -->
+
+
+
+                <!-- School Subjects -->
+                <ng-container *ngIf="step==7">
+                    <app-school-subjects [subjects]="schoolClasses"></app-school-subjects>
+                </ng-container>
+                <!-- School Subjects -->
+
+
+                <ng-container *ngIf="step==8">
+                    <app-annul-holiday-list [holidays]="schoolClasses"></app-annul-holiday-list>
+                </ng-container>
+                
+
+            </div>
+        </div>
+    </div>
+    
+</div>

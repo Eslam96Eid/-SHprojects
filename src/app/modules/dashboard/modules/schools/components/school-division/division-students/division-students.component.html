@@ -1,0 +1,62 @@
+<div class="prim-table mt-4">
+    <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
+        <!-- Table Caption -->
+        <ng-template pTemplate="caption">
+            <div class="d-flex align-items-center bg-gray-30 radius-15">
+                <div class="flex-grow-1">
+                    <app-table-caption></app-table-caption>
+                </div>
+                <!-- <button class="btn btn--sm btn-outline-none pe-2 mb-4" (click)="addStudentModelOpened=true">
+                    <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+                    <span>{{'dashboard.schools.addStudent'|translate}}</span>
+                </button> -->
+            </div>
+        </ng-template>
+        
+        <ng-template pTemplate="header" let-columns="columns">
+            <tr>
+                <!-- <th *ngFor="let col of cols">
+                    {{col.header}}
+                </th>
+                <th pSortableColumn="actions"></th> -->
+                <th pSortableColumn="code">{{'dashboard.schools.studentName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'dashboard.schools.studentNickname'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="price">{{'dashboard.schools.track'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
+                <th pSortableColumn="category">{{'dashboard.schools.studentId'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
+                <th pSortableColumn="quantity">{{'dashboard.schools.studentMinisterialId'|translate}}  <p-sortIcon field="quantity"></p-sortIcon></th>
+                <th pSortableColumn="actions">{{'shared.personalId'|translate}}</th>
+                <th class="actions"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-product let-columns="columns">
+            <tr>
+                <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                    {{product[col.field]}}
+                </td> -->
+                <td>{{product.code}}</td>
+                <td>{{product.name}}</td>
+                <td>
+                    {{product.quantity}}
+                </td>
+                <td>{{product.quantity}}</td>
+                <td>
+                    {{product.price}}
+                </td>
+                <td>
+                    {{product.category}}
+                </td>
+                <td>
+                    <div class="d-flex align-items-center gap-4" (click)="transferStudentModelOpened=true">
+                        <span class="color-skyBlue-400">تعديل مسار</span>
+                        <fa-icon class="color-skyBlue-400 fs-6" [icon]="faChevronCircleLeft"></fa-icon>
+                    </div>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+
+    <div class="">
+        <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+::ng-deep p-dialog{
+    .p-dialog-mask{z-index: 900000 !important;}
+    .p-dialog{
+        
+        .p-dialog-header{
+            padding: 3.5rem 3.5rem 2.5rem 3.5rem;
+                font-size: 1.8rem;
+            p{font-size: 1.7rem;}
+            .p-dialog-title{
+                font-size: 1.8rem;
+                font-weight: 600;
+            }
+        }
+         .p-dialog-content{
+            padding: 0 3rem 3.5rem 3.5rem;
+            // overflow: unset;
+            color: #000;
+        }
+
+        .p-dialog-header-icons{
+            align-self: flex-start;
+        }
+    }
+
+    .pi{font-size: 1rem;}
+    .pi.pi-times {font-size: 1.5rem;}
+}

@@ -1,0 +1,117 @@
+<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/subject/new-subject'" [content]="'dashboard.Subjects.Add New Subject'"></app-add-btn>
+<div class="prim-table mt-4" *ngIf="subjects.total || subjects.loading">
+    <p-table #dt [lazy]="true" [value]="subjectsList" (onSort)="sortMe($event)">
+
+
+        <ng-template pTemplate="caption">
+            <app-table-caption (onExport)="first=false;onExport($event)" (onFilter)="first=false;getAllSubjects()" (onSearch)="first=false;filtration.KeyWord = $event; getAllSubjects()" (onClear)="first=false;clearFilter()">
+
+                <div class="row gx-5 form-set">
+                   
+                    <div class="col-6">
+                        <label class="label" for="evaluationType">{{'dashboard.Subjects.Evaluation System'|translate}} </label>
+                        <p-dropdown [options]="evaluationTypeList"  optionLabel="name.ar" optionValue="id" [(ngModel)]="filtration.evaluation" inputId="evaluationType"  placeholder="{{'dashboard.Subjects.select evaluation type'|translate}}"></p-dropdown>
+                    </div>
+                   
+                </div>
+
+            </app-table-caption>
+
+        </ng-template>
+
+  
+  
+  
+  <ng-template pTemplate="header" >
+        <tr  >
+          <th   pSortableColumn="subjectCode" >#</th>
+          <th   pSortableColumn="subjectName" ><p-sortIcon  field="subjectName" ></p-sortIcon>{{'dashboard.Subjects.Subject Name'|translate}}</th>
+          <th   pSortableColumn="evaluationType"><p-sortIcon  field="evaluationType"></p-sortIcon>{{'dashboard.Subjects.Evaluation System'|translate}}</th>
+          <th   pSortableColumn="creatorName" ><p-sortIcon  field="creatorName" ></p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}</th>
+          <th   pSortableColumn="createdDate"><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+          <th   pSortableColumn="editorName"><p-sortIcon field="editorName"></p-sortIcon>{{'dashboard.Subjects.Edited by'|translate}}</th>
+          <th   pSortableColumn="lastEditedDate"><p-sortIcon field="lastEditedDate"></p-sortIcon>{{'dashboard.Subjects.Last EditDate'|translate}}</th>
+          <th   pSortableColumn="subjectMinmumDegree"><p-sortIcon field="subjectMinmumDegree"></p-sortIcon>{{'dashboard.Subjects.Subject Minimum grade'|translate}}</th>
+          <th   pSortableColumn="edit" class="actions"></th>
+        
+
+          
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-e  >
+        <tr  >
+            <td   >{{e.subjectCode|translate}}#</td>
+            <td  >{{e.subjectName.ar|translate}}</td>
+            <td   >{{e.evaluationType|translate}}</td>
+            <td  >{{e.creatorName|translate}}</td>
+            <td  >{{e.createdDate|date:'yyyy/mm/dd'|translate}}</td>
+            <td  >{{e.editorName|translate}}</td>
+            <td>{{e.lastEditedDate|date:'yyyy/mm/dd'|translate}}</td>
+            <td class="center" *ngIf="e.subjectMinmumDegree||e.subjectMinmumDegree==0">{{e.subjectMinmumDegree|translate}}</td>
+            <td  class="center" *ngIf="!e.subjectMinmumDegree&&e.subjectMinmumDegree!=0">-</td>
+            <td>
+                 
+                
+                <div class="dropdown">
+                    <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                        <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
+                    </div>
+                    <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
+                        <li class="dropdown-item">
+                            <a class="link"  routerLink="/dashboard/educational-settings/subject/edit-subject/{{e.id}}">
+                              <img src="assets/images/shared/pen.svg" alt="">
+                              <p>{{'shared.edit'|translate}}</p>
+                            </a>
+                        </li>
+                        <li class="dropdown-item">
+                            <a class="link" (click)="deleteSubject(e)" >
+   
+                              <img src="assets/images/shared/delete.svg" alt="">
+                              <p>{{'dashboard.Subjects.Delete subject'|translate}}</p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            
+          
+            </td>
+        </tr>
+    </ng-template>
+
+
+
+    
+    
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+            <td [attr.colspan]="20">
+                <ng-container *ngIf="subjects.total &&  allSubjectsLength == 0">
+                    <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                </ng-container>
+
+                <app-loader></app-loader>
+
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<div *ngIf="paginationState.rows<allSubjectsLength">
+    <app-pagination [totalItems]="allSubjectsLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
+</div>
+</div>
+<!-- emptymessage -->
+<ng-container *ngIf="!subjects.total && !subjects.loading">
+<app-informative-block title="{{'emptyList.Subject List is Empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>
+
+
+  <!-- confirm dialog on delete subject  -->
+  <p-confirmDialog #cd [style]="{width: '35vw',height:'15vw'}"  >
+    <ng-template pTemplate="footer">
+        <button type="button"  pButton  label="{{'shared.yes'|translate}}" (click)="cd.accept()"></button>
+        <button type="button"   pButton  label="{{'shared.no'|translate}}" (click)="cd.reject()"></button>
+        
+    </ng-template>
+</p-confirmDialog>

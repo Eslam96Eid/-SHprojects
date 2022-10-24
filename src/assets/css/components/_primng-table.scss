@@ -1,0 +1,178 @@
+
+.prim-table{
+
+
+    
+    ::ng-deep p-table{
+    
+        
+         div.p-datatable-wrapper{
+            border: 0.5px solid #F5F5F5; 
+            border-bottom-width:0 ;
+            // border-radius: 12px;
+            // overflow-x: auto;
+        
+        }
+ 
+        
+        .p-datatable-header{border: none; padding: 0;}
+        tr:hover {background-color: $color-gray-50; cursor: pointer;}
+
+        .p-component{ font-size: inherit; }
+
+        thead.p-datatable-thead tr th{
+            background-color:  #3052A1;
+            color: $color-white;
+            font-family: 'Droid';
+            text-align: start;
+            font-size: 1.3rem;
+            padding: 1.4rem .5rem;
+            font-weight: 400;
+            min-width: 11rem;
+           
+
+            &.actions{min-width: 4rem; text-align: end; padding: 1.5rem;}
+
+            &:first-of-type {border-top-right-radius: 12px; padding-inline-start: 3rem;}
+     
+            &:last-of-type {border-top-left-radius: 12px}
+        
+            p-sorticon i{color: $color-white;}
+            &.p-sortable-column.p-highlight .p-sortable-column-icon{color: $color-white;}
+       
+            &:hover{
+                background-color: $color-primary;
+                color: $color-white;
+                p-sorticon .p-sortable-column-icon {color: $color-white;}
+            }
+        }
+
+       
+        .mediumrow{min-width: 20rem;}
+        .longrow{ min-width: 30rem;}
+       
+
+        .p-datatable-tbody tr:not(:last-child){
+           border-bottom:1px solid #EEEEEE;
+        }
+        
+        .p-datatable-tbody tr td{ 
+            &.edit{
+                button{
+                    color: $color-skyBlue-400;
+                    border:none; 
+                    background-color:transparent;
+                img{  padding-bottom:0.5rem;padding-right:0.7rem ; }   
+            }
+        }
+            font-weight: 400;
+          
+            font-family: 'Droid';
+             font-size: 1.5rem;
+            color: $color-gray-800;
+          
+            text-align: start;
+            &.center{ text-align: center;}
+           
+            border-width:  0px ;
+            // font-size: 1.4rem;
+             &.list{text-align: end;padding-left: 1.5rem;}
+          
+             &:first-child{padding: 3rem;}
+           
+        }
+
+        // tr:last-child td:first-child { border-bottom-right-radius: 12px;}
+        // tr:last-child td:last-child { border-bottom-left-radius: 12px;}
+
+
+
+        .p-datatable-tfoot{
+            
+            tr td{
+                background: #F8FAFB;
+
+            }
+            .p-paginator{
+                height: auto;
+                overflow: visible;
+                font-size: 1.4rem;
+            }
+        }
+
+        .p-paginator{
+            font-size: 1.8rem;
+            border-bottom: 0;
+            margin-top: 2rem;
+            justify-content: flex-end;
+            // .p-paginator-right-content{margin-inline-start: 0;}
+            // .p-paginator-left-content{margin-inline-end: 0;}
+            
+            .p-paginator-right-content{margin: 0;}
+            .p-paginator-left-content{margin: 0;}
+
+            & > button.p-paginator-element{display: none;}
+
+            .p-paginator-pages{
+                margin: 0 1.5rem;
+                .p-paginator-page{
+                    border-radius: 5px;
+                    font-size: 1.6rem;
+                    
+                    &.p-highlight{
+                        background-color: $color-blue-100;
+                        color: $color-primary;
+                    }
+                }
+            }
+
+
+            // Hide pagination For Design purpous
+            height: 0;
+            overflow: hidden;
+            padding: 0;
+            margin: 0;
+        }
+
+
+
+    }
+
+
+
+    &.light-theme{
+
+        ::ng-deep p-table{
+
+            div.p-datatable-wrapper{
+                border: none; 
+            }
+
+            thead.p-datatable-thead tr{
+                // border-radius: 12px;
+            }
+
+            thead.p-datatable-thead tr th{
+                background-color: #F0F0F0;
+                color: #676767;
+                border: none;
+
+                &:first-of-type {border-radius: 0 12px 12px 0;}
+     
+                &:last-of-type {border-radius: 12px 0 0 12px;}
+            }
+
+            .p-datatable-tbody tr td{ 
+                background-color: #FAFAFA;
+                color: #767676;
+                font-weight: 500;
+            }
+                
+        }
+
+
+    }
+   
+ 
+ 
+}

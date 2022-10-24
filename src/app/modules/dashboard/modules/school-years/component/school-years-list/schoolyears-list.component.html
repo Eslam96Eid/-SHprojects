@@ -1,0 +1,90 @@
+<app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/school-year/new-school-year'" [content]="'breadcrumb.Add New School Year'"></app-add-btn>
+<div class="prim-table ">
+    <p-table  #dt [value]="schoolYearList"  [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
+     
+   
+
+    <!-- Table Caption -->
+    <ng-template pTemplate="caption">
+
+            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
+        
+    </ng-template>
+
+       
+      
+      
+      <ng-template pTemplate="header" >
+            <tr  >
+              <th   pSortableColumn="name" ><p-sortIcon  field="name" ></p-sortIcon>{{'dashboard.SchoolYear.School Year Name'|translate}}</th>
+              <th   pSortableColumn="id"><p-sortIcon  field="id"></p-sortIcon>{{'dashboard.SchoolYear.curriculum Number'|translate}}</th>
+              <th   pSortableColumn="phoneno"><p-sortIcon field="phoneno"></p-sortIcon>{{'dashboard.SchoolYear.School Year StartDate'|translate}}</th>
+              <th   pSortableColumn="email"><p-sortIcon  field="email"></p-sortIcon>{{'dashboard.SchoolYear.School Year EndDate'|translate}}</th>
+              <th   pSortableColumn="gender"><p-sortIcon field="gender"></p-sortIcon>{{'dashboard.SchoolYear.WeekEnd Days'|translate}}</th>
+              <th   pSortableColumn="nationality"><p-sortIcon field="nationality"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+              <th   pSortableColumn="Class" ><p-sortIcon field="nationality"></p-sortIcon>{{'dashboard.SchoolYear.Class Number'|translate}}</th>
+              <th   pSortableColumn="edit" class="actions"></th>
+
+              
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e  >
+            <tr  >
+                <td  >{{e.schoolYearName|translate}}</td>
+                <td   >{{e.curriculum|translate}}</td>
+                <td  >{{e.schoolYearStartDate|translate}}</td>
+                <td  >{{e.schoolYearEndDate|translate}}</td>
+                <td><ng-container *ngFor="let item of e.weekendDays let i=index"> 
+                    {{item|translate}} 
+                    <ng-container *ngIf="i<e.weekendDays.length-1">,</ng-container> 
+                </ng-container></td>
+                <td>{{e.createdDate|translate}}</td>
+                <td>{{e.class|translate}}</td>
+                <td>
+          
+                    <div class="dropdown">
+                        <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                            <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
+                        </div>
+                        <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
+                            <li class="dropdown-item">
+                                <a class="link" routerLink="/dashboard/educational-settings/school-year/edit-school-year/{{e.id}}">
+                                  <img src="assets/images/shared/pen.svg" alt="">
+                                  <p>{{'shared.edit'|translate}}</p>
+                                </a>
+                            </li>
+                            <li class="dropdown-item">
+                                <a class="link" routerLink="">
+                                  <img src="assets/images/shared/cup.svg" alt="">
+                                  <p>{{'dashboard.SchoolYear.choose Top Students'|translate}}</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                
+              
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
+
+            <tr>
+
+                <td [attr.colspan]="20" [att.rowspan]="10">
+
+                    <app-informative-block title="{{'emptyList.SchoolYear List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+
+                </td>
+
+            </tr>
+
+          </ng-template>
+    </p-table>
+  
+  
+    <div >
+        <app-pagination [totalItems]="schoolYearList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    </div>
+    
+    </div>

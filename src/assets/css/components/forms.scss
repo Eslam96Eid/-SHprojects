@@ -1,0 +1,465 @@
+.custom-form {
+    .form-set {
+        margin-bottom: 3rem;
+        padding-inline-end: 1.5rem;
+    }
+    input,
+    textarea {
+        width: 100%;
+        border-radius: 15px;
+        // background-color: $color-gray-150;
+        border-color: $color-gray-150;
+        font-size: 1.6rem;
+        height: 55px;
+      
+        &::placeholder {
+          
+            color: $color-gray-300;
+            font-weight: 400;
+            font-family: 'Droid';
+        }
+        &:focus {
+            background-color: #fff;
+            box-shadow: inset 0 0 0 1px #3f51b5, inset 0 0 0 1px #3f51b5, inset 0 0 0 1px #3f51b5, inset 0 0 0 1px #3f51b5;
+        }
+        &.p-inputtext {
+            font-size: 1.6rem;
+            font-weight: 400;
+            padding: .6rem 1rem;
+            font-family: 'Droid';
+            border-radius: 15px;
+            // height: 55rem;
+            &:focus {
+                background-color: #fff;
+                box-shadow: inset 0 0 0 1px #3f51b5, inset 0 0 0 1px #3f51b5, inset 0 0 0 1px #3f51b5, inset 0 0 0 1px #3f51b5;
+            }
+            &::placeholder {
+                color: $color-gray-300;
+            }
+            &:enabled:hover {
+                border-color: #DBDBDB;
+            }
+        }
+    }
+    // custom File Upload
+    .file-upload {
+        // background-color: $color-gray-150;
+        padding: 0.6rem 1.5rem;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        column-gap: 1.3rem;
+        cursor: pointer;
+        .file {
+            flex-grow: 1;
+            color: $color-primary;
+        }
+    }
+
+
+     ::ng-deep {
+        p-dropdown {
+            &.ng-dirty.ng-invalid>.p-dropdown {
+                border-color: #EF525B;
+                background-color: #fff;
+                border-width: 1px;
+            }
+            &.ng-dirty.ng-invalid .p-dropdown:not(.p-disabled).p-focus {
+                box-shadow: inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B
+            }
+            .p-dropdown {
+                width: 100%;
+                height: 55px;
+                border-radius: 15px;
+                // background-color: $color-gray-150;
+                border-color: $color-gray-150;
+                .p-placeholder {
+                    color: $color-gray-250;
+                    
+                }
+                &.p-focus {
+                    background-color: #fff;
+                }
+                .p-dropdown-label {
+                    font-family: 'Droid';
+                    font-size: 1.6rem;
+                    padding: .3rem 1rem;
+                    line-height: 3;
+                }
+                .p-dropdown-trigger {
+                    padding-inline-end: 1.5rem;
+                    color: #1A1A1A;
+                    .pi {
+                        font-size: 1.4rem;
+                    }
+                }
+                .p-dropdown-panel {
+                    font-size: 1.6rem;
+                }
+            }
+        }
+        // for INPUT Number And DATE piker
+        .p-inputwrapper-focus {
+            .p-inputnumber {
+                border: 2px solid $color-primary;
+                background: #fff;
+            }
+            .p-calendar {
+                background: #fff;
+            }
+        }
+
+
+        p-inputnumber {
+            display: flex;
+            .p-inputnumber {
+                height: 55px;
+                width: 100%;
+                border-radius: 12px;
+                overflow: hidden;
+                // background-color: $color-gray-150;
+                border: 2px solid $color-gray-150;
+                // overflow: hidden;
+                input {
+                    border: none;
+                    border-radius: 12px;
+                    &:enabled:focus {
+                        box-shadow: none;
+                    }
+                }
+                .p-button {
+                    background-color: transparent;
+                    &:hover {
+                        background-color: transparent;
+                    }
+                }
+                .p-inputnumber-button-group {
+                    .p-button {
+                        color: #1A1A1A;
+                        width: 4rem;
+                        .pi {
+                            font-size: 1.4rem;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        .p-multiselect {
+            height: 55px;
+            width: 100%;
+            border-radius: 15px;
+            font-size: 15px;
+            font-family: 'Droid';
+            // background-color: #EFEFEF;
+            // border: none;
+            border-color: $color-gray-150;
+            .p-multiselect-trigger {
+                width: 3.5rem;
+                color: #1A1A1A;
+                .pi {
+                    font-size: 1.4rem;
+                }
+            }
+            .p-multiselect-token {
+                gap: 1.5rem;
+                background-color: $color-gray-50;
+                font-size: 1.4rem;
+                .pi {
+                    font-size: 1.4rem;
+                }
+            }
+            .p-multiselect-panel {
+                background: #ffffff;
+                border: 1px solid $color-gray-150;
+                border-radius: 15px;
+                box-shadow: none;
+                overflow: hidden;
+                top: 63px !important;
+                .p-multiselect-header {
+                    display: none;
+                }
+                .p-multiselect-items {
+                    font-size: 1.4rem;
+                    .p-multiselect-item {
+                        color: $color-primary;
+                        &:hover {
+                            background-color: rgba(235, 241, 255, 0.7);
+                            ;
+                        }
+                        &:focus {
+                            background-color: #fff;
+                        }
+                        &.p-highlight {
+                            background: rgba(235, 241, 255, 0.7);
+                        }
+                    }
+                    .p-checkbox {
+                        display: none;
+                    }
+                }
+            }
+            .p-multiselect-label.p-placeholder,
+            .p-multiselect-label {
+                font-family: 'Droid';
+                font-weight: 400;
+                color: $color-gray-250;
+                font-size: 1.6rem;
+                padding: .6rem 1rem;
+            }
+        }
+
+
+        p-checkbox {
+            .p-checkbox,
+            .p-checkbox-box {
+                width: 20px;
+                height: 20px;
+                border-color: $color-gray-200;
+                .p-checkbox-icon {
+                    // font-size: 1.6rem;
+                }
+            }
+            .p-checkbox-box {
+                // padding: 1rem;
+                &.p-highlight {
+                    border-color: $color-skyBlue-600;
+                    background-color: $color-skyBlue-600;
+                    &:hover {
+                        background-color: $color-skyBlue-600;
+                    }
+                }
+            }
+            .p-checkbox-label {
+                margin-inline-start: 1rem;
+                font-size: 1.6rem;
+            }
+            .p-checkbox .p-checkbox-box.p-highlight .p-checkbox-icon.pi-check:before {
+                content: "\e909";
+                position: relative;
+                border: none;
+                top: 0;
+                left: 0;
+            }
+        }
+         ::ng-deep p-calendar {
+             &.ng-dirty.ng-invalid>.p-calendar {
+                 border-color: #EF525B;
+                 background-color: #fff;
+                 border-width: 1px;
+             }
+             &.ng-dirty.ng-invalid .p-calendar:not(.p-disabled).p-focus {
+                 box-shadow: inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B
+             }
+            .p-calendar {
+                width: 100%;
+                border-radius: 15px;
+                background-color: #fff;
+                border: 2px solid $color-gray-150;
+                .pi {
+                    font-size: 1.4rem;
+                }
+                .p-datepicker {
+                    top: 50px !important;
+                    border: 1px solid $color-primary !important;
+                    border-radius: 15px !important;
+                    color: #828282;
+                    &.p-datepicker-timeonly {
+                        top: 68px !important
+                    }
+                    .p-datepicker-header {
+                        .p-datepicker-prev,
+                        .p-datepicker-next {
+                            .pi {
+                                font-size: 1.4rem;
+                            }
+                            color: #000;
+                        }
+                        .p-datepicker-title {
+                            .p-datepicker-month {
+                                color: $color-primary;
+                                font-size: 1.4rem;
+                                font-weight: 500;
+                            }
+                            .p-datepicker-year {
+                                font-size: 1.4rem;
+                                color: $color-skyBlue-600;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                    table {
+                        font-size: 1.2rem;
+                        th {
+                            font-size: 1rem;
+                            color: $color-primary;
+                        }
+                        td>span.p-highlight {
+                            background: $color-skyBlue-600;
+                            color: $color-primary;
+                            width: 3rem;
+                            height: 3rem;
+                        }
+                    }
+                    table td.p-datepicker-today>span {
+                        color: $color-primary;
+                        border-color: $color-primary;
+                        box-shadow: none;
+                        width: 3rem;
+                        height: 3rem;
+                        font-weight: 500;
+                    }
+                }
+                .p-placeholder {
+                    color: $color-gray-250;
+                }
+                &.p-calendar-w-btn {
+                    // border-color: transparent;
+                }
+                input {
+                    border: none;
+                    border-radius: 12px;
+                    &::placeholder {
+                        color: $color-gray-250;
+                    }
+                    &:enabled:focus {
+                        box-shadow: none;
+                        background-color: transparent;
+                    }
+                }
+            }
+        }
+        p-chips {
+            .p-chips {
+                width: 100%;
+                border-radius: 12px;
+                background-color: $color-gray-50;
+                .p-placeholder {
+                    color: $color-gray-250;
+                }
+                .p-chips-multiple-container {
+                    width: 100%;
+                    border-radius: 12px;
+                    border-color: $color-gray-150;
+                    padding: .2rem 1rem;
+                    // // &.p-focus{
+                    // //     li.p-chips-input-token{
+                    // //         padding: .2rem .2rem;
+                    // //     }
+                    // // }
+                    input {
+                        &:focus {
+                            background: transparent;
+                            font-size: 1.6rem;
+                            border: none;
+                            box-shadow: none;
+                            border: none;
+                            box-shadow: none;
+                        }
+                    }
+                    li.p-chips-input-token {
+                        padding: .2rem .2rem;
+                    }
+                    li.p-chips-token {
+                        background-color: $color-gray-50;
+                        color: $color-primary;
+                        font-family: 'Droid';
+                        font-size: 1.6rem;
+                        font-weight: 400;
+                        gap: .6rem;
+                        padding: .2rem 1rem;
+                        .p-chips-token-icon {
+                            &::before {
+                                font-size: 1.5rem;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        p-password {
+            &.ng-invalid.ng-dirty>.p-password>.p-inputtext {
+                border-color: #EF525B;
+                background-color: #fff;
+            }
+            &.ng-dirty.ng-invalid .p-password input.p-inputtext:focuS {
+                box-shadow: inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B, inset 0 0 0 1px #EF525B
+            }
+            position: relative;
+            .p-password {
+                width: 100%;
+                i {
+                    inset-inline-end: 1rem;
+                    right: unset;
+                }
+            }
+            i {
+                position: absolute;
+                top: 50%;
+                margin-top: -.5rem;
+                &.pi {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+
+        p-radiobutton{
+            .p-radiobutton {
+                .p-radiobutton-box{
+                   &.p-highlight{
+                   background-color: $color-skyBlue-600;
+                   border-color: $color-skyBlue-600;
+                   &:hover{}
+                   }
+                    .p-radiobutton-icon{
+                    background-color: white;
+                }
+
+            }
+        }
+        }
+        p-inputswitch {
+            .p-inputswitch {
+                width: 3.67rem;
+                height: 2.15rem;
+                display: flex;
+                .p-inputswitch-slider {
+                    border-radius: 30px;
+                    background-color: #5BCDDB;
+                    &::before {
+                        width: 1.6rem;
+                        height: 1.6rem;
+                        left: 0.38rem;
+                        margin-top: -0.8rem;
+                        background-color: #fff;
+                        // top: 50%;
+                        // transform: translateY(-50%);
+                        // margin-top: 0;
+                        box-shadow: none;
+                    }
+                }
+                &.p-inputswitch-checked .p-inputswitch-slider {
+                    background: rgba(91, 205, 219, 0.31);
+                    &::before {
+                        left: 0.2rem;
+                    }
+                }
+            }
+        }
+    }
+    .label {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 400;
+        margin-bottom: 1.5rem;
+        span {
+            // color: $color-gray-300;
+            // font-weight:400;
+        }
+        &--sm {
+            font-size: 1.4rem;
+            margin-bottom: 0;
+        }
+    }
+}

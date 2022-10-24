@@ -1,0 +1,49 @@
+@import '../../../../../../../assets/css/utils/variables.scss';
+@import '../../../../../../../assets/css/components/breadcrumb';
+@import '../../../../../../../assets/css/components/primng-table';
+@import '../../../../../../../assets/css/components/model';
+.survey-details {
+    &__content {
+        padding: 5rem 3rem;
+        background-color: #fff;
+        width: 93%;
+        min-height: 100vh;
+        .row {
+            margin-bottom: 6rem;
+        }
+    }
+}
+
+.p-datatable .p-datatable-tbody>tr {
+    color: #004684 !important;
+}
+
+p-table .p-datatable-tbody tr td {
+    background-color: #FAFAFA;
+    color: #004684 !important;
+    font-weight: 500;
+}
+
+.downloadbtn {
+    right: 103rem;
+}
+
+.cancelbtn {
+    font-family: "Droid Arabic Kufi";
+    font-weight: 600;
+    padding: 10px 20px 10px;
+    font-size: 19px;
+}
+
+.Surveystatus-close {
+    font-family: 'Droid Arabic Kufi';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 23px;
+    text-align: center;
+    color: #D55891;
+    background: #FAEBF2;
+    padding: 2px 30px;
+    border-radius: 15px;
+}

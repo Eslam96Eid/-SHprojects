@@ -1,0 +1,213 @@
+<div class="student">
+
+
+    <!-- <div class="student__avatar d-flex align-items-center">
+        <div class="">
+            <img [src]="student.src" alt="Avatar">
+        </div>
+        <div class="info">
+            <h4 class="heading heading--tertiary">{{student.name}}</h4>
+            <p class="color-green-500">{{student.age}}سنه</p>
+        </div>
+
+        <div class="badge d-flex justify-content-center align-items-center gap-3 rounded-5" 
+        [ngClass]="{'bg-blue-100' :!student.regestered , 'bg-skyBlue-300': student.regestered} ">
+            <div class=" d-flex align-items-center" >
+                <img *ngIf="student.regestered" src="assets/images/home/student/graduation-student.svg" alt="">
+                <img *ngIf="!student.regestered" src="assets/images/home/student/student.svg" alt="">
+            </div>
+            <p class="" [ngClass]="student.regestered ? 'color-skyBlue-500' :''" *ngIf="student.regestered"> مسجل</p>
+            <p class="" [ngClass]="!student.regestered ? 'color-primary' :''" *ngIf="!student.regestered">غير مسجل</p>
+        </div>
+
+        <button class="btn btn-outline-primary btn--md " *ngIf="transeferBy =='parent'">
+            <fa-icon class="icon" [icon]="faPlus"></fa-icon>
+            <span>{{'dashboard.students.addMoreStudents'| translate}}</span>
+        </button>
+    </div> -->
+
+    <div class="radius-15 border p-5 mb-5 bg-white">
+        <div class="d-flex align-items-center justify-content-between bg-white">
+            <div class="profile d-flex align-items-center">
+                <div class="profile__avatar">
+                    <img [src]="student.src" alt="Avatar">
+                </div>
+                <div class="profile__info">
+                    <div class="profile__name ">
+                        <h4 class="heading heading--tertiary">{{student.name}}</h4>
+                        <div >
+                            <img src="assets/images/shared/medal.svg" alt="">
+                            <span class="color-red-500">الموهبه</span>
+                        </div>
+                        <div >
+                            <img src="assets/images/shared/medal-cup.svg" alt="">
+                            <span class="color-yellow-400">من الاوائل</span>
+                        </div>
+                        <div >
+                            <img src="assets/images/shared/medal-flag.svg" alt="">
+                            <span class="color-fuchsia-500">ابناء الشهداء</span>
+                        </div>
+
+                    </div>
+                    <div class="profile__details">
+                        <div class="fs-4">
+                            <img src="assets/images/shared/child.svg" alt="">
+                            <span class="color-gray-300">12 سنه</span>
+                        </div>
+                        <div>
+                            <img src="assets/images/shared/fingure.svg" alt="">
+                            <span class="color-gray-300 fs-4">
+                            مسجل
+                          </span>
+                        </div>
+                        <div >
+                            <img src="assets/images/shared/branch.svg" alt="">
+                            <span class="color-gray-300 fs-4">الصف الرابع</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions d-flex align-items-center gap-3 mb-5">
+
+                <ng-container>
+                    <button class="btn btn-primary btn--sm px-5" 
+                    [disabled]="submitted || 
+                    !transferTypeVal.value||
+                    (!f.valid && transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate)|| 
+                    (!selectedSchool.value && transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate)" 
+                    (click)="transferStudent()">
+                        <span>{{'dashboard.students.transferStudent' |translate}} </span>
+                        <div class="spinner-border text-light" role="status" *ngIf="submitted"></div>
+                    </button>
+                </ng-container>
+    
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div class="custom-form mb-5 mt-6">
+        <h2 class="heading heading--tertiary mb-3">{{'shared.transportationType'| translate}}</h2>
+        <div class="col-md-4 " [hidden]="mode !='transfer'">
+            <!-- <label class="label" for="description">{{'shared.transportationType'| translate}}</label> -->
+            <p-dropdown name="type" #transferTypeVal [options]="transferType" [(ngModel)]="transferForm.transferType" optionValue="value" optionLabel="name" placeholder="{{'shared.chooseTransportationType' |translate}}" required></p-dropdown>
+        </div>
+    </div>
+
+    
+    
+    <ng-container  *ngIf="transferTypeVal.value ===TransferTypeEnum.TransferWithinTheEmirate">
+        
+        <div class="prim-table">
+            <app-table-caption (onFilter)="getSchools()" (onSearch)="filtration.KeyWord = $event; getSchools()" (onClear)="clearFilter()">
+    
+                <div class="row gx-5 form-set">
+                    <div class="col">
+                        <label class="label" for="region">{{'shared.state'|translate }}  </label>
+                        <p-dropdown [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
+                    </div>
+                    <div class="col">
+                        <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                        <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                    </div>
+                </div>
+            </app-table-caption>
+        </div>
+
+        <div class="student__content border p-5 radius-12 mt-5">
+    
+    
+            <h2 class="heading heading--secondary mb-5">{{'dashboard.students.availableSchools'| translate}}({{schools.total}})</h2>
+            <div class="cards row" *ngIf="!schools.loading && schools.total">
+                <div 
+                    class="card col-md-4 p-5 border-dark radius-15 d-flex align-items-center flex-row gap-4"
+                    *ngFor="let school of schools.list; let i=index" 
+                    (click)="onSelectSchool(i, school)" 
+                    [class.checked]="i==selectedSchool.index">
+                 
+                        <div class="">
+                            <img src="assets/images/school-logo.svg" alt="">
+                        </div>
+                        <div class="">
+                            <p class="color-primary fs-3">{{school.name.ar}}</p>
+                            <div class="d-flex align-items-center justify-content-start gap-3 mt-3">
+                                <img src="assets/images/shared/location.svg" alt="">
+                                <!-- <span class="color-gray-200">دبي، {{'cities.'+school.city |translate}}</span> -->
+                                <span class="color-gray-200">دبي، {{school.state.ar}}</span>
+    
+                            </div>
+                        </div>
+                
+                </div>
+            </div>
+            <div class="mt-5" *ngIf="schools.total > paginationState.rows">
+                <app-pagination [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            </div>
+    
+        </div>
+    
+        <app-loader *ngIf="schools.totalAllData"></app-loader>
+        
+        <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
+            <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+        </ng-container>
+
+
+        <ng-container *ngIf="!schools.totalAllData && !schools.loading">
+            <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+        </ng-container>
+    </ng-container>
+    
+
+
+    <div [ngClass]="{'h-0': (!selectedSchool.value || transferTypeVal.value !=TransferTypeEnum.TransferWithinTheEmirate)}">
+        <form class="custom-form" #f="ngForm">
+            <div class="custom-form my-6 p-5 bg-color-30 radius-15 border-dark">
+                <div class="row gx-5 form-set">
+                 
+                    <div class="col-md-4 " *ngIf="mode =='register'">
+                        <label class="label" for="description">{{'dashboard.students.academicYear'| translate}}</label>
+                        <p-dropdown name="academicYear" [options]="['yes', 'now']" optionLabel="name"></p-dropdown>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label class="label" for="description">{{'shared.grade'| translate}}</label>
+                        <p-dropdown name="grade" #Grade [options]="(schoolGrades$ | async)" [(ngModel)]="transferForm.gradeId" (ngModelChange)="onGradeSelected($event)" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر" required></p-dropdown>
+                    </div>
+                    
+                    <div class="col-md-4 ">
+                        <label class="label" for="description">{{'shared.division'| translate}}</label>
+                        <p-dropdown name="division" #Division [disabled]="!Grade.value" [options]="(gradeDivisions$ | async)" [(ngModel)]="transferForm.divisionId" (ngModelChange)="onDivisionSelected($event)" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد شعب فى هذا الصف" required></p-dropdown>
+                    </div>
+                    <div class="col-md-4 ">
+                        <label class="label" for="description">{{'shared.track'| translate}}</label>
+                        <p-dropdown name="track" [disabled]="!Division.value"  [options]="(divisionTracks$ | async)" [(ngModel)]="transferForm.trackId" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooserack' |translate}}" emptyMessage="لايوجد مسارات فى هذه الشعبه"></p-dropdown>
+                    </div>
+                </div>
+        
+            </div>
+    
+    
+            <div class="row gx-5 gy-4 form-set px-5">
+                <div class="col-md-8">
+                    <div class="row g-4">
+                        <label class="label fw-bold" for="">{{'shared.optionalSubjects'|translate}}</label>
+                        
+                        <ng-container *ngFor="let subject of (optionalSubjects$|async)">
+                            <div class="col-md-6 d-flex align-items-center gap-4">
+                                <p-checkbox  name="subjects" [value]="subject.id" [(ngModel)]="transferForm.subjects"></p-checkbox>
+                                <label class="label label--sm" for="">{{subject.name.ar}}</label>
+                            </div>
+                        </ng-container>
+                        
+                    </div>
+        
+                </div>
+            </div>
+    
+        </form>
+    </div>
+
+</div>

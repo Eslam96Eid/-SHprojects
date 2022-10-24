@@ -1,0 +1,29 @@
+
+
+<ng-container [ngSwitch]="shape">
+    <ng-container *ngSwitchCase="'rectangle'">
+        <div  class="">
+            <ng-container *ngFor="let item of countArr">
+                <p-skeleton borderRadius="15px" [height]="height" [width]="width" [size]="size" [style]="style" ></p-skeleton>
+            </ng-container>
+        </div>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'circle'">
+        <ng-container *ngFor="let item of countArr">
+            <p-skeleton shape="circle" [size]="size"></p-skeleton>
+        </ng-container>
+    </ng-container>
+
+
+    <ng-container *ngSwitchDefault>
+        <div  class="">
+            <ng-container *ngFor="let item of countArr">
+                <p-skeleton [borderRadius]="borderRadius" [height]="height" [width]="width" [style]="style"></p-skeleton>
+            </ng-container>
+        </div>
+    </ng-container>
+    
+</ng-container>
+
+

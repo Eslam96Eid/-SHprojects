@@ -1,0 +1,117 @@
+:host {
+    .mat-icon {
+        vertical-align: middle;
+        margin: 5px;
+
+    }
+}
+
+.logo {
+    text-align: center;
+    padding: 2.6rem 1rem;
+
+    img {
+        width: 200px;
+    }
+}
+
+.mat-divider {
+    border-top-width: 2px;
+    border-color: white;
+}
+
+.mat-list-item {
+    color: #94a3b8 !important;
+    font-size: 1.3rem;
+    height: 44px !important;
+    margin-bottom: 4px;
+    font-size: 1.7rem;
+    font-family: 'DINnext';
+
+    &:hover {
+        color: #f2f5f7 !important;
+    }
+
+    ::ng-deep {
+        .mat-list-item-content {
+            border-radius: 5px;
+            margin: 0 8px;
+
+
+            &:hover {
+                background: #E6EAF4;
+                color: black;
+            }
+
+            &:active {
+                background: #E6EAF4;
+                color: black;
+                border-right: 4px solid #2E50A3;
+
+                .mat-icon {
+                    color: #2E50A3;
+                }
+
+            }
+        }
+    }
+}
+
+.list-item-active {
+    // background: blue !important;
+    // border-radius: 0 2rem 2rem 0;
+    // &:hover {
+    //   background: blue;
+    // }
+
+    color: #f2f5f7 !important;
+
+    ::ng-deep {
+        .mat-list-item-content {
+            background: #E6EAF4;
+            color: black;
+            border-right: 4px solid #2E50A3;
+
+            .mat-icon {
+                color: #2E50A3;
+            }
+
+
+            &:hover {
+                background: #E6EAF4;
+                color: black;
+                border-right: 4px solid #2E50A3;
+
+                .mat-icon {
+                    color: #2E50A3;
+                }
+            }
+        }
+    }
+}
+
+.mat-subheader {
+    color: #818cf8;
+    font-size: 0.6rem;
+    font-weight: 100;
+    letter-spacing: 1px;
+}
+
+.btn {
+    width: 91%;
+    margin: 0 10px;
+    margin: 0 10px 20px 0;
+    border: 1px solid #2E50A3;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #2E50A3;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+p {
+    font-weight: 300;
+    font-size: 14px;
+    color: #8F8F8F;
+    margin: 10px 22px;
+}

@@ -1,0 +1,213 @@
+// @import "../../../../assets/css/utils/variables.scss";
+
+// .ripple {
+//   appearance: none;
+//     -moz-appearance: none;
+//     -webkit-appearance: none;
+//     z-index: -1;
+//     position: absolute;
+//     display: block;
+//     margin: 0;
+//     border-radius: 50%;
+//     width: 40px;
+//     height: 40px;
+//     background-color: #aaa; /*highlight color*/
+//     outline: none;
+    
+//     pointer-events: none;
+//   /*
+//     transition: opacity .55s ease-out, background-color 0ms linear, transform 200ms;
+//   */
+
+  
+//   top: -11px;
+//   left: -12px;
+//   top: calc(0px - 10px);
+//   opacity: 0;
+//   transform: scale(1);
+//   transition: opacity 0s, background-color 300ms linear, transform 0ms;
+// }
+
+// .slide-toggle-bar input {
+//   position: absolute;
+//   left: -9999px;
+//   opacity: 0;
+// }
+
+// .slide-toggle {
+//     display: inline-block;
+//     height: 24px;
+//     max-width: 100%;
+//     line-height: 24px;
+//     white-space: nowrap;
+//     outline: none;
+//     -webkit-tap-highlight-color: transparent;
+// }
+// .slide-toggle-label {
+//     display: flex;
+//     flex: 1;
+//     flex-direction: row;
+//     align-items: center;
+//     column-gap: 1rem;
+//     height: inherit;
+//     cursor: pointer;
+// }
+
+// .slide-toggle-bar, 
+// .slide-toggle-thumb {
+//     transition: all 80ms linear;
+//     // transition: all 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
+//     transition-property: background-color;
+//     transition-delay: 50ms;
+// }
+// .slide-toggle-bar {
+//     margin-left: 0;
+//     position: relative;
+//     width: 36px;
+//     height: 12px;
+//     flex-shrink: 0;
+//     border-radius: 8px;
+//     background-color: $color-gray-250;
+//     &.active {
+//       background-color: rgba($color-primary,.4);
+//     }
+// }
+
+// .slide-toggle-thumb-container {
+//     position: absolute;
+//     z-index: 1;
+//     width: 20px;
+//     height: 20px;
+//     top: -4px;
+//     left: 0px;
+//     transform: translate3d(0, 0, 0);
+//     // transition: all 0.4s cubic-bezier(0.85, 0.05, 0.18, 1.35);
+//     transition: all 80ms linear;
+// }
+
+
+// .slide-toggle-thumb {
+//   margin-left: -2px;
+//     height: 20px;
+//     width: 20px;
+//     border-radius: 50%;
+//     box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+//     background-color: #fafafa;
+// }
+
+
+// input:checked ~ .slide-toggle-thumb-container {
+//     top: -4px;
+//     left: 20px;
+  
+//     transition: all 80ms linear;
+// }
+
+// input:hover ~ .ripple,
+// input:hover ~ .slide-toggle-thumb-container .ripple{
+//   transition: opacity .55s ease-out, background-color 0ms linear, transform 200ms;
+//   opacity: .4; 
+//   cursor: pointer;
+// }
+// input:checked:hover ~ .ripple,
+// input:checked:hover ~ .slide-toggle-thumb-container .ripple{
+//   transition: opacity .55s ease-out, background-color 0ms linear, transform 200ms;
+//   background-color: rgba($color-gray-700,.54);
+//   opacity: .24;
+// }
+
+// /*  Focus & :checked Focus  */
+// input:focus ~ .ripple,
+// input:focus ~ .slide-toggle-thumb-container .ripple{  
+//   transition: opacity 150ms, background-color 300ms linear, transform 200ms;
+//   opacity: .4;
+// }
+// input:checked:focus ~ .ripple,
+// input:checked:focus ~ .slide-toggle-thumb-container .ripple{
+//   background-color: rgba($color-gray-700,.54);
+//   transition: opacity 150ms, background-color 300ms linear, transform 200ms;
+//   opacity: .24; 
+// }
+
+// /*  Focus Hover & :checked Focus Hover  */
+// input:focus:hover ~ .ripple,
+// input:focus:hover ~ .slide-toggle-thumb-container .ripple{
+//   opacity: .24; /*opacity bounce back after uncheck - 0.4*/
+//   transition: opacity .55s ease-out, background-color 0ms linear, transform 200ms;
+// }
+// input:checked:focus:hover ~ .ripple,
+// input:checked:focus:hover ~ .slide-toggle-thumb-container .ripple{
+//   transition: opacity .55s ease-out, background-color 0ms linear, transform 200ms;
+//   opacity: .24; /*opacity bounce back after check*/
+// }
+
+// /*  Active & :checked Active  */
+// input:active ~ .ripple,
+// input:active ~ .slide-toggle-thumb-container .ripple{
+//   transition: 0ms;
+//   transform: scale(0);
+//   opacity: 1;
+//   transition: transform 0s, opacity 0s;
+// }
+
+// input:checked:active ~ .ripple,
+// input:checked:active ~ .slide-toggle-thumb-container .ripple{
+//   transition: 0ms;
+//   opacity: 1;  
+// }
+// input:checked:active ~ .checkbox-frame {
+//   border-color: #ddd;
+// }
+
+// /*  Make sure the ripple jumps back to scale-0 instead of growing  */
+// input:focus:hover:active ~ .ripple,
+// input:focus:hover:active ~ .slide-toggle-thumb-container .ripple{
+//   transition: 0ms;
+// }
+
+// /*  Disabled  */
+// input:disabled ~ .ripple,
+// input:disabled ~ .slide-toggle-thumb-container .ripple{
+//   transition: 0ms;
+//   transform: scale(0);
+//   opacity: 0;
+// }
+
+// .checkbox-container 
+// input:disabled ~ span {
+//   opacity: .2;
+//   cursor: default;
+// }
+
+
+
+
+// input:disabled ~ .checkbox-frame {
+//   border-color: rgba(0,0,0,.2);
+// }
+
+
+// input:checked ~ .slide-toggle-thumb-container .slide-toggle-thumb,
+// input:checked ~ .slide-toggle-thumb-container .slide-toggle-bar,
+// input:checked ~ .ripple,
+// input:checked ~ .slide-toggle-thumb-container .ripple{
+//   color: rgba($color-gray-700,1);
+//   border-color: rgba($color-gray-700,1) !important;
+//   background-color: rgba($color-primary,1);
+//   transition: opacity 150ms, background-color .2s, transform 200ms;
+//   opacity: 1;
+// }
+
+
+// input:checked ~ .ripple,
+// input:checked ~ .slide-toggle-thumb-container .ripple{
+//   opacity: 0;
+// }
+
+
+
+// .slide-toggle-content .input-label{
+//   font-size: 1.9rem;
+//   font-weight: 400;
+//   color: $color-black;
+// }

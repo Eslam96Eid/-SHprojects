@@ -1,0 +1,6 @@
+export enum UserEnum{
+    U_PARENTS = 'U_PARENTS',
+    U_SHARJAH_AUTHORITY = 'U_SHARJAH_AUTHORITY',
+    U_SCHOOL = 'U_SCHOOL'
+
+}

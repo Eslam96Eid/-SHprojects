@@ -1,0 +1,60 @@
+<div class="student">
+    <div class="prim-table">
+        <app-table-caption></app-table-caption>
+    </div>
+
+    <div class=" my-5 p-5 bg-color-30 radius-15 border-dark">
+        <ng-content></ng-content>
+        <!-- <div class="row gx-5 mb-0">
+            <div class="col " *ngIf="mode =='transfer'">
+                <label class="label" for="description">{{'shared.transportationType'| translate}}</label>
+                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+            </div>
+
+            <div class="col " *ngIf="mode =='register'">
+                <label class="label" for="description">{{'dashboard.students.academicYear'| translate}}</label>
+                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+            </div>
+
+            <div class="col ">
+                <label class="label" for="description">{{'shared.class'| translate}}</label>
+                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+            </div>
+            <div class="col ">
+                <label class="label" for="description">{{'shared.section'| translate}}</label>
+                <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+            </div>
+        </div> -->
+    </div>
+
+    <div class="border p-5 radius-12 mt-5">
+        <h2 class="heading heading--secondary mb-5">{{'dashboard.students.availableSchools'| translate}}(6)</h2>
+        <div class="cards">
+                <div 
+                class="card p-5 border-dark radius-15 d-flex align-items-center flex-row gap-4"
+                *ngFor="let el of [1,2,3,4,5,6]; let i=index" 
+                (click)="onSelectSchool(i)" 
+                [class.checked]="i==selectedScoolIndex">
+
+                        <div class="">
+                            <img src="assets/images/school-logo.svg" alt="">
+                        </div>
+                        <div class="">
+                            <p class="color-primary fs-3">مدرسة الشارقة الإبتدائية</p>
+                            <div class="d-flex align-items-center justify-content-center gap-3 mt-3">
+                                <img src="assets/images/shared/location.svg" alt="">
+                                <span class="color-gray-200">دبي، منطقة الشارقة</span>
+                            </div>
+                        </div>
+            
+                </div>
+            </div>
+            <div class="mt-5">
+                <app-pagination totalItems="20" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            </div>
+
+        </div>
+        
+
+
+</div>

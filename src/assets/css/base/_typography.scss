@@ -1,0 +1,47 @@
+.heading{
+
+    &--primary{
+        font-size: 3.2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    &--secondary{
+        font-size: 2.2rem;
+        font-weight: 700;
+    }
+    &--tertiary{
+        font-weight: 700;
+        font-size: 1.5rem;
+        line-height: 27px;
+    }
+
+    &--border-bottom{
+        border-bottom: 5px solid lighten($color: $color-primary, $amount: 45);
+    }
+
+}
+
+
+
+
+.paragraph{
+    line-height: 1.7;
+    // color: $color-gray-800;
+
+
+    &--lg{
+        font-size: 2rem;
+        font-weight: 500;
+    }
+
+    &--md{
+        font-size: 1.8rem;
+    }
+
+    &--sm{
+        font-size: 1.4rem;
+    }
+
+    &--white{ color: $color-white;}
+    &--black{ color: $color-black;}
+}

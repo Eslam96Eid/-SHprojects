@@ -1,0 +1,82 @@
+<div class="main-message-header dashboard d-flex justify-content-between">
+    <div class="left d-flex align-items-center ">
+
+<button class=" btn  custom-btn px-4 mx-3" routerLink='/dashboard/messages/messages' >{{'dashboard.Messages.close the conversation' | translate}}</button>
+        <button class="btn btn-primary" (click)="showDialog()">{{'dashboard.Messages.Send Reply' | translate}}</button>
+        
+        
+        <p-dialog header="{{'dashboard.Messages.Send Reply' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
+            [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+            <div class="custom-form">
+
+                <div class="form-group">
+                    <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}}</label>
+                    <textarea class="form-control my-3" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
+
+                </div>
+
+                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+                    <img src="assets/images/shared/Cloud.svg">
+                    <input accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                    hidden
+                    type="file"
+                    multiple
+                    #fileInput (change)="uploadFile($event.target.files)">
+                  </div>
+                  <div  class="files-list" *ngFor="let file of files;let i= index">
+                      <p> {{ file }} </p>
+                      <button class="delete-file" (click)="deleteAttachment(i)">
+                        <img src="assets/images/shared/slice.svg">
+                      </button>
+                   </div>
+            </div>
+
+            <ng-template pTemplate="footer">
+                <button style="float: left;" class="btn btn-primary"> {{'dashboard.Messages.Send' | translate}}</button>
+            </ng-template>
+        </p-dialog>
+    </div>
+
+</div>
+
+<div id="main-message-content">
+    <div class="d-flex group ">
+        <div class="myInput myInput--md myInput--search p-input-icon-left  ">
+            <i class="pi pi-search fs-3"></i>
+            <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" />
+        </div>
+    </div>
+</div>
+
+<div class="messages">
+
+    <div class="title">
+        <p class="title-Message">{{'dashboard.Messages.title message' | translate}}</p>
+        <p class="time">قبل ساعتين</p>
+    </div>
+
+
+    <div class="first-message">
+        <p class="title">محمد كمال - مدير المدرسه</p>
+        <div class="body-content">
+            <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيو. يوت انيم أد مينيم فينايم,كيواس.</p>
+            <p class="time">قبل ساعتين</p>
+        </div>
+    </div>
+    <div class="second-message">
+        <p class="title">محمد كمال - مدير المدرسه</p>
+        <div class="body-content">
+            <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيو. يوت انيم أد مينيم فينايم,كيواس.</p>
+            <p class="time">قبل ساعتين</p>
+        </div>
+    </div>
+    <div class="first-message">
+        <p class="title">محمد كمال - مدير المدرسه</p>
+        <div class="body-content">
+            <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيو. يوت انيم أد مينيم فينايم,كيواس.</p>
+            <p class="time">قبل ساعتين</p>
+        </div>
+    </div>
+
+
+</div>

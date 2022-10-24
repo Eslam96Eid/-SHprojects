@@ -1,0 +1,46 @@
+.swipper{
+    height: 26rem;
+    ::ng-deep p-galleria{
+        .p-galleria-indicators{
+            background: transparent;
+            top: 0;
+            z-index: 11;
+
+            .p-galleria-indicator.p-highlight button{ background: #fff}
+        };
+
+        ::ng-deep p-galleriacontent{
+            .p-galleria-indicators-bottom{max-width: 100% !important; }
+
+            p-galleriaitem {
+
+                .p-galleria-item-container{
+                    border-radius: 12px;
+
+                    .p-galleria-caption{
+                        background: linear-gradient(180deg, rgba(46, 80, 163, 0.4) 0%, rgba(46, 80, 163, 0.91) 100%);
+
+                        top: 0;
+                        z-index: 10;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.card{
+
+    &__list li{
+
+        .icon{
+            margin-inline-start:0 ;
+        }
+        & > *{ flex-shrink: 0;}
+    }
+
+    &__badge{
+        p{font-size: 1.4rem;}
+    }
+}

@@ -1,0 +1,22 @@
+
+
+<div class="student  my-5">
+        <!-- <div class="actions d-flex align-items-center gap-3 mb-5">
+            <app-back route="../../"></app-back>
+            <button class="btn btn-primary btn--sm px-5">
+                <span>{{'shared.send' |translate}}</span>
+            </button>
+        </div> -->
+
+        <div class="student__content box-shadow radius-12 custom-form" [formGroup]="deleteStudentForm">
+            <div class="col-md-4 form-set">
+                <label class="label" for="cause">{{'dashboard.students.reasonForDelete' |translate}} </label>
+                <p-dropdown [options]="[{'name':'yes'}, {'name':'now'}]" formControlName="cause" name="cause" inputId="day" optionLabel="name" placeholder="اكتب عنوان الاستبيان"></p-dropdown>
+            </div>
+
+            <div class="col-md-8 mt-6">
+                <label class="label" for="day">{{'shared.attacheFile' |translate}} <span>(اختيارى)</span> </label>
+                <app-file-upload (onFileUpload)="onFileUpload($event)" view="list" label=" انقر لإرفاق ملف"></app-file-upload>
+            </div>
+        </div>
+</div>

@@ -1,0 +1,151 @@
+<div class="survey">
+
+    <!-- <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
+        <app-back [route]="'../'"></app-back>
+        <button class="btn btn-primary btn--sm">
+            <fa-icon class="icon" [icon]="faCheck"></fa-icon>
+            <span >{{'shared.save'| translate}} </span>
+        </button>
+    </div> -->
+    <div class="survey__content my-5 rounded">
+
+        <form class="custom-form" [formGroup]="medicalFileForm">
+
+            <ng-container *ngIf="step ==1">
+
+                <div class="row gx-5 form-set">
+                    <div class="col-md-4">
+                        <label class="label" for="day">تاريخ ظهور الاستبيان </label>
+                        <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-calendar" [showIcon]="true" placeholder="dd/mm/yy" (onSelect)="selectedDate($event)"></p-calendar>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="label" for="day">وقت ظهور الاستبيان </label>
+                        <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-clock" [showIcon]="true" placeholder="4:00 PM" (onSelect)="selectedDate($event)"></p-calendar>
+                    </div>
+                </div>
+
+                <hr class="color-gray-400 mb-4">
+
+                <div class="row gx-5 form-set">
+                    <div class="col-md-4">
+                        <label class="label" for="day">تاريخ اختفاء الاستبيان </label>
+                        <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-calendar" [showIcon]="true" placeholder="dd/mm/yy" (onSelect)="selectedDate($event)"></p-calendar>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="label" for="day">وقت اختفاء الاستبيان</label>
+                        <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-clock" [showIcon]="true" placeholder="4:00 PM" (onSelect)="selectedDate($event)"></p-calendar>
+                    </div>
+                </div>
+
+                <hr class="color-gray-400 mb-4">
+
+                <div class="row gx-5 form-set">
+                    <label class="label" for="day">اولياء الامور</label>
+                    <div class="d-flex gap-3 align-items-center">
+                        <div class="flex-grow-1">
+
+                            <!-- <p-chips name="chronicDiseases" formControlName="chronicDiseases"  placeholder=""></p-chips> -->
+                            <p-multiSelect [options]="diseases" formControlName="chronicDiseases" optionLabel="name" display="chip"></p-multiSelect>
+
+
+
+                        </div>
+                        <div class="filter bg-blue-100" (click)="openparentsModel()">
+                            <img src="assets/images/shared/filter.svg" alt="">
+                        </div>
+                    </div>
+
+                </div>
+            </ng-container>
+
+            <!-------------------Total Servay Send--------------------------->
+            <p-dialog header="عدد أولياء الأمور المستهدفين " [(visible)]="display" [style]="{width: '30vw',height:'67vh'}">
+
+                <ng-container>
+                    <div class="target-parents d-flex flex-column gap-3 align-items-center">
+                        <div class="icon rounded-circle w-50">
+                            <img src="assets/images/home/schools-students/Parentnew.svg" alt="">
+                        </div>
+                        <h3 class="heading heading-secondary">عدد أولياء الأمور المستهدفين : <span class="color-gray-400 fw-light"> (ولي أمر 32)</span></h3>
+                    </div>
+                    <div class="d-flex  align-items-center justify-content-end mt-5">
+                        <button class="btn btn-primary btn--sm" (click)="addParents()">
+
+                      <span>{{'shared.sendServey'| translate}} </span>
+                  </button>
+                    </div>
+                </ng-container>
+            </p-dialog>
+
+
+
+            <!-- ACTIONS -->
+            <ng-container *ngIf="step ==1">
+                <div class="actions d-flex  align-items-center justify-content-end ">
+                    <button type="button" class="btn btn-primary btn--md" (click)="showDialog()" icon="pi pi-info-circle" label="Show">
+                    <span>{{'shared.send'| translate}} </span>
+
+                  </button>
+                    <!-- <button class="btn btn-outline-primary btn--md" (click)="step=2">
+
+                    </button> -->
+                </div>
+            </ng-container>
+
+            <ng-container *ngIf="step ==2">
+
+                <div class="actions d-flex align-items-center gap-3 justify-content-end">
+                    <div class="next-btn d-flex  align-items-center  ">
+                        <button class="btn btn-primary btn--md px-5" routerLink="./../survey-report">
+                            <div class="icon">
+                                <img src="assets/images/shared/send.svg" alt="">
+                            </div>
+                            <span>{{'dashboard.surveys.sendSurvey'| translate}} </span>
+                        </button>
+                    </div>
+                    <div class="next-btn d-flex  align-items-center  ">
+                        <button class="btn btn-outline-primary btn--md " (click)="step=1">
+                            <fa-icon class="icon" [icon]="faArrowRight"></fa-icon>
+                            <span>{{'shared.previous'| translate}} </span>
+                        </button>
+                    </div>
+
+                </div>
+            </ng-container>
+
+        </form>
+    </div>
+
+
+
+
+    <p-dialog header="اختيار  أولياء الأمور" [(visible)]="parentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw',height:'67vh'}">
+        <ng-template pTemplate="content">
+            <div class="custom-form parent-modal">
+
+                <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
+                    <i class="pi pi-search fs-3"></i>
+                    <input class="input rounded-4" type="text" pInputText placeholder="البحث برقم الهوية ID، الإسم..." [(ngModel)]="searchText" />
+                </div>
+
+                <div class="row gx-5 gy-4 form-set">
+                    <ng-container *ngFor="let p of parentsList; let i = index">
+                        <div class="col-md-6 d-flex align-items-center justify-content-between">
+                            <label class="label label--sm" for=""> {{p.firstName}} {{p.lastName}}</label>
+                            <p-checkbox name="subjects" [value]="p" [(ngModel)]="selectedParents"></p-checkbox>
+                        </div>
+                    </ng-container>
+
+                </div>
+                <div class="d-flex  align-items-center justify-content-end mt-5">
+                    <button class="btn btn-primary btn--sm" (click)="addParents()">
+                    <fa-icon class="icon" [icon]="faCheck"></fa-icon>
+                    <span>{{'shared.save'| translate}} </span>
+                </button>
+                </div>
+            </div>
+        </ng-template>
+    </p-dialog>
+</div>

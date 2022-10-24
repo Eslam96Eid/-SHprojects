@@ -1,0 +1,89 @@
+<div class="ui-g" *ngIf="!isSkeletonVisible">
+    <div class="row" [lazy]="true">
+        <div class="col-md-4">
+            <p-card id="card-chart">
+                <div class="row">
+                    <div *ngIf="model.schoolCurriculumDatasets" class="col-md-6" id="shoolCurriculumChart">
+                        <canvas baseChart [datasets]="model.schoolCurriculumDatasets" [options]="model.schoolCurriculumOptions" [legend]="false" [type]="'doughnut'">
+                        </canvas>
+                        <ng-template [ngTemplateOutlet]="totalSchoolCount"></ng-template>
+                    </div>
+                    <div *ngIf="model.chartData && model.shoolCurriculumChartLabels.length > 0" class="col-md-6">
+                        <ul class="chart-Info">
+                            <li *ngFor="let item of model.shoolCurriculumChartLabels" class="Active">
+                                <span class="color-primary-700 mb-2 percentage">{{item.value}}%</span>
+                                <span class="color-gray-300 fs-4">{{item.key}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </p-card>
+        </div>
+        <div class="col-md-5">
+            <p-card id="card-chart-bar" hight>
+                <div class="row">
+                    <div class="col-md-8">
+                        <canvas id="bar" baseChart [data]="model.regionSchoolsData" [options]="model.regionSchoolsOptions" [plugins]="model.regionSchoolPlugins" [legend]="false" [type]="'bar'" height="220" width="365" style="font-size: large;">
+                        </canvas>
+                    </div>
+                    <div *ngIf="model.chartData" class="col-md-4 mt-5 Bar-char-Info">
+                        <h2 class="title">عدد المدارس</h2>
+                        <ul class="chart-Info-bar">
+                            <li class="Active mb-2">
+                                <span class="color-primary-700 mb-2 percentage">{{model.chartData.schoolCountInCentralRegion}}</span>
+                                <span class="color-gray-300 fs-5">المنطقة الوسطى</span>
+                            </li>
+                            <li class="second">
+                                <span class="color-primary-700 mb-2 percentage">{{model.chartData.schoolCountInEasternProvince}}</span>
+                                <span class="color-gray-300 fs-5">المنطقة الشرقية</span>
+                            </li>
+                            <li class="notActive">
+                                <span class="color-primary-700 mb-2 percentage">{{model.chartData.schoolCountInSharjahCity}}</span>
+                                <span class="color-gray-300 fs-5"> المنطقة الشارقة</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </p-card>
+        </div>
+        <div class="col-md-3">
+            <p-card id="card-chart">
+                <div class="row">
+                    <div class="col-md-6" id="activeSchoolsChar">
+                        <canvas baseChart [labels]="model.activeSchoolsChartLabels" [datasets]="model.activeSchoolsDatasets" [options]="model.activeSchoolsOptions" [legend]="false" [type]="'doughnut'">
+                        </canvas>
+                        <ng-template [ngTemplateOutlet]="totalSchoolCount"></ng-template>
+                    </div>
+                    <div class="col-md-6">
+                        <ul class="chart-Info">
+                            <li class="notActive mb-4">
+                                <span class="color-gray-300 fs-4">غير مفعله</span>
+                            </li>
+                            <li class="Active">
+                                <span class="color-gray-300 fs-4">مفعله </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </p-card>
+        </div>
+    </div>
+</div>
+
+<ng-template #totalSchoolCount>
+    <div *ngIf="model.chartData" class="mt-4">
+        <h2 class="chart-title">عدد المدارس الكلية</h2>
+        <h2 class="number-chart">{{model.chartData.totalSchoolCount}}</h2>
+    </div>
+</ng-template>
+<!-- <app-loader [loadingStatus]="isLoading"></app-loader> -->
+<ng-container *ngIf="isSkeletonVisible">
+
+    <ngx-skeleton-loader count="7" [theme]="{
+    'border-radius': '5px',
+    height: '45px',
+    'background-color': '#EEEEEE',
+    border: '1px solid white',
+    width:'30%'
+  }"></ngx-skeleton-loader>
+</ng-container>

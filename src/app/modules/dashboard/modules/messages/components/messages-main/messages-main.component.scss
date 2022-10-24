@@ -1,0 +1,276 @@
+@import "../../../../../../../assets/css/utils/variables.scss";
+@import "src/assets/css/components/primng-table";
+@import "src/assets/css/components/input";
+@import "src/assets/css/components/buttons";
+@import "../../../../../../../assets/css/components/forms.scss";
+@import "../../../../../../../assets/css/components/validation-form.scss";
+
+.main-message-header {
+  .left {
+    position: absolute;
+    // left: 0;
+    // top: -8rem;
+  }
+}
+.left {
+  margin-left: 12rem;
+  // .btn-primary{
+  //     background-color: transparent;
+  //     color:$color-gray-250 ;
+  //     height: 37px;
+  //     width:120px;
+  //     &:focus{background-color: $color-primary;color: #fff;}
+  // }
+}
+
+#main-message-content {
+  margin-right: 4rem;
+  margin-top: 1.5rem;
+  .Readingstatus {
+    font-weight: 500;
+  }
+  .group {
+    height: 44px;
+    .button-group {
+      background-color: $color-gray-50;
+      height: transparent;
+      align-items: center;
+      border-radius: 12px;
+      width: 250px;
+      justify-content: center;
+    }
+    .myInput {
+      width: 92%;
+
+      &--search {
+        input {
+          height: 39px;
+          margin-top: 0.4rem;
+        }
+      }
+    }
+  }
+
+  .Notifications__cards {
+    .cardd {
+      border-radius: 12px 12px 12px 12px;
+      box-shadow: 0rem 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.06);
+
+      .card-header {
+        padding-right: 2.5rem;
+        padding-bottom: 0.7rem;
+        padding-top: 0.7rem;
+        background-color: #fff;
+        border-bottom: 1px solid #e9e9e9;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        .headerName {
+          font-weight: 500;
+          margin-right: 7px;
+        }
+        .NotReadable {
+          margin-right: 0.5rem;
+        }
+        .receivedtime {
+          color: $color-gray-250;
+          font-weight: 400;
+          padding-right: 90.5rem;
+        }
+      }
+      .card-body {
+        margin-top: 3rem;
+        padding-right: 2.5rem;
+        margin-bottom: 0.7rem;
+        padding-bottom: 1rem;
+        .name-description {
+          margin-top: 2rem;
+          .tittle {
+            font-weight: 700;
+            margin: 1rem;
+          }
+          .tittle2 {
+            margin: 1rem;
+          }
+          .headerName {
+            font-weight: 700;
+            margin: 1rem;
+          }
+          .receviedTime {
+            color: $color-gray-250;
+            margin: 6rem;
+          }
+          .NotReadable {
+            margin-top: -3rem;
+          }
+        }
+        .cardimage {
+          flex: none;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+
+          margin-left: 8px;
+        }
+        .Date {
+          margin-top: 1.3rem;
+          .date {
+            color: $color-gray-250;
+            font-weight: 400;
+          }
+          .calendaricon {
+            margin-right: 0.7rem;
+            padding-bottom: 8px;
+          }
+        }
+        .tittle {
+          font-weight: 500;
+        }
+
+        .Description {
+          // width:40%;
+
+          // margin-right: 6rem;
+          margin-top: 1rem;
+          // border-right: 3px solid #b4b4b4;
+          // padding-right: 2rem;
+          margin-bottom: 1rem;
+
+          // margin-right: 15rem;
+          .paragraph {
+            color: $color-gray-250;
+            font-weight: 400;
+          }
+        }
+
+        .Details {
+          padding-right: 23.2rem;
+          margin-left: 2rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-around;
+          span {
+            position: absolute;
+            top: 22px;
+            // left: 3px;
+            color: #d9d9d9;
+          }
+          .btn-primary {
+            padding-right: 0;
+            padding-left: 0;
+            height: 35px;
+            width: 155px;
+            background: transparent;
+            color: #5bcedd;
+            &:hover {
+              background-color: transparent !important;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .LoadMore {
+    display: none;
+    width: 140px;
+    height: 35px;
+    margin-right: 42%;
+    margin-top: 2%;
+    margin-bottom: 5%;
+    &.shown-spinner {
+      display: flex;
+    }
+    &.hidden-spineer {
+      display: none;
+    }
+  }
+
+  .Empty {
+    position: relative;
+    bottom: 90px;
+  }
+}
+
+.typeOfRead {
+  display: flex;
+  margin: auto;
+  .btn-primary {
+    background-color: transparent;
+    color: $color-gray-250;
+    height: 37px;
+    width: 14rem;
+    &:focus {
+      background-color: $color-primary;
+      color: #fff;
+    }
+  }
+}
+
+.dialog-header {
+  ::ng-deep .p-dialog {
+    .p-dialog-header {
+      .p-dialog-title {
+        font-weight: 700 !important;
+      }
+    }
+  }
+}
+
+.custom-form{
+    font-size: 1.5rem;
+    .El-form{
+        .field1{
+            margin-left: 7rem;
+        }
+    }
+}
+
+
+
+
+.uploaded {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.uploadfilecontainer {
+  text-align: center;
+  font-size: 1.3rem;
+  padding: 60px 0;
+  height: 200px;
+  width: 100%;
+  border: 4px dashed #D7D7D7;
+  border-radius: 10px;
+  img{
+    width: 5rem;
+  }
+}
+
+.uploadfilecontainer:hover {
+  cursor: pointer;
+  background-color: #9ecbec !important;
+  opacity: 0.8;
+}
+
+.files-list {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border: 1px solid #44c13c;
+  border-radius: 12px;
+  padding: 5px;
+  margin: 2rem 0;
+
+}
+
+.files-list .delete-file {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.files-list .delete-file img {
+  width: 30px;
+}
+

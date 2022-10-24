@@ -1,0 +1,76 @@
+@import '../../../../../../../assets/css/utils/variables.scss';
+@import '../../../../../../../assets/css/components/breadcrumb';
+@import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/primng-table';
+.survey-report {
+    &__content {
+        padding: 5rem 3rem;
+        background-color: #fff;
+        width: 93%;
+         ::ng-deep p-progressbar {
+            flex-grow: 1;
+            .p-progressbar {
+                width: 93%;
+                height: 1.2rem;
+                border-radius: 100px;
+                background-color: #F3F3F3;
+                margin-top: 6px;
+                // margin-top: 2.1rem;
+                .p-progressbar-value {
+                    border-radius: 100px;
+                    background-color: $color-skyBlue;
+                }
+            }
+        }
+        .details {
+            border: 1px solid #D9D9D9;
+            .report {
+                padding: 4rem 3rem 0;
+                height: 80vh;
+                overflow-y: auto;
+                margin-bottom: 5rem;
+            }
+        }
+    }
+}
+
+span {
+    display: flex;
+}
+
+span.textSuvey {
+    display: inline-block;
+}
+
+::ng-deep #optionB .p-progressbar-value {
+    border-radius: 100px;
+    background-color: #F8C073;
+}
+
+::ng-deep #optionC .p-progressbar-value {
+    border-radius: 100px;
+    background-color: #CC3FA8;
+    ;
+}
+
+::ng-deep #optionD .p-progressbar-value {
+    border-radius: 100px;
+    background-color: #3052A1;
+    ;
+}
+
+::ng-deep .caption .actions .filter {
+    position: relative;
+    display: none;
+}
+
+::ng-deep .caption__filter.caption__filter--actions {
+    position: relative;
+    display: none !important;
+}
+
+.surveyQuestions,
+.surveyQuestions2 {
+    background-color: #F3F8FA;
+    padding: 20px 10px;
+}

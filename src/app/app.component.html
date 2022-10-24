@@ -1,0 +1,92 @@
+
+<div id="app-version" class="color-primary">version : {{version}}</div>
+
+<div *ngIf="hideHeader">
+    <app-header></app-header>
+</div>
+
+
+<router-outlet></router-outlet>
+
+<div class="panal-wrapper" *ngIf="hideToolPanal">
+
+    <div class="befor" [class.show]="firstChildHoverd"></div>
+    <div class="panal">
+        <ul class="panal__list">
+            <li class="panal__list__item" (mouseover)="onFirstChildHoverd()" (mouseleave)="onFirstChildLeaved()">
+                <div class="icon">
+                    <img src="assets/images/home/panal/home.svg" alt="">
+                </div>
+                <div class="lable">
+                    <span>الصفحه الرئيسيه</span>
+                </div>
+            </li>
+            <li class="panal__list__item">
+                <div class="icon" (click)="changeLanguage()">
+                    <span>{{isAr ? arabic: english}}</span>
+                </div>
+                <div class="lable" (click)="changeLanguage()">
+                    <span>{{isAr ? english: arabic}}</span>
+                </div>
+            </li>
+            <li class="panal__list__item">
+                <div class="icon">
+                    <img src="assets/images/home/panal/user.svg" alt="">
+                </div>
+                <div class="lable">
+                    <span>على مصطفى</span>
+                </div>
+            </li>
+            <li class="panal__list__item">
+                <div class="icon">
+                    <img src="assets/images/home/panal/search.svg" alt="">
+                </div>
+                <div class="lable p-3">
+                    <div class="myInput myInput--lg myInput--search p-input-icon-left ">
+                        <i class="pi pi-search fs-3"></i>
+                        <input class="input" type="text" pInputText placeholder="بحث" [(ngModel)]="searchText" />
+                    </div>
+
+                    <span></span>
+                </div>
+            </li>
+            <li class="panal__list__item">
+                <div class="icon">
+                    <img src="assets/images/home/panal/setting.svg" alt="">
+                </div>
+                <div class="lable">
+                    <span>الاعدادات</span>
+                </div>
+            </li>
+<!-- 
+            <li class="panal__list__item">
+                <div class="icon">
+                    <img src="assets/images/home/panal/help.svg" alt="">
+                </div>
+                <div class="lable">
+                    <span>مساعده الطفل</span>
+                </div>
+            </li>
+            <li class="panal__list__item">
+                <div class="icon">
+                    <img src="assets/images/home/panal/folder.svg" alt="">
+                </div>
+                <div class="lable">
+                    <span>الملفات</span>
+                </div>
+            </li> -->
+
+            <li class="panal__list__item" (click)="logout()" (mouseover)="onLastChildHoverd()" (mouseleave)="onLastChildLeaved()">
+                <div class="icon">
+                    <img src="assets/images/home/panal/logout.svg" alt="">
+                </div>
+                <div class="lable">
+                    <span>تسجيل خروج</span>
+                </div>
+            </li>
+
+        </ul>
+
+    </div>
+    <div class="after" [class.show]="lastChildHoverd"></div>
+</div>

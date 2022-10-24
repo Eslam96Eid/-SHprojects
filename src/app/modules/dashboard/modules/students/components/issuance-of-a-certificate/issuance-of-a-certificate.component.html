@@ -1,0 +1,28 @@
+<form>
+<div class="custom-form">
+    <h4 class="mb-4">{{'dashboard.students.Issuance of certificate'|translate}} ( {{studentName}} )</h4>
+    <span class="mb-4">{{'dashboard.students.type of certificate'|translate}}</span> <br>
+    <p-dropdown  [options]="certificates" optionLabel="name.ar" optionValue="id"  appValidation  ></p-dropdown>
+</div>
+
+
+    <button class="btn btn-primary submitBtn">اصدار الشهاده </button>
+    <div class="row g-5 form-set">
+        <div class="col-md-4">
+            <label class="label">{{'dashboard.students.academic year'|translate}}</label> <br>
+            <p-dropdown  [options]="cities"  optionLabel="name"></p-dropdown> 
+    
+        </div>
+        <div class="col-md-4">
+            <label class="label">{{'dashboard.students.School Name'| translate}}</label> <br>
+            <!-- <p-dropdown  [options]="schoolNames"  optionLabel="name"></p-dropdown>  -->
+            <p-dropdown  [options]="schoolNames" optionLabel="name.ar" optionValue="id"  appValidation  ></p-dropdown>
+
+        </div>
+        <div class="col-md-4">
+            <label class="label">{{'dashboard.students.Class'|translate}}</label> <br>
+            <p-dropdown  [options]="grades" optionLabel="name.ar" optionValue="id"  appValidation  ></p-dropdown>
+        </div>
+    
+    </div>
+</form>

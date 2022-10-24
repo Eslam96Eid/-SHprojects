@@ -1,0 +1,194 @@
+<div class="report">
+
+    <div class="caption custom-form " [class.direction-col]="showFilterBox">
+        <!-- Serach and Filter Button -->
+        <div class="caption__filter caption__filter--actions">
+            <div class="myInput myInput--md myInput--search p-input-icon-left ">
+                <i class="pi pi-search fs-3"></i>
+                <input class="input rounded-4 bg-white border" type="text" pInputText placeholder="بحث" [(ngModel)]="searchText" />
+            </div>
+
+            <button class="btn btn--sm btn-secondary" (click)="showFilterBox=!showFilterBox">
+                <span>{{'shared.filter'|translate }} </span>
+                <img class="icon" src="assets/images/shared/filter.svg" alt="">
+            </button>
+
+            <button class="btn btn-primary btn--sm" routerLink="new-survey">
+                <span>{{'dashboard.reports.generateDegreesReport'| translate}} </span>
+            </button>
+        </div>
+
+        <!-- Filter Box -->
+        <ng-container *ngIf="showFilterBox">
+            <div class="caption__filter caption__filter--box custom-form bg-white box-shadow radius-12 mb-4">
+                <div class="row gx-5 mb-0">
+                    <div class="col ">
+                        <label class="label" for="description">{{'shared.schoolName'|translate }} </label>
+                        <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                    </div>
+                    <div class="col ">
+                        <label class="label" for="description">{{'dashboard.reports.academicYear'|translate }} </label>
+                        <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                    </div>
+                    <div class="col ">
+                        <label class="label" for="description">{{'dashboard.reports.semester'|translate }} </label>
+                        <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                    </div>
+
+                </div>
+            </div>
+        </ng-container>
+    </div>
+
+    <div class="box-shadow bg-white raduis-12 p-5">
+        <h3 class="heading heading-secondary text-underline m-0 mb-5">{{'dashboard.reports.degreesDetails'|translate }} </h3>
+        <div class="row g-5">
+            <div class="col col-md-3">
+                <h4 class="heading heading--tertiary mb-2">{{'shared.schoolName'|translate }}</h4>
+                <p class="paragraph paragraph--sm">مدرسة الشارقة الإبتدائية</p>
+            </div>
+            <div class="col col-md-3">
+                <h4 class="heading heading--tertiary mb-2">{{'shared.className'|translate }}</h4>
+                <p class="paragraph paragraph--sm">الصف الرابع</p>
+            </div>
+            <div class="col col-md-3">
+                <h4 class="heading heading--tertiary mb-2">{{'shared.sectionName'|translate }}</h4>
+                <p class="paragraph paragraph--sm">A3</p>
+            </div>
+            <div class="col col-md-3">
+                <h4 class="heading heading--tertiary mb-2">{{'dashboard.reports.semester'|translate }}</h4>
+                <p class="paragraph paragraph--sm">N/A</p>
+            </div>
+            <div class="col col-md-3">
+                <h4 class="heading heading--tertiary mb-2">{{'dashboard.reports.subjectCount'|translate }}</h4>
+                <p class="paragraph paragraph--sm">12</p>
+            </div>
+            <div class="col col-md-3">
+                <h4 class="heading heading--tertiary mb-2">{{'dashboard.reports.successPercentage'|translate }}</h4>
+                <p class="paragraph paragraph--sm">90%</p>
+            </div>
+            <div class="col col-md-3">
+                <h4 class="heading heading--tertiary mb-2">{{'dashboard.reports.failPercentage'|translate }}</h4>
+                <p class="paragraph paragraph--sm">10%</p>
+            </div>
+        </div>
+    </div>
+
+
+    
+
+
+
+    <!-- ======================================= -->
+
+
+    <div class="prim-table mt-5">
+        <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
+            <!-- Table Caption -->
+            <ng-template pTemplate="caption">
+                <div class="caption custom-form">
+                    <!-- Import Export -->
+                    <div class="actions bg-transparent">
+                        <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
+                            <img src="assets/images/shared/csv.svg" alt="import">
+                        </div>
+                        <p-divider layout="vertical"></p-divider>
+                        <div  pTooltip="XLS"  role="button">
+                            <img src="assets/images/shared/pdf.svg" alt="pdf">
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            
+            <ng-template pTemplate="header" let-columns="columns">
+                <tr>
+                    <th pSortableColumn="category">{{'shared.nationalId'|translate }} <p-sortIcon field="category"></p-sortIcon></th>
+                    <th pSortableColumn="quantity">{{'dashboard.reports.studentName'|translate }} <p-sortIcon field="quantity"></p-sortIcon></th>
+                    <th pSortableColumn="price">{{'dashboard.reports.finalResultForSemester'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product let-columns="columns">
+                <tr>
+                    <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                        {{product[col.field]}}
+                    </td> -->
+                    <td>{{product.code}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.name}}</td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="20" [att.rowspan]="10" rowspan="20">
+                        <app-informative-block title="{{'emptyList.studetsDegrees' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </td>
+                </tr>
+              </ng-template>
+
+        </p-table>
+
+        <div class="">
+            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        </div>
+    </div>
+
+
+<!-- ============================================== -->
+
+    <div class="prim-table mt-5">
+        <p-table #dt [value]="emptyArr" [paginator]="true" [(rows)]="rows" [(first)]="first">
+            <!-- Table Caption -->
+            <ng-template pTemplate="caption">
+                <div class="caption custom-form">
+                    <!-- Import Export -->
+                    <div class="actions bg-transparent">
+                        <div role="button"  pTooltip="CSV" (click)="dt.exportCSV()">
+                            <img src="assets/images/shared/csv.svg" alt="import">
+                        </div>
+                        <p-divider layout="vertical"></p-divider>
+                        <div  pTooltip="XLS"  role="button">
+                            <img src="assets/images/shared/pdf.svg" alt="pdf">
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            
+            <ng-template pTemplate="header" let-columns="columns">
+                <tr>
+                    <th pSortableColumn="category">{{'dashboard.reports.semester'|translate }} <p-sortIcon field="category"></p-sortIcon></th>
+                    <th pSortableColumn="quantity">{{'dashboard.reports.subjectName'|translate }} <p-sortIcon field="quantity"></p-sortIcon></th>
+                    <th pSortableColumn="price">{{'dashboard.reports.minDegree'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
+                    <th pSortableColumn="quantity">{{'dashboard.reports.maxdegree'|translate }} <p-sortIcon field="quantity"></p-sortIcon></th>
+                    <th pSortableColumn="price">{{'dashboard.reports.result'|translate }} <p-sortIcon field="price"></p-sortIcon></th>
+
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product let-columns="columns">
+                <tr>
+                    <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                        {{product[col.field]}}
+                    </td> -->
+                    <td>{{product.code}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.name}}</td>
+                    <td>{{product.name}}</td>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="20" [att.rowspan]="10" rowspan="20">
+                        <app-informative-block title="{{'emptyList.degreesList' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </td>
+                </tr>
+              </ng-template>
+
+        </p-table>
+
+        <div class="">
+            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        </div>
+    </div>
+</div>

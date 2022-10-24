@@ -1,0 +1,43 @@
+<ng-container *ngIf="mode=='view'">
+    <div class="child__info__section info">
+        <div class="row g-5">
+            <div class="col-sm-3 d-flex align-items-center gap-3">
+                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.acceptanceDate'|translate }}</p>
+                <span class="color-primary mb-2">2022/01/24</span>
+            </div>
+            <div class="col-sm-3 d-flex align-items-center gap-3">
+                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
+                <span class="color-primary mb-2">مسجل</span>
+            </div>
+            <div class="col-sm-3 d-flex align-items-center gap-3">
+                <p class="color-gray-300 fs-4">{{ 'shared.mobile'|translate }}</p>
+                <span class="color-primary mb-2">لا</span>
+            </div>
+            <div class="col-sm-3 d-flex align-items-center gap-3">
+                <p class="color-gray-300 fs-4">{{'shared.internet'|translate }}</p>
+                <span class="color-primary mb-2">نعم</span>
+            </div>
+            <div class="col-sm-3 d-flex align-items-center gap-3">
+                <p class="color-gray-300 fs-4">{{ 'shared.publicTransport'|translate }}</p>
+                <span class="color-primary mb-2">نعم</span>
+            </div>
+            <div class="col-sm-3">
+                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.specialEducation'|translate }}</p>
+                <span class="color-primary mb-2">لا</span>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-auto">
+            <button class="btn btn-outline-primary btn--md">
+                <div class="icon">
+                    <img src="assets/images/shared/pen.svg" alt="">
+                </div>
+                <span>{{ 'shared.edit' |translate}}</span>
+            </button>
+        </div>
+    </div>
+</ng-container>
+
+<ng-container *ngIf="mode=='edit'">
+
+</ng-container>

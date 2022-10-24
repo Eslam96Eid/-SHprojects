@@ -1,0 +1,56 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import 'src/assets/css/components/buttons';
+@import 'src/assets/css/components/input';
+@import'src/assets/css/components/forms';
+@import 'src/assets/css/components/_dropdown';
+#paginationdiv {
+    direction: ltr;
+    margin-top: 2.5%;
+}
+
+#Editbtn {
+    color: #2E50A3;
+    background-color: rgba(46, 80, 163, 0.16);
+    border: 0.05em solid rgba(46, 80, 163, 0.16);
+    border-radius: 12px;
+    width: 3em;
+    padding: 0.7em;
+    a {
+        font-style: Medium;
+        font-size: 16px;
+    }
+}
+
+h3 {
+    font-family: "Droid Arabic Kufi";
+    font-weight: 600;
+    padding: 10px 10px 5px;
+    font-size: 2.4rem;
+}
+
+::ng-deep .p-card {
+    margin: 0px 2rem;
+}
+
+//
+.symbol-one,
+.symbl-two,
+.symbol-three,
+.symbol-four {
+    width: 35%;
+    padding: 5px 0px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.pag {
+    color: #A8A6A6;
+}
+
+span {
+    font-family: 'Droid Arabic Kufi';
+    line-height: 26.68px;
+    font-size: 14px;
+    font-weight: 500;
+}

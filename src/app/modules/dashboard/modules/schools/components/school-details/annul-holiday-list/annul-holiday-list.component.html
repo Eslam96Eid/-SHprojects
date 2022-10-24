@@ -1,0 +1,121 @@
+<div class="prim-table mt-4" *ngIf="holidays.totalAllData || holidays.loading">
+    <p-table  [lazy]="true" [value]="holidays.list" (onSort)="onSort($event)" >
+        <ng-template pTemplate="caption">
+            <app-table-caption
+            [hasFilter]="false"
+            (onExport)="onExport($event)" 
+            (onFilter)="getHolidays()" 
+            (onSearch)="filtration.KeyWord = $event; getHolidays()" 
+            (onClear)="clearFilter()"></app-table-caption>
+        </ng-template>
+        
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="annualCalendarName">{{'dashboard.schools.annulCalendarName' |translate}} <p-sortIcon field="annualCalendarName"></p-sortIcon></th>
+                <th pSortableColumn="year">{{'dashboard.AnnualHoliday.Year' |translate}} <p-sortIcon field="year"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'dashboard.schools.holidayName' |translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="dateRange">{{'shared.date' |translate}} <p-sortIcon field="dateRange"></p-sortIcon></th>
+                <th pSortableColumn="createdDate">{{'shared.Created Date' |translate}} <p-sortIcon field="createdDate"></p-sortIcon></th>
+
+                <th class="actions"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-holiday>
+            <tr>
+                <td>{{holiday.annualCalendarName}}</td>
+                <td>{{holiday.year}}</td>
+                <td>{{holiday.name.ar}}</td>
+                <td>من {{holiday.dateFrom}} - الى {{holiday.dateTo}}</td>
+                <td>
+                    {{holiday.createdDate | date :'shortDate'}}
+                </td>
+                <td>
+                    <ng-container *ngIf="holiday.flexibilityStatus =='Flexible'">
+                        <app-dropdown [items]="[menuItems[1]]" (onItemClicked)="editFlexableHoliday(holiday)"></app-dropdown>
+                    </ng-container>
+                    <ng-container *ngIf="holiday.flexibilityStatus !='Flexible'">
+                        <app-dropdown [items]="[menuItems[0]]" (onItemClicked)="editAnnualHoliday(holiday.id)"></app-dropdown>
+                    </ng-container>
+                </td>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="holidays.totalAllData && holidays.list.length == 0 &&  !holidays.loading">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+
+                    <app-loader></app-loader>
+                </td>
+            </tr>
+        </ng-template>
+
+
+    </p-table>
+
+    <div *ngIf="holidays.total > paginationState.rows">
+        <app-pagination [totalItems]="holidays.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    </div>
+</div>
+
+<ng-container *ngIf="!holidays.totalAllData && !holidays.loading">
+    <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>
+
+
+
+
+
+<p-dialog [(visible)]="openHolidaytModel"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
+    <ng-template pTemplate="header">
+        <div class="">
+            <div class="fw-bold fs-3">{{'dashboard.schools.editHolidayReq' | translate}}</div>
+            <div class="paragraph paragraph--sm color-gray-200 mt-2">
+                يرجى تحديد تاريخ بداية الاجازة المرنة وتاريخ نهاية الاجازة المرنة بحيث لا تتجاوز عدد أيام العطلة عدد الأيام المحددة مُسبقاً من قبل هيئة الشارقة للتعليم الخاص 
+            </div>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="content">
+        <div class="details">
+
+            <div class="custom-form">
+                <form class="custom-form" [formGroup]="editHolidayForm">
+                    <div class="row gx-5 form-set">
+                        <div class="col-md-6">
+                            <label class="label"  for="password">{{'shared.dateFrom' | translate}}</label>
+                            <p-calendar formControlName="dateFrom" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="--/--/--"></p-calendar>
+                        </div>
+        
+                        <div class="col-md-6">
+                            <label class="label"  for="password">{{'shared.dateTo' | translate}}</label>
+                            <p-calendar 
+                            [ngClass]="{'ng-invalid ng-dirty': holidayForm.dateTo.errors && holidayForm.dateTo.errors?.['not']}" 
+                            formControlName="dateTo" 
+                            [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" 
+                            [showIcon]="true" placeholder="--/--/--"></p-calendar>
+
+                            <div class="errors" *ngIf="holidayForm.dateTo.invalid && (holidayForm.dateTo.dirty)">
+                                <div class="color-red-500" *ngIf="holidayForm.dateTo.errors?.['not']">الرقم السر لا يطابق</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <label class="label">{{'shared.cause' | translate}}</label>
+                            <input type="text" formControlName="description" pInputText placeholder="{{'shared.cause' | translate}}">
+                        </div>
+                    </div>
+
+                    <div class="d-flex  align-items-center justify-content-end mt-5">
+                        <button class="btn btn-primary btn--md" (click)="updateFlexableHoliday()">
+                            <span>{{'shared.send'| translate}} </span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>

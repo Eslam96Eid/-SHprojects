@@ -1,0 +1,13 @@
+
+:host{
+
+    // flex-grow: 1;
+    // width: 100%;
+}
+
+::ng-deep p-skeleton{
+    // flex-basis: 100%;
+    .p-skeleton{
+        margin-bottom: 1rem;
+    }
+}

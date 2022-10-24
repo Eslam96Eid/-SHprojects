@@ -1,0 +1,81 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import'src/assets/css/components/input';
+@import'src/assets/css/components/buttons';
+@import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/validation-form.scss';
+@import '../../../../../../../assets/css/utils/variables.scss';
+@import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/breadcrumb';
+@import '../../../../../../../assets/css/components/accordion';
+@import '../../../../../../../assets/css/components/model';
+#content {
+    width: 100%;
+    font-family: 'Droid Arabic Kufi';
+}
+
+#assessmentline {
+    margin-right: 0.8rem;
+    width: 86%;
+    color: #cecbcb;
+}
+
+.class {
+    .submit-btn {
+        top: -8rem;
+        inset-inline-end: 0;
+    }
+    &__form {
+        // border: 1px solid $color-gray-200;
+        min-height: 100vh;
+        // label{font-size: 1.4rem;}
+        .subjects {
+            li.subject {
+                border-top: 1px solid $color-gray-100;
+            }
+        }
+        .tracks {
+            .track {
+                border-top: 1px solid $color-gray-100;
+                &__head {
+                    background-color: $color-gray-30;
+                    padding: 1.2rem 2rem;
+                    margin-bottom: 3rem;
+                    border-radius: 15px;
+                }
+                li.subject:not(:last-child) {
+                    margin-bottom: 2.75rem;
+                }
+            }
+        }
+    }
+}
+
+label {
+    font-style: normal;
+    font-weight: 400;
+    // font-size: 19px;
+    line-height: 23px;
+    text-align: right;
+}
+
+.AddAssesment span {
+    font-family: 'Droid Arabic Kufi';
+    line-height: 30px;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.basicinput {
+    margin: 0px 15px;
+}
+
+//inputgroupto
+//inputgroupfrom
+.custom-form[_ngcontent-nnh-c188] p-dropdown .p-dropdown .p-dropdown-label {
+    font-size: 1.4rem !important;
+}
+
+span.p-dropdown-label.p-inputtext.p-placeholder {
+    font-size: 1.4rem !important;
+}

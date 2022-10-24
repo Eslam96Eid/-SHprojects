@@ -1,0 +1,106 @@
+
+
+<div class="container-fluid auth-container">
+  
+    <div class="row All-content">
+        <div class="col-lg-4 sidebar d-none d-sm-block">
+           
+            
+        </div>
+        <div class="col-lg-8 end-side">
+            <div class="inner">
+                <div class="header-images ">
+                    <img class="first-img" src="assets/images/Login/elSharkaHeader.svg" alt="">
+                </div>
+                  
+                <div class="content" >
+               
+                    <div class="form-header">
+                        <h4 class="color-gray-400">{{'Welcome'|translate}}<img class="handimg" src="assets/images/Login/hand.png"></h4>
+                        <h1 class="mb-4 color-primary"><b>{{'Login' | translate}}</b></h1>
+                        <h6>{{'Please enter your email and password' | translate}}</h6>
+                    </div>
+            
+
+                    <div class="custom-form custom-validation-form mt-5 container">
+                        <form  [formGroup]="loginForm" (ngSubmit)="onNext()" >
+                            <div class="row gx-5 mb-5">
+                             <div class="col-md-12">
+                                <label for="email" class="label">{{'shared.User Name'|translate}}</label>
+                                <input type="text" pInputText formControlName="email"  class="form-control " placeholder="{{'shared.Write User Name'|translate}}"  name="email"  id="email"> 
+                            
+                                <div [hidden]=" email.valid || email.untouched" class="passerror">
+                                    <small *ngIf="email?.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                        {{'shared.This Field is Required'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    </small>
+                                
+                                    <small *ngIf="email?.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                        {{'Please write a valid email'|translate}}
+                                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    </small>
+                                </div>
+                                
+                             </div>
+                            </div>
+                            <div class="row gx-5 mb-1">
+                             <div class=" col-md-12">
+                                
+                                <label for="PID6" class="label">{{'Password'| translate}}</label>
+                            
+                                <p-password iconPos="left" formControlName="password" class="form-control" appValidation [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'shared.Write Password'| translate}}"></p-password> 
+                                <div [hidden]="password.valid || password.untouched" class="passerror">
+                                    <small *ngIf="password.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                    {{'shared.This Field is Required'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    </small>
+                                
+                                    <small *ngIf="password.errors?.['pattern']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                        {{'shared.Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic'|translate}}
+                                        
+                                        <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                    </small>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="forget-password mb-5 ">
+
+                                <a href="#" class="color-skyBlue-400">{{'Forgot password?' | translate}}</a>
+
+                            </div>
+
+                           <button class="btn btn-primary mb-3" [disabled]="isBtnLoading" >
+                                    {{'Login'| translate}}
+
+                                    <div class="spinner-border text-light" role="status" [hidden]="!isBtnLoading">
+                                        
+                                    </div>
+                                
+                           </button>
+                            
+                           
+                        </form>
+                        <button (click)="signWithIdentity()" class="btn btn-outline-primary mb-4"  >
+                            <img src="assets/images/Login/identity.svg" alt="">
+                            <p>{{'Sign in with digital identity' | translate}}</p>
+                   </button>
+                    </div>
+               
+                <p class="hint ">
+                    {{'A unified and certified digital identity that provides a unified digital identity solution for all service providers' | translate}}
+                </p>
+                <div class="signup">
+                    <span class="mx-2" >{{'Login with' | translate}}</span><a href="" class="color-skyBlue-400">{{'New account' | translate}}</a>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+
+
+
+

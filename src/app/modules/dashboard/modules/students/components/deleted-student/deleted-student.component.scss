@@ -1,0 +1,12 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/forms';
+
+.student{
+
+
+
+    &__content{
+        padding: 4rem 3rem;
+        min-height: 80vh;
+    }
+}

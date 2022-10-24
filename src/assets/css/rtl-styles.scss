@@ -1,0 +1,390 @@
+@font-face {
+    font-family: DINNext;
+    src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-UltraLight-4.ttf") format("TrueType");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: DINNext;
+    src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNEXTLTARABIC-LIGHT-2-2.ttf") format("TrueType");
+    font-weight: 200;
+}
+
+@font-face {
+    font-family: DINNext;
+    src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Regular-4.ttf") format("TrueType");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: DINNext;
+    src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Medium-4.ttf") format("TrueType");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: DINNext;
+    src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Heavy2-2.ttf") format("TrueType");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: DINNext;
+    src: url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Bold-4.ttf") format("TrueType");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: Droid;
+    src: url("/assets/font/droid/DroidKufi-Regular.ttf") format("TrueType");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Droid;
+    src: url("/assets/font/droid/DroidKufi-Bold.ttf") format("TrueType");
+    font-weight: 700;
+}
+
+html[dir="rtl"] {
+    body {
+        font-family: 'Droid' !important;
+    }
+}
+
+[lang="en"] body {
+    text-align: left !important;
+    .panal-wrapper {
+        right: 4rem;
+        .befor,
+        .after {
+            right: 100%;
+            transform-origin: right;
+            border-radius: 0 30px 30px 0;
+        }
+    }
+    .panal {
+        &__list {
+            &__item {
+                .lable {
+                    inset-inline-end: calc(100% + .5rem);
+                    transform-origin: right;
+                    border-radius: 30px 0px 0px 30px;
+                }
+            }
+        }
+    }
+    .panal-wrapper.second {
+        right: 0rem;
+        top: 4vh;
+        .befor,
+        .after {
+            left: 50%;
+            transform-origin: left;
+            border-radius: 30px 30px 30px 30px;
+        }
+    }
+    .panal-wrapper.second .panal {
+        &__list {
+            &__item {
+                .lable {
+                    inset-inline-start: calc(100% + 1.1rem);
+                    transform-origin: left;
+                    border-radius: 0px 30px 30px 0px;
+                }
+            }
+        }
+    }
+     // ------------- notification-list-------------
+     .notification-header{
+        &.dashboard{
+        margin-left: 4.3rem;
+        margin-top: 16rem;
+    
+    }   
+    .left{
+        margin-right: 12rem;
+    }
+    }
+
+    #notification-content{
+        margin-left: 4rem;
+        margin-top: 1.5rem;
+        .myInput{
+            margin-left: 3rem;
+        }
+        .cardd,.carddd{
+            .card-body{
+              padding-left: 2.5rem;
+              .Description{
+                margin-left: 6rem;
+                padding-left: 2rem;
+                border-left: 3px solid #B4B4B4;
+              }
+            }.Details{
+                position: relative;
+                img{
+                    left: 8rem;
+                    position: absolute;
+                    top: 1.9rem;
+                    transform: rotate(180deg);
+                }
+                button{
+                    position: absolute;
+                    right: -70rem;                
+                }
+            }
+        }
+    }
+    .notification-sendreply{
+        margin-left: 5rem;
+        .sendbtn{
+            right: 142px;
+       
+        img{
+            transform : rotate(180deg)
+       }  
+         }
+       }
+
+    p-breadcrumb .p-breadcrumb .p-breadcrumb-chevron {
+        transform: rotate(1deg);
+    }   
+    // --------------------------------------------
+        // ---------- navbar notifications---------
+        .nav__notifications{
+            .header-notification{
+            .left{
+                ::ng-deep select{
+                    background-position: left 8rem center ;  
+                   }
+                }
+            }
+        }
+        .rightNotification{
+            text-align: left!important;
+        }
+        #notification-content{
+            .Description{
+                margin-left: 4rem !important;
+                border-left: 2px solid #c5c5c5;
+                padding-left: 2rem;
+            }
+        }
+        // ----------------------------------------
+    // ----------- main message---------------
+    .main-message-header {
+        .left {
+          position: absolute;
+          right: 127px;
+          top: -8rem;
+        }
+      }
+
+      #main-message-content{
+        .cardd{
+            .Details{
+                span{
+                    right: 3px;
+                }
+                img{
+                    transform: rotate(180deg);
+                }
+            }
+            .title{
+                margin-left: 2rem;
+            }
+            .Description{
+                margin-left: 6rem;
+                border-left: 3px solid #b4b4b4;
+                padding-left: 2rem;
+            }
+        }
+       
+      }
+ .messages{
+            .title-Message{
+                margin-right: 2rem;
+            }
+        }
+    //---------------------------------------
+
+}
+
+[lang="ar"] body {
+    text-align: right !important;
+    .panal-wrapper {
+        position: fixed;
+        top: 50%;
+        left: 4rem !important;
+        border-radius: 30px;
+        transform: translateY(-40%);
+        z-index: 9;
+        .befor,
+        .after {
+            left: 100%;
+            transform-origin: left;
+        }
+    }
+    .panal {
+        &__list {
+            &__item {
+                .lable {
+                    inset-inline-end: calc(100% + .5rem);
+                    transform-origin: left;
+                    border-radius: 0px 30px 30px 0px;
+                }
+            }
+        }
+    }
+    .panal-wrapper.second {
+        left: 0rem !important;
+        top: 20vh;
+        .befor,
+        .after {
+            right: 47%;
+            transform-origin: right;
+            border-radius: 30px 0px 0px 30px;
+        }
+    }
+    .panal-wrapper.second .panal {
+        &__list {
+            &__item {
+                .lable {
+                    inset-inline-start: calc(100% + 1.1rem);
+                    transform-origin: right;
+                }
+            }
+        }
+    }
+    // ------------- notification-list-------------
+    .notification-header{
+    &.dashboard{
+    margin-right: 4.3rem;
+    margin-top: 16rem;
+
+}   
+
+.left{
+    margin-left: 12rem;
+    }
+}
+
+
+#notification-content{
+    margin-right: 4rem;
+    margin-top: 1.5rem;
+    .myInput{
+        margin-right: 3rem;
+    }
+    .cardd,.carddd{
+        .card-body{
+          padding-right: 2.5rem;
+          .Description{
+            margin-right: 6rem;
+            padding-right: 2rem;
+            border-right: 3px solid #B4B4B4;
+          }
+        }
+        .Details{
+            position: relative;
+            img{
+                position: absolute;
+                left: 3rem;
+                top: 5rem;            
+            }
+            button{
+                padding-right: 0;
+                padding-left: 0;
+                height: 35px;
+                width: 155px;
+            }
+        }
+    }
+  
+}
+
+  .notification-sendreply{
+        margin-right: 6.3rem;
+        .sendbtn{
+            left: 126px;
+        }
+       }
+    // --------------------------------------------
+    // ---------- navbar notifications---------
+    .nav__notifications{
+        .header-notification{
+        .left{
+            ::ng-deep select{
+                background-position: right 8rem center;  
+               }
+            }
+        }
+    }
+    .rightNotification{
+        text-align: right!important;
+    }
+    #notification-content{
+        .Description{
+            margin-right: 4rem !important;
+            border-right: 2px solid #c5c5c5;
+            padding-right: 2rem;
+        }
+    }
+    // ----------------------------------------
+    // ----------- main message---------------
+    .main-message-header {
+        .left {
+          position: absolute;
+          left: 0;
+          top: -8rem;
+        }
+      }
+      
+      #main-message-content{
+        .cardd{
+            .Details{
+                span{
+                    left: 3px;
+                }
+            }
+            .Description{
+            margin-right: 6rem;
+            border-right: 3px solid #b4b4b4;
+            padding-right: 2rem;
+            }
+        }
+      
+      }
+        .messages{
+            .title-Message{
+                margin-left: 2rem;
+            }
+        }
+
+    //---------------------------------------
+
+}
+
+// url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Black-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Black-3.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Black-4.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Bold-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Bold-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Bold-4.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Heavy-1.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Heavy2-1.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Heavy2-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Heavy2-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNEXTLTARABIC-LIGHT-1.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNEXTLTARABIC-LIGHT-2-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Medium-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Medium-3.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Medium-4.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Regular-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Regular-3.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-Regular-4.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-UltraLight-1.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-UltraLight-2.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-UltraLight-3.ttf") format("TrueType"),
+//     url("/assets/font/ArbFonts.com-(21)/ArbFONTS-DINNextLTArabic-UltraLight-4.ttf") format("TrueType"),

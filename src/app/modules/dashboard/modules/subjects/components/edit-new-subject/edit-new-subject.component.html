@@ -1,0 +1,215 @@
+
+    
+       <div id="content" >
+        <div class=" d-flex align-items-center justify-content-end ">
+            <div class="Btn-group d-flex">
+                <button type="submit"  class="btn  btn-primary" [disabled]="subjectFormGrp.invalid">{{'shared.save'|translate}}</button>
+            </div>
+        </div>
+  
+          <div class=" mt-5 custom-form custom-validation-form border" >
+              <form [formGroup]="subjectFormGrp" >
+                  <div class="row gx-5 form-set container-fluid ">
+                      <div class="col-xs-2 col-lg-4 left">
+                          <label for="PID" class="label">{{'dashboard.Subjects.Subject Name in Arabic'|translate}}</label>
+                          <input  type="text" pInputText  formControlName="subjectNameInArabic" (ngModelChange)="checkUniqueSubjectNameInArabic($event)" class="form-control basicinput" appValidatorsInput  placeholder="{{'dashboard.Subjects.Subject Name in Arabic'|translate}}" name="PID" id="PID"> 
+                          <div>
+                            <div [hidden]="subjectNameInArabic.valid || subjectNameInArabic.untouched">
+                                <small *ngIf="subjectNameInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                                <small *ngIf="subjectNameInArabic.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                    {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+
+                              
+                             </div>
+                             <small *ngIf="isSubjectNotUnique && !subjectNameInArabic.errors?.['maxlength'] && !subjectNameInArabic.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                                
+                            </div>
+                      </div>
+                      <div class="col-xs-2 col-lg-4">
+                         
+                          <label for="PID2" class="label">{{'dashboard.Subjects.Subject Name in English'|translate}}</label>
+                          <input type="text" pInputText  formControlName="subjectNameInEnglish" (ngModelChange)="checkUniqueSubjectNameInEnglish($event)" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.Subject Name in English'|translate}}" name="PID2" id="PID2"> 
+                          <div>
+                            <div [hidden]="subjectNameInEnglish.valid || subjectNameInEnglish.untouched">
+                                <small *ngIf="subjectNameInEnglish.errors?.['required']"   class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                                <small *ngIf="subjectNameInEnglish.errors?.['maxlength']" class="form-text text-muted d-block " class="alert-danger" >
+                                    {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                          
+                             </div>
+                             <small *ngIf="isSubjectNotUnique && !subjectNameInEnglish.errors?.['maxlength'] && !subjectNameInEnglish.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                                
+                            </div>
+                         
+                      </div>
+                 
+                  </div>
+                  <div class=" row gx-5 form-set container-fluid ">
+                    <div class="col-xs-2 col-lg-4 left">
+                        
+                        <label for="PID3" class="label">{{'dashboard.Subjects.Name in results screen in Arabic'|translate}}</label>
+                        <input type="text" pInputText  formControlName="nameInResultsScreenInArabic" (ngModelChange)="checkUniqueNameInResultsScreenInArabic($event)" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.Write Name in results screen in Arabic'|translate}}"  name="PID3" id="PID3"> 
+                        <div>
+                            <div [hidden]="nameInResultsScreenInArabic.valid || nameInResultsScreenInArabic.untouched">
+                                <small *ngIf="nameInResultsScreenInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                                <small *ngIf="nameInResultsScreenInArabic.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                    {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                             </div>
+                             <small *ngIf="isSubjectNotUnique && !nameInResultsScreenInArabic.errors?.['maxlength'] && !nameInResultsScreenInArabic.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                                
+                        </div>
+                       
+                    </div>
+                    <div class="col-xs-2 col-lg-4 "  >
+                       
+                        <label for="PID4"  class="label">{{'dashboard.Subjects.Name in results screen in English'|translate}}</label>
+                        <input type="text" pInputText  formControlName="nameInResultsScreenInEnglish" (ngModelChange)="checkUniqueNameInResultsScreenInEnglish($event)" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.Write Name in results screen in English'|translate}}"  name="PID4" id="PID4"> 
+                        <div>
+                            <div [hidden]="nameInResultsScreenInEnglish.valid || nameInResultsScreenInEnglish.untouched">
+                                <small *ngIf="nameInResultsScreenInEnglish.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                                <small *ngIf="nameInResultsScreenInEnglish.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                    {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                             </div>
+                             <small *ngIf="isSubjectNotUnique && !nameInResultsScreenInEnglish.errors?.['maxlength'] && !nameInResultsScreenInEnglish.errors?.['required']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                {{'dashboard.Subjects.Subject Name Must Be Unique'|translate}}
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                                
+                        </div>
+                       
+                    </div>
+
+                   
+                </div>
+                <hr > 
+                <div class=" row gx-5 form-set mt-5 container-fluid ">
+                    <div class="col-xs-2 col-lg-4 left">
+                         
+                        <label for="PID7" class="label"> {{'dashboard.Subjects.subject Code'| translate}}</label>
+                        <input type="text" pInputText formControlName="SubjectCode"  class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.write Subject Code'| translate}}"  name="PID7" id="PID7"> 
+                 
+                    </div>
+                    <div class="col-xs-4 col-lg-7 evaluationSys" >
+                        <div *ngFor="let type of evaluationTypeList" class="field-checkbox">
+                            <p-radioButton [inputId]="type.id" [ngModelOptions]="{standalone: true}" formControlName="evaluationType"  (onClick)="checkEvaluationType($event)"  [value]="type"  ></p-radioButton>
+                            <label [for]="type.id">{{type.name.ar}}</label>
+                        </div>
+                    </div>
+                 
+                </div> 
+                <hr > 
+                <div class=" row gx-5 form-set mt-5 container-fluid " *ngIf="showEvaluation">
+                    <div class="col-xs-2 col-lg-4">
+                        <label for="PID8" class="label">{{'dashboard.Subjects.select evaluation from old known evaluation'|translate}}</label>
+                          <p-dropdown [options]="cities"  formControlName="oldEvaluation"   placeholder="{{'dashboard.Subjects.select evaluation from old known evaluation'|translate}}" name="PID8" id="PID8" class="form-control" appValidation  ></p-dropdown>
+                    </div>
+                 
+                </div>  
+                <div class=" row gx-5 form-set mt-5 container-fluid " *ngIf="showDegree||showIpPoints">
+                    <div class="col-xs-2 col-lg-4 left">
+                         
+                        <label for="PID7" class="label"> {{'dashboard.Subjects.minmum degree'| translate}}</label>
+                        <input type="text" pInputText formControlName="minmumDegree"   class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.write minmum degree'| translate}}"  name="PID7" id="PID7"> 
+                        <div>
+                            <div [hidden]="minmumDegree.valid || minmumDegree.untouched">
+                                <small *ngIf="minmumDegree.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                                <small *ngIf="minmumDegree.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                    {{'shared.Degree Must More than or Equal zero'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-2 col-lg-4 ">
+                         
+                        <label for="PID7" class="label"> {{'dashboard.Subjects.maximum degree'| translate}}</label>
+                        <input type="text" pInputText formControlName="maximumDegree" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.write maximum degree'| translate}}"  name="PID7" id="PID7"> 
+                        <div>
+                            <div [hidden]="maximumDegree.valid || maximumDegree.untouched">
+                                <small *ngIf="maximumDegree.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                                  {{'shared.This Field is Required'|translate}}
+                                   <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                               
+                                <small *ngIf="maximumDegree.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                    {{'shared.Degree Must More than or Equal zero'|translate}}
+                                    <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                                </small>
+                             </div>
+                        </div>
+                    </div>
+                 
+                </div> 
+                <div  *ngIf="showDescription">
+                    <div formArrayName="description" >
+                        <div *ngFor="let item of description.controls ; let i=index" [formGroupName]="i">
+                            <div class="row gx-5 form-set container-fluid ">
+                                <div class="col-xs-2 col-lg-4">
+                                    <label for="PP + {{i}}" class="label">{{'dashboard.Subjects.explanation'|translate}}</label>
+                                    <input type="text" pInputText  formControlName="explanation" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.explanation'|translate}}"  id="PP + {{i}}" name="PPO + {{i}}">
+ 
+                                </div>
+                                <div class="col-xs-2 col-lg-4">
+                                    
+                                    <label for="cal3 + {{i}}" class="label">{{'dashboard.Subjects.meaning'|translate}}</label>  
+                                    <input type="text" pInputText  formControlName="meaning" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.meaning'|translate}}"  name="cal3O + {{i}}" id="cal3 + {{i}}">
+                               </div>
+                               
+                                <div class="col-xs-2 col-lg-4">
+                                    <label for="cal4 + {{i}}" class="label">{{'dashboard.Subjects.successed'|translate}}/{{'dashboard.Subjects.retry'|translate}}</label>
+                                    <p-dropdown [options]="cities"  formControlName="successStatus" placeholder="{{'dashboard.Subjects.successed'|translate}}\{{'dashboard.Subjects.retry'|translate}}" name="calO4 + {{i}}" id="cal4 + {{i}}" class="form-control" appValidation  ></p-dropdown>
+                               </div>
+                            </div>
+                            <div class="btn btn-outline-primary Addnew mb-5" role="button" (click)="addNew()">
+                                <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
+                                {{'dashboard.Subjects.add description'|translate}}
+                                
+                               </div>
+                        </div>
+                    </div>
+                 
+                </div> 
+               
+              
+                 
+              </form>
+            </div>                   
+     
+        
+        </div> 

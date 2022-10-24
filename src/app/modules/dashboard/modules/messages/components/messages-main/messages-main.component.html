@@ -1,0 +1,182 @@
+<div class="main-message-header dashboard d-flex justify-content-between">
+    <div class="left d-flex align-items-center ">
+
+        <button class="btn btn-primary" (click)="showDialog()">{{'dashboard.Messages.new message' | translate}}</button>
+        
+        <p-dialog header="{{'dashboard.Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true"
+            [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+            <div class="custom-form">
+                <div class="form-group">
+                    <label for="">{{'dashboard.Messages.Enter the message title' | translate}}</label>
+                    <input class="form-control py-3 my-3" type="text" placeholder="{{'dashboard.Messages.Enter the message title' | translate}}">
+                </div>
+
+                <div class="d-flex El-form my-4">
+                    <div class="form-group d-flex field1">
+                        <label  class="px-3" for="">{{'dashboard.Messages.Require confirmation of receipt' | translate}}</label>
+                        <p-inputSwitch class="px-3" [(ngModel)]="checked" id="switchbtn"></p-inputSwitch> {{'dashboard.Messages.Yes' | translate}}
+                    </div>
+                    <div class="form-group d-flex">
+                        <label    class="px-3" for="">  {{'dashboard.Messages.Possibility to reply' | translate}} </label>
+                        <p-inputSwitch   class="px-3" [(ngModel)]="checked1" id="switchbtn"></p-inputSwitch>  {{'dashboard.Messages.Yes' | translate}}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}}</label>
+                    <textarea class="form-control my-3" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
+
+                </div>
+
+                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+                    <img src="assets/images/shared/Cloud.svg">
+                    <input accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"
+                    hidden
+                    type="file"
+                    multiple
+                    #fileInput (change)="uploadFile($event.target.files)">
+                  </div>
+                  <div  class="files-list" *ngFor="let file of files;let i= index">
+                      <p> {{ file }} </p>
+                      <button class="delete-file" (click)="deleteAttachment(i)">
+                        <img src="assets/images/shared/slice.svg">
+                      </button>
+                   </div>
+            </div>
+
+            <ng-template pTemplate="footer">
+                <button style="float: left;" class="btn btn-primary"> {{'dashboard.Messages.Send' | translate}}</button>
+            </ng-template>
+        </p-dialog>
+    </div>
+
+</div>
+<div id="main-message-content">
+
+    <div class="d-flex group ">
+        <div class="myInput myInput--md myInput--search p-input-icon-left  ">
+            <i class="pi pi-search fs-3"></i>
+            <input class="input rounded-4" type="text" pInputText placeholder="{{'Search...' | translate}}" />
+        </div>
+    </div>
+    <div class="search-results" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500"
+        (scrolled)="onScroll()">
+
+        <div class="Notifications__cards mt-5">
+
+            <div class="container-fluid">
+
+
+
+                <div class="row ">
+                    <div class="filter-data-with-date d-flex custom-form">
+                        <div class="col-md-4 g-5 form-set">
+                            <div class="form-group">
+                                <label class="label" for="">
+                                    {{'dashboard.Messages.from' | translate}}
+                                </label>
+                                <div class="field col-12 md:col-4">
+
+                                    <p-calendar [showIcon]="true" inputId="icon" selectionMode="range" appValidation
+                                        placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy">
+                                    </p-calendar>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 g-5 form-set">
+                            <div class="form-group">
+                                <label class="label" for="">
+                                    {{'dashboard.Messages.to' | translate}}
+                                </label>
+                                <div class="field col-12 md:col-4">
+
+                                    <p-calendar [showIcon]="true" inputId="icon" selectionMode="range" appValidation
+                                        placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy">
+                                    </p-calendar>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 typeOfRead">
+                            <button class="btn btn-primary " autofocus (click)="getNotReadable()">{{'Notifications.Not
+                                readable'|translate}}</button>
+                            <button class="btn btn-primary "
+                                (click)="getReadable()">{{'Notifications.Readable'|translate}}</button>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div class="row">
+                    <div class=" col-11 p-0 mb-4" *ngFor="let card of messagesList; let i=index">
+                        <div class="cardd">
+                            <div class="card-body d-flex">
+                                <div class="name-description">
+                                    <div class="title">
+                                        <img class="NotReadable" src="assets/images/shared/bluecircle.svg"
+                                            *ngIf="!card.notReadable">
+                                        <img class="cardimage" src="assets/images/shared/Person.jpg">
+                                        <span class="tittle">{{card.senderName|translate}}</span>
+                                        <span>/</span>
+                                        <span class="headerName ">{{card.notificationName|translate}}</span>
+                                    </div>
+                                    <div class="Description">
+                                        <span class="tittle2">{{'dashboard.Messages.title message'|translate}}</span>
+                                        <p class="paragraph ">{{card.description|translate}}</p>
+                                    </div>
+                                    <span class="receviedTime">{{card.receivedTime|translate}}</span>
+                                </div>
+                                <div class="Details position-relative">
+                                    <span class="d-flex">
+                                        <p class="px-2">15</p> <img src="assets/images/shared/message.svg" alt="">
+                                    </span>
+                                    <button class="btn btn-primary detail-btn " (click)="showDetails(card.id)">
+                                        {{'dashboard.Messages.Show Details'|translate}}
+                                        <img src="assets/images/shared/detail-arrow.png">
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- <button class="btn btn-primary LoadMore" (click)="loadMore()"    [disabled]="activeLoadBtn">
+                        
+                        {{'shared.Load More'|translate}}
+                    </button> -->
+                    <div class="Empty">
+                        <app-informative-block *ngIf="messagesList.length==0"
+                            title="{{'dashboard.Messages.Messages List is empty' |translate}}"
+                            src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <button class="btn btn-primary LoadMore" type="button" disabled
+            [ngClass]="showSpinner?'shown-spinner':'hidden-spineer'">
+
+            {{currentNotificationNumber}}{{'shared.From'|translate}}{{allNotificationNumber}}
+
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+        </button>
+    </div>
+
+
+</div>

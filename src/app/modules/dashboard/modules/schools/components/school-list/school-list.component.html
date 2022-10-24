@@ -1,0 +1,128 @@
+<div class="schools">
+    <div class="ui-g">
+        <div class="row">
+            <app-school-charts></app-school-charts>
+        </div>
+
+    </div>
+    <div class="prim-table mt-4" *ngIf="schools.totalAllData || schools.loading">
+        <p-table #dt [lazy]="true" [value]="schools.list" (onSort)="onSort($event)">
+            <!-- Table Caption -->
+            <ng-template pTemplate="caption">
+                <app-table-caption 
+                (onExport)="onExport($event)" 
+                (onFilter)="getSchools()" 
+                (onSearch)="filtration.KeyWord = $event; getSchools()" 
+                (onClear)="clearFilter()">
+
+                    <div class="row gx-5 form-set">
+                        <div class="col">
+                            <label class="label" for="status">{{'shared.status'|translate }} </label>
+                            <p-dropdown [options]="schoolStatus" [(ngModel)]="filtration.Status" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                        </div>
+                        <div class="col">
+                            <label class="label" for="city">{{'shared.city'|translate }} </label>
+                            <p-dropdown [options]="cities" [(ngModel)]="filtration.City" optionValue="value" optionLabel="name" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row gx-5 form-set">
+                        <div class="col">
+                            <label class="label" for="region">{{'shared.state'|translate }}  </label>
+                            <p-dropdown [options]="(states$ |async)" [(ngModel)]="filtration.StateId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
+                        </div>
+                        <div class="col">
+                            <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                            <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                        </div>
+                    </div>
+                </app-table-caption>
+
+            </ng-template>
+
+            <ng-template pTemplate="header" let-columns="columns">
+                <tr>
+                    <!-- <th *ngFor="let col of cols">
+                      {{col.header}}
+                  </th>
+                  <th pSortableColumn="actions"></th> -->
+                    <th pSortableColumn="name">{{'dashboard.schools.schoolName'|translate}}
+                        <p-sortIcon field="name"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="city">{{'shared.city'|translate}}
+                        <p-sortIcon field="city"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="state">{{'shared.state'|translate}}
+                        <p-sortIcon field="state"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="curriculum">{{'shared.curriculum'|translate}}
+                        <p-sortIcon field="curriculum"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="studentCount">{{'dashboard.schools.studentsNumber'|translate}}
+                        <p-sortIcon field="studentCount"></p-sortIcon>
+                    </th>
+                    <th pSortableColumn="establishmentDate">{{'dashboard.schools.schoolStablishmentDate'|translate}}</th>
+                    <th pSortableColumn="actions">{{'dashboard.schools.schoolStatus'|translate}}</th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-school>
+
+                <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
+                    <tr [routerLink]="['school/', school.id]">
+                        <td>{{school.name.ar}}</td>
+                        <td>{{school.city}}</td>
+                        <td>{{school.state.ar}}</td>
+                        <td>{{school.curriculum.ar}}</td>
+                        <td>{{school.studentCount}}</td>
+                        <td>{{school.establishmentDate | date}}</td>
+                        <td>
+
+                            <div class="alerting " [ngClass]="{'success':school.status == StatusEnum.Active, 'danger': school.status == StatusEnum.Inactive}">
+                                {{ school.status == StatusEnum.Active ? ('shared.allStatus.' +StatusEnum.Active| translate) : ('shared.allStatus.' +StatusEnum.Inactive| translate) }}
+                            </div>
+                        </td>
+                    </tr>
+            </ng-template>
+
+            <!-- <ng-template pTemplate="footer" let-columns="columns">
+              <tr  class="p-rowgroup-footer">
+                  <td [attr.colspan]="7" style="width: 100%">
+                      <div *ngIf="schoolClasses.length > 0">
+                          <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                      </div>
+                  </td>
+              </tr>
+          </ng-template> -->
+
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="20">
+                        <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
+                            <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        </ng-container>
+
+                        <app-loader></app-loader>
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+        <div *ngIf="schools.total > paginationState.rows">
+            <app-pagination [totalItems]="schools.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        </div>
+
+    </div>
+
+    <ng-container *ngIf="!schools.totalAllData && !schools.loading">
+        <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
+
+</div>
+
+
+<ng-template #totalSchoolCount>
+    <div *ngIf="model.chartData" class="mt-4">
+        <h2 class="chart-title">عدد المدارس الكلية</h2>
+        <h2 class="number-chart">{{model.chartData.totalSchoolCount}}</h2>
+    </div>
+</ng-template>

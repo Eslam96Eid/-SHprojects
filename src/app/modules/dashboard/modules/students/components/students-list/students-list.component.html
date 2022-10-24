@@ -1,0 +1,157 @@
+<div class="students">
+
+    <div class="search-box bg-gray-30 mb-5 border-dark radius-15">
+        <div class="d-flex justify-content-between p-5 " role="button" (click)="isCollapsed = !isCollapsed">
+            <span class="fs-2 color-primary">{{'dashboard.students.searchForStudent' |translate}}</span>
+            <fa-icon [icon]="isCollapsed ? faAngleDown :faAngleLeft"></fa-icon>
+        </div>
+
+        <div class="custom-form p-5 " *ngIf="isCollapsed">
+          
+            <div class="row g-5 form-set">
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.curriculum'| translate}}</label>
+                    <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.schoolName'| translate}}</label>
+                    <p-dropdown 
+                    [options]="(schools$| async)?.data" 
+                    [(ngModel)]="filtration.SchoolId" 
+                    optionValue="id"
+                    placeholder="{{'shared.chooseSchool'|translate }}" 
+                    optionLabel="name.ar"></p-dropdown>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.classes'| translate}}</label>
+                    <p-dropdown [options]="(AllGrades$ | async)" [(ngModel)]="filtration.GradeId" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="row g-5 form-set">
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.divisions'| translate}}</label>
+                    <p-dropdown [options]="(AllDivisions$ | async)" [(ngModel)]="filtration.DivisionId" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.choosedivision' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.tracks'| translate}}</label>
+                    <p-dropdown [options]="(AllTracks$ | async)" [(ngModel)]="filtration.TrackId" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooserack' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
+                    <p-dropdown [options]="(countries$ | async)" optionValue="id" [(ngModel)]="filtration.NationalityId" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
+                </div>
+
+            </div>
+
+            <div class="row g-5 form-set">
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.sonsOfMartyrs'| translate}}</label>
+                    <p-dropdown [options]="booleanOptions" [(ngModel)]="filtration.IsChildOfAMartyr" optionValue="value"  optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                </div>
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.withDisabilities'| translate}}</label>
+                    <p-dropdown [options]="disabilitiesOptions" [(ngModel)]="filtration.withDisabilities" (ngModelChange)="onSelectDisabilities($event)" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                </div>
+    
+                <div class="col-md-4">
+                    <label class="label">{{'dashboard.students.finalScore'| translate}}</label>
+                    <p-dropdown [options]="passedOptions" [(ngModel)]="filtration.IsPassed" optionValue="value" inputId="description" optionLabel="name" placeholder="{{'shared.choosePassedOrnot' |translate}}"></p-dropdown>
+                </div>
+            </div>
+
+            <div class="row g-5 form-set">
+            <div class="col-md-4">
+                <label class="label">{{'dashboard.students.talent'| translate}}</label>
+                <p-dropdown [options]="(talents$|async)" inputId="description" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+            </div>
+            </div>
+
+            <div class="d-flex justify-content-end align-items-center gap-5" >
+                <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح الكل</span>
+                <button class="btn btn--md btn-primary" (click)="getStudents()">{{'shared.search' |translate}}</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="prim-table mt-4" *ngIf="students.total || students.loading">
+        <p-table #dt [value]="students.list" (onSort)="onSort($event)" [lazy]="true"> 
+            <!-- Table Caption -->
+            <ng-template pTemplate="caption">
+                <app-table-caption
+                [hasFilter]="false" 
+                (onExport)="onExport($event)" 
+                (onFilter)="getStudents()" 
+                (onSearch)="filtration.KeyWord = $event; getStudents()" 
+                (onClear)="clearFilter()"></app-table-caption>
+            </ng-template>
+            
+            <ng-template pTemplate="header" let-columns="columns">
+                <tr>
+                    <!-- <th *ngFor="let col of cols">
+                        {{col.header}}
+                    </th>
+                    <th pSortableColumn="actions"></th> -->
+                    <th pSortableColumn="studentDaleelNumber">{{'dashboard.students.daleelNumber'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
+                    <th pSortableColumn="arabicName">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
+                    <th pSortableColumn="surName">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
+                    <th pSortableColumn="nationality">{{'shared.nationality'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
+                    <th pSortableColumn="currentSchoolName">{{'dashboard.students.schoolName'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
+                    <th pSortableColumn="guardianName">{{'dashboard.students.parent'|translate}}  <p-sortIcon field="guardianName"></p-sortIcon></th>
+                    <th pSortableColumn="gradeName">{{'shared.grade'|translate}}</th>
+                    <th pSortableColumn="divisionName">{{'shared.division'|translate}}</th>
+                    <!-- <th class="actions"></th> -->
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-student >
+                <tr [routerLink]="['student/', student.id]">
+                    <td>{{student.studentDaleelNumber}}</td>
+                    <td>{{student.arabicName}}</td>
+                    <td>{{student.surName}}</td>
+                    <td>{{student.nationality}}</td>
+                    <td>
+                        <a [routerLink]="['../schools/school/',student.schoolId]" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">{{student.currentSchoolName}}</a>
+                    </td>
+                    <td>
+                        <!-- <span routerLink="../all-parents/parent/2/all-children">محمد أنوار</span> -->
+                        <span>{{student.guardianName}}</span>
+                    </td>
+                    <td>
+                        <!-- <span routerLink="../schools/school/2/class/5">الصف الخامس</span> -->
+                        <span>{{student.gradeName}}</span>
+                    </td>
+                    <td>
+                        <!-- <span routerLink="../schools/school/2/track/7">B 1</span> -->
+                        <span>{{student.divisionName}}</span>
+                    </td>
+                    <!-- <td >
+                        <app-dropdown [items]="items"></app-dropdown>
+                    </td> -->
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="20">
+                        <ng-container *ngIf="students.total && students.list.length == 0 &&  !students.loading">
+                            <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        </ng-container>
+                        
+                        <app-loader></app-loader>
+                    </td>
+                </tr>
+            </ng-template>
+
+        </p-table>
+
+        <div class="" *ngIf="students.total  > paginationState.rows">
+            <app-pagination [totalItems]="students.total + 5" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        </div>
+    </div>
+
+    <ng-container *ngIf="!students.total && !students.loading">
+        <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
+</div>

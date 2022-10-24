@@ -1,0 +1,182 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/buttons';
+@import 'src/assets/css/components/input';
+
+.notification-header{
+    &.dashboard{
+    // margin-right: 4.3rem;
+    // margin-top: 16rem;
+
+}   
+
+.left{
+    // margin-left: 12rem;
+.btn-primary{
+    background-color: transparent;
+    color:$color-gray-250 ;
+    height: 37px;
+    width:120px;
+    padding: 1rem;
+    // &:focus,&:active, &:visited, &:target{background-color: $color-primary;color: #fff;}
+}
+}
+}
+
+#notification-content{
+    // margin-right: 4rem;
+    // margin-top: 1.5rem;
+    .Readingstatus{
+        font-weight: 500;
+    }
+    .group{
+        height: 44px;
+    .button-group{
+        background-color: $color-gray-50;
+        height:transparent;
+        align-items: center;
+        border-radius: 12px;
+        width: 250px;
+        justify-content: center;
+        
+       
+    }
+    .myInput{
+        width: 87%;
+        //  margin-right: 3rem;
+        &--search{
+                 input{height: 39px;margin-top: 0.4rem;}
+        }
+    }
+}
+
+    .Notifications__cards{
+       
+
+ 
+        .cardd{
+            
+            border-radius: 12px 12px 12px 12px;
+            box-shadow:  0rem 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.06);
+           
+            .card-header{
+                padding-right: 2.5rem;
+                padding-bottom: 0.7rem;
+                padding-top: 0.7rem;
+                background-color: #fff;
+                border-bottom:1px solid #E9E9E9 ;
+                border-top-left-radius: 12px;
+                border-top-right-radius: 12px;
+                .headerName{
+                    font-weight: 500;margin-right: 7px;
+                }
+                .NotReadable{margin-right: 0.5rem;}
+                .receivedtime{
+                    color:$color-gray-250;
+                    font-weight: 400;
+                    padding-right: 90.5rem;
+                }
+            }
+            .card-body{
+                margin-top: 3rem;
+                // padding-right: 2.5rem;
+                margin-bottom: 0.7rem;
+                padding-bottom: 1rem;
+                .name-description{
+                    margin-top: 2rem;
+                    .tittle{
+                        font-weight: 700;
+                        margin: 1rem;
+                    }
+                    .headerName{
+                        font-weight: 700;
+                        margin: 1rem;
+                    }
+                    .receviedTime{
+                         color:$color-gray-250;
+                         margin: 6rem;
+                    }
+                    .NotReadable{
+                        margin-top: -3rem;
+
+                    }
+                }
+                           .cardimage{
+                                    flex: none;
+                                    width: 40px;
+                                    height: 40px;
+                                    border-radius: 50%;
+                                    object-fit: cover;
+                                
+                                    margin-left: 8px;
+                   
+                                    }
+                            .Date{
+                                margin-top: 1.3rem;
+                            .date{
+                                color:$color-gray-250;
+                                font-weight: 400;
+                            
+                            }
+                            .calendaricon{margin-right: 0.7rem;padding-bottom: 8px;}
+                            }
+                            .tittle{font-weight: 500;}
+                
+                .Description{
+                    // width:40%;
+                    
+                    // margin-right: 6rem;
+                    margin-top: 1rem;
+                    // border-right: 3px solid #B4B4B4;
+                    // padding-right: 2rem;
+                    margin-bottom: 1rem;
+
+                    // margin-right: 15rem;
+                    .paragraph{
+                        color:$color-gray-250;
+                        font-weight: 400;
+                    }
+                }
+
+                .Details{
+                    padding-right: 23.2rem;
+                    padding-top: 3.7rem;
+                    margin: auto;
+                    margin-left: 2rem;
+                    .btn-primary{
+                        background: transparent;
+                        color: #5BCEDD;    
+                        &:hover{
+                            background-color: transparent !important;
+                        }
+                    }
+                }
+            }
+           
+            
+        }
+       
+
+    }
+
+    .LoadMore{
+            
+        // display: none;
+        width: 140px;
+        height: 35px;
+        margin-right: 42%;
+        margin-top: 2%;
+        margin-bottom: 5%;
+        &.shown-spinner{display: flex;}
+        &.hidden-spineer{display: none;}
+    }
+
+    .Empty{
+        position: relative;
+        bottom:90px;
+    }
+}
+
+.activeBtn{
+    background-color: $color-primary!important;
+    color: #fff!important;
+}

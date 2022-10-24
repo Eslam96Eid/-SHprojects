@@ -1,0 +1,271 @@
+.btn {
+    border-radius: 15px;
+    // font-weight: 500;
+    padding: 0 2.5rem;
+    font-size: 16px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    text-align: right;
+    justify-content: center;
+    flex-shrink: 0;
+    height: 45px;
+    text-align: center;
+    gap: 1rem;
+
+    &:visited, &:hover,&:focus,&:active {
+        box-shadow: none;
+        background-color: transparent ;
+        border-color: transparent !important;
+    }
+
+
+    .icon {
+        // margin-inline-end: 1rem;
+        // margin: 0 1rem;
+        display: inline-block;
+        min-width: 1.3rem;
+        min-height: 1.3rem;
+    }
+    
+
+    &--full{
+        width: 100%;
+    }
+
+    &--md{
+        height:50px;
+    }
+
+
+    &--sm{
+        height: 42px;
+        padding: 0 1.25rem;
+    }
+
+
+    &.passbtn{background-color:$color-gray-150 ;
+        height: 39px;
+        border-radius: 12px 0px 0px 12px;
+        color:$color-gray-250;
+        
+        
+    }
+
+}
+
+// :not(.btn-check) + .btn:hover, .btn:first-child:hover{
+//     background-color: transparent;
+// }
+
+
+.float-btn{
+    position: absolute;
+    top: 4rem;
+    left: 7rem;
+    border-radius: 50%;
+    background-color: $color-primary;
+    height: 4.25rem;
+    width: 4.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: $color-primary-dark;
+    }
+
+
+    img{
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+}
+
+
+.btn-primary {
+    color: #FFFFFF;
+    background: $color-primary;
+    border: none;
+
+    &:hover {
+        // background-color: #2E50A3;
+        background-color: $color-primary-dark !important;
+    }
+
+    &:focus {
+        background-color: $color-primary;
+        box-shadow: none;
+    }
+
+    &:active {
+        background-color: $color-primary;
+        box-shadow: none;
+
+    }
+    &:disabled{
+        background-color: $color-primary;
+    }
+}
+
+.btn-outline-primary {
+    color: $color-primary;
+    background: #ffff;
+    border: 1px solid $color-primary;
+
+    &:hover {
+        background-color: lighten($color: $color-primary, $amount: 51) !important;
+        color: $color-primary !important;
+        border: 1px solid transparent;
+    }
+    
+    &:focus {
+        color: $color-primary;
+        background-color: lighten($color: $color-primary, $amount: 51);
+        border: 1px solid transparent;
+    }
+
+   
+
+    // &:active {
+    //     color: $color-primary;
+    //     background: #ffff;
+    //     border: 1px solid $color-primary;
+    // }
+}
+
+.btn-outline-none {
+    color: $color-primary;
+    // background: #F0FBFC;
+
+    &:hover {
+        background-color: lighten($color: $color-primary, $amount: 51);
+        color: $color-primary;
+        border: 1px solid transparent;
+    }
+    
+    &:focus {
+        color: $color-primary;
+        background-color: lighten($color: $color-primary, $amount: 51);
+        border: 1px solid transparent;
+    }
+
+    // &:active {
+    //     color: $color-primary;
+    //     background: #ffff;
+    //     border: 1px solid $color-primary;
+    // }
+}
+
+.btn-outline-green{
+    color: #ffff;
+    background: $color-green-500;
+    border: 1px solid $color-green-500;
+    border-radius: 8px;
+    width: 114px;
+    height: 29px;
+    &:hover {
+        background-color: $color-green-450;
+        color: #ffff;
+        border: 1px solid transparent;
+    }
+
+}
+
+.btn-outline-red{
+    color: #ffff;
+    background: $color-pink-500;
+    border: 1px solid $color-green-500;
+    border-radius: 8px;
+    width: 114px;
+    height: 29px;
+    &:hover {
+        background-color: $color-pink-450;
+        color: #ffff;
+        border: 1px solid transparent;
+    }
+
+}
+
+.btn-secondary {
+    background-color: #fff;
+    color: $color-primary;
+    // background-color: lighten($color: $color-primary, $amount: 51);
+    border: 1px solid #E9E9E9;
+
+    &:hover, &:active , &:focus{
+        color: $color-primary !important;
+        background-color: lighten($color: $color-primary, $amount: 45) !important;
+        box-shadow: none;
+    }
+
+    &:hover{
+        
+    }
+
+    &:not(.btn-check) + .btn:hover, .btn:first-child:hover{
+        background-color: red !important;
+    }
+}
+
+
+.first-filter {
+    .filerBtn {
+        background: rgba(46, 80, 163, 0.16);
+        border-radius: 1rem;
+        color: #2E50A3;
+        margin: 0 1rem;
+        padding: 0.5rem 2rem;
+    }
+}
+
+.all-filters {
+    background-color: white;
+}
+
+
+.addbtn{
+    background-color: $color-primary;
+    
+  
+    border-radius:8px;
+    span{
+      
+        font-style: Medium;
+        font-size: 16px;
+    }
+
+}
+
+
+
+ #dropdownlistbtn{
+    color:$color-gray-350;
+    & :hover{color:$color-primary;}
+}
+
+.actions{
+
+    &__back{
+        width: 3.25rem;
+        height: 3.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        border: 1px solid $color-primary;
+
+        .icon{margin-top: -3px; transition: all .3s ease-out;}
+        &:hover{
+            background-color: $color-primary;
+            .icon{
+                color: $color-white;
+            }
+        }
+    }
+    
+}
+
+

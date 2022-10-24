@@ -1,0 +1,38 @@
+<p-paginator [rows]="paginationState.rows" [first]="paginationState.first" pageLinkSize="{{searchModel.pageSize}}" [totalRecords]="totalItems" [templateLeft]="templateLeft" [templateRight]="templateRight" [showCurrentPageReport]="true" [showPageLinks]="false"
+    currentPageReportTemplate="اظهار{first} الى {last} من المداخل" #pagination (onPageChange)="onPageChange($event)"></p-paginator>
+
+<!-- currentPageReportTemplate="عرض العناصر من {first} الى {last} من اصل {totalRecords} من العناصر" -->
+
+<ng-template #templateLeft let-state>
+
+    <span>الصفحه التى انت فيها</span>
+
+    <!-- *ngIf="pagesArrOptions?.length>0"  -->
+
+    <p-dropdown [options]="pagesArrOptions" [(ngModel)]="currentPage" (onChange)="jupmToPage(state, $event.value)"></p-dropdown>
+
+
+
+    <p-divider layout="vertical"></p-divider>
+
+
+
+    <button [disabled]="isFirstPage()" (click)="prev(state)" class="color-gray-400 bg-transparent border-0 " type="button" role="button"><img src="assets/images/shared/circle-arrow-right.svg"></button>
+
+
+
+    <!-- <p-dropdown [options]="[]"></p-dropdown> -->
+
+
+
+</ng-template>
+
+
+
+<ng-template #templateRight let-state>
+
+    <button [disabled]="isLastPage()" (click)="next(state)" class="color-gray-400 bg-transparent border-0 " type="button" role="button"><img src="assets/images/shared/circle-arrow-left.svg"></button>
+
+
+
+</ng-template>

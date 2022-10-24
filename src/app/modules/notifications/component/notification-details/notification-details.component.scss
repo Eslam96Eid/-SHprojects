@@ -1,0 +1,265 @@
+
+@import 'src/assets/css/utils/variables.scss';
+
+
+
+.notification-header{
+    &.dashboard{
+    // margin-right: 1.3rem;
+    margin-top: 15rem;
+}
+} 
+#notification-content{
+    // margin-right: 4rem;
+    margin-bottom: 3rem;
+    margin-top: 1.5rem;
+    width: 89%;
+    border-radius: 12px;
+    box-shadow:  0rem 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.06);
+   
+    .cardd{
+        border:0;
+      
+        .card-header{
+            padding-right: 2.5rem;
+            padding-bottom: 0.7rem;
+            padding-top: 0.7rem;
+            background-color: #fff;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom:1px solid #E9E9E9 ;
+            .headerName{
+                font-weight: 500;margin-right: 7px;
+            }
+            .receivedtime{
+                color:$color-gray-250;
+                font-weight: 400;
+                padding-right: 91.5rem;
+            }
+        }
+        .card-body{
+            margin-top: 3rem;
+            padding-right: 2.5rem;
+            margin-bottom: 3rem;
+            .Information{
+                       .cardimage{
+                                flex: none;
+                                width: 40px;
+                                height: 40px;
+                                border-radius: 50%;
+                                object-fit: cover;
+                            
+                                margin-left: 8px;
+               
+                                }
+                        .Date{
+                            margin-top: 1.3rem;
+                        .date{
+                            color:$color-gray-250;
+                            font-weight: 400;
+                        
+                        }
+                        .calendaricon{margin-right: 0.7rem;padding-bottom: 8px;}
+                        }
+                        .tittle{font-weight: 500;}
+              }
+            .Description{
+                width:40%;
+                
+                margin-right: 15rem;
+                .paragraph{
+                    color:$color-gray-250;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+    .line{
+        margin-right: 1.2rem;
+        width:98%;
+        color:#a9a9a9;
+    }
+   
+
+
+        
+    
+}
+
+.carddd{
+            
+    border-radius: 12px 12px 12px 12px;
+    box-shadow:  0rem 0rem 0.2rem 0.2rem rgba(0, 0, 0, 0.06);
+   
+    .card-header{
+        padding-right: 2.5rem;
+        padding-bottom: 0.7rem;
+        padding-top: 0.7rem;
+        background-color: #fff;
+        border-bottom:1px solid #E9E9E9 ;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        .headerName{
+            font-weight: 500;margin-right: 7px;
+        }
+        .NotReadable{margin-right: 0.5rem;}
+        .receivedtime{
+            color:$color-gray-250;
+            font-weight: 400;
+            padding-right: 90.5rem;
+        }
+    }
+    .card-body{
+        margin-top: 3rem;
+        padding-right: 2.5rem;
+        margin-bottom: 0.7rem;
+        padding-bottom: 1rem;
+        .name-description{
+            margin-top: 2rem;
+            .tittle{
+                font-weight: 700;
+                margin: 1rem;
+            }
+            .headerName{
+                font-weight: 700;
+                margin: 1rem;
+            }
+            .receviedTime{
+                 color:$color-gray-250;
+                 margin: 6rem;
+            }
+            .NotReadable{
+                margin-top: -3rem;
+
+            }
+        }
+                   .cardimage{
+                            flex: none;
+                            width: 40px;
+                            height: 40px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        
+                            margin-left: 8px;
+           
+                            }
+                    .Date{
+                        margin-top: 1.3rem;
+                    .date{
+                        color:$color-gray-250;
+                        font-weight: 400;
+                    
+                    }
+                    .calendaricon{margin-right: 0.7rem;padding-bottom: 8px;}
+                    }
+                    .tittle{font-weight: 500;}
+        
+        .Description{
+            // width:40%;
+            
+            margin-right: 6rem;
+            margin-top: 1rem;
+            // border-right: 3px solid #B4B4B4;
+            padding-right: 2rem;
+            margin-bottom: 1rem;
+
+            // margin-right: 15rem;
+            .paragraph{
+                color:$color-gray-250;
+                font-weight: 400;
+            }
+        }
+
+        .Details{
+            padding-right: 23.2rem;
+            padding-top: 3.7rem;
+            margin: auto;
+            margin-left: 2rem;
+            .btn-primary{
+                padding-right: 0;
+                padding-left: 0;
+                height: 35px;
+                width: 155px;
+                background: transparent;
+                color: #5BCEDD;    
+                &:hover{
+                    background-color: transparent !important;
+                }
+            }
+        }
+    }
+   
+    
+}
+
+
+.notification-sendreply{
+    // margin-right: 5.25rem;
+    padding-bottom: 1rem;
+    // margin-left: 1.3rem;
+    position: relative;
+    ::ng-deep {
+       
+        textarea{
+            
+          border: 2px  #DEDEDE solid;
+          border-radius: 12px;
+          font-size: 15px;
+          &::placeholder{
+            font-weight: 400;
+            color:#AFAFAF;
+            padding-top: 5px;
+           }
+          &:focus{border: none;}
+        }
+          .p-inputtext{ 
+            font-weight: 400;
+            
+            color:#AFAFAF;
+           
+            }
+        }
+        .sendbtn{
+           
+            position: absolute;
+            top: 21px;
+            // left: 126px;
+                
+            .sendimg{padding-right: 1rem;}
+        }
+       
+    }
+
+    .sub-content{
+        margin-top: 5rem;
+        margin-bottom: 5rem;
+        border-radius: 12px;
+        margin-right: 5.25rem;
+        margin-left: 10.3rem;
+        padding-top: 1rem;
+        padding-bottom: 2rem;
+        padding-right: 2.5rem;
+        background-color: $color-gray-30;
+        .cardimage{
+            flex: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        
+            margin-left: 8px;
+
+            }
+         .tittle{font-weight: 500;}
+
+         .Description{
+          
+            
+          
+            .paragraph{
+                color:$color-gray-250;
+                font-weight: 400;
+                padding: 3rem;
+            }
+        }
+    }

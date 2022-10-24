@@ -1,0 +1,27 @@
+
+<!-- <app-layout></app-layout> -->
+<div class="bg" *ngIf="hideBackGroundImage">
+    <img src="assets/images/shared/pattern.svg" alt="">
+</div>
+
+<div class="dashboard wrapper">
+    <div class="dashboard__content  d-flex">
+
+        <div class="dashboard__panal p-5">
+            <app-dashboard-panal></app-dashboard-panal>
+        </div>
+
+        <div class="dashboard__loaded-conponent">
+
+          <app-header-dashboard></app-header-dashboard>
+          <div class="" id="routeroutlet" [@routeSlide]="prepareRoute(outlet)">
+              <div class="position-relative">
+                  <router-outlet #outlet="outlet" (activate)="onActive($event, outlet)"></router-outlet>
+              </div>
+          </div>
+
+        </div>
+
+
+    </div>
+</div>

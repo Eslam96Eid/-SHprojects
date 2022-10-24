@@ -1,0 +1,46 @@
+@import '../utils/variables.scss';
+
+
+p-inputswitch{
+ ::ng-deep{
+    
+    .p-inputswitch
+    {
+        display:inline-block !important;
+        transform: rotate(180deg);
+        position: relative;
+        top:0.5rem;
+        width: 3.67rem;
+        height: 2.15rem;
+        .p-inputswitch-slider{
+            border-radius: 30px;
+                &:not(.p-disabled){
+                    
+                    background-color: rgba(91, 205, 219, 0.31);
+                    
+                }
+               
+                &:before{
+                    background-color: #fff;
+                    box-shadow: none;
+                    width: 1.6rem;
+                    height: 1.6rem;
+                    left: 0.30rem;
+                    margin-top: -0.8rem;
+                }
+              
+            }
+
+        &.p-inputswitch-checked
+         {
+                &:not(.p-disabled)
+                {
+                     .p-inputswitch-slider{   
+                             background-color:$color-skyBlue-400;
+                        }
+                 }
+        }
+      
+    }
+  }
+}

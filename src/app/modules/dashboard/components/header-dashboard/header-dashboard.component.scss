@@ -1,0 +1,56 @@
+@import '../../../../../assets/css/components/breadcrumb';
+
+
+.headerfont{    width:278px;
+    height:35px;
+       
+    font-style: normal;
+    font-size: 24px;}
+
+    b{
+        padding-right: 2rem;
+       
+    }
+
+    .sub-heading{
+        font-size: 2.3rem;
+        font-weight: 700;
+    }
+
+    .dashboard-header{
+        // margin: 6rem 2rem 1.5rem 0;
+        
+    }
+
+    .header{
+
+        &__title{
+            &--main{
+                .Notifications{font-size:2.6rem;position: relative;bottom:5px ;}
+               
+
+            }
+
+            &--sub{
+                font-size: 2.6rem;
+                font-weight: 700;
+                margin-top: 1rem;
+
+                .sub{
+                    font-weight: 400;
+                }
+            }
+        }
+
+        &__breadcrumb{
+            .NotificationsHeader{ padding-top: 15.5px;
+                
+            .Rejectbtn{margin-right: 1rem;}
+            
+           
+            
+            }
+            
+        }
+        .addBtn{color:$color-primary;background-color:red;margin-right:70.3rem ;}
+    }

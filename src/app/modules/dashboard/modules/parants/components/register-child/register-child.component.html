@@ -1,0 +1,513 @@
+<div class="tabView">
+    <!-- Navigations Options -->
+    <ul class="tabView__nav">
+        <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.parents.personalInfo'|translate}}</span></li>
+        <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{ 'dashboard.parents.acceptanceInfo'|translate}}</span></li>
+        <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.parents.attendanceAndAbsence'|translate}}</span></li>
+        <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.students.studentAttachedment'|translate}}</span></li>
+        <li class="tabView__nav__link" [class.active]="step==5" (click)="step=5"><span> {{ 'dashboard.parents.certificateList'|translate }}</span></li>
+        <li class="tabView__nav__link" [class.active]="step==6" (click)="step=6"><span>{{ 'dashboard.parents.studentBehavior'|translate }}</span></li>
+        <li class="tabView__nav__link" [class.active]="step==7" (click)="step=7;"><span>{{ 'dashboard.students.medicalFile'|translate }}</span></li>
+        <li class="tabView__nav__link" [class.active]="step==8" (click)="step=8;"><span>{{ 'dashboard.parents.editableList'|translate }}</span></li>
+    </ul>
+</div>
+<div class="tabView__content">
+
+    <ng-container *ngIf="step==1">
+        <div class="row gx-5">
+            <div class="col-md-4">
+                <h3 class="heading heading--tertiary mb-5">معلومات عن طالب</h3>
+                <div class="grid-container gap-5">
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentName'|translate }}</p>
+                    <span class="color-primary mb-2">محمد على</span>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentNickname'|translate }}</p>
+                    <span class="color-primary mb-2">طارق</span>
+
+                    <p class="color-gray-300 fs-4">{{'dashboard.parents.sectionName'|translate }}</p>
+                    <span class="color-primary mb-2">2002/07/04</span>
+
+                    <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
+                    <span class="color-primary mb-2">مصرى</span>
+
+                    <p class="color-gray-300 fs-4">{{'shared.nationalId'|translate }}</p>
+                    <span class="color-primary mb-2">2002/07/04</span>
+
+                    <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
+                    <span class="color-primary mb-2">مصرى</span>
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+                <h3 class="heading heading--tertiary mb-5">معلومات عن مدرسه الطالب</h3>
+                <div class="grid-container">
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.currentSchoolName'|translate }}</p>
+                    <span class="color-primary mb-2">
+                                <a class="color-skyBlue-500 text-decoration-underline">مدرسه الشارقه الابتدائيه</a>
+                            </span>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.trackName'|translate }}</p>
+                    <span class="color-primary mb-2">علمى</span>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.className'|translate }}</p>
+                    <span class="color-primary mb-2">
+                                <a class="color-skyBlue-500 text-decoration-underline">A 3</a>
+                            </span>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
+                    <span class="color-primary mb-2">234144</span>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
+                    <span class="color-primary mb-2">234144</span>
+
+                    <p class="color-gray-300 fs-4">{{'dashboard.parents.sectionName'|translate }}</p>
+                    <span class="color-primary mb-2">2002/07/04</span>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
+                    <span class="color-primary mb-2">345315252</span>
+
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4">
+                <h3 class="heading heading--tertiary mb-5">معلومات عن عنوان طالب</h3>
+                <div class="grid-container">
+
+                    <p class="color-gray-300 fs-4">{{'shared.city'|translate }}</p>
+                    <span class="color-primary mb-2">الرياض</span>
+
+                    <p class="color-gray-300 fs-4">{{ 'shared.emara'|translate }}</p>
+                    <span class="color-primary mb-2">الشارقه</span>
+
+                    <p class="color-gray-300 fs-4">{{ 'shared.state'|translate }}</p>
+                    <span class="color-primary mb-2">الاهليه</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row gx-5 p-4 bg-gray-50 mt-6 radius-15">
+            <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
+            <div class="col d-flex align-items-center gap-3">
+                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.paidAmount'|translate }}</p>
+                <span class="color-primary mb-2">10,000 AED</span>
+            </div>
+            <div class="col d-flex align-items-center gap-3">
+                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.requiredAmount'|translate }}</p>
+                <span class="color-primary mb-2">10,000 AED</span>
+            </div>
+            <div class="col d-flex align-items-center gap-3">
+                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.restAmount'|translate }}</p>
+                <span class="color-primary mb-2">5,000 AED</span>
+            </div>
+            <div class="col d-flex align-items-center gap-3">
+                <p class="color-gray-800 fs-4 fw-bold">{{'dashboard.parents.accountantComment'|translate }}</p>
+                <span class="mb-2">
+                            <a class="color-skyBlue-500">عرض التعليق</a>
+                        </span>
+            </div>
+        </div>
+    </ng-container>
+
+
+    <ng-container *ngIf="step==2">
+        <div class="child__info__section info">
+            <div class="row g-5">
+                <div class="col-sm-3 d-flex align-items-center gap-3">
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.acceptanceDate'|translate }}</p>
+                    <span class="color-primary mb-2">2022/01/24</span>
+                </div>
+                <div class="col-sm-3 d-flex align-items-center gap-3">
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentEnrollmentStatus'|translate }}</p>
+                    <span class="color-primary mb-2">مسجل</span>
+                </div>
+                <div class="col-sm-3 d-flex align-items-center gap-3">
+                    <p class="color-gray-300 fs-4">{{ 'shared.mobile'|translate }}</p>
+                    <span class="color-primary mb-2">لا</span>
+                </div>
+                <div class="col-sm-3 d-flex align-items-center gap-3">
+                    <p class="color-gray-300 fs-4">{{'shared.internet'|translate }}</p>
+                    <span class="color-primary mb-2">نعم</span>
+                </div>
+                <div class="col-sm-3 d-flex align-items-center gap-3">
+                    <p class="color-gray-300 fs-4">{{ 'shared.publicTransport'|translate }}</p>
+                    <span class="color-primary mb-2">نعم</span>
+                </div>
+                <div class="col-sm-3">
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.specialEducation'|translate }}</p>
+                    <span class="color-primary mb-2">لا</span>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end mt-auto">
+                <button class="btn btn-outline-primary btn--md">
+                            <div class="icon">
+                                <img src="assets/images/shared/pen.svg" alt="">
+                            </div>
+                            <span>{{ 'shared.edit' |translate}}</span>
+                        </button>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="step==3">
+        <div class="child__info__section absence">
+            <div class="row ">
+                <div class="col-12 d-flex gap-5 mb-6">
+                    <div class="card justify-content-between border-dark p-3">
+                        <div class="d-flex flex-column align-items-center p-5">
+                            <!-- <div class="user">
+                                        <img src="assets/images/shared/attendance.svg" alt="">
+                                    </div> -->
+                            <div class="number color-skyBlue-500">48%</div>
+                            <div class="text">{{ 'dashboard.parents.attendancePercentage'|translate }}</div>
+                        </div>
+                        <div class="p-3 text-center fs-2 color-skyBlue-500 bg-gray-50 radius-15">
+                            <p>{{ 'dashboard.parents.attentDays'|translate }}: 156</p>
+                        </div>
+                    </div>
+
+                    <div class="card justify-content-between border-dark p-3">
+                        <div class="d-flex flex-column align-items-center p-5">
+                            <!-- <div class="user">
+                                        <img src="assets/images/shared/absence.svg" alt="">
+                                    </div> -->
+                            <div class="number color-fuchsia-600">16%</div>
+                            <div class="text">{{ 'dashboard.parents.attendancePercentage'|translate }}</div>
+                        </div>
+                        <div class="p-3 text-center fs-2 color-fuchsia-600 bg-gray-50 radius-15">
+                            <p>{{ 'dashboard.parents.absencDays'|translate }}: 5</p>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-12">
+                    <h3 class="heading heading--tertiary mb-4">{{ 'dashboard.parents.absenceDaysDetails'|translate }}(5)</h3>
+
+                    <div class="prim-table">
+                        <p-table [value]="schoolClasses">
+                            <ng-template pTemplate="header" let-columns="columns">
+                                <tr>
+                                    <th pSortableColumn="quantity">{{'dashboard.parents.absenceDate'|translate }}
+                                        <p-sortIcon field="quantity"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="price">{{'dashboard.parents.absenceWithCause'|translate }}
+                                        <p-sortIcon field="price"></p-sortIcon>
+                                    </th>
+                                    <th pSortableColumn="actions">{{'dashboard.parents.absenceCause'|translate }}</th>
+                                </tr>
+                            </ng-template>
+
+                            <ng-template pTemplate="body" let-product let-columns="columns">
+                                <tr>
+                                    <td>{{product.name}}</td>
+                                    <td>
+                                        نعم
+                                    </td>
+                                    <td>
+                                        لا يوجد
+                                    </td>
+                                </tr>
+                            </ng-template>
+
+                        </p-table>
+
+                        <div class="">
+                            <app-pagination></app-pagination>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="step==4">
+        <div class="child__info__section absence">
+            <div class="row ">
+                <div class="col-12 d-flex gap-5 mb-6">
+                    <div class="card justify-content-between border-dark p-3">
+                        <span class="paragraph paragraph--sm color-gray-300">هويه الطالب</span>
+                        <div class="image-uploader blue-theme">
+                            <!-- <div class="">
+                                <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
+                                <div class="image-uploader__box upload-btn" (click)="upload.click()">
+                                    <input type="file" #upload accept="image/*" [hidden]="true" (change)="attachedFile($event)">
+                                    <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
+                                    <p class="title">{{ 'shared.clickToUploadFiles'|translate }}</p>
+                                    <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
+                                </div>
+                            </div> -->
+
+                            <ul class="file__list">
+                                <li class="file__list__item">
+                                    <div class="icon--file">
+                                        <img src="assets/images/shared/file.svg" alt="">
+                                    </div>
+                                    <span class="text color-primary">ملف.pdf</span>
+
+                                    <div class="icon--delete">
+                                        <img src="assets/images/shared/delete.svg" alt="">
+                                    </div>
+                                </li>
+                                <li class="file__list__item" *ngFor="let file of uploadedFiles; let i=index">
+                                    <div class="icon--file">
+                                        <img src="assets/images/shared/file.svg" alt="">
+                                    </div>
+                                    <span class="text color-primary">{{file.name}}</span>
+
+                                    <div class="icon--delete" (click)="deleteFile(i)">
+                                        <img src="assets/images/shared/delete.svg" alt="">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+
+
+                            <input hidden type="file" multiple #fileInput (change)="uploadFile($event.target.files)" placeholder=" انقر لإرفاق المستندات">
+                            <div class="icon-upload">
+                                <img class="" src="assets/images/shared/upload.svg" alt="upload">
+                            </div>
+                        </div>
+                        <div class="files-list" *ngFor="let file of files;let i= index">
+                            <div class="fileNameWithIcon d-flex align-items-center">
+                                <img src="assets/images/shared/Folder.svg">
+                                <p class="mx-2"> {{ file }} </p>
+                            </div>
+                            <button class="delete-file" (click)="deleteAttachment(i)">
+                                <img src="assets/images/dropdown/Delete.svg">
+                            </button>
+                        </div> -->
+                    </div>
+
+                    <div class="card justify-content-between border-dark p-3">
+                        <span class="paragraph paragraph--sm color-gray-300">هويه الطالب</span>
+
+                        <div class="image-uploader blue-theme">
+                            <!-- <div class="">
+                                <label class="label" for="day">{{'dashboard.students.studentAttachedment' |translate}}</label>
+                                <div class="image-uploader__box upload-btn" (click)="upload.click()">
+                                    <input type="file" #upload accept="image/*" [hidden]="true" (change)="attachedFile($event)">
+                                    <img class="icon-upload" src="assets/images/shared/upload.svg" alt="upload">
+                                    <p class="title">{{ 'shared.clickToUploadFiles'|translate }}</p>
+                                    <p class="sub-title">{{ 'shared.fileMaxSize'|translate }}</p>
+                                </div>
+                            </div> -->
+
+                            <ul class="file__list">
+                                <li class="file__list__item">
+                                    <div class="icon--file">
+                                        <img src="assets/images/shared/file.svg" alt="">
+                                    </div>
+                                    <span class="text color-primary">ملف.pdf</span>
+
+                                    <div class="icon--delete">
+                                        <img src="assets/images/shared/delete.svg" alt="">
+                                    </div>
+                                </li>
+                                <li class="file__list__item" *ngFor="let file of uploadedFiles; let i=index">
+                                    <div class="icon--file">
+                                        <img src="assets/images/shared/file.svg" alt="">
+                                    </div>
+                                    <span class="text color-primary">{{file.name}}</span>
+
+                                    <div class="icon--delete" (click)="deleteFile(i)">
+                                        <img src="assets/images/shared/delete.svg" alt="">
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="child__info__section absence notes">
+                    <div class="col-12">
+                        <h3 class="heading heading--tertiary mb-4">{{ 'dashboard.parents.Notes'|translate }}</h3>
+                        <p>لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ..</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="step==5">
+        <div class="child__info__section absence">
+            <div class="schools">
+
+                <div class="prim-table mt-4">
+                    <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
+                        <!-- Table Caption -->
+                        <ng-template pTemplate="caption">
+                            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
+
+                        </ng-template>
+
+                        <ng-template pTemplate="header" let-columns="columns">
+                            <tr>
+                                <!-- <th *ngFor="let col of cols">
+                              {{col.header}}
+                          </th>
+                          <th pSortableColumn="actions"></th> -->
+                                <th pSortableColumn="code">{{'dashboard.schools.Typeofcertificate'|translate}}
+                                    <p-sortIcon field="code"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="name">{{'dashboard.schools.SchoolYear'|translate}}
+                                    <p-sortIcon field="name"></p-sortIcon>
+                                </th>
+                                <th pSortableColumn="price">{{'dashboard.schools.Dateofapplicationforthecertificate'|translate}}
+                                    <p-sortIcon field="price"></p-sortIcon>
+                                </th>
+
+
+                                <th pSortableColumn="actions"></th>
+                            </tr>
+                        </ng-template>
+
+                        <ng-template pTemplate="body" let-product>
+
+                            <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
+
+                            <tr routerLink="school/4">
+                                <td>{{product.code}}</td>
+                                <td>{{product.name}}</td>
+                                <td>{{product.quantity}}</td>
+
+                                <td>
+                                    <a class="color-skyBlue-500 text-decoration-underline">
+                                        <div class="icon">الإطلاع
+                                            <img src="assets/images/shared/eye.svg" alt="">
+                                        </div>
+                                        <!-- <fa-icon class="icon" [icon]="faCheck"></fa-icon> -->
+
+                                    </a>
+                                </td>
+                            </tr>
+                        </ng-template>
+
+                        <!-- <ng-template pTemplate="footer" let-columns="columns">
+                      <tr  class="p-rowgroup-footer">
+                          <td [attr.colspan]="7" style="width: 100%">
+                              <div *ngIf="schoolClasses.length > 0">
+                                  <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                              </div>
+                          </td>
+                      </tr>
+                  </ng-template> -->
+
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td [attr.colspan]="20">
+                                    <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                </td>
+                            </tr>
+                        </ng-template>
+
+                    </p-table>
+                    <div class="">
+                        <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="step==7">
+        <div class="row gx-5">
+            <div class="col-md-4">
+
+                <div class="grid-container gap-5">
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Chronicdiseases'|translate }}</p>
+                    <span class="color-primary mb-2 HealthProfile">أمراض القلب  -السكري</span>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.SonofDetermination'|translate }}</p>
+                    <span class="color-primary mb-2">نعم</span>
+
+                    <p class="color-gray-300 fs-4">{{'dashboard.parents.IQ'|translate }}</p>
+                    <span class="color-primary mb-2">95%</span>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.increasement'|translate }}</p>
+                    <span class="color-primary mb-2">الزيادة</span>
+
+                    <p class="color-gray-300 fs-4">{{'dashboard.parents.weight'|translate }}</p>
+                    <span class="color-primary mb-2">100 كغ</span>
+
+
+                </div>
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="grid-container">
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Allergicdiseases'|translate }}</p>
+                    <span class="color-primary mb-2">
+                              <a class="color-primary mb-2"> سيلان الأنف التحسسي </a>
+                          </span>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Disabilities'|translate }}</p>
+                    <span class="color-primary mb-2">كفيف</span>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.fats'|translate }}</p>
+                    <span class="color-primary mb-2">
+                        15 %
+                          </span>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Weightloss'|translate }}</p>
+                    <span class="color-primary mb-2">اكتب النقص</span>
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Length'|translate }}</p>
+                    <span class="color-primary mb-2">159 سم </span>
+
+
+
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4">
+                <div class="col-sm-3 d-flex align-items-center gap-3">
+                    <p class="color-gray-300 fs-4">{{'dashboard.parents.athlete'|translate }}</p>
+                    <span class="color-primary mb-2">نعم</span>
+                </div>
+                <div class="d-flex justify-content-end mt-auto">
+                    <button>
+                      <div class="icon">
+                          <img src="assets/images/shared/editpen.svg" alt="">
+                      </div>
+
+                  </button>
+                </div>
+                <div class="grid-container mt-4">
+
+
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.Diet'|translate }}</p>
+                    <div class="d-flex align-items-center gap-3">
+                        <p class="color-primary mb-2">اكتب النظام الغذائي المتبع لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ... </p>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="row gx-5 p-4 bg-gray-50 mt-6 radius-15">
+            <h3 class="heading heading--tertiary mb-4">Notes</h3>
+            <p class="heading heading--tertiary mb-4">14-09-2022</p>
+            <div class="d-flex align-items-center gap-3">
+                <p class="color-gray-300 fs-4">لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...</p>
+
+            </div>
+
+        </div>
+    </ng-container>
+</div>

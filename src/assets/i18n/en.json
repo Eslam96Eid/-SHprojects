@@ -1,0 +1,470 @@
+{
+    "Login": "Login",
+    "Please enter your email and password": "Please enter your email and password",
+    "Your email": "Your email",
+    "Your email is required": "Your email is required",
+    "Please write a valid email": "Please write a valid email",
+    "Your password": "Your password",
+    "Your password is required": "Your password is required",
+    "Please write a password contains number , captial and small letters": "Please write a password contains number , captial and small letters",
+    "forget password": "forget password",
+    "login with": "login",
+    "Sign in with a digital identity": "Sign in with a digital identity",
+    "A unified and certified digital identity that provides a unified digital identity solution for all service providers": "A unified and certified digital identity that provides a unified digital identity solution for all service providers",
+    "new account": "new account",
+    "Enter your mobile phone number or email": "Enter your mobile phone number or email",
+    "Type the password": "Type the password",
+    "Schools": "Schools",
+    "Students": "Students",
+    "Parents": "Parents",
+    "Schools And Students": "Schools And Students",
+    "Home Page": "Home Page",
+    "login": {
+        "Login Successfully": "Login Successfully",
+        "Something is wrong,Pleaze login again": "Something is wrong,Pleaze login again",
+        "Login With Digital Identity": "Login With Digital Identity",
+        "IdentityNumber,Email,PhoneNumber.Example:971500000000": "IdentityNumber,Email,PhoneNumber.Example:971500000000",
+        "remember me": "remember me",
+        "wrong,pleaze check examples and try again": "wrong,pleaze check examples and try again"
+
+    },
+
+    "breadcrumb": {
+        "createNewSurvey": "Create New Survey",
+        "sendSurvey": "Send Survey",
+        "surveyList": "Survey List",
+        "saveList": "Save List",
+        "exportreport": "Export report",
+        "Studentregister": "Student Register",
+
+        "schoolList": "School List",
+        "showSchoolListDetails": "Show School List Details",
+        "enterGrades": "Enter Grades",
+        "editClass": "Edit Class",
+        "editTrack": "Edit Track",
+        "tracksList": "Tracks List",
+        "absenceRecord": "Absence Record",
+        "editSchoolEmployeeInfo": "edit School EmployeeInfo",
+        "surveysList": "Surveys List",
+        "Notifications": "Notifications",
+        "School Years List": "School Years List",
+        "Add New School Year": "Add New School Year",
+        "Edit School Year": "Edit School Year",
+        "Assignments List": "Assignments List",
+        "Upload Assignment": "Upload Assignment",
+        "Add Roles in The System": "Add Roles in The System",
+        "Job Role Details": "Job Role Details",
+        "AddUser": "Add User",
+        "AddASSesment": "Add Assesment",
+        "Add": "Add"
+
+    },
+
+    "shared": {
+        "contactUs": "ContactUs",
+        "status": "Status",
+        "city": "City",
+        "state": "State",
+        "writeState": "Write State",
+        "writeEmara": "write Emara",
+        "writeCity": "Write City",
+        "street": "Street",
+        "course": "Course",
+        "school": "School",
+        "schoolName": "SchoolName",
+        "class": "Class",
+        "className": "ClassName",
+        "section": "Section",
+        "sectionName": "SectionName",
+        "phoneNumber": "PhoneNumber",
+        "email": "Email",
+        "personalId": "PersonalId",
+        "search": "Search",
+        "filter": "Filter",
+        "downloadFiles": "Download Files",
+        "options": "Options",
+        "activated": "Activated",
+        "deactivated": "Deactivated",
+        "deleted": "Deleted",
+        "Edit": "Edit",
+        "save": "Save",
+        "send": "Send",
+        "next": "Next",
+        "previous": "Previous",
+        "signOut": "SignOut",
+        "account": "Account",
+        "readOnly": "(ReadOnly)",
+        "saveChanges": "SaveChanges",
+        "yes": "yes",
+        "no": "No",
+        "note": "Note",
+        "writeNote": "Write Note",
+        "day": "Day",
+        "nationality": "Nationality",
+        "todayDate": "TodayDate",
+        "password": "Password",
+        "confirmPassword": "Confirm Password",
+        "Created Date": "Created Date",
+        "Numbres Of Characters Must not More than 256 character": "Numbres Of Characters Must not More than 256 character",
+        "Numbres Of Characters must not more than 65 character": "Numbres Of Characters must not more than 500 character",
+        "Numbres Of Characters must not more than 500 character": "Numbres Of Characters must not more than 500 character",
+        "Numbres Of Characters must not more than 32 character": "Numbres Of Characters must not more than 32 character",
+        "Age must more than or equal 1 year": "Age must more than or equal 1 year",
+        "Age must less than or equal 32 year": "Age must less than or equal 32 year",
+        "This Field is Required": "This Field is Required",
+        "Show Details": "Details",
+        "User Name": "UserName",
+        "Write User Name": "Write User Name",
+        "Write phoneNumber": "Write phoneNumber",
+        "Write email": "Write email",
+        "Mobile Must Start With 05 and Contain 10 Numbers Only": "Mobile Must Start With 05 and Contain 10 Numbers Only",
+        "Must be Valid Email": "Must be Valid Email",
+        "Full Name": "Full Name",
+        "Write Identity Number": "Write Identity Number",
+        "Identity Number": "Identity Number",
+        "Effective": "Effective",
+        "Write Password": "Write Password",
+        "Write Nick Name": "Write Nick Name",
+        "Nick Name": "Nick Name",
+        "Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic": "Password Must contain at least one number and one uppercase and lowercase letter and one non alphabetic",
+        "Confirm Password Must Match Password": "Confirm Password Must Match Password",
+        "edit": "Edit",
+        "parentNationalId": "Parent NationalId",
+        "registerd": "Registerd",
+        "notRegistered": "Not Registered",
+        "nickname": "Nickname",
+        "gender": "Gender",
+        "birthDay": "BirthDay",
+        "nationalId": "NationalId",
+        "nationalIdExpireDate": "NationalId ExpireDate",
+        "nationalityClass": "Nationality Class",
+        "emara": "Emara",
+        "religion": "Religion",
+        "mobile": "Mobile",
+        "internet": "Internet",
+        "publicTransport": "Public Transport",
+        "attacheFile": "Attache File",
+        "fileMaxSize": "fileMaxSize(Max Size:5 MB)",
+        "transportationType": "Transportation Type",
+        "searchBySchoolName": "Search By School Name",
+        "clickToUploadFiles": "click To Upload Files",
+        "clickToUploadFile": "Click To Upload File",
+        "percentage": "Percentage",
+        "CreatedDate And Time": "CreatedDate And Time",
+        "From": "From",
+        "To": "To",
+        "Before": "Before",
+        "Accept": "Accept",
+        "Reject": "Reject",
+        "sendServey": "Send Servey",
+        "Wite Your Reply...": "Wite Your Reply...",
+        "chooseTrack": "Choose Track",
+        "chooseStudent": "Choose Student",
+        "Load More...": "Load More..."
+    },
+    "sideBar": {
+
+        "schoolsAndStudents": {
+            "title": "Schools&Students",
+            "chidren": {
+                "schools": "Schools",
+                "students": "Students",
+                "parents": "Parents"
+            }
+
+        },
+
+        "performanceManagment": {
+
+            "title": "اداره الاداء",
+
+            "chidren": {
+
+            }
+
+        },
+
+        "educationalSettings": {
+
+            "title": "الاعدادات التعليميه",
+
+            "children": {
+                "Annual Holidays": "الاجازات السنويه",
+                "Subjects": "المواد الدراسيه",
+                "Subjects Assessments": "تقييمات المواد الدراسية",
+                "School Years": "السنوات الدراسية"
+
+            }
+
+        },
+
+        "managerTools": {
+
+            "title": "ادوات مدير النظام",
+
+            "children": {
+                "Users": "المستخدمين",
+                "Job Roles": "الأدوار الوظيفية",
+                "System List": "قوائم النظام"
+            }
+
+        },
+
+        "reportsManagment": {
+
+            "title": "اداره التقارير",
+
+            "chidren": {
+
+            }
+
+        },
+
+        "comunicationAndmanagment": {
+
+            "title": "اداره التواصل",
+
+            "chidren": {
+
+            }
+
+        },
+
+        "schoolInfo": {
+
+            "title": "معلومات المدرسه",
+
+            "chidren": {
+
+            }
+
+        }
+
+
+
+    },
+    "dashboard": {
+        "schools": {
+            "Typeofcertificate": "Type of Certificate",
+            "SchoolYear": "School Year",
+            "Dateofapplicationforthecertificate": "Date Of Certificate App",
+
+            "schoolsList": "Schools List",
+            "schoolStablishmentDate": "School Stablishment Date",
+            "studentsNumber": "عدد الطلاب",
+            "schoolName": "اسم المدرسه",
+            "schoolStatus": "حاله المدرسه",
+            "generalInfo": "معلومات عامه",
+            "schoolAddress": "عنوان المدرسه",
+            "schoolEmployee": "موظفين المدرسه",
+            "schoolClasses": "صفوف المدرسة",
+            "schoolTracks": "شُعب المدرسة",
+            "editableList": "قائمة التعديلات",
+            "schoolInfo": "معلومات المدرسه",
+            "whoIsSchoolManager": "من هو مدير المدرسه؟",
+            "editSchoolInfo": "تعديل معلومات موظف المدرسة",
+            "employeeRole": "دور الموظف",
+            "employeeStatus": "حالة الموظف",
+            "SchoolLogo": "شعار المدرسة",
+            "enterForAttachSchoolLogo": "انقر لارفاق شعار المدرسه",
+            "reliableLogo": "شعار الاعتماد الخاص بالدبلوم",
+            "enSchoolName": "مسمى المدرسه (باللغه العربيه)",
+            "arSchoolName": "مسمى المدرسه (باللغه الانجليزيه)",
+            "schoolNumber": "رقم المدرسة",
+            "schoolId": "رمز المدرسة",
+            "schoolCategory": "فئه المدرسه",
+            "schoolEmail": "البريد الالكتروني للمدرسة",
+            "schoolType": "نوع المدرسة",
+            "schoolLicenceNumber": "رقم ترخيص المدرسه",
+            "course": "المنهج",
+            "schoolStudentNumber": "عدد الطلاب في المدرسة",
+            "educationalInstitution": "المؤسسة التعليمية",
+            "schoolLocation": "الموقع الجغرافي للمدرسة",
+            "schoolEmployeeList": "قائمة الموظفين في المدرسة",
+            "employeeId": "رقم معرّف الموظف",
+            "employeeName": "اسم الموظف",
+            "employeeNickname": "كنية الموظف",
+            "jobTitle": "المسمى الوظيفي",
+            "classeNumberPerWeak": "عدد حصص الاسبوع",
+            "tracksNumber": "عدد المسارات",
+            "sectionsNumber": "عدد الشعب",
+            "studentNumber": "عدد الطلاب",
+            "tracks": "مسارات",
+            "sectionName": "مُسمّى الشعبة",
+            "gradeName": "مُسمّى الصف ",
+            "roomNumber": "رقم الغرفة ( تراخيص)",
+            "spetialAbilities": "القدرات الخاصّة",
+            "sectionTeacher": "معلم الشعبة",
+            "enterGrades": "ادخال الدرجات",
+            "absenceRecord": "سجل الغياب",
+            "raseAttendance": "رفع الحضور",
+            "defineSchedule": "تعريف الجدول الزمني",
+            "absentStudents": "الطلاب الغائبين",
+            "absent": "غائب",
+            "absentRecord": "سجل الغياب",
+            "addAbsentStudents": "إضافة طلاب غائبين",
+            "canNotChooseDay": "(لا يمكن اختيار يوم في المستقبل)",
+            "studentsList": "قائمة الطلاب",
+            "editBy": "تم التعديل بواسطة",
+            "editionDate": "تاريخ التعديل",
+            "versionsAfterEdit": "الإصدارات بعد التعديل",
+            "viewVersionsAfterEdit": "الاطلاع على الاصدار بعد التعديل ",
+            "editClass": " تعديل الصف",
+            "gradInfo": "معلومات الصف",
+            "classesSchedule": "جدول الحصص",
+            "abilityToWriteDescription": "امكانية كتابة وصف مع ادخال الدرجات",
+            "includingTracks": "يتضمن مسارات",
+            "optional": "اختيارية",
+            "mandatory": "إجبارية",
+            "doNotAddToFinalScore": " لا تدخل بالمجموع النهائي ",
+            "notAddedToFinalScore": "لا تدخل بالمجموع النهائي",
+            "addSubject": "اضافة مادة",
+            "subjectsNumber": "عدد المواد:",
+            "track": "مسار :",
+            "addClass": "إضافة  حصة",
+            "addDivision": "إضافة  مسار",
+            "classStartTime": "وقت بداية الحصة",
+            "classEndTime": "وقت نهاية الحصة ",
+            "editSection": " تعديل الشعبة ",
+            "sectionInfo": "معلومات الشعبة",
+            "sectionTeachers": "معلمين الشعبة",
+            "sectionStudents": "طلاب الشعبة",
+            "schedule": "الجدول الزمني",
+            "sectionNumber": "رقم الشعبة من نظام تراخيص ",
+            "maxStudentsNumber": "عدد الطلاب الأقصى",
+            "sectionForSpetialAbilitiesStudents": "الشعبة لطلاب القدرات الخاصّة أم لا",
+            "sectionManager": "مسؤول الشعبة",
+            "abilityToEnterDegree": "مسموح لادخال الدرجات ام لا",
+            "subjectsTeachers": "معلمين المواد",
+            "subjects": "المواد الدراسيه",
+            "subject": "الماده",
+            "subjectTeacher": "معلم المادة",
+            "studentName": "اسم الطالب",
+            "studentNickname": "كنية الطالب",
+            "studentId": "رقم الطالب ",
+            "studentMinisterialId": "رقم الطالب الوزاري",
+            "addStudent": "إضافة طالب",
+            "addStudentToSection": "إضافة طالب إلى الشعبة",
+            "student": "الطالب",
+            "abilityToClickOnClassAndAddSubjects": "ملاحظة: يمكنك الضغط على الحصة لإضافة المواد",
+            "chooseScheduleSubjects": "اختيار مواد الجدول الزمني",
+            "editTrack": "تعديل الشعبه",
+            "viewSchoolInfo": "الاطلاع على معلومات المدرسة ",
+            "editSchoolEmployeeInfo": "تعديل معلومات موظف المدرسة",
+            "employeetRole": "دور الموظف"
+        },
+        "parents": {
+            "attendanceAndAbsence": "Attendance And Absence",
+            "acceptanceInfo": "Acceptance Info",
+            "personalInfo": "Personal Info",
+            "certificateList": "Certificate List",
+            "studentBehavior": "Student Behavior",
+            "studentName": "Student Name",
+            "studentNickname": "Student Nickname",
+
+            "parentsList": "Parents List",
+            "childrenList": "Children List",
+            "parents": "Parents",
+            "parentName": "Parent Name",
+            "childName": "Child Name",
+            "parentNickname": "Parent Nickname",
+            "childrenNumber": "Children Number",
+            "viewChildrenList": "(View Children List)",
+            "academicLevel": "Academic Level",
+            "relativeRelation": "Relative Relation",
+            "registerdInSchool": "Registerd In School",
+            "sonAttachments": "Son Attachments",
+            "requests": "Requests",
+            "sonDetails": "SonDetails",
+            "editableList": "Editable List",
+            "currentSchoolName": "Current School Name",
+            "schoolNumber": "School Number",
+            "ministerialStudentNumber": "Ministerial Student Number",
+            "spetialAbilitiesStudent": "Spetial Abilities Student",
+            "nickname": "Nick Name",
+            "trackName": "TrackName",
+            "sectionName": "Section Name",
+            "className": "Class Name",
+            "identityProof": "Identity Proof",
+            "ministerialNumber": "Ministerial Number",
+            "paidAmount": "Paid Amount",
+            "requiredAmount": "Required Amount",
+            "restAmount": "المبالغ المتبقية",
+            "accountantComment": "التعليق الخاص بالمحاسب",
+            "viewComment": "عرض التعليق",
+            "acceptanceDate": "تاريخ القبول",
+            "studentEnrollmentStatus": "حالة قيد الطالب",
+            "specialEducation": "التربية الخاصة",
+            "attendancePercentage": "نسبة الحضور",
+            "absencePercentage": "نسبة الغياب",
+            "absenceDaysDetails": "تفاصيل أيام الغياب",
+            "absenceDate": "تاريخ الغياب",
+            "absenceWithCause": "غياب بعذر",
+            "absenceWithoutCause": "غياب بدون بعذر",
+            "absenceCause": "سبب الغياب",
+            "attentDays": "AttentDays",
+            "absencDays": "Absence Days",
+            "selectParents": "Select Parents",
+            "Allergicdiseases": "Allergic Diseases",
+            "Disabilities": "Disabilities",
+            "fats": "Fats",
+            "Weightloss": "Weight loss",
+            "Length": "Length",
+            "Chronicdiseases": "Chronic Diseases",
+            "increasement": "Increasement",
+            "weight": "Weight",
+            "Diet": "Diet",
+            "athlete": "Athlete",
+            "SonofDetermination": "Son of Determination",
+            "IQ": "IQ"
+
+
+
+
+
+        },
+        "students": {
+            "studentAttachedment": "Student Attachedment",
+            "medicalFile": "Medical File",
+            "IssuanceOfACertificate": "Issuance Of Certificate To student",
+            "Issuance of certificate": "Issuance of certificate",
+            "Issuing the certificate manually": "Issuing the certificate manually",
+            "type of certificate": "Type Of Certificate",
+            "academic year": "Academic year",
+            "School Name": "School Name",
+            "Class": "Class"
+        },
+        "Messages": {
+            "messages": "Messages",
+            "title message": "Title",
+            "Show Details": "Details",
+            "new message":  "New Message",
+            "from": "From Date",
+            "to": "To Date",
+            "Messages List is empty": "No Messages Yet",
+            "Send a new message": "Send a new message",
+            "Enter the message title": "Enter the message title",
+            "Require confirmation of receipt": "Require confirmation of receipt",
+            "Yes": "Yes",
+            "Possibility to reply": "Possibility to reply",
+            "Send": "Send",
+            "Enter the text of the message" : "Enter the text of the message",
+            "Chat Details": "Message Details",
+            "Send Reply": "Send Reply",
+            "close the conversation": "close the conversation"
+        }
+    },
+    "Notifications": {
+        "Reading Status": "حالة القراءة",
+        "Readable": "Readable",
+        "Not readable": "Not Readable",
+        "Description": "Description",
+        "Notification details": "Notification details",
+        "All Notifications": "All Notifications",
+        "Ask": "Ask ",
+        "Show All": "Show All",
+        "Notifications": "Notifications",
+        "all": "All",
+        "Mark As Read": "Mark as read"
+    }
+}

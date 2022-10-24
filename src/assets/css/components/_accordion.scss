@@ -1,0 +1,42 @@
+
+
+    ::ng-deep p-accordion .p-accordion{
+
+            .p-accordion-tab{
+                margin-bottom: 2rem;
+                border: 1px solid $color-gray-50;
+                box-shadow: none;
+                overflow: hidden;
+
+                &:first-child{
+                    border-top-left-radius: 15px;
+                    border-top-right-radius: 15px;
+                }
+                &:last-child{
+                    border-bottom-left-radius: 15px;
+                    border-bottom-right-radius: 15px;
+                }
+                .p-accordion-header{
+                    
+                    .p-accordion-header-link{
+                        padding: 2.1rem 3.5rem;
+                        background-color: #F8FAFB;
+                        
+                        &:hover{
+                            background-color: #F8FAFB;
+                        }
+                    }
+
+                    &:not(.p-disabled).p-highlight .p-accordion-header-link{
+                        background-color: #F8FAFB
+                    }
+                }
+            }
+
+            .p-accordion-content{
+                padding: 0;
+            }
+        
+    }
+
+   

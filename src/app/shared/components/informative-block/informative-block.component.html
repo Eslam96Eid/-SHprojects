@@ -1,0 +1,9 @@
+<div class="text-center py-5 informative-block " [ngClass]="popup?'popup':''">
+    <img *ngIf="src" loading="lazy" class="img-fluid" [src]="src">
+    <div class="title text-center h-100">
+        <h1 class="heading heading--tertiary fs-2 color-black mb-2">{{title}} </h1>
+        <p class="paragraph paragraph--md paragraph--black">{{subTitle}}</p>
+    </div>
+
+    <ng-content></ng-content>
+</div>
