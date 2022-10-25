@@ -1,8 +1,11 @@
-<div class="chidren">
-
+<div *ngIf="students.length == 0 && chiledren.length == 0">
+    <app-informative-block title="{{'emptyList.childern List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</div>
+<div class="students" *ngIf="students.length != 0">
+    <h4><b>الابناء المسجلين </b></h4>
     <div class="cards ">
         <div class="row g-5">
-            <div class="col-sm-4 col-md-3" *ngFor="let student of chiledren">
+            <div class="col-sm-4 col-md-3" *ngFor="let student of students">
                 <div class="card p-0">
 
                     <div class="card__header px-4 pt-4 d-block">
@@ -19,149 +22,82 @@
                             </div>
                             <!-- <fa-icon class="icon color-gray-300" [icon]="faChevronLeft"></fa-icon> -->
                         </div>
-
-                        <!-- <div class="card__badge d-flex justify-content-center align-items-center gap-3 rounded-5 py-2 my-4"
-                        [ngClass]="{'bg-blue-100' :!student.regestered , 'bg-skyBlue-300': student.regestered} ">
-                            <div class=" d-flex align-items-center" >
-                                <img *ngIf="student.regestered" src="assets/images/home/student/graduation-student.svg" alt="">
-                                <img *ngIf="!student.regestered" src="assets/images/home/student/student.svg" alt="">
-                            </div>
-                            <p class="" [ngClass]="student.regestered ? 'color-skyBlue-500' :''" *ngIf="student.regestered"> مسجل (مدرسه الفتح الخاص)</p>
-                            <p class="" [ngClass]="!student.regestered ? 'color-primary' :''" *ngIf="!student.regestered">غير مسجل</p>
-                        </div> -->
                     </div>
 
                     <div class="card__body">
 
                         <div class="grid-container gap-3 gap-4">
-                            <!-- <span class=" color-gray-300 fs-5">المستوى الدراسى</span>
-                            <div class="color-gray-800 me-2 fs-4">{{student.grade.ar}}</div>
+                            <span class=" color-gray-300 fs-5">المستوى الدراسى</span>
+                            <div class="color-gray-800 me-2 fs-4">
+                                <span *ngIf="student.grade !=null">{{student.grade.ar}}</span>
+                                <span *ngIf="student.grade ==null"> </span>
+
+                            </div>
 
                             <span class=" color-gray-300 fs-5">المدرسه </span>
-                            <div class="color-gray-800 me-2 fs-4">{{student.school.ar}}</div> -->
+                            <div class="color-gray-800 me-2 fs-4">
+                                <span *ngIf="student.school !=null"> {{student.school.ar}}</span>
+                                <span *ngIf="student.school ==null"> </span>
+                            </div>
 
                             <span class=" color-gray-300 fs-5">صله القرابه </span>
                             <div class="color-gray-800 me-2 fs-4">{{student.relativeRelation.ar}}</div>
                         </div>
-                        <!-- <ul class="card__list p-4">
-                            <li class="d-flex align-items-center mb-3">
-                                <div class="icon bg-blue-100 rounded p-2">
-                                    <img src="assets/images/home/student/graduation-cap.svg" alt="">
-                                </div>
-                                <h4 class="heading heading--tertiary">المستوى الدراسى:</h4>
-                                <div class="color-gray-300 me-2">{{student.class}}</div>
-                            </li>
-                            <li class="d-flex align-items-center mb-3">
-                                <div class="icon bg-blue-100 rounded p-2">
-                                    <img src="assets/images/home/student/school.svg" alt="">
-                                </div>
-                                <h4 class="heading heading--tertiary">المدرسه : </h4>
-                                <div class="color-gray-300 me-2">{{student.school}}</div>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <div class="icon bg-blue-100 rounded p-2">
-                                    <img src="assets/images/home/student/relation.svg" alt="">
-                                </div>
-                                <h4 class="heading heading--tertiary">صله القرابه : </h4>
-                                <div class="color-gray-300 me-2">{{student.relativeRelation}}</div>
-                            </li>
-                        </ul> -->
                     </div>
-
-                    <div class="card__actions p-3 mb-1" *ngIf="student.regestered">
-                        <button class="btn btn--full btn-primary ">
-                            <span class="ms-3">سجل فى المدرسه</span>
-                        </button>
-                    </div>
-                    <div class="card__actions p-3 mb-1" *ngIf="!student.regestered">
+                    <div class="card__actions p-3 mb-1">
                         <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150">
                             <span class="ms-3">مسجل</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <!--------------------------------------------------------------->
-            <div class="row">
-                <div class="col-sm-4 col-md-3" *ngFor="let child of chiledren">
-                    <div class="card p-0">
+        </div>
+    </div>
+</div>
 
-                        <div class="card__header px-4 pt-4 d-block">
-                            <div class="profile card__avatar mb-4" role="button">
-                                <div class="profile__avatar sm ">
-                                    <img src="assets/images/avatar.png" alt="Avatar">
-                                    <!-- <img [src]="student.imagePath" alt="Avatar"> -->
-                                </div>
-                                <div class="profile__info">
-                                    <div class="info ms-auto">
-                                        <h4 class="heading heading--tertiary color-primary mb-2">{{student.name.ar}}</h4>
-                                        <p class="color-gray-300 fs-4">{{student.age}}سنه</p>
-                                    </div>
-                                </div>
-                                <!-- <fa-icon class="icon color-gray-300" [icon]="faChevronLeft"></fa-icon> -->
-                            </div>
+<br>
 
-                            <!-- <div class="card__badge d-flex justify-content-center align-items-center gap-3 rounded-5 py-2 my-4"
-                        [ngClass]="{'bg-blue-100' :!student.regestered , 'bg-skyBlue-300': student.regestered} ">
-                            <div class=" d-flex align-items-center" >
-                                <img *ngIf="student.regestered" src="assets/images/home/student/graduation-student.svg" alt="">
-                                <img *ngIf="!student.regestered" src="assets/images/home/student/student.svg" alt="">
+<div class="chidren" *ngIf="chiledren.length != 0">
+    <h4><b>الابناء الغير مسجلين </b></h4>
+    <div class="cards ">
+        <div class="row g-5">
+            <div class="col-sm-4 col-md-3" *ngFor="let child of chiledren">
+                <div class="card p-0">
+
+                    <div class="card__header px-4 pt-4 d-block">
+                        <div class="profile card__avatar mb-4" role="button">
+                            <div class="profile__avatar sm ">
+                                <img src="assets/images/avatar.png" alt="Avatar">
+                                <!-- <img [src]="student.imagePath" alt="Avatar"> -->
                             </div>
-                            <p class="" [ngClass]="student.regestered ? 'color-skyBlue-500' :''" *ngIf="student.regestered"> مسجل (مدرسه الفتح الخاص)</p>
-                            <p class="" [ngClass]="!student.regestered ? 'color-primary' :''" *ngIf="!student.regestered">غير مسجل</p>
-                        </div> -->
+                            <div class="profile__info">
+                                <div class="info ms-auto">
+                                    <h4 class="heading heading--tertiary color-primary mb-2">{{child.name.ar}}</h4>
+                                    <p class="color-gray-300 fs-4">{{child.age}}سنه</p>
+                                </div>
+                            </div>
+                            <!-- <fa-icon class="icon color-gray-300" [icon]="faChevronLeft"></fa-icon> -->
                         </div>
 
-                        <div class="card__body">
 
-                            <div class="grid-container gap-3 gap-4">
-                                <!-- <span class=" color-gray-300 fs-5">المستوى الدراسى</span>
-                            <div class="color-gray-800 me-2 fs-4">{{student.grade.ar}}</div>
+                    </div>
 
-                            <span class=" color-gray-300 fs-5">المدرسه </span>
-                            <div class="color-gray-800 me-2 fs-4">{{student.school.ar}}</div> -->
+                    <div class="card__body">
 
-                                <span class=" color-gray-300 fs-5">صله القرابه </span>
-                                <div class="color-gray-800 me-2 fs-4">{{student.relativeRelation.ar}}</div>
-                            </div>
-                            <!-- <ul class="card__list p-4">
-                            <li class="d-flex align-items-center mb-3">
-                                <div class="icon bg-blue-100 rounded p-2">
-                                    <img src="assets/images/home/student/graduation-cap.svg" alt="">
-                                </div>
-                                <h4 class="heading heading--tertiary">المستوى الدراسى:</h4>
-                                <div class="color-gray-300 me-2">{{student.class}}</div>
-                            </li>
-                            <li class="d-flex align-items-center mb-3">
-                                <div class="icon bg-blue-100 rounded p-2">
-                                    <img src="assets/images/home/student/school.svg" alt="">
-                                </div>
-                                <h4 class="heading heading--tertiary">المدرسه : </h4>
-                                <div class="color-gray-300 me-2">{{student.school}}</div>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <div class="icon bg-blue-100 rounded p-2">
-                                    <img src="assets/images/home/student/relation.svg" alt="">
-                                </div>
-                                <h4 class="heading heading--tertiary">صله القرابه : </h4>
-                                <div class="color-gray-300 me-2">{{student.relativeRelation}}</div>
-                            </li>
-                        </ul> -->
-                        </div>
-
-                        <div class="card__actions p-3 mb-1" *ngIf="!student.regestered">
-                            <button class="btn btn--full btn-primary ">
-                            <span class="ms-3">سجل فى المدرسه</span>
-                        </button>
-                        </div>
-                        <div class="card__actions p-3 mb-1" *ngIf="student.regestered">
-                            <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150">
-                                <span class="ms-3">مسجل</span>
-                            </div>
+                        <div class="grid-container gap-3 gap-4">
+                            <span class=" color-gray-300 fs-5">صله القرابه </span>
+                            <div class="color-gray-800 me-2 fs-4">{{child.relativeRelation.ar}}</div>
                         </div>
                     </div>
+
+                    <div class="card__actions p-3 mb-1">
+                        <button class="btn btn--full btn-primary "  (click)="displayUnregisterChild(child.id);">
+                            <span class="ms-3">سجل فى المدرسه</span>
+                        </button>
+                    </div>
+
                 </div>
             </div>
-
         </div>
     </div>
 </div>

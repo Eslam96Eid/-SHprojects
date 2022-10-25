@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
@@ -39,6 +39,7 @@ export class ChildrenListComponent implements OnInit {
     private headerService: HeaderService,
     private parentService : ParentService,
     private _router: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -66,5 +67,11 @@ export class ChildrenListComponent implements OnInit {
       //   userStatus : this.account.isActive
       // })
     })
+  }
+
+  displayUnregisterChild(chiledId : number){
+    debugger
+    let parentId = Number(this._router.snapshot.paramMap.get('id'));
+    this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${parentId}/child/${chiledId}/unregister-child`);
   }
 }

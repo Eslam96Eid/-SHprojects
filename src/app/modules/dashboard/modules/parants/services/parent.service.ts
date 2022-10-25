@@ -37,4 +37,7 @@ export class ParentService {
     return this.http.get<any>(`${this.baseUrl+'/Guardian/'+id+'/Children'}`);
   }
 
+  getUnregisterChildern(id:number): Observable<any>{
+    return this.http.get<any>(`${this.baseUrl+'/Child/'+id}`);
+  }
 }

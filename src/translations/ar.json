@@ -196,7 +196,8 @@
         "studetsDegrees": "يتوجب على المستخدم اختيار الفلتر لإظهار قائمة بالدرجات التفصيلية لكل طالب",
         "Notifications List is empty": "لا يوجد لديك إشعارات",
         "SchoolYear List is empty": "لا توجد سنوات دراسية بعد",
-        "Assignments List is empty": "لاتوجد إمتحانات بعد"
+        "Assignments List is empty": "لاتوجد إمتحانات بعد",
+        "childern List is empty": "لا توجد اي بيانات بعد"
 
     },
     "shared": {
