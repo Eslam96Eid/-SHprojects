@@ -102,7 +102,6 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
 
   onPageChange(event: paginationState) {
-    console.log(event);
     this.paginationState = { ...this.paginationState, ...event }
     this.paginationChanged.emit(event)
   }

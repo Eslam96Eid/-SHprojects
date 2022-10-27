@@ -20,7 +20,7 @@ export class ViewListOfUsersComponent implements OnInit {
   isLoaded = false;
   searchKey: string = '';
   first = 0;
-  rows = 4;
+  rows = 6;
   usersList: IUser[] = [];
   faEllipsisVertical = faEllipsisVertical;
   cities: string[];

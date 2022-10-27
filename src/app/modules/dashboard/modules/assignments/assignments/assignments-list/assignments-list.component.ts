@@ -1,18 +1,11 @@
 
 import { AssignmentServiceService } from './../../service/assignment-service.service';
-import { formatDate } from '@angular/common';
-
-import { Router } from '@angular/router';
-import { faAngleRight, faAngleLeft, faHouse, faSearch, faFilter, faHome, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-
+import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { Component, OnInit, ViewChild } from '@angular/core';
-
 import { TranslateService } from '@ngx-translate/core';
 import { Paginator } from 'primeng/paginator';
-
 import { IHeader, paginationState } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
-
 import { Iassignments } from '../model/Iassignments';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -30,7 +23,7 @@ export class AssignmentsListComponent implements OnInit {
   @ViewChild('pagination') pagination: Paginator;
   page: number = 1;
   first = 1
-  rows = 4
+  rows = 6
   pagesArrOptions = []
   totalItems: number = 1;
   currentActivePage = { page: 1 }
@@ -38,7 +31,6 @@ export class AssignmentsListComponent implements OnInit {
   isLoaded = false;
   assignmentList: Iassignments[] = [];
   pageNum = 1;
-  pageSize = 50;
   searchKey: string = '';
   filtration = {...Filtration,IndexTypeId: '',indexStatus:''};
 
@@ -62,17 +54,14 @@ export class AssignmentsListComponent implements OnInit {
 
   constructor(
     private headerService: HeaderService,
-
     private translate: TranslateService,
-    private router: Router,
     private assignmentservice: AssignmentServiceService) { }
 
 
-  getAssignmentList(search = '', sortby = '', pageNum = 1, pageSize = 100, sortColumn = '', sortDir = '') {
+  getAssignmentList(search :string, sortby :string, pageNum :number, pageSize :number, sortColumn :string, sortDir :string) {
     this.assignmentservice.getAssignmentList(search, sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
-
       this.assignmentList = response?.data;
-      this.totalItems = this.assignmentList.length;
+      this.totalItems = response.total;
       this.isLoaded = true;
     })
 
@@ -83,7 +72,7 @@ export class AssignmentsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAssignmentList();
+    this.getAssignmentList('', '', 1, 6, '', "asc");
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -92,9 +81,10 @@ export class AssignmentsListComponent implements OnInit {
     );
   }
   onTableDataChange(event: paginationState) {
+    console.log(event);
     this.first = event.first
     this.rows = event.rows
-
+    this.getAssignmentList('', '', event.page, 6, '', "asc");
   }
   onSearchClear() {
     this.searchKey = '';
@@ -103,7 +93,7 @@ export class AssignmentsListComponent implements OnInit {
 
   applyFilter() {
     let searchData = this.searchKey.trim().toLowerCase();
-    this.getAssignmentList(searchData, '', 1, 50, '', "asc");
+    this.getAssignmentList(searchData, '', 1, 6, '', "asc");
   }
 
   exportPdf(examPath : any){
@@ -112,4 +102,5 @@ export class AssignmentsListComponent implements OnInit {
    exportAudio(examPath : any){
     window.open(examPath, '_blank').focus();
    }
+   
 }

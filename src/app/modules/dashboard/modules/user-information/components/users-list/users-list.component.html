@@ -21,16 +21,16 @@
 
         </ng-template> -->
 
-        <ng-template pTemplate="header">
+        <ng-template pTemplate="header" et-columns="columns">
             <tr>
-                <th pSortableColumn="name">
-                    <p-sortIcon field="name"></p-sortIcon>{{'shared.Full Name'|translate}}</th>
+                <th pSortableColumn="fullName">
+                    <p-sortIcon field="fullName"></p-sortIcon>{{'shared.Full Name'|translate}}</th>
                 <th pSortableColumn="email">
                     <p-sortIcon field="email"></p-sortIcon>{{'shared.email'|translate}}</th>
-                <th pSortableColumn="ownerId">
-                    <p-sortIcon field="ownerId"></p-sortIcon>{{'shared.Identity Number'|translate}}</th>
-                <th pSortableColumn="phoneno">
-                    <p-sortIcon field="phoneno"></p-sortIcon>{{'shared.phoneNumber'|translate}}</th>
+                <th pSortableColumn="emiratesIdNumber">
+                    <p-sortIcon field="emiratesIdNumber"></p-sortIcon>{{'shared.Identity Number'|translate}}</th>
+                <th pSortableColumn="phoneNumber">
+                    <p-sortIcon field="phoneNumber"></p-sortIcon>{{'shared.phoneNumber'|translate}}</th>
                 <th pSortableColumn="createdDate">
                     <p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                 <th pSortableColumn="status">
@@ -41,7 +41,7 @@
 
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-e>
+        <ng-template pTemplate="body" let-e let-columns="columns">
             <tr>
                 <td>{{e.fullName|translate}}</td>
                 <td>{{e.email|translate}}</td>

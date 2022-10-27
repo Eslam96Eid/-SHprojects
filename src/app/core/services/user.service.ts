@@ -9,6 +9,7 @@ import { IAccount } from 'src/app/modules/dashboard/modules/user-information/mod
 import { IAccountAddOrEdit } from 'src/app/modules/dashboard/modules/user-information/models/IAccountAddOrEdit';
 import { environment } from 'src/environments/environment';
 import { Token, IUser } from '../models/base.models';
+import { HttpHandlerService } from './http/http-handler.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class UserService {
 
   selectedCities: string[];
   usersList: IUser[] = [];
-  constructor(private router: Router ,private http: HttpClient
+  constructor(private http: HttpHandlerService
 ) {
   this.headers = this.headers.set('content-type', 'application/json');
   this.headers = this.headers.set('Accept', 'application/json');
@@ -77,8 +78,7 @@ export class UserService {
   getUsersList(keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
 
     let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
-console.log(body)
-    return this.http.post<any>(`${this.baseUrl+'/Account/Search'}`,body ,{observe:'body',headers:this._headers }).pipe(
+    return this.http.post(`${this.baseUrl+'/Account/Search'}`,body ,{observe:'body',headers:this._headers }).pipe(
       map(response => {
          return response ;
       })
@@ -86,20 +86,20 @@ console.log(body)
   }
 
   getUsersById(id:number): Observable<IAccount>{
-    return this.http.get<IAccount>(`${this.baseUrl+'/Account/Get/'+id}`);
+    return this.http.get(`${this.baseUrl+'/Account/Get/'+id}`);
   }
 
   AddAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/Account/Add`, data);
+    return this.http.post(`${this.baseUrl}/Account/Add`, data);
   }
   EditAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/Account/Update`, data);
+    return this.http.put(`${this.baseUrl}/Account/Update`, data);
   }
   GetRoleList(): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}` + `/Role/List`);
+    return this.http.get(`${this.baseUrl}` + `/Role/List`);
   }
   GetRoleById(id:number): Observable<IAccount>{
-    return this.http.get<IAccount>(`${this.baseUrl+'/Role/Get/'+id}`);
+    return this.http.get(`${this.baseUrl+'/Role/Get/'+id}`);
   }
 
 

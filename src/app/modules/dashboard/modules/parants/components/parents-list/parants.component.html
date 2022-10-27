@@ -1,26 +1,35 @@
 <div class="parents">
+    <div class="caption">
+        <!-- Serach and Filter Button -->
+        <div class="col-8  caption__filter caption__filter--actions">
+            <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+                <i class="pi pi-search fs-3 "></i>
+                <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
+            </div>
+        </div>
+    </div>
 
-    <div class="prim-table mt-4">
-        <p-table #dt [value]="parent" [paginator]="true" [(rows)]="rows" [(first)]="first">
+    <div class="prim-table mt-4"  *ngIf="isLoaded">
+        <p-table #dt [value]="parent" [paginator]="true" [(rows)]="rows" [(first)]="first"sortMode="multiple">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption></app-table-caption>
+                <!-- <app-table-caption></app-table-caption> -->
             </ng-template>
 
             <ng-template pTemplate="header" let-columns="columns">
                 <tr>
-                    <th pSortableColumn="name">
+                    <th pSortableColumn="name.ar">
                         <div class="content">
                             {{'dashboard.parents.parentName'|translate }}
-                            <p-sortIcon field="name"></p-sortIcon>
+                            <p-sortIcon field="name.ar"></p-sortIcon>
                         </div>
                     </th>
-                    <th pSortableColumn="surname">
+                    <th pSortableColumn="surname.ar">
                         {{'dashboard.parents.parentNickname'|translate }}
-                        <p-sortIcon field="surname"></p-sortIcon>
+                        <p-sortIcon field="surname.ar"></p-sortIcon>
                     </th>
-                    <th pSortableColumn="nationalityName">{{'shared.nationality'|translate }}
-                        <p-sortIcon field="nationalityName"></p-sortIcon>
+                    <th pSortableColumn="nationalityName.ar">{{'shared.nationality'|translate }}
+                        <p-sortIcon field="nationalityName.ar"></p-sortIcon>
                     </th>
                     <th pSortableColumn="mobile">{{'shared.phoneNumber'|translate }}
                         <p-sortIcon field="mobile"></p-sortIcon>
@@ -58,7 +67,8 @@
         </p-table>
 
         <div class="">
-            <app-pagination [totalItems]="parent.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <app-pagination [totalItems]="totalItem" 
+            (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>
 </div>

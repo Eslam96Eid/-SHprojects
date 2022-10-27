@@ -15,8 +15,11 @@ export class AssignmentServiceService {
   baseUrl = environment.serverUrl;
   private headers = new HttpHeaders();
   constructor(private http: HttpHandlerService,private _http: HttpClient) {
-     this.headers = this.headers.set('content-type', 'application/json');
-  this.headers = this.headers.set('Accept', 'application/json');}
+    // this.headers = this.headers.set('content-type', 'application/json');
+    // this.headers = this.headers.set('Accept', 'application/json');
+    this.headers = this.headers.append('Content-Type', 'multipart/form-data');
+    this.headers = this.headers.append('enctype', 'multipart/form-data');
+}
 
 
 
@@ -30,9 +33,9 @@ export class AssignmentServiceService {
       params = params.append('sortcolumn' , sortcolumn.toString());
       params = params.append('sortdirection' , sortdirection.toString());
     }
-    return this._http.get<any>(`${this.baseUrl+'/Curriculum'}`, {observe:'response' , params}).pipe(
+    return this.http.get(`${this.baseUrl+'/Curriculum'}`,params).pipe(
       map(response => {
-         return response.body ;
+         return response ;
       })
     )
   }
@@ -42,13 +45,13 @@ export class AssignmentServiceService {
     let params = new HttpParams();
     if(curriculumId !== null && curriculumId !== undefined ){
       params = params.append('curriculumId' , curriculumId.toString());
-      return this._http.get<any>(`${this.baseUrl+'/School'}`, {observe:'response' , params}).pipe(
+      return this.http.get(`${this.baseUrl+'/School'}`, {observe:'response' , params}).pipe(
         map(response => {
            return response.body ;
         })
       )
     }else{
-      return this._http.get<any>(`${this.baseUrl+'/School'}`, {observe:'response'}).pipe(
+      return this.http.get(`${this.baseUrl+'/School'}`, {observe:'response'}).pipe(
         map(response => {
            return response.body ;
         })
@@ -58,11 +61,11 @@ export class AssignmentServiceService {
   }
 
   GetGradeList(): Observable<any> {
-    return this._http.get<any>(`${this.baseUrl}` + `/Grade`);
+    return this.http.get(`${this.baseUrl}` + `/Grade`);
   }
 
   GetSubjectList(): Observable<any> {
-    return this._http.get<any>(`${this.baseUrl}` + `/Subject`);
+    return this.http.get(`${this.baseUrl}` + `/Subject`);
   }
 
   getAssignmentList(keyword:string ,sortby:string ,page :number , pagesize :number , sortcolumn:string , sortdirection:string) {
@@ -74,22 +77,23 @@ export class AssignmentServiceService {
       params = params.append('pagesize' , pagesize.toString());
       params = params.append('sortcolumn' , sortcolumn.toString());
       params = params.append('sortdirection' , sortdirection.toString());
-    }
-    return this._http.get<any>(`${this.baseUrl+'/Exam'}`, {observe:'response' , params}).pipe(
+    } 
+    let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
+    return this.http.get(`${this.baseUrl+'/Exam'}`,body).pipe(
       map(response => {
-         return response.body ;
+        console.log(response);
+         return response ;
       })
     )
   }
   AddAssignment(data: IuploadAssignment): Observable<any> {
-    return this._http.post<any>(`${this.baseUrl}/Exam`, data);
+    return this.http.post(`${this.baseUrl}/Exam`, data);
   }
   _headers = new HttpHeaders({
     'Accept': 'application/json',
     'zumo-api-version': '2.0.0',
-
 });
-  public onFileUpload(_file : any ): Observable<any>{
-    return this._http.post<any>(this.baseUrl + '/Upload/Upload-blobstorage?type=exam',_file,{headers:this._headers});
-  }
+public onFileUpload(_file : any ): Observable<any>{
+  return this._http.post<any>(this.baseUrl + '/Upload/Upload-blobstorage?type=exam',_file,{headers:this._headers});
+}
 }

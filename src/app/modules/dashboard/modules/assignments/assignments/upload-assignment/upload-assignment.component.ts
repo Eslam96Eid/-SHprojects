@@ -15,6 +15,7 @@ import { Ischool } from '../model/Ischool';
 import { Igrade } from '../model/Igrade';
 import { Isubject } from '../model/Isubject';
 import { MessageService } from 'primeng/api';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-upload-assignment',
   templateUrl: './upload-assignment.component.html',
@@ -42,7 +43,7 @@ export class UploadAssignmentComponent implements OnInit {
 
   constructor(private headerService: HeaderService, private router: Router,
      private translate: TranslateService, private fb: FormBuilder, private assignmentService: AssignmentServiceService,
-    private messageService: MessageService) {
+    private messageService: MessageService,private toastr: ToastrService) {
     this.assignmentFormGrp = fb.group({
       curriculum: [''],
       schools:[''],
@@ -130,6 +131,10 @@ onUpload(event) {
     const file = data.files[0];
     fd.append('file', file, file.name);
     this.assignmentService.onFileUpload(fd).subscribe(res => {
+      debugger
+      if(res){
+        this.toastr.success('Upload Successfully','');
+      }
       let typePath = res.url.split('.').pop();
       if (typePath === 'jpg' || typePath === 'png')
        { this.assignmentFormGrp.value.examPdfPath = res.url; }

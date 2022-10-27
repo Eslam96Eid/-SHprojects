@@ -21,7 +21,7 @@
 
 <!-- ------Table------- -->
 <div class="prim-table" *ngIf="isLoaded">
-    <p-table #dt [value]="assignmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
+    <p-table selectionMode="multiple"  [lazy]="true"  #dt [value]="assignmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
         <!-- Table Caption -->
         <!-- <ng-template pTemplate="caption">
@@ -33,10 +33,11 @@
 
         </ng-template> -->
 
-        <ng-template pTemplate="header">
+        <ng-template pTemplate="header"let-columns>
             <tr>
                 <th pSortableColumn="name.ar">
-                    <p-sortIcon field="name.ar"></p-sortIcon>{{'dashboard.Assignments.Assignment Name' | translate}}
+                    <p-sortIcon field="name.ar"></p-sortIcon>
+                   {{'dashboard.Assignments.Assignment Name' | translate}}
                 </th>
 
                 <th pSortableColumn="gradeName.ar">
@@ -47,8 +48,8 @@
                     <p-sortIcon field="curriculmName.ar"></p-sortIcon>{{'dashboard.Assignments.curriculum' | translate}}
                 </th>
 
-                <th pSortableColumn="schoolName">
-                    <p-sortIcon field="schoolName"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}
+                <th pSortableColumn="schoolCount">
+                    <p-sortIcon field="schoolCount"></p-sortIcon>{{'dashboard.Assignments.schoolCount' | translate}}
                 </th>
 
 
@@ -130,7 +131,7 @@
 
     <div>
 
-        <app-pagination [totalItems]="assignmentList.length" (paginationChanged)="onTableDataChange($event)">
+        <app-pagination [totalItems]="totalItems" (paginationChanged)="onTableDataChange($event)">
         </app-pagination>
     </div>
 
