@@ -1,12 +1,5 @@
-<div class="caption">
-    <!-- Serach and Filter Button -->
-    <div class="col-8  caption__filter caption__filter--actions">
-        <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
-            <i class="pi pi-search fs-3 "></i>
-            <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
-        </div>
-    </div>
-</div>
+
+
 
 
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-information/new-user'" [content]="'breadcrumb.AddUser'"></app-add-btn>
@@ -15,11 +8,41 @@
     <p-table #dt [value]="users_List" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
         <!-- Table Caption -->
-        <!-- <ng-template pTemplate="caption">
+        <ng-template pTemplate="caption">
 
-            <app-table-caption [filterFormControls]="['Identity Number','shared.User Name','state','course']"></app-table-caption>
+            <div class="caption">
+                <!-- Serach and Filter Button -->
+                <div class="col-8  caption__filter caption__filter--actions">
+                    <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+                        <i class="pi pi-search fs-3 "></i>
+                        <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText
+                            placeholder="{{'shared.Search...'|translate}}" />
+                    </div>
+                </div>
+            
+                <div class="col-3 actions">
+                    <div class="filter" (clickOutside)="showFilterModel=false" *ngIf="hasFilter">
+                        <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel">
+                            <img class="icon" src="assets/images/shared/filter.svg" alt="">
+                            <span>{{'shared.filter'|translate}}</span>
+                        </button>
+            
+                        <div class="filter__model custom-form" [class.show]="showFilterModel">
+                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" class="form-control" optionLabel="name"
+                                placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            </p-dropdown>
+                            <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
+                                <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح
+                                    الكل</span>
+                                <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">بحث</button>
+                            </div>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
 
-        </ng-template> -->
+        </ng-template>
 
         <ng-template pTemplate="header" et-columns="columns">
             <tr>

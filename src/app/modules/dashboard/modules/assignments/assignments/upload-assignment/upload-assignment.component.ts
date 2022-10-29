@@ -136,7 +136,7 @@ onUpload(event) {
         this.toastr.success('Upload Successfully','');
       }
       let typePath = res.url.split('.').pop();
-      if (typePath === 'jpg' || typePath === 'png')
+      if (typePath === 'jpeg' || typePath === 'png' || typePath ==='jpg')
        { this.assignmentFormGrp.value.examPdfPath = res.url; }
       else if (typePath === 'pdf')
        { this.assignmentFormGrp.value.examPdfPath = res.url; }

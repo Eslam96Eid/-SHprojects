@@ -84,22 +84,31 @@ export class UserService {
       })
     )
   }
+  getUsersListByRoled(roleId:number , isactive : boolean = true , keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
+    let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
+    return this.http.post('/Account/Search?roleId='+roleId+'&isactive='+isactive,body ,{observe:'body',headers:this._headers }).pipe(
+      map(response => {
+        debugger;
+         return response ;
+      })
+    )
+  }
 
   getUsersById(id:number): Observable<IAccount>{
-    return this.http.get(`${this.baseUrl+'/Account/Get/'+id}`);
+    return this.http.get('/Account/Get/'+id);
   }
 
   AddAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.post(`${this.baseUrl}/Account/Add`, data);
+    return this.http.post(`/Account/Add`, data);
   }
   EditAccount(data: IAccountAddOrEdit): Observable<any> {
-    return this.http.put(`${this.baseUrl}/Account/Update`, data);
+    return this.http.put(`/Account/Update`, data);
   }
   GetRoleList(): Observable<any> {
-    return this.http.get(`${this.baseUrl}` + `/Role/List`);
+    return this.http.get(`/Role/List`);
   }
   GetRoleById(id:number): Observable<IAccount>{
-    return this.http.get(`${this.baseUrl+'/Role/Get/'+id}`);
+    return this.http.get('/Role/Get/'+id);
   }
 
 
