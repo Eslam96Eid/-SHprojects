@@ -3,10 +3,16 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
+import { Filtration } from 'src/app/core/classes/filtration';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { Filter } from 'src/app/core/models/filter/filter';
 import { IHeader } from 'src/app/core/Models/iheader';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 // import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { CountriesService } from 'src/app/shared/services/countries/countries.service';
+import { ExportService } from 'src/app/shared/services/export/export.service';
 import { Iparent } from '../../models/Iparent';
 import { ParentService } from '../../services/parent.service';
 // import { ParentService } from '../../services/parent.service';
@@ -17,9 +23,18 @@ import { ParentService } from '../../services/parent.service';
 	styleUrls: ['./parants.component.scss']
 })
 export class ParantsComponent implements OnInit {
+	paginationState= {...paginationInitialState}
+	countries$ = this.countriesService.getCountries()
 	@ViewChild('dt') table: Table;
+	filtration :Filter = {...Filtration,  NationalityId:""}
 	faEllipsisVertical = faEllipsisVertical
-	parent: Iparent[] = [];
+	//parent: Iparent[] = [];
+	parent={
+		totalAllData:0,
+		total:0,
+		list:[],
+		loading:true
+	  }
 	totalItem :number;
 	first = 0;
 	rows = 4;
@@ -38,28 +53,43 @@ export class ParantsComponent implements OnInit {
 	}
 
 	constructor(
+		private exportService: ExportService,
 		private translate: TranslateService,
 		private headerService: HeaderService,
-		private parentService : ParentService
+		private parentService : ParentService,
+		private countriesService: CountriesService,
 	) { }
 
-	getParentList(search: string , sortby : string ,pageNum: number, pageSize: number, sortColumn: string, sortDir: string) {
-		this.parentService.getAllParents(search,sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
+	getParentList() {
+		this.parent.loading=true
+		this.parent.list=[]
+		this.parentService.getAllParents(this.filtration).subscribe(res => {
 			debugger
-		  this.parent = response?.data;
-		  this.totalItem=response.total;
-		  this.isLoaded=true;
-		})
+			this.parent.loading = false
+			this.parent.list = res.data
+			this.parent.totalAllData = res.totalAllData
+			this.parent.total =res.total
+		},err=> {
+			this.parent.loading=false
+			this.parent.total=0
+		  })
 	  }
 	ngOnInit(): void {
-		this.getParentList('','',1, 6, '', '');
+		this.getParentList();
 		this.headerService.changeHeaderdata(this.componentHeaderData)
 
 	}
+	onSort(e){
+		console.log(e);
+		if(e.order==1) this.filtration.SortBy= 'old'
+		else if(e.order == -1) this.filtration.SortBy= 'update'
+		this.getParentList()
+	  }
 	paginationChanged(event: paginationState) {
+		this.filtration.Page = event.page
 		this.first = event.first
 		this.rows = event.rows;
-		this.getParentList('','',event.page, 6, '', '');
+		this.getParentList();
 	}
 
 	onSearchClear() {
@@ -69,11 +99,18 @@ export class ParantsComponent implements OnInit {
 	
 	  applyFilter() {
 		let searchData = this.searchKey.trim().toLowerCase();
-		this.getParentList(searchData, '', 1, 6, '', "asc");
+		this.getParentList();
 	  }
-
-	  onclick(event :any){
-		debugger;
+	  
+	  onExport(fileType: FileEnum, table:Table){
+		this.exportService.exportFile(fileType, table, this.parent.list)
 	  }
-
+	  clearFilter(){
+		this.filtration.KeyWord =''
+		this.filtration.City= null
+		this.filtration.StateId= null
+		this.filtration.Status =''
+		this.filtration.curricuulumId = null
+		this.getParentList()
+	  }
 }

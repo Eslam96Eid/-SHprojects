@@ -1,19 +1,31 @@
 <div class="parents">
-    <div class="caption">
-        <!-- Serach and Filter Button -->
+    <!-- <div class="caption">
         <div class="col-8  caption__filter caption__filter--actions">
             <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
                 <i class="pi pi-search fs-3 "></i>
                 <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
             </div>
         </div>
-    </div>
+    </div> -->
 
-    <div class="prim-table mt-4"  *ngIf="isLoaded">
-        <p-table #dt [value]="parent" [paginator]="true" [(rows)]="rows" [(first)]="first"sortMode="multiple">
+    <div class="prim-table mt-4"  *ngIf="parent.totalAllData || parent.loading" >
+        <p-table #dt [value]="parent.list" (onSort)="onSort($event)" [lazy]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <!-- <app-table-caption></app-table-caption> -->
+                <app-table-caption 
+                (onExport)="onExport($event)" 
+                (onFilter)="getParentList()" 
+                (onSearch)="filtration.KeyWord = $event; getParentList()" 
+                (onClear)="clearFilter()">
+
+                    <div class="row gx-5 form-set">
+                        <div class="col">
+                            <label class="label">{{'dashboard.students.nationalities'| translate}}</label>
+                            <p-dropdown [options]="(countries$ | async)" optionValue="id" [(ngModel)]="filtration.NationalityId" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseNationalitie' |translate}}"></p-dropdown>
+                        </div>
+                    </div>
+                </app-table-caption>
+
             </ng-template>
 
             <ng-template pTemplate="header" let-columns="columns">
@@ -66,8 +78,8 @@
 
         </p-table>
 
-        <div class="">
-            <app-pagination [totalItems]="totalItem" 
+        <div *ngIf="parent.total > paginationState.rows">
+            <app-pagination [totalItems]="parent.total" 
             (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>

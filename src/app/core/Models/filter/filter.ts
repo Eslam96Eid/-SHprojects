@@ -30,6 +30,10 @@ export interface Filter{
     CurriculumName?:string;
     HolidayStatus?:string;
 
+    //Users
+    UserStatus?:string;
+    UserRole?:string
+
 
 
 
