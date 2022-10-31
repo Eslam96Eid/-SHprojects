@@ -1,22 +1,26 @@
 <app-add-btn bg-primary [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
     <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
 </app-add-btn>
-<div class="prim-table">
+<div class="prim-table" *ngIf="assessmentList.totalAllData || assessmentList.loading" >
 
 
-    <p-table #dt [value]="assessmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
+    <p-table #dt  [value]="assessmentList.list" (onSort)="onSort($event)" [lazy]="true">
 
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
-
-            <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
+            <app-table-caption 
+            (onExport)="onExport($event)" 
+            (onFilter)="getRate()" 
+            (onSearch)="filtration.KeyWord = $event; getRate()" 
+            (onClear)="clearFilter()">
+            </app-table-caption>
 
         </ng-template>
     </p-table>
 
     <div class="row">
-        <ng-container *ngIf="rateList.length > 0">
-            <ng-container *ngFor="let rate of rateList">
+        <ng-container *ngIf="assessmentList.list.length > 0">
+            <ng-container *ngFor="let rate of assessmentList.list">
                     <div class="col-md-4 ml-3">
                     <p-card class="p-5 m-4 radius-5">
                         <ng-template pTemplate="header">
@@ -30,7 +34,7 @@
                                 <span class="color-skyBlue-500 fs-3 fw-700"> الدرجه العظمي :{{rate.max}}</span>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row"  [style]="{height: '360px'}">
                             <ng-container *ngIf="rate.rateScores.length > 0">
                                 <div class="col-md-4">
                                     <p class="color-skyBlue-300 fs-4 mb-4 mt-4">رمز التقييم</p>
@@ -76,7 +80,9 @@
             </ng-container>
         </ng-container>
     </div>
-    <div>
-        <app-pagination [totalItems]="assessmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+    <div *ngIf="assessmentList.totalAllData > paginationState.rows">
+        <app-pagination [totalItems]="assessmentList.totalAllData"  (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
+
+
 </div>
