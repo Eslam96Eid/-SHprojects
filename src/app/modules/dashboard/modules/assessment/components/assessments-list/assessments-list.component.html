@@ -13,6 +13,22 @@
             (onFilter)="getRate()" 
             (onSearch)="filtration.KeyWord = $event; getRate()" 
             (onClear)="clearFilter()">
+            <div class="row gx-5 form-set">
+                <div class="col">
+                    <label class="label">{{'shared.activated'|translate}}</label>
+                    <p-dropdown  
+                    (onChange)="onChange($event)"
+                    [options]="filteration_status"
+                    optionLabel="name"></p-dropdown>
+                </div>
+            </div>
+<!-- 
+            <div class="col-xs-4 col-lg-4">
+                <label for="PID8" class="label"><b>{{'shared.activated'|translate}}</b></label>
+                <p-inputSwitch (onChange)="isToggleLabelFiltration($event)"></p-inputSwitch>
+                <span class="Label" *ngIf="isShownfiltration">{{'shared.no'|translate}}</span>
+                <span class="Label" *ngIf="!isShownfiltration">{{'shared.yes'|translate}}</span>
+            </div> -->
             </app-table-caption>
 
         </ng-template>
@@ -24,7 +40,17 @@
                     <div class="col-md-4 ml-3">
                     <p-card class="p-5 m-4 radius-5">
                         <ng-template pTemplate="header">
-                            <h3 class="heading color-primary">تقييم الأكاديمي</h3>
+                            <div class="row gx-5 p-3  radius-5">
+                                <div class="col-md-6">
+                                    <h3 class="heading color-primary">تقييم الأكاديمي</h3>
+                                </div>
+                                <div class="col-md-6 " *ngIf="isAdmin">
+                                    <label class="Label_toggle">{{'shared.activated'|translate}}</label>
+                                    <p-inputSwitch (onChange)="isToggleLabel($event)" [(ngModel)]="rate.isActive"></p-inputSwitch>
+                                    <span class="Label_toggle" *ngIf="!rate.isActive">{{'shared.no'|translate}}</span>
+                                    <span class="Label_toggle" *ngIf="rate.isActive">{{'shared.yes'|translate}}</span>
+                                </div>
+                            </div>
                         </ng-template>
                         <div class="row gx-5 p-3 bg-gray-50  radius-5">
                             <div class="col-md-6">
@@ -80,8 +106,8 @@
             </ng-container>
         </ng-container>
     </div>
-    <div *ngIf="assessmentList.totalAllData > paginationState.rows">
-        <app-pagination [totalItems]="assessmentList.totalAllData"  (paginationChanged)="paginationChanged($event)"></app-pagination>
+    <div *ngIf="assessmentList.total > paginationState.rows">
+        <app-pagination [totalItems]="assessmentList.total"  (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 
 

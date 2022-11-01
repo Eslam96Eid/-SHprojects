@@ -1,6 +1,4 @@
-<div *ngIf="students.length == 0 && chiledren.length == 0">
-    <app-informative-block title="{{'emptyList.childern List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-</div>
+
 <div class="students" *ngIf="students.length != 0">
     <h4><b>الابناء المسجلين </b></h4>
     <div class="cards ">
@@ -101,3 +99,9 @@
         </div>
     </div>
 </div>
+
+
+<!-- 
+<div *ngIf="students.length == 0 || chiledren.length == 0">
+    <app-informative-block title="{{'emptyList.childern List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</div> -->

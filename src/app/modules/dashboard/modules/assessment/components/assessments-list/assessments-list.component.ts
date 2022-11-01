@@ -21,6 +21,9 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
   styleUrls: ['./assessments-list.component.scss']
 })
 export class AssessmentsListComponent implements OnInit {
+  isShown:boolean=false;
+  isShownfiltration:boolean=false;
+  checked:boolean=true;
   faEllipsisVertical = faEllipsisVertical;
   paginationState= {...paginationInitialState}
   //assessmentList: IAssesment[] = [];
@@ -31,12 +34,18 @@ export class AssessmentsListComponent implements OnInit {
   faAngleRight = faAngleRight
   plusIcon = faPlus;
   checkIcon= faCheck;
-  filtration: Filter = { ...Filtration }
+  status = '';
+  filtration: Filter = { ...Filtration , status : null }
   componentHeaderData: IHeader = {
     'breadCrump': [
       { label: this.translate.instant('sideBar.educationalSettings.children.Subjects Assessments'), routerLink: '/dashboard/educational-settings/assessments/assements-list/', routerLinkActiveOptions: { exact: true } }],
 
   };
+  selectedStatus:any;
+  filteration_status = [
+    {name: 'نعم', code: true},
+    {name: 'لا', code: false}
+];
   // rateList: Array<IRate> = [];
   assessmentList = {
     totalAllData: 0,
@@ -47,9 +56,14 @@ export class AssessmentsListComponent implements OnInit {
 
   constructor(private exportService: ExportService, private headerService: HeaderService,
     private assessmentService: AssessmentService, private translate: TranslateService, private router: Router) { }
-
+   isAdmin =false;
   ngOnInit(): void {
-    console.log(this.paginationState)
+    let userRole =JSON.parse(localStorage.getItem('$AJ$user'));
+    userRole.roles.forEach(element => {
+      if(element.name=='Admin'){
+        this.isAdmin=true;
+      }
+    });
     this.headerService.changeHeaderdata(this.componentHeaderData);
     this.getRate();
   }
@@ -69,12 +83,13 @@ export class AssessmentsListComponent implements OnInit {
   }
 
   private getRate(): void {
+    if(this.selectedStatus){
+      this.filtration.status=this.selectedStatus.code;
+    }
     this.assessmentList.loading = true
     this.assessmentList.list = []
-    if(this.filtration.PageSize==6)
-       { this.filtration.PageSize = 3}
     this.assessmentService.getRates(this.filtration).subscribe(res => {
-      debugger
+      
       this.assessmentList.loading = false
       this.assessmentList.list = res.data
       this.assessmentList.totalAllData = res.totalAllData
@@ -95,10 +110,34 @@ export class AssessmentsListComponent implements OnInit {
   }
   clearFilter() {
     this.filtration.KeyWord = ''
-    this.filtration.City = null
-    this.filtration.StateId = null
-    this.filtration.Status = ''
-    this.filtration.curricuulumId = null
+    this.filtration.status = null
+    this.selectedStatus = null
     this.getRate()
   }
+  isToggleLabel(e)
+  {
+    if(e.checked)
+    {
+      this.isShown=true;
+    }
+    else{
+      this.isShown=false;
+    }
+  }
+  isToggleLabelFiltration(e)
+  {
+    if(e.checked)
+    {
+      this.isShownfiltration=true;
+      this.filtration.status=false;
+    }
+    else{
+      this.isShownfiltration=false;
+      this.filtration.status=true;
+    }
+  }
+  onChange(event: any ) {
+    this.selectedStatus= event.value;
+}
+
 }

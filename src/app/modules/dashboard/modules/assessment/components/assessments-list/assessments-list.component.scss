@@ -54,3 +54,35 @@ span {
     font-size: 14px;
     font-weight: 500;
 }
+
+#switchbtn {
+    position: absolute;
+    margin-right: 28px;
+    transform: rotate(0deg);
+}
+
+.switch {
+    .Label {
+        margin-right: 0.5rem;
+    }
+    .status {
+        color: #AFAFAF;
+        font-weight: 400;
+        // margin-left: 1rem;
+    }
+    position: relative;
+    top:0.2rem;
+    // right: 9rem;
+}
+
+span.Label.ng-star-inserted {
+    margin-right: 8rem;
+}
+
+.Label_toggle{
+    margin-right: 5rem;
+    font-family: 'Droid Arabic Kufi';
+    line-height: 26.68px;
+    font-size: 2.0rem;
+    font-weight: 500;
+}

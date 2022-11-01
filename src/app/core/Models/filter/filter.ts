@@ -32,10 +32,10 @@ export interface Filter{
 
     //Users
     UserStatus?:string;
-    UserRole?:string
+    UserRole?:string;
 
-
-
+    //Assessment
+    status?:boolean
 
 
 }
