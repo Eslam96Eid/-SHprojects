@@ -66,9 +66,13 @@
                     <td>{{product.mobile}}</td>
                     <td>{{product.email}}</td>
                     <td>{{product.childrenCount}}</td>
-                    <td>
-                        <div [ngClass]="{'my-disable':product.childrenCount === 0}"  class="color-skyBlue-500 ">
-                            <a role="button" class="gap-2 color-skyBlue-500  text-decoration-underline fs-4" routerLink="parent/{{product.id}}/all-children">
+                    <td (click)="product.childrenCount == 0 ? showToastr(product.childrenCount) :null  " >
+                        <div [ngClass]="{'my-disable':product.childrenCount === 0}"
+                         class="color-skyBlue-500 ">
+                            <a
+                             role="button"
+                              class="gap-2 color-skyBlue-500  text-decoration-underline fs-4" 
+                              routerLink="parent/{{product.id}}/all-children">
                                 <p><span class=""></span>&nbsp;<span>{{'dashboard.parents.viewChildrenList'|translate }}</span></p>
                             </a>
                         </div>

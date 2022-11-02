@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -58,13 +59,13 @@ export class ParantsComponent implements OnInit {
 		private headerService: HeaderService,
 		private parentService : ParentService,
 		private countriesService: CountriesService,
+		private toastr: ToastrService
 	) { }
 
 	getParentList() {
 		this.parent.loading=true
 		this.parent.list=[]
 		this.parentService.getAllParents(this.filtration).subscribe(res => {
-			debugger
 			this.parent.loading = false
 			this.parent.list = res.data
 			this.parent.totalAllData = res.totalAllData
@@ -112,5 +113,9 @@ export class ParantsComponent implements OnInit {
 		this.filtration.Status =''
 		this.filtration.curricuulumId = null
 		this.getParentList()
+	  }
+	  showToastr(childrenCount:any){
+		if(childrenCount == 0)
+		  this.toastr.warning('لا يوجد ابناء ','');
 	  }
 }
