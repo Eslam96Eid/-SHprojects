@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IHeader } from 'src/app/core/models/iheader';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 @Component({

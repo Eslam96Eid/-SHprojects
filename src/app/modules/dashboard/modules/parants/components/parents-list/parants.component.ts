@@ -6,15 +6,17 @@ import { MenuItem } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { IHeader } from 'src/app/core/Models';
 import { Filter } from 'src/app/core/models/filter/filter';
-import { IHeader } from 'src/app/core/Models/iheader';
+
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 // import { paginationState } from 'src/app/core/models/pagination/pagination';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { CountriesService } from 'src/app/shared/services/countries/countries.service';
 import { ExportService } from 'src/app/shared/services/export/export.service';
-import { Iparent } from '../../models/Iparent';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
+
 import { ParentService } from '../../services/parent.service';
 // import { ParentService } from '../../services/parent.service';
 
@@ -36,6 +38,7 @@ export class ParantsComponent implements OnInit {
 		list:[],
 		loading:true
 	  }
+
 	totalItem :number;
 	first = 0;
 	rows = 4;
@@ -49,7 +52,7 @@ export class ParantsComponent implements OnInit {
 
 	componentHeaderData: IHeader = {
 		breadCrump: [
-			{ label: this.translate.instant('dashboard.parents.parents') },
+			{ label: this.translate.instant('dashboard.parents.parents') , routerLink: '/dashboard/schools-and-students/all-parents' ,routerLinkActiveOptions:{exact: true}},
 		],
 	}
 
@@ -59,20 +62,25 @@ export class ParantsComponent implements OnInit {
 		private headerService: HeaderService,
 		private parentService : ParentService,
 		private countriesService: CountriesService,
-		private toastr: ToastrService
+    public loaderService:LoaderService,
+    private toastr: ToastrService
 	) { }
 
 	getParentList() {
 		this.parent.loading=true
 		this.parent.list=[]
 		this.parentService.getAllParents(this.filtration).subscribe(res => {
-			this.parent.loading = false
+if(res.data){
+
 			this.parent.list = res.data
 			this.parent.totalAllData = res.totalAllData
 			this.parent.total =res.total
+      this.parent.loading = false
+}
 		},err=> {
 			this.parent.loading=false
-			this.parent.total=0
+			this.parent.total=0;
+
 		  })
 	  }
 	ngOnInit(): void {
@@ -97,25 +105,25 @@ export class ParantsComponent implements OnInit {
 		this.searchKey = '';
 		this.applyFilter();
 	  }
-	
+
 	  applyFilter() {
 		let searchData = this.searchKey.trim().toLowerCase();
 		this.getParentList();
 	  }
-	  
+
 	  onExport(fileType: FileEnum, table:Table){
 		this.exportService.exportFile(fileType, table, this.parent.list)
 	  }
 	  clearFilter(){
 		this.filtration.KeyWord =''
-		this.filtration.City= null
-		this.filtration.StateId= null
-		this.filtration.Status =''
-		this.filtration.curricuulumId = null
+		this.filtration.NationalityId= null
+		// this.filtration.StateId= null
+		// this.filtration.Status =''
+		// this.filtration.curricuulumId = null
 		this.getParentList()
 	  }
-	  showToastr(childrenCount:any){
-		if(childrenCount == 0)
-		  this.toastr.warning('لا يوجد ابناء ','');
-	  }
+    showToastr(childrenCount:any){
+      if(childrenCount == 0)
+        this.toastr.warning('لا يوجد ابناء ','');
+      }
 }

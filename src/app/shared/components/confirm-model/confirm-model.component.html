@@ -1,0 +1,16 @@
+<div class="confirm-model">
+
+    <p-dialog [(visible)]="isOpend" [modal]="true" [style]="{width: '35vw'}" >
+        <ng-template pTemplate="content">
+           <div class="d-flex flex-column justify-content-center align-items-center gap-4">
+            <img src="assets/images/empty-list/basket.svg" alt="">
+            <p class="fs-3">{{'shared.confirmDelete' |translate}}</p>
+            <div class="d-flex align-items-center gap-4 mt-3">
+                <button (click)="confirm()" class="btn btn-primary">{{'shared.yes' |translate}}</button>
+                <button (click)="this.confirmModelService.closeModel()" class="btn btn-secondary">{{'shared.no' |translate}}</button>
+    
+            </div>
+           </div>
+        </ng-template>
+    </p-dialog>
+</div>

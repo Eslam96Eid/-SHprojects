@@ -16,9 +16,10 @@
  
         
         .p-datatable-header{border: none; padding: 0;}
-        tr:hover {background-color: $color-gray-50; cursor: pointer;}
+        tr:hover {background-color: $color-gray-100; cursor: pointer;}
 
         .p-component{ font-size: inherit; }
+       
 
         thead.p-datatable-thead tr th{
             background-color:  #3052A1;
@@ -29,13 +30,28 @@
             padding: 1.4rem .5rem;
             font-weight: 400;
             min-width: 11rem;
+            &.expand{
+                background-color: #F9F9F9 ;color: #AAAAAA;
+                p-sorticon .p-sortable-column-icon {color: #AAAAAA;}
+                &:hover{
+                    background-color: #F9F9F9;
+                    color:  #AAAAAA;
+                    p-sorticon .p-sortable-column-icon {color: #AAAAAA;}
+                }
+            }
+               
+             
            
-
+            &.actions--sm{min-width: 2rem; }
             &.actions{min-width: 4rem; text-align: end; padding: 1.5rem;}
 
-            &:first-of-type {border-top-right-radius: 12px; padding-inline-start: 3rem;}
+            &:first-of-type {border-top-right-radius: 12px; padding-inline-start: 3rem;
+                &.expand{border-top-right-radius: 0px}
+            }
      
-            &:last-of-type {border-top-left-radius: 12px}
+            &:last-of-type {border-top-left-radius: 12px;
+                &.expand{border-top-left-radius: 0px}
+            }
         
             p-sorticon i{color: $color-white;}
             &.p-sortable-column.p-highlight .p-sortable-column-icon{color: $color-white;}
@@ -72,13 +88,16 @@
             color: $color-gray-800;
           
             text-align: start;
+            &.expandd{background-color:  #F9F9F9;}
             &.center{ text-align: center;}
            
             border-width:  0px ;
             // font-size: 1.4rem;
              &.list{text-align: end;padding-left: 1.5rem;}
           
-             &:first-child{padding: 3rem;}
+             &:first-child{padding: 3rem;
+                &.expand{padding:0rem}
+            }
            
         }
 

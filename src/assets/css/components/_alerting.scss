@@ -8,21 +8,22 @@
     text-align: center;
     font-size: 1.4rem;
     font-weight: 500;
-  
     &.warning {
-      color: $color-skyBlue-500;
-      background-color: rgba($color-skyBlue-500, 0.18);
+        color: $color-skyBlue-500;
+        background-color: rgba($color-skyBlue-500, 0.18);
     }
-  
     &.danger {
-      color: #D55891;
-      background-color: #FAEBF2;
-      // background-color: rgba(#D55891, 0.18);
+        color: #D55891;
+        background-color: #FAEBF2;
+        // background-color: rgba(#D55891, 0.18);
     }
-    
-    
     &.success {
-      color:  #52B9C7;
-      background-color: #F0FBFC;
+        color: #52B9C7;
+        background-color: #F0FBFC;
     }
-  }
+    &.primary {
+        color: #1ABB3E;
+        background-color: rgba(57, 192, 71, 0.1);
+        ;
+    }
+}

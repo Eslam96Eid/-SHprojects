@@ -50,9 +50,9 @@ export class HomeComponent implements OnInit {
           {label:'تقيمات المواد الدراسيه', icon:'assets/images/home/educational-setting/note-marked.svg',url:'/dashboard/educational-settings/assessments/assements-list'},
         ]
       }
-     
+
     },
-    
+
     {
       image:'assets/images/home/reports-managment.png',
       content:{
@@ -110,16 +110,16 @@ export class HomeComponent implements OnInit {
         },
         list: [
           {label:'الامتحانات', icon:'assets/images/home/performance-managment/list.svg'},
-          {label:'مهامى', icon:'assets/images/home/performance-managment/note-list.svg'},
+          {label:'مهامى', icon:'assets/images/home/performance-managment/note-list.svg',url:'/dashboard/performance-managment/RequestList/Request-List'},
         ]
       }
-      
+
     },
 
 
 
   ]
-  
+
   constructor(private renderer: Renderer2) { }
 
   ngOnInit(): void {

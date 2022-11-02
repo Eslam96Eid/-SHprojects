@@ -71,8 +71,8 @@
                         <span class="status">{{'dashboard.Indexes.Index Status'|translate}}</span>
                         {{'shared.activated'|translate}}
                         <p-inputSwitch  (onChange)="isToggleLabel($event)" formControlName="indexStatus"  ></p-inputSwitch>
-                        <span class="Label" *ngIf="!isShown && !urlParameter">{{'shared.no'|translate}}</span>
-                        <span class="Label" *ngIf="isShown && !urlParameter">{{'shared.yes'|translate}}</span>
+                        <span class="Label" *ngIf="!isLabelShown && !urlParameter">{{'shared.no'|translate}}</span>
+                        <span class="Label" *ngIf="isLabelShown && !urlParameter">{{'shared.yes'|translate}}</span>
                         <span class="Label" *ngIf="index.indexStatus!='Active'&&index.indexStatus!='1' && urlParameter">{{'shared.no'|translate}}</span>
                         <span class="Label" *ngIf="(index.indexStatus=='Active'||index.indexStatus=='1')&& urlParameter">{{'shared.yes'|translate}}</span>
                     </div>

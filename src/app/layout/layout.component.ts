@@ -13,7 +13,6 @@ import { LayoutService } from './services/layout/layout.service';
 export class LayoutComponent implements OnInit {
   sideBarOpen = true;
   currentLang: string;
-  message:string="";
   bgColor$ = this.layoutService.bgColor$
 
 
@@ -24,7 +23,7 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.layoutService.message.subscribe((res)=>{this.message=res;});
+    
   }
 
   sideBarToggler() {

@@ -1,6 +1,6 @@
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/subject/new-subject'" [content]="'dashboard.Subjects.Add New Subject'"></app-add-btn>
-<div class="prim-table mt-4" *ngIf="subjects.total || subjects.loading">
-    <p-table #dt [lazy]="true" [value]="subjectsList" (onSort)="sortMe($event)">
+<div class="prim-table mt-4" *ngIf="fixedLength || subjects.loading">
+    <p-table #dt [lazy]="true" [value]="subjects.list" (onSort)="sortMe($event)">
 
 
         <ng-template pTemplate="caption">
@@ -49,10 +49,10 @@
             <td>{{e.lastEditedDate|date:'yyyy/mm/dd'|translate}}</td>
             <td class="center" *ngIf="e.subjectMinmumDegree||e.subjectMinmumDegree==0">{{e.subjectMinmumDegree|translate}}</td>
             <td  class="center" *ngIf="!e.subjectMinmumDegree&&e.subjectMinmumDegree!=0">-</td>
-            <td>
+            <td class="dropdown">
                  
                 
-                <div class="dropdown">
+             
                     <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                         <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
                     </div>
@@ -64,7 +64,7 @@
                             </a>
                         </li>
                         <li class="dropdown-item">
-                            <a class="link" (click)="deleteSubject(e)" >
+                            <a class="link" (click)="this.confirmModelService.openModel(); deletedSubject=e" >
    
                               <img src="assets/images/shared/delete.svg" alt="">
                               <p>{{'dashboard.Subjects.Delete subject'|translate}}</p>
@@ -72,7 +72,7 @@
                         </li>
 
                     </ul>
-                </div>
+             
             
           
             </td>
@@ -86,7 +86,7 @@
       <ng-template pTemplate="emptymessage" let-columns>
         <tr>
             <td [attr.colspan]="20">
-                <ng-container *ngIf="subjects.total &&  allSubjectsLength == 0">
+                <ng-container *ngIf="fixedLength && subjects.list.length == 0 &&  !subjects.loading">
                     <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                 </ng-container>
 
@@ -97,21 +97,12 @@
     </ng-template>
 </p-table>
 
-<div *ngIf="paginationState.rows<allSubjectsLength">
-    <app-pagination [totalItems]="allSubjectsLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
+<div *ngIf="paginationState.rows<subjects.total">
+    <app-pagination [totalItems]="subjects.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
 </div>
 </div>
 <!-- emptymessage -->
-<ng-container *ngIf="!subjects.total && !subjects.loading">
+<ng-container *ngIf="!fixedLength && !subjects.loading">
 <app-informative-block title="{{'emptyList.Subject List is Empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>
 
-
-  <!-- confirm dialog on delete subject  -->
-  <p-confirmDialog #cd [style]="{width: '35vw',height:'15vw'}"  >
-    <ng-template pTemplate="footer">
-        <button type="button"  pButton  label="{{'shared.yes'|translate}}" (click)="cd.accept()"></button>
-        <button type="button"   pButton  label="{{'shared.no'|translate}}" (click)="cd.reject()"></button>
-        
-    </ng-template>
-</p-confirmDialog>

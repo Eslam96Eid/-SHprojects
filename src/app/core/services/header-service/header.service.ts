@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { IHeader } from '../../Models/iheader';
+import { IHeader } from '../../Models/header-dashboard';
 
 
 @Injectable({

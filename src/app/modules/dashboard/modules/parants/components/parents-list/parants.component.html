@@ -1,22 +1,11 @@
 <div class="parents">
-    <!-- <div class="caption">
-        <div class="col-8  caption__filter caption__filter--actions">
-            <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
-                <i class="pi pi-search fs-3 "></i>
-                <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
-            </div>
-        </div>
-    </div> -->
 
-    <div class="prim-table mt-4"  *ngIf="parent.totalAllData || parent.loading" >
+
+    <div class="prim-table mt-4" *ngIf="parent.totalAllData || parent.loading">
         <p-table #dt [value]="parent.list" (onSort)="onSort($event)" [lazy]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
-                <app-table-caption 
-                (onExport)="onExport($event)" 
-                (onFilter)="getParentList()" 
-                (onSearch)="filtration.KeyWord = $event; getParentList()" 
-                (onClear)="clearFilter()">
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="getParentList()" (onSearch)="filtration.KeyWord = $event; getParentList()" (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
                         <div class="col">
@@ -66,16 +55,23 @@
                     <td>{{product.mobile}}</td>
                     <td>{{product.email}}</td>
                     <td>{{product.childrenCount}}</td>
-                    <td (click)="product.childrenCount == 0 ? showToastr(product.childrenCount) :null  " >
-                        <div [ngClass]="{'my-disable':product.childrenCount === 0}"
-                         class="color-skyBlue-500 ">
-                            <a
-                             role="button"
-                              class="gap-2 color-skyBlue-500  text-decoration-underline fs-4" 
-                              routerLink="parent/{{product.id}}/all-children">
+                    <td (click)="product.childrenCount == 0 ? showToastr(product.childrenCount) :null  ">
+                        <div [ngClass]="{'my-disable':product.childrenCount === 0}" class="color-skyBlue-500 ">
+                            <a role="button" class="gap-2 color-skyBlue-500  text-decoration-underline fs-4" routerLink="parent/{{product.id}}/all-children">
                                 <p><span class=""></span>&nbsp;<span>{{'dashboard.parents.viewChildrenList'|translate }}</span></p>
                             </a>
                         </div>
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td [attr.colspan]="20">
+                        <ng-container *ngIf="parent.totalAllData && parent.list.length == 0 &&  !parent.loading">
+                            <app-informative-block title="{{'emptyList.Parent List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        </ng-container>
+
+                        <app-loader></app-loader>
                     </td>
                 </tr>
             </ng-template>
@@ -83,8 +79,10 @@
         </p-table>
 
         <div *ngIf="parent.totalAllData > paginationState.rows">
-            <app-pagination [totalItems]="parent.totalAllData" 
-            (paginationChanged)="paginationChanged($event)"></app-pagination>
+            <app-pagination [totalItems]="parent.totalAllData" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>
+    <ng-container *ngIf="!parent.totalAllData && !parent.loading">
+        <app-informative-block title="{{'emptyList.parent' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
 </div>

@@ -1,107 +1,125 @@
+<div class="ui-g" *ngIf="!isSkeletonVisible">
+    <div class="students" *ngIf="students.length != 0">
+        <h4><b>{{'dashboard.parents.registerSons'|translate }}</b></h4>
+        <div class="cards ">
+            <div class="row g-5">
+                <div class="col-sm-4 col-md-3" *ngFor="let student of students">
+                    <div class="card p-0">
 
-<div class="students" *ngIf="students.length != 0">
-    <h4><b>الابناء المسجلين </b></h4>
-    <div class="cards ">
-        <div class="row g-5">
-            <div class="col-sm-4 col-md-3" *ngFor="let student of students">
-                <div class="card p-0">
-
-                    <div class="card__header px-4 pt-4 d-block">
-                        <div class="profile card__avatar mb-4" role="button">
-                            <div class="profile__avatar sm ">
-                                <img src="assets/images/avatar.png" alt="Avatar">
-                                <!-- <img [src]="student.imagePath" alt="Avatar"> -->
-                            </div>
-                            <div class="profile__info">
-                                <div class="info ms-auto">
-                                    <h4 class="heading heading--tertiary color-primary mb-2">{{student.name.ar}}</h4>
-                                    <p class="color-gray-300 fs-4">{{student.age}}سنه</p>
+                        <div class="card__header px-4 pt-4 d-block">
+                            <div class="profile card__avatar mb-4" role="button">
+                                <div class="profile__avatar sm ">
+                                    <img src="assets/images/avatar.png" alt="Avatar">
+                                    <!-- <img [src]="student.imagePath" alt="Avatar"> -->
                                 </div>
+                                <div class="profile__info">
+                                    <div class="info ms-auto">
+                                        <h4 class="heading heading--tertiary color-primary mb-2">{{translationService.lang=='ar'?student.name.ar:student.name.en}}</h4>
+                                        <p class="color-gray-300 fs-4">{{student.age}}سنه</p>
+                                    </div>
+                                </div>
+                                <!-- <fa-icon class="icon color-gray-300" [icon]="faChevronLeft"></fa-icon> -->
                             </div>
-                            <!-- <fa-icon class="icon color-gray-300" [icon]="faChevronLeft"></fa-icon> -->
                         </div>
-                    </div>
 
-                    <div class="card__body">
+                        <div class="card__body">
 
-                        <div class="grid-container gap-3 gap-4">
-                            <span class=" color-gray-300 fs-5">المستوى الدراسى</span>
-                            <div class="color-gray-800 me-2 fs-4">
-                                <span *ngIf="student.grade !=null">{{student.grade.ar}}</span>
-                                <span *ngIf="student.grade ==null"> </span>
+                            <div class="grid-container gap-3 gap-4">
+                                <span class=" color-gray-300 fs-5">{{'dashboard.parents.grade'|translate }}</span>
+                                <div class="color-gray-800 me-2 fs-4">
+                                    <span *ngIf="student.grade !=null">{{translationService.lang=='ar'?student.grade.ar:student.school.en}}</span>
+                                    <span *ngIf="student.grade ==null"> </span>
 
+                                </div>
+
+                                <span class=" color-gray-300 fs-5">{{'dashboard.parents.school'|translate }}</span>
+                                <div class="color-gray-800 me-2 fs-4">
+                                    <span *ngIf="student.school !=null"> {{translationService.lang=='ar'?student.school.ar:student.school.en}}</span>
+                                    <span *ngIf="student.school ==null"> </span>
+                                </div>
+
+                                <span class=" color-gray-300 fs-5">{{'dashboard.parents.relativeRelation'|translate }}</span>
+                                <div class="color-gray-800 me-2 fs-4">{{translationService.lang=='ar'?student.relativeRelation.ar:student.relativeRelation.en}}</div>
                             </div>
-
-                            <span class=" color-gray-300 fs-5">المدرسه </span>
-                            <div class="color-gray-800 me-2 fs-4">
-                                <span *ngIf="student.school !=null"> {{student.school.ar}}</span>
-                                <span *ngIf="student.school ==null"> </span>
-                            </div>
-
-                            <span class=" color-gray-300 fs-5">صله القرابه </span>
-                            <div class="color-gray-800 me-2 fs-4">{{student.relativeRelation.ar}}</div>
                         </div>
-                    </div>
-                    <div class="card__actions p-3 mb-1">
-                        <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150">
-                            <span class="ms-3">مسجل</span>
+                        <div class="card__actions p-3 mb-1">
+                            <div class="d-flex justify-content-center radius-15 py-3 w-100 bg-gray-50 color-gray-150">
+                                <span class="ms-3">{{'dashboard.parents.Register'|translate }}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<br>
+    <br>
 
-<div class="chidren" *ngIf="chiledren.length != 0">
-    <h4><b>الابناء الغير مسجلين </b></h4>
-    <div class="cards ">
-        <div class="row g-5">
-            <div class="col-sm-4 col-md-3" *ngFor="let child of chiledren">
-                <div class="card p-0">
+    <div class="chidren" *ngIf="chiledren.length != 0">
+        <h4><b>{{'dashboard.parents.UnregisterSons'|translate }}</b></h4>
+        <div class="cards ">
+            <div class="row g-5">
+                <div class="col-sm-4 col-md-3" *ngFor="let child of chiledren">
+                    <div class="card p-0">
 
-                    <div class="card__header px-4 pt-4 d-block">
-                        <div class="profile card__avatar mb-4" role="button">
-                            <div class="profile__avatar sm ">
-                                <img src="assets/images/avatar.png" alt="Avatar">
-                                <!-- <img [src]="student.imagePath" alt="Avatar"> -->
+                        <div class="card__header px-4 pt-4 d-block">
+                            <div class="profile card__avatar mb-4" role="button">
+                                <div class="profile__avatar sm ">
+                                    <img src="assets/images/avatar.png" alt="Avatar">
+                                    <!-- <img [src]="student.imagePath" alt="Avatar"> -->
+                                </div>
+                                <div class="profile__info">
+                                    <div class="info ms-auto">
+                                        <h4 class="heading heading--tertiary color-primary mb-2">{{translationService.lang=='ar'?child.name.ar :child.name.en}}</h4>
+                                        <p class="color-gray-300 fs-4">{{child.age}}سنه</p>
+                                    </div>
+                                </div>
+                                <!-- <fa-icon class="icon color-gray-300" [icon]="faChevronLeft"></fa-icon> -->
                             </div>
-                            <div class="profile__info">
-                                <div class="info ms-auto">
-                                    <h4 class="heading heading--tertiary color-primary mb-2">{{child.name.ar}}</h4>
-                                    <p class="color-gray-300 fs-4">{{child.age}}سنه</p>
+
+
+                        </div>
+
+                        <div class="card__body">
+                            <div class="card__body">
+
+                                <div class="grid-container gap-3 gap-4">
+                                    <span class=" color-gray-300 fs-5">{{'dashboard.parents.grade'|translate }}</span>
+                                    <div class="color-gray-800 me-2 fs-4">
+                                        <span></span>
+
+                                    </div>
+
+                                    <span class=" color-gray-300 fs-5">{{'dashboard.parents.school'|translate }}</span>
+                                    <div class="color-gray-800 me-2 fs-4">
+                                        <span> </span>
+                                    </div>
+                                    <span class=" color-gray-300 fs-5 ">{{'dashboard.parents.relativeRelation'|translate }}</span>
+                                    <div class="color-gray-800 me-2 fs-4 ">{{translationService.lang=='ar'?child.relativeRelation.ar:child.relativeRelation.en}}</div>
                                 </div>
                             </div>
-                            <!-- <fa-icon class="icon color-gray-300" [icon]="faChevronLeft"></fa-icon> -->
+
                         </div>
 
-
-                    </div>
-
-                    <div class="card__body">
-
-                        <div class="grid-container gap-3 gap-4">
-                            <span class=" color-gray-300 fs-5">صله القرابه </span>
-                            <div class="color-gray-800 me-2 fs-4">{{child.relativeRelation.ar}}</div>
-                        </div>
-                    </div>
-
-                    <div class="card__actions p-3 mb-1">
-                        <button class="btn btn--full btn-primary "  (click)="displayUnregisterChild(child.id);">
-                            <span class="ms-3">سجل فى المدرسه</span>
+                        <div class="card__actions p-3 mb-1 ">
+                            <button class="btn btn--full btn-primary " (click)="displayUnregisterChild(child.id); ">
+                            <span class="ms-3 ">{{'dashboard.parents.Unregister'|translate }}</span>
                         </button>
-                    </div>
+                        </div>
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<ng-container *ngIf="isSkeletonVisible">
 
-
-<!-- 
-<div *ngIf="students.length == 0 || chiledren.length == 0">
-    <app-informative-block title="{{'emptyList.childern List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-</div> -->
+    <ngx-skeleton-loader count="7" [theme]="{
+  'border-radius': '5px',
+  height: '45px',
+  'background-color': '#EEEEEE',
+  border: '1px solid white',
+  width:'30%'
+}"></ngx-skeleton-loader>
+</ng-container>

@@ -1,0 +1,84 @@
+<!-- emptymessage -->
+<div class="schools">
+
+    <div class="prim-table mt-4" *ngIf="schools.totalAllData || schools.loading">
+
+
+
+
+
+
+        <div class="parents">
+
+            <div class="prim-table mt-4">
+                <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
+
+                    <!-- Table Caption -->
+                    <ng-template pTemplate="caption">
+                        <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
+
+                    </ng-template>
+                    <ng-template pTemplate="header" let-columns="columns">
+                        <tr>
+                            <th pSortableColumn="requestNumber">
+                                <p-sortIcon field="requestNumber"></p-sortIcon>{{'dashboard.Requests.requestNumber'|translate}}</th>
+                            <th pSortableColumn="requestType">
+                                <p-sortIcon field="requestType"></p-sortIcon>{{'dashboard.Requests.requestType'|translate}}</th>
+                            <th pSortableColumn="creatorName">
+                                <p-sortIcon field="creatorName"></p-sortIcon>{{'dashboard.Subjects.Created by'|translate}}</th>
+                            <th pSortableColumn="createdDate">
+                                <p-sortIcon field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+                            <th pSortableColumn="Status">
+                                <p-sortIcon field="Status"></p-sortIcon>{{'dashboard.Requests.Status'|translate}}</th>
+                            <th pSortableColumn="edit" class="actions"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product let-columns="columns">
+                        <tr>
+                            <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
+                      {{product[col.field]}}
+                  </td> -->
+                            <td>{{product.code}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.name}}</td>
+                            <td>{{product.quantity}}</td>
+
+                            <td>
+                                <div class="alerting success">معلّق</div>
+
+
+                            </td>
+                            <td class="edit">
+                                <button routerLink="/dashboard/performance-managment/RequestList/Requestdetails">
+                      {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
+                   </button>
+                            </td>
+
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage" let-columns>
+                        <tr>
+                            <td [attr.colspan]="20">
+                                <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
+                                    <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                </ng-container>
+
+                                <app-loader></app-loader>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <div class="">
+            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+        </div>
+
+
+
+        <ng-container *ngIf="!schools.totalAllData && !schools.loading">
+            <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+        </ng-container>
+
+    </div>
+</div>

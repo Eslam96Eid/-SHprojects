@@ -58,6 +58,15 @@
             &__model {
                 width: 40vw;
                 padding: 3rem;
+                &.sm{
+                    width: 30vw;
+            
+                }
+                .actions{
+                    .sm{
+                        font-size: 1.6rem !important;
+                    }
+                }
 
                 @extend %model;
             }
@@ -66,6 +75,10 @@
 
         .export{
             position: relative;
+            &.sm{
+                display: none;
+        
+            }
             &__model{
 
                 @extend %model;
@@ -74,6 +87,7 @@
                 padding: 0.5rem 2rem 1rem 1rem;
 
                 p{color: $color-primary ;font-weight: 400;font-size: 1.5rem;}
+
             }
 
         }

@@ -7,9 +7,11 @@ import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { UserService } from 'src/app/core/services/user.service';
 
 import { FormBuilder } from '@angular/forms';
-import { IAccount } from '../../models/IAccount';
+
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { IRole } from '../../models/IRole';
+import { IRole } from 'src/app/core/Models/IRole';
+import { IAccount } from 'src/app/core/Models/IAccount';
+
 
 
 @Component({
@@ -32,18 +34,18 @@ export class ViewListOfUsersComponent implements OnInit {
   showFilterBox = false
   searchText=""
   showFilterModel=false
-
+  users={
+	totalAllData:0,
+		total:0,
+		list:[],
+		loading:true
+  }
   filterForm
-
+  isSkeletonVisible = true;
   constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder) {}
   users_List: IAccount[] = [];
 
-  getUsersList(search = '', sortby = '', pageNum = 1, pageSize = 100){
-    this.userInformation.getUsersList(search, sortby, pageNum, pageSize).subscribe(response => {
-      this.users_List = response?.data;
-      this.isLoaded = true;
-    })
-  }
+
   ngOnInit(): void {
     this.getRoleList();
     this.initForm();
@@ -60,7 +62,16 @@ export class ViewListOfUsersComponent implements OnInit {
     this.usersList = this.userInformation.usersList;
     this.getUsersList();
   }
+  getUsersList(search = '', sortby = '', pageNum = 1, pageSize = 100){
+    this.userInformation.getUsersList(search, sortby, pageNum, pageSize).subscribe(response => {
+      this.users_List = response?.data;
+      this.isLoaded = true;
+      this.isSkeletonVisible = false;
 
+    },err=> {
+      this.isSkeletonVisible=false;
+    })
+  }
   onTableDataChange(event: paginationState) {
     this.first = event.first
     this.rows = event.rows
@@ -100,7 +111,7 @@ export class ViewListOfUsersComponent implements OnInit {
     this.applyFilter();
   }
   applyFilter() {
-    debugger
+
     let searchData = this.searchKey.trim().toLowerCase();
     this.getUsersList(searchData, '', 1, 50);
   }
@@ -118,7 +129,7 @@ export class ViewListOfUsersComponent implements OnInit {
 }
 clearFilter(){
   this.selectedItems = null;
-  this.showFilterModel = false; 
+  this.showFilterModel = false;
   this.getUsersList();
 }
 
@@ -130,7 +141,7 @@ onFilterActivated(){
     console.log(  this.users_List );
   })
   this.showFilterModel=!this.showFilterModel
-  
+
 }
 
 }

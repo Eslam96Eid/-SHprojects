@@ -2,8 +2,8 @@
     <div class="submit-btn d-flex justify-content-end gap-4 position-absolute bottom-100 end-100 start-50">
 
         <button class="btn btn-primary btn--md" (click)="save()">
-            <span>{{'shared.save'| translate}}</span>
-        </button>
+          <span>{{'shared.save'| translate}}</span>
+      </button>
     </div>
     <div class="d-flex">
 
@@ -19,14 +19,14 @@
                             <div>
                                 <div [hidden]="assesmentName.valid || assesmentName.untouched">
                                     <small *ngIf="assesmentName.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                              {{'shared.This Field is Required'|translate}}
-                               <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                            </small>
+                            {{'shared.This Field is Required'|translate}}
+                             <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                          </small>
 
                                     <small *ngIf="assesmentName.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
-                                {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
-                                <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                            </small>
+                              {{'shared.Numbres Of Characters must not more than 65 character'|translate}}
+                              <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                          </small>
                                 </div>
 
                             </div>
@@ -40,13 +40,13 @@
 
                             <div [hidden]="maximumDegree.valid ||  maximumDegree.untouched">
                                 <small *ngIf="maximumDegree.errors?.['required']" class="form-text text-muted d-block  " class="alert-danger">
-                              {{'shared.This Field is Required'|translate}}
-                               <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                            </small>
-                                <small *ngIf="maximumDegree.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
-                              {{'dashboard.Assessment.Degrees must be more than or equal Zero'|translate}}
-                              <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            {{'shared.This Field is Required'|translate}}
+                             <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                           </small>
+                                <small *ngIf="maximumDegree.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                            {{'dashboard.Assessment.Degrees must be more than or equal Zero'|translate}}
+                            <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
 
 
 
@@ -63,13 +63,13 @@
 
                             <div [hidden]="minmumDegree.valid || minmumDegree.untouched">
                                 <small *ngIf="minmumDegree.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                              {{'shared.This Field is Required'|translate}}
-                               <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                            </small>
-                                <small *ngIf="minmumDegree.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
-                              {{'dashboard.Assessment.Degrees must be more than or equal Zero'|translate}}
-                              <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            {{'shared.This Field is Required'|translate}}
+                             <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
                           </small>
+                                <small *ngIf="minmumDegree.errors?.['min']" id="helpId2" class="form-text text-muted d-block " class="alert-danger">
+                            {{'dashboard.Assessment.Degrees must be more than or equal Zero'|translate}}
+                            <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
 
                             </div>
 
@@ -95,9 +95,9 @@
                                             <input type="text" pInputText formControlName="code" class="form-control basicinput" [placeholder]="'dashboard.Assessment.Select Assessment'| translate" name="PID7" id="PID7">
                                             <div *ngIf="rateScores.controls[i].get('code').errors?.required && rateScores.controls[i].get('code').touched">
                                                 <small id="helpId" class="form-text text-muted d-block" class="alert-danger">
-                                                    {{'shared.This Field is Required'|translate}}
-                                                    <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
-                                                </small>
+                                                  {{'shared.This Field is Required'|translate}}
+                                                  <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
+                                              </small>
                                             </div>
                                         </div>
                                         <div class="col-xs-4 col-lg-4">
@@ -107,18 +107,18 @@
                                                     <input type="text" pInputText formControlName="from" class="form-control basicinput " placeholder="{{'dashboard.Assessment.From'| translate}}" name="PID7" id="PID7">
                                                     <div *ngIf="rateScores.controls[i].get('from').errors?.required && rateScores.controls[i].get('from').touched">
                                                         <small id="helpId" class="form-text text-muted d-block" class="alert-danger">
-                                                            {{'shared.This Field is Required'|translate}}
-                                                            <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
-                                                        </small>
+                                                          {{'shared.This Field is Required'|translate}}
+                                                          <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
+                                                      </small>
                                                     </div>
                                                 </div>
                                                 <div>
                                                     <input type="text" pInputText formControlName="to" class="form-control basicinput " placeholder="{{'dashboard.Assessment.To'| translate}}" name="PID7" id="PID7">
                                                     <div *ngIf="rateScores.controls[i].get('to').errors?.required && rateScores.controls[i].get('to').touched">
                                                         <small id="helpId" class="form-text text-muted d-block" class="alert-danger">
-                                                            {{'shared.This Field is Required'|translate}}
-                                                            <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
-                                                        </small>
+                                                          {{'shared.This Field is Required'|translate}}
+                                                          <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
+                                                      </small>
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,9 +128,9 @@
                                             <p-dropdown [options]="statusList" formControlName="isSuccess" placeholder="{{'dashboard.Assessment.succeeded'| translate}}" name="PID8" id="PID8" class="form-control" optionLabel="key" appValidation></p-dropdown>
                                             <div *ngIf="rateScores.controls[i].get('isSuccess').errors?.required && rateScores.controls[i].get('isSuccess').touched">
                                                 <small id="helpId" class="form-text text-muted d-block" class="alert-danger">
-                                                    {{'shared.This Field is Required'|translate}}
-                                                    <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
-                                                </small>
+                                                  {{'shared.This Field is Required'|translate}}
+                                                  <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
+                                              </small>
                                             </div>
                                         </div>
                                     </div>

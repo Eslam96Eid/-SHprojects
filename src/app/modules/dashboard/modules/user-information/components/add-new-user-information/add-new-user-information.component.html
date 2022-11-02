@@ -1,8 +1,4 @@
-<app-send-btn [route]="'/dashboard/manager-tools/user-information/users-list'" [content]="userFormGrp"  [typeOfAdd]="'AddOrEditUser'"></app-send-btn>
-
-<div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
-
-</div>
+<app-send-btn [route]="'/dashboard/manager-tools/user-information/users-list'" [content]="userFormGrp" [typeOfAdd]="'AddOrEditUser'"></app-send-btn>
 <div style="overflow-x: hidden;">
 
     <div class="d-flex">
@@ -99,21 +95,9 @@
                                 <option *ngFor="let options of roles" [ngValue]="options.id">{{options.name}}</option>
                             </select> -->
 
-                            <p-dropdown
-                                (onChange)="onChange($event)"
-                                [(ngModel)]="selectedItems" 
-                                [options]="roles" 
-                                formControlName="privateRole" 
-                                class="form-control"  
-                                optionLabel="name"
-                                placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" formControlName="privateRole" class="form-control" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
                             </p-dropdown>
-                                <!-- <ng-template let-item pTemplate="selectedItems">
-                                    {{item.value.name}}
-                                </ng-template> -->
-                                <!-- <ng-template let-item pTemplate="item">
-                                            {{item.name}}
-                               </ng-template> -->
+
 
                             <div>
                                 <div [hidden]="privateRole.valid || privateRole.untouched">
@@ -132,10 +116,9 @@
                             <p-inputSwitch (onChange)="isToggleLabel($event)" [(ngModel)]="checked" id="switchbtn"></p-inputSwitch>
                             <span class="Label" *ngIf="isShown">{{'shared.no'|translate}}</span>
                             <span class="Label" *ngIf="!isShown">{{'shared.yes'|translate}}</span>
-                            <!-- <label for="PID8" class="label"><b>{{'dashboard.UserInformation.User Status'|translate}}</b></label>
-                            <p-dropdown [options]="cities" formControlName="userStatus" placeholder="{{'shared.Effective'|translate}}" class="form-control" appValidation></p-dropdown> -->
+
                             <div>
-                                <div [hidden]="userStatus.valid || userStatus.untouched" >
+                                <div [hidden]="userStatus.valid || userStatus.untouched">
                                     <small *ngIf="userStatus.errors?.['required']" id="helpId" class="form-text text-muted d-block  " class="alert-danger">
                                 {{'shared.This Field is Required'|translate}}
                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>

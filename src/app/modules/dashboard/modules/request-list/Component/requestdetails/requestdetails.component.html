@@ -1,0 +1,225 @@
+<div class="radius-15 border p-5 mb-5 bg-white">
+
+
+
+    <div class="child__info__section info">
+        <div class="row gap-6">
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.Requests.requestNumber'|translate }}</p>
+                <h4 class="color-primary mb-2">#123456</h4>
+            </div>
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.Requests.requestType'|translate }}</p>
+                <h4 class="color-primary mb-2">إعادة ربط الابن مع ولي الأمر</h4>
+            </div>
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.Requests.CreatedBy'|translate }}</p>
+                <h4 class="color-primary mb-2">محمد علي</h4>
+            </div>
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.Requests.Status'|translate }}</p>
+                <h4 class="color-primary mb-2">موافقة مبدأية</h4>
+            </div>
+
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.Requests.StudentStatus'|translate }}</p>
+                <h4 class="color-primary mb-2">منسحب</h4>
+            </div>
+
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.Requests.DateandTimeCreate'|translate }}</p>
+                <h4 class="color-primary mb-2">14-09-2022-09:38AM</h4>
+            </div>
+            <div class="col-4 d-flex align-items-center gap-5 mb-5">
+                <p class="color-gray-300 fs-4">{{'dashboard.Requests.CurrentParent'|translate }}</p>
+                <h4 class="color-primary mb-2">محمد علي</h4>
+            </div>
+        </div>
+
+    </div>
+
+
+
+</div>
+<div class="container attach">
+    <label class="mb-2">التعليق</label>
+    <div class="row">
+        <input type="text" class="form-control basicinput p-4 mb-2" placeholder="يمكنك اضافة تعليق هنا" name="PID" id="PID">
+        <div class="image-uploader__upload upload-btn mt-4" (click)="upload.click()">
+            <input type="file" #upload accept="image/*" [hidden]="true">
+            <div class="icon-upload">
+                <img class="" src="assets/images/shared/upload.svg" alt="upload">
+            </div>
+            <!-- <p class="title">{{ 'dashboard.schools.enterForAttachSchoolLogo'|translate }}</p> -->
+            <p class="title text-center">{{ label }}</p>
+            <!-- <p class="sub-title">Photo (Maximum Size: 5mp)</p> -->
+        </div>
+    </div>
+    <div class=" d-flex align-items-center justify-content-end mt-3 ">
+        <div class="Btn-group d-flex">
+            <button type="submit" class="btn btn-outline-primary m-3">
+              ارجاع
+              <div class=" text-light" role="status" ></div>
+          </button>
+            <button type="submit" class="btn  btn-primary m-3">
+              الموافقة
+              <div class=" text-light" role="status" ></div>
+          </button>
+            <button><a routerLink="/dashboard/educational-settings/subject/subjects-list" class="cancelbtn">الرفض</a></button>
+        </div>
+    </div>
+</div>
+<div class="row gx-4 gap-4 gap-xxl-5 bg-gray">
+
+    <div class="tabView">
+
+        <!-- Navigations Options -->
+        <ul class="tabView__nav">
+            <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>اجراءات الطلب</span></li>
+            <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>تفاصيل الطلب</span></li>
+
+
+        </ul>
+
+        <div class="tabView__content">
+
+
+            <ng-container *ngIf="step==1">
+                <!-- <p-timeline [value]="events">
+                    <ng-template pTemplate="content" let-event>
+                        <small class="p-text-secondary">{{event.date}}</small>
+                    </ng-template>
+                    <ng-template pTemplate="opposite" let-event>
+                        {{event.status}}
+                    </ng-template>
+                </p-timeline> -->
+                <div class="container py-5">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div id="content">
+                                <ul class="timeline-1 text-black">
+                                    <li class="event active" data-date="4 ايام">
+                                        <div class="inforequest">
+                                            <div class="profile__name ">
+                                                <h4 class="heading heading--tertiary ">{{student.name}}</h4>
+                                                <span class="color-black-500 fs-4 ">رفض <span class="heading heading--tertiary">تعديل الإجازة</span></span>
+                                                <span class="color-red-500 fs-4 fw-900 reject"> تم الرفض</span>
+                                            </div>
+
+                                            <div class="child__info__section info ">
+                                                <p>لوريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت,سيت دو أيوسمود تيمبور أنكايديديونتيوت لابوري ات دولار ماجنا أليكيوا . يوت انيم أد مينيم فينايم,كيواس.</p>
+                                            </div>
+                                            <div class="icon--file m-4">
+                                                <img src="assets/images/shared/PDFSEC.svg" alt="">
+                                                <span class="text color-primary"> ملف خلاصة القيد.pdf</span>
+                                            </div>
+                                        </div>
+
+
+                                    </li>
+                                    <li class="event" data-date="">
+                                    </li>
+                                    <li class=" event" data-date="6 ايام ">
+                                    </li>
+                                    <li class="event" data-date="8 ايام">
+
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- <div class="col-md-6 ">
+                        </div> -->
+                    </div>
+                </div>
+            </ng-container>
+            <ng-container *ngIf="step==2 ">
+                <div class="d-flex align-items-center justify-content-between bg-white ">
+                    <div class="profile d-flex align-items-center ">
+                        <div class="profile__avatar ">
+                            <img [src]="student.src " alt="Avatar ">
+                        </div>
+                        <div class="profile__info ">
+                            <div class="profile__name ">
+                                <h4 class="heading heading--tertiary ">{{student.name}}</h4>
+                                <span class="color-red-500 fs-4 ">الموهبه</span>
+                            </div>
+                            <div class="profile__details ">
+                                <div class="fs-4 ">
+                                    <img src="assets/images/shared/child.svg " alt=" ">
+                                    <span class="color-gray-300 fs-4 ">12 سنه</span>
+                                </div>
+                                <div>
+                                    <!-- <img *ngIf="student.regestered " src="assets/images/shared/fingure.svg " alt=" "> -->
+                                    <img *ngIf="!student.regestered " src="assets/images/shared/fingur-blue.svg " alt=" ">
+                                    <span class="color-gray-300 fs-4 " [ngClass]="{ 'color-gray-300':!student.regestered, 'color-gray-300': student.regestered} ">
+                           {{student.regestered ? ' غير مسجل': ' مسجل'}}
+                          </span>
+                                </div>
+                                <div>
+                                    <!-- <img *ngIf="student.regestered " src="assets/images/shared/fingure.svg " alt=" "> -->
+                                    <img *ngIf="!student.regestered " src="assets/images/shared/fingur-blue.svg " alt=" ">
+                                    <span class="color-gray-300 fs-4 ">
+                                  الصف الرابع
+                          </span>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="child__info__section info ">
+                    <div class="row gap-6 mt-5 ">
+                        <div class="col-3 d-flex align-items-center gap-5 ">
+                            <p class="color-gray-300 fs-4 ">{{ 'shared.personalId'|translate }}</p>
+                            <h4 class="color-primary mb-2 ">254535</h4>
+                        </div>
+                        <div class="col-3 d-flex align-items-center gap-5 ">
+                            <p class="color-gray-300 fs-4 ">{{'shared.birthDay'|translate }}</p>
+                            <h4 class="color-primary mb-2 ">2002/07/04</h4>
+                        </div>
+                        <div class="col-3 d-flex align-items-center gap-5 ">
+                            <p class="color-gray-300 fs-4 ">{{ 'shared.nationality'|translate }}</p>
+                            <h4 class="color-primary mb-2 ">اماراتي</h4>
+                        </div>
+                        <div class="col-3 d-flex align-items-center gap-5 ">
+                            <p class="color-gray-300 fs-4 ">{{ 'shared.gender'|translate }}</p>
+                            <h4 class="color-primary mb-2 ">ذكر</h4>
+                        </div>
+                        <div class="col-3 d-flex align-items-center gap-5 mt-5 ">
+                            <p class="color-gray-300 fs-4 ">اسم ولي الامر الجديد </p>
+                            <h4 class="color-primary mb-2 ">علي محمد</h4>
+                        </div>
+
+
+                        <div class="col-3 d-flex align-items-center gap-5 mt-5 ">
+                            <p class="color-gray-300 fs-4 ">نوع الصلة</p>
+                            <h4 class="color-primary mb-2 ">ابن</h4>
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 d-flex align-items-center mt-5 ">
+                        <span>
+                          المرفقات الخاصّة بالطالب
+                    </span>
+
+                        <div class="icon--file m-4 ">
+                            <img src="assets/images/shared/PDFSEC.svg " alt=" ">
+                            <span class="text color-primary "> ملف خلاصة القيد.pdf</span>
+                        </div>
+                        <div class="icon--file m-4 ">
+                            <img src="assets/images/shared/PDFSEC.svg " alt=" ">
+                            <span class="text color-primary "> ملف خلاصة القيد.pdf</span>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </ng-container>
+
+        </div>

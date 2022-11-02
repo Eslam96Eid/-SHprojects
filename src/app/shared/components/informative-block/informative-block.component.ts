@@ -10,7 +10,7 @@ export class InformativeBlockComponent implements OnInit {
   @Input() title:string;
   @Input() subTitle:string;
   @Input() src:string;
-  @Input('size') popup:string;
+  @Input('size') small:string;
   
   constructor() { }
 

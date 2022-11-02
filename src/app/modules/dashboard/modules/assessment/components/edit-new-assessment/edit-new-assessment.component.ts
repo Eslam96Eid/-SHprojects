@@ -36,8 +36,8 @@ export class EditNewAssessmentComponent implements OnInit {
   ];
   private readonly assementsListUrl = '/dashboard/educational-settings/assessments/assements-list';
 
-  get rateScores(): FormArray { 
-    return this.assesmentFormGrp.get('rateScores') as FormArray 
+  get rateScores(): FormArray {
+    return this.assesmentFormGrp.get('rateScores') as FormArray
   }
 
   get assesmentName() {
@@ -93,7 +93,7 @@ export class EditNewAssessmentComponent implements OnInit {
       if (this.assessmtId) {
         this.assessmentService.updateRate({...data, id: this.assessmtId}).subscribe(() => {
           this.assesmentFormGrp.reset();
-          this.toastService.success(this.getTranslateValue('toastr.updatedSuccessfully'));
+          this.toastService.success(this.getTranslateValue('updatedSuccessfully'));
           timer(1000).subscribe(() => {
             this.router.navigateByUrl(this.assementsListUrl);
           });
@@ -101,7 +101,7 @@ export class EditNewAssessmentComponent implements OnInit {
       } else {
         this.assessmentService.addRate(data).subscribe(() => {
           this.assesmentFormGrp.reset();
-          this.toastService.success(this.getTranslateValue('toastr.savedSuccessfully'));
+          this.toastService.success(this.getTranslateValue('savedSuccessfully'));
         });
       }
     }
@@ -112,8 +112,8 @@ export class EditNewAssessmentComponent implements OnInit {
       this.rateScores.push(this.newRateScores());
     } else {
       this.toastService.warning(
-        this.getTranslateValue('toastr.pleaseFillTheAboveRate'),
-        this.getTranslateValue('toastr.warning'),
+        this.getTranslateValue('pleaseFillTheAboveRate'),
+        this.getTranslateValue('warning'),
         {timeOut: 3000}
       );
     }

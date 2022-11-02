@@ -6,11 +6,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { faCheck, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from 'src/app/core/services/user.service';
-import { AssessmentService } from 'src/app/modules/dashboard/modules/assessment/service/assessment.service';
-import { Iassignments } from 'src/app/modules/dashboard/modules/assignments/assignments/model/Iassignments';
-import { IuploadAssignment } from 'src/app/modules/dashboard/modules/assignments/assignments/model/IuploadAssignment';
-import { IAccountAddOrEdit } from 'src/app/modules/dashboard/modules/user-information/models/IAccountAddOrEdit';
+// import { UserService } from 'src/app/core/services/user.service';
+
+
+import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
+import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-send-btn',
@@ -24,14 +25,15 @@ export class SendBtnComponent implements OnInit {
   @Input('backGroundColor') backGroundColor='';
   plusIcon = faPlus;
   checkIcon = faCheck;
-
+  isBtnLoading: boolean=false;
   accountModel : IAccountAddOrEdit= <IAccountAddOrEdit>{};
   assignmentModel : IuploadAssignment= <IuploadAssignment>{};
 
   currentDate = new Date();
 
 
-  constructor(private _router: ActivatedRoute,private router: Router,private route:ActivatedRoute , private userService : UserService,
+  constructor(private _router: ActivatedRoute,private router: Router,private route:ActivatedRoute ,
+    private userService : UserService,
     private assignmentService : AssignmentServiceService, private toastr: ToastrService) { }
 
   ngOnInit(): void {

@@ -136,6 +136,32 @@
     // }
 }
 
+.btn-outline-skyBlue {
+    color: #ffff;
+    background: $color-skyBlue-400;
+    border: 1px solid  $color-skyBlue-400;
+
+    &:hover {
+        background-color: $color-skyBlue-350;
+        color: #ffff !important;
+        border: 1px solid transparent;
+    }
+    
+    &:focus {
+        color: $color-primary;
+        background-color: lighten($color: $color-primary, $amount: 51);
+        border: 1px solid transparent;
+    }
+
+   
+
+    // &:active {
+    //     color: $color-primary;
+    //     background: #ffff;
+    //     border: 1px solid $color-primary;
+    // }
+}
+
 .btn-outline-none {
     color: $color-primary;
     // background: #F0FBFC;

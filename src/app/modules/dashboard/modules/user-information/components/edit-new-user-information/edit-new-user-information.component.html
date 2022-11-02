@@ -1,7 +1,5 @@
 <app-send-btn [route]="'/dashboard/manager-tools/user-information/users-list'" [content]="userFormGrp" [typeOfAdd]="'AddOrEditUser'"></app-send-btn>
-<div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
 
-</div>
 <div style="overflow-x: hidden;">
 
     <div class="d-flex">
@@ -94,42 +92,16 @@
                         <div class="col-xs-4 col-lg-4">
                             <label for="PID8" class="label"><b>{{'dashboard.UserInformation.Determine Private Roles'|translate}}</b></label>
 
-                                <!-- <select class="form-control" appValidation styleClass="p-multiselect"         formControlName="privateRole" placeholder="Select Private Roles" multiple>
+                            <!-- <select class="form-control" appValidation styleClass="p-multiselect"         formControlName="privateRole" placeholder="Select Private Roles" multiple>
                                     <option *ngFor="let options of roles" [ngValue]="options.id">{{options.name}}</option>
                                 </select> -->
 
 
-                                
-                            <p-dropdown
-                            (onChange)="onChange($event)"
-                            [(ngModel)]="selectedItems" 
-                            [options]="roles" 
-                            formControlName="privateRole" 
-                            class="form-control"  
-                            optionLabel="name"
-                            placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
-                           </p-dropdown>
 
-                                <!-- <p-multiSelect 
-                                (onChange)="onChange($event)"
-                                [(ngModel)]="listOfRoles" 
-                                [options]="roles" 
-                                formControlName="privateRole" 
-                                class="form-control"  
-                                styleClass="p-multiselect" 
-                                defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
-                                <ng-template let-value pTemplate="selectedItems">
-                                        <div class="country-item country-item-value" *ngFor="let option of listOfName">
-                                            <div>{{option}}</div>
-                                        </div>
-                                </ng-template>
-                                <ng-template let-item pTemplate="item">
-                                            {{item.name}}
-                               </ng-template>
-                            </p-multiSelect> -->
+                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" formControlName="privateRole" class="form-control" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            </p-dropdown>
 
-                            <!-- <p-multiSelect [options]="roles"  formControlName="privateRole" class="form-control" appValidation styleClass="p-multiselect" defaultLabel="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
-                            </p-multiSelect> -->
+
 
                             <div>
                                 <div [hidden]="privateRole.valid || privateRole.untouched">

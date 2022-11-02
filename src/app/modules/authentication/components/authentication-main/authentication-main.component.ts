@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { faArrowRight ,faExclamationCircle,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -45,14 +45,13 @@ export class AuthenticationMainComponent implements OnInit {
   mywindow
   constructor(
     private messageService: MessageService,
-    private layoutService:LayoutService,
     private formbuilder: FormBuilder,
     private authService: AuthenticationService,
     private translationService: TranslationService,
     private userService: UserService,
     private router: Router,
     public translate: TranslateService,
-    private toastr:ToastrService,
+    private toastService: ToastService,
     private activatedRoute:ActivatedRoute
   ) {
     activatedRoute.queryParams.subscribe(params =>{
@@ -205,20 +204,13 @@ export class AuthenticationMainComponent implements OnInit {
 
 
   showSuccess() {
-    this.toastr.clear();
-  console.log("helo from success")
-    this.layoutService.message.next('login.Login Successfully');
-    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
-    this.toastr.success( this.translate.instant(this. message));
 
+    this.toastService.success(this.translate.instant('login.Login Successfully'));
   }
 
   showError() {
-    this.toastr.clear();
-    this.layoutService.message.next( 'login.Something is wrong,Pleaze login again');
-    this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
-    this.toastr.error( this.translate.instant(this. message));
-   
+
+    this.toastService.error(this.translate.instant('login.Something is wrong,Pleaze login again'));
 
   }
 

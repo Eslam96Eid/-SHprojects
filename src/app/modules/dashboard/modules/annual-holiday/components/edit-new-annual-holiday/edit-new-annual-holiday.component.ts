@@ -12,7 +12,7 @@ import { HeaderService } from 'src/app/core/services/header-service/header.servi
 import { ActivatedRoute, Router } from '@angular/router';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
-import { IAnnualHoliday } from 'src/app/core/Models';
+import { IAnnualHoliday } from 'src/app/core/Models/annual-holidays/annual-holiday';
 
 
 @Component({
@@ -65,7 +65,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
   this.route.paramMap.subscribe(param => {
     this.urlParameter = Number(param.get('holidayId'));
   });
-    this.layoutService.message.subscribe((res)=>{this.message=res;});
+
     this.headerService.Header.next(
       {
         'breadCrump': [
@@ -83,7 +83,7 @@ export class EditNewAnnualHolidayComponent implements OnInit {
     this.getAllHolidays();
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
     this.yearList=this.annualHolidayService.yearList;
-    this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;})
+    this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
    
   }
  
@@ -128,11 +128,11 @@ export class EditNewAnnualHolidayComponent implements OnInit {
     
     for(let i in this.holiday.controls)
     {
-      if ((this.annualHolidayAddedList[i].arabicName == undefined) || (this.annualHolidayAddedList[i].flexibilityStatus == undefined) || (this.annualHolidayAddedList[i].dateTo ==undefined) || (this.annualHolidayAddedList[i].dateTo == undefined) || (this.annualHolidayAddedList[i].curriculumName == undefined))
+      // if ((this.annualHolidayAddedList[i].arabicName == undefined) || (this.annualHolidayAddedList[i].flexibilityStatus == undefined) || (this.annualHolidayAddedList[i].dateTo ==undefined) || (this.annualHolidayAddedList[i].dateTo == undefined) || (this.annualHolidayAddedList[i].curriculumName == undefined))
 
-        { 
-          availableadd = 0;
-        }
+      //   { 
+      //     availableadd = 0;
+      //   }
         }
     if (availableadd == 1) {
       this.holiday.push(this.fb.group({
@@ -174,9 +174,9 @@ export class EditNewAnnualHolidayComponent implements OnInit {
         this.annualHolidayObj={};
         this.convertDate(holiday);
         this.annualHolidayObj={'annualCalendarName':holiday.annualCalendarName,
-        'arabicName':holiday.arabicName,
-        'flexibilityStatusId':holiday.flexibilityStatus,
-        'curriculumId':holiday.curriculumName,
+        // 'arabicName':holiday.arabicName,
+        // 'flexibilityStatusId':holiday.flexibilityStatus,
+        // 'curriculumId':holiday.curriculumName,
         'dateFrom':this.dateFromConverted,
         'dateTo':this.dateToConverted,
         'year':holiday.year
@@ -195,9 +195,9 @@ export class EditNewAnnualHolidayComponent implements OnInit {
         this.annualHolidayObj={};
         this.convertDate(holiday);
         this.annualHolidayObj={'annualCalendarName':this.annualHolidayAddedList[0].annualCalendarName,
-        'arabicName':holiday.arabicName,
-        'flexibilityStatusId':holiday.flexibilityStatus,
-        'curriculumId':holiday.curriculumName,
+        // 'arabicName':holiday.arabicName,
+        // 'flexibilityStatusId':holiday.flexibilityStatus,
+        // 'curriculumId':holiday.curriculumName,
         'dateFrom':this.dateFromConverted,
         'dateTo':this.dateToConverted,
         'year':this.annualHolidayAddedList[0].year};
@@ -226,17 +226,13 @@ export class EditNewAnnualHolidayComponent implements OnInit {
    }
    showSuccessedMessage()
   {
-    this.toastr.clear();
-    this.layoutService.message.next( 'mission Succeeded');
-    this.layoutService.message.subscribe((res)=>{this.message=res;});
+
     this.toastr.success( this.translate.instant(this. message));
   }
 
   showErrorMessage()
   {
-    this.toastr.clear();
-    this.layoutService.message.next( 'error happened');
-    this.layoutService.message.subscribe((res)=>{this.message=res;});
+
     this.toastr.error( this.translate.instant(this. message));
   }
 

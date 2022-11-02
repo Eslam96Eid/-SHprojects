@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IIndexs } from 'src/app/core/Models/iindex';
-import { take,  delay,BehaviorSubject,finalize } from 'rxjs';
+import { take,finalize } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -9,9 +8,7 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
   providedIn: 'root'
 })
 export class IndexesService {
-  indexListType;
   indexStatusList;
-  indexesList: IIndexs[] = [];
   constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
   
     this.indexStatusList=[

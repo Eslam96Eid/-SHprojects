@@ -1,8 +1,8 @@
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/indexes/new-index'" [content]="'dashboard.Indexes.Add Item'">
 </app-add-btn>
 
-<div class="prim-table mt-4" *ngIf="indexes.total || indexes.loading">
-    <p-table #dt [lazy]="true" [value]="indexesList" (onSort)="sortMe($event)">
+<div class="prim-table mt-4" *ngIf="fixedLength || indexes.loading">
+    <p-table #dt [lazy]="true" [value]="indexes.list" (onSort)="sortMe($event)">
 
 
         <ng-template pTemplate="caption">
@@ -67,7 +67,7 @@
         <ng-template pTemplate="emptymessage" let-columns>
             <tr>
                 <td [attr.colspan]="20">
-                    <ng-container *ngIf="indexes.total &&  allIndexesLength == 0">
+                    <ng-container *ngIf="fixedLength && indexes.list.length == 0 &&  !indexes.loading">
                         <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
@@ -79,11 +79,11 @@
 
     </p-table>
 
-    <div *ngIf="paginationState.rows<allIndexesLength">
-        <app-pagination [totalItems]="allIndexesLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    <div *ngIf="paginationState.rows<indexes.total">
+        <app-pagination [totalItems]="indexes.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
 <!-- emptymessage -->
-<ng-container *ngIf="!indexes.total && !indexes.loading">
+<ng-container *ngIf="!fixedLength && !indexes.loading">
     <app-informative-block title="{{'emptyList.Indexes List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>

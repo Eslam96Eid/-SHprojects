@@ -89,7 +89,7 @@ export class AssessmentsListComponent implements OnInit {
     this.assessmentList.loading = true
     this.assessmentList.list = []
     this.assessmentService.getRates(this.filtration).subscribe(res => {
-      
+
       this.assessmentList.loading = false
       this.assessmentList.list = res.data
       this.assessmentList.totalAllData = res.totalAllData

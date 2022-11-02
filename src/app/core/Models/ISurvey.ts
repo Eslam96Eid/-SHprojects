@@ -1,12 +1,18 @@
+import { StatusEnum } from "src/app/shared/enums/status/status.enum";
+
 export interface ISurvey {
   id:number;
   surveyNumber:string;
-  surveyAddress:string;
+  arabicTitle:string;
+  englishTitle:string;
 
   surveyType:string;
-  targetsNumber:string;
-  responsesNumber:string;
-  surveyStatus:string;
+  userName:string;
+  arabicUserName:string;
+  createdDate:string;
+  surveyStatus:StatusEnum;
+
+  targetGuardians:number;
 
 
 }

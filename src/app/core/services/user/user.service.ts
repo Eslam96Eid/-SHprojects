@@ -5,10 +5,11 @@ import { Injectable, Inject, EventEmitter } from '@angular/core';
 
 import { Router } from '@angular/router';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { IAccount } from 'src/app/modules/dashboard/modules/user-information/models/IAccount';
-import { IAccountAddOrEdit } from 'src/app/modules/dashboard/modules/user-information/models/IAccountAddOrEdit';
+
 import { environment } from 'src/environments/environment';
 import { IUser, Token } from '../../Models/base.models';
+import { IAccount } from '../../Models/IAccount';
+import { IAccountAddOrEdit } from '../../Models/IAccountAddOrEdit';
 
 
 @Injectable({
@@ -35,29 +36,7 @@ export class UserService {
     this.token.expires = this.load('expires');
     this.token.token = this.load('token');
     this.token.claims = this.load('claims');
-    this.usersList = [
-      { 'id': 12354777789745, 'fullName': 'محمد علي', 'phoneNumber': '(815) 6180492', 'email': 'ccornau0@bigcartel.com', 'lastUpdated': 'Female', 'privateRole': 'مدرس', 'nickName': "", 'userStatus': "فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'أحمد طارق', 'phoneNumber': '(507) 3119958', 'email': 'eelsmore1@goo.gl', 'lastUpdated': 'Male', 'privateRole': 'مدرس', 'nickName': "", 'userStatus': "فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'عمرو صلاح', 'phoneNumber': '(478) 7181722', 'email': 'aelldred2@archive.org', 'lastUpdated': 'Female', 'privateRole': 'مدرس', 'nickName': "", 'userStatus': "غير فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'عباس مصطفي', 'phoneNumber': '(698) 4411762', 'email': 'ameachem3@columbia.edu', 'lastUpdated': 'Female', 'privateRole': 'مهندس كمبيوتر', 'nickName': "", 'userStatus': "فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'ناهد محمد', 'phoneNumber': '(345) 6582965', 'email': 'jhadwen4@vkontakte.ru', 'lastUpdated': 'Male', 'privateRole': 'مهندس كمبيوتر', 'nickName': "", 'userStatus': "غير فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'رياض علي', 'phoneNumber': '(659) 9557733', 'email': 'rwainscoat5@thetimes.co.uk', 'lastUpdated': 'Male', 'privateRole': 'مدرس', 'nickName': "", 'userStatus': "فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'أيهاب فوزي', 'phoneNumber': '(864) 2101861', 'email': 'mbraddock6@yellowbook.com', 'lastUpdated': 'Male', 'privateRole': 'مهندس كمبيوتر', 'nickName': "", 'userStatus':"فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'مححمود احمد', 'phoneNumber': '(165) 5814372', 'email': 'jcrotty7@opensource.org', 'lastUpdated': 'Male', 'privateRole': 'مساعد مدير', 'nickName': "", 'userStatus': "غير فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'أياد محمد', 'phoneNumber': '(428) 2282928', 'email': 'mbraker8@yahoo.co.jp', 'lastUpdated': 'Female', 'privateRole': 'مدرس', 'nickName': "", 'userStatus':"غير فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'مني علي', 'phoneNumber': '(673) 5170425', 'email': 'bbosman9@google.co.jp', 'lastUpdated': 'Female', 'privateRole': 'مدرس', 'nickName': "", 'userStatus': "فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'طه محمود', 'phoneNumber': '(978) 8885907', 'email': 'drowlandsa@slate.com', 'lastUpdated': 'Female', 'privateRole': 'مساعد مدير', 'nickName': "", 'userStatus': "غير فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777897452, 'fullName': 'علي مصطفي', 'phoneNumber': '(956) 9360112', 'email': 'nkeetsb@canalblog.com', 'lastUpdated': 'Female', 'privateRole': 'مدرس', 'nickName': "", 'userStatus': "فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'داليا مصطفي', 'phoneNumber': '(240) 7150720', 'email': 'sbussenc@so-net.ne.jp', 'lastUpdated': 'Female', 'privateRole': 'مساعد مدير', 'nickName': "", 'userStatus': "غير فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'طارق شوقي', 'phoneNumber': '(416) 4076124', 'email': 'adriversd@com.com', 'lastUpdated': 'Male', 'privateRole': 'مساعد مدير', 'nickName': "", 'userStatus': "فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'محمد محمود', 'phoneNumber': '(262) 7945277', 'email': 'cbalasine@blogger.com', 'lastUpdated': 'Female', 'privateRole': 'مساعد مدير', 'nickName': "", 'userStatus': "فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'إيمان علي', 'phoneNumber': '(501) 3984600', 'email': 'cbarrickf@t-online.de', 'lastUpdated': 'Female', 'privateRole': 'مساعد مدير', 'nickName': "", 'userStatus': "غير فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'ناديه محمد', 'phoneNumber': '(718) 4157883', 'email': 'itreweelag@tripod.com', 'lastUpdated': 'Male', 'privateRole': 'مدرس', 'nickName': "", 'userStatus': "فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'صادق عبد الرحمن', 'phoneNumber': '(213) 5730967', 'email': 'ygeorgeoth@360.cn', 'lastUpdated': 'Male', 'privateRole': 'مهندس كمبيوتر', 'nickName': "", 'userStatus': "فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 12354777789745, 'fullName': 'سلوي ابراهيم', 'phoneNumber': '(349) 6453938', 'email': 'hpalffreyi@nba.com', 'lastUpdated': 'Female', 'privateRole': 'مدرس', 'nickName': "", 'userStatus':"فعال", 'password': "", 'identityNumber': "" },
-      { 'id': 21235477789745, 'fullName': 'مراد ممدوح', 'phoneNumber': '(474) 3068249', 'email': 'gmordonj@uiuc.edu', 'lastUpdated': 'Female', 'privateRole': 'مدرس', 'nickName': "", 'userStatus': "غير فعال", 'password': "", 'identityNumber': "" }
 
-    ];
 
 
 

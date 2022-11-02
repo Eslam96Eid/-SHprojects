@@ -9,6 +9,9 @@ import { ReportsManagmentModule } from './modules/reports-managment/reports-mana
 import { DashboardPanalComponent } from './components/dashboard-panal/dashboard-panal.component';
 import { RegisterChildComponent } from './modules/shared/components/register-child/register-child.component';
 import { DashboardSharedModule } from './modules/shared/dashboard-shared/dashboard-shared.module';
+import { ConfirmModelComponent } from 'src/app/shared/components/confirm-model/confirm-model.component';
+
+
 
 
 
@@ -32,6 +35,7 @@ import { DashboardSharedModule } from './modules/shared/dashboard-shared/dashboa
 
 
 
+
   ],
   imports: [
     CommonModule,
@@ -39,6 +43,7 @@ import { DashboardSharedModule } from './modules/shared/dashboard-shared/dashboa
     SharedModule,
     ReportsManagmentModule,
     DashboardSharedModule,
+
   ]
 })
 export class DashboardModule { }

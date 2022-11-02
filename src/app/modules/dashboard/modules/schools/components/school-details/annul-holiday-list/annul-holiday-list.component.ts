@@ -16,7 +16,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   styleUrls: ['./annul-holiday-list.component.scss']
 })
 export class AnnulHolidayListComponent implements OnInit {
-  
+
   first = 0
   rows = 4
 
@@ -52,7 +52,7 @@ export class AnnulHolidayListComponent implements OnInit {
   },{validators: [
     DateValidators.greaterThan('dateFrom', 'dateTo')
   ]})
-  
+
   get holidayForm(){ return this.editHolidayForm.controls}
 
   constructor(
@@ -66,7 +66,7 @@ export class AnnulHolidayListComponent implements OnInit {
   ngOnInit(): void {
     this.getHolidays()
     console.log(new Date('2024-10-13'));
-    
+
   }
 
   getHolidays(){
@@ -85,15 +85,15 @@ export class AnnulHolidayListComponent implements OnInit {
   }
 
   editFlexableHoliday(holiday){
-    
+
       this.selectedHoliday= holiday
       this.holidayForm['id'].setValue(holiday.id)
 
       console.log(this.selectedHoliday);
-      
+
       this.openHolidaytModel=true
   }
-  
+
   editAnnualHoliday(holidayId){
     this.router.navigate(['dashboard/educational-settings/annual-holiday/edit-holiday/',holidayId])
 

@@ -12,13 +12,15 @@ import { CardModule } from "primeng/card";
 import { MessageService } from 'primeng/api';
 import { MessagesModule } from 'primeng/messages';
 import { MessageModule } from 'primeng/message';
+import { ExamUploadComponent } from './assignments/exam-upload/exam-upload.component';
 
 
 
 @NgModule({
   declarations: [
     AssignmentsListComponent,
-    UploadAssignmentComponent
+    UploadAssignmentComponent,
+    ExamUploadComponent
   ],
   imports: [
     CommonModule,

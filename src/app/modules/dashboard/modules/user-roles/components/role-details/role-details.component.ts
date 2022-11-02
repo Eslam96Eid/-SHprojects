@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { IUserRoles } from 'src/app/core/Models';
+import { IUserRoles } from 'src/app/core/Models/user-roles/user-role';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { UserRolesService } from '../../service/user-roles.service';
 
@@ -11,33 +11,37 @@ import { UserRolesService } from '../../service/user-roles.service';
   styleUrls: ['./role-details.component.scss']
 })
 export class RoleDetailsComponent implements OnInit {
-  checked:boolean=false;
-  notChecked:boolean=true;
+  dataRestrictionLevelList;
+  roleRestrictionLevel:string="";
   jobRole:IUserRoles={} as IUserRoles;
-  userRolesList:IUserRoles[] = [];
-  urlParameter: number=0;
   userRoleTittle:string="";
+  urlParameter: string='';
+  showLoader:boolean=false;
+  checkedStatus:boolean=false;
+  notCheckedStatus:boolean=true;
   constructor(private route: ActivatedRoute, private userRolesService: UserRolesService, private translate: TranslateService, private headerService:HeaderService) { }
 
   ngOnInit(): void {
-    this.userRolesService.userRolesList.subscribe((res)=>{this.userRolesList=res;});
-   
+    this.showLoader=true;
+    this.dataRestrictionLevelList=this.userRolesService.dataRestrictionLevelList;
     this.route.paramMap.subscribe(param => {
-      this.urlParameter = Number(param.get('roleId'));
+      this.urlParameter=param.get('roleId');
 
-      this.userRolesList.forEach(element => {
-        if(this.urlParameter==element.id)
-        { 
-          this.userRoleTittle=element.jobRoleName;
-          this.jobRole=element;
-        
-        }
-    
+      this.userRolesService.getRoleByID(Number(this.urlParameter)).subscribe((res)=>{this.showLoader=false;this.jobRole=res;this.userRolesService.userTittle.next(res.jobRoleName.ar)
+ 
+        console.log(this.jobRole);
+        this.dataRestrictionLevelList.forEach(element => {
+          if(element.name.en==this.jobRole.restrictionLevelId)
+          {
+            this.roleRestrictionLevel=element.name.ar;
+          }
         });
+       
+       })
     
   });
-
-    this.headerService.Header.next(
+  this.userRolesService.userTittle.subscribe((res)=>{this.userRoleTittle=res;
+  this.headerService.Header.next(
       {
         'breadCrump': [
           { label: this.translate.instant('dashboard.UserRole.List Of Job Roles'), routerLink: '/dashboard/manager-tools/user-roles/user-roles-list',routerLinkActiveOptions:{exact: true} },
@@ -45,6 +49,8 @@ export class RoleDetailsComponent implements OnInit {
         'mainTitle': { main: this.userRoleTittle}
       }
     );
+  });
+   
   }
 
 }

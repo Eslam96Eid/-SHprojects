@@ -1,0 +1,17 @@
+@import '../../../../assets/css/components/model';
+
+
+.confirm-model{
+    ::ng-deep p-dialog{
+    
+        .p-dialog{
+            overflow: hidden;
+            border-radius: 15px;
+            .p-dialog-header{
+                padding:1.2rem !important;
+                justify-content: end;
+            }
+            
+        }
+    }
+}

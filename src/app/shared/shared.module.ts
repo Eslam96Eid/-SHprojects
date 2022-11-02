@@ -29,6 +29,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LoaderComponent } from './components/loader/loader/loader.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
 registerLocaleData(localeAr);
 
 
@@ -55,7 +56,7 @@ registerLocaleData(localeAr);
     PermissionDirective,
     LoaderComponent,
     SkeletonComponent,
-
+    ConfirmModelComponent
 
   ],
   imports: [
@@ -98,7 +99,8 @@ registerLocaleData(localeAr);
     PermissionDirective,
     NgxSkeletonLoaderModule,
     LoaderComponent,
-    SkeletonComponent
+    SkeletonComponent,
+    ConfirmModelComponent
 
   ]
 })

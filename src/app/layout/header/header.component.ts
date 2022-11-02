@@ -63,7 +63,7 @@ export class HeaderComponent implements OnInit {
       title:'اداره الاداء',
       links:[
         {name: 'الامتحانات',url:'/dashboard/performance-managment/assignments/assignments-list'},
-        {name: 'مهامى',url:'/dashboard/performance-managment/'},
+        {name: 'قائمه الطلبات',url:'/dashboard/performance-managment/RequestList/Request-List'},
 
       ]
     },
@@ -117,7 +117,7 @@ export class HeaderComponent implements OnInit {
     "pageSize": 2,
     "isRead": null
   }
-  
+
   constructor(
     private toastr:ToastrService,
     private router: Router,
@@ -131,8 +131,8 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit(): void {
-   
-    
+
+
     // if(this.router.url.indexOf('dashboard') > -1) this.isInDashboard = true
 
     // this.router.events
@@ -152,12 +152,12 @@ export class HeaderComponent implements OnInit {
       this.checkLanguage = true
     }else{
       this.checkLanguage = false
-    }    
-    this.setupScrollListener() 
+    }
+    this.setupScrollListener()
   }
 
 
-  getNotifications(searchModel){   
+  getNotifications(searchModel){
     this.notificationService.getAllNotifications(searchModel).subscribe(res=>{
       this.notificationsList = res.data
     })
@@ -170,7 +170,7 @@ export class HeaderComponent implements OnInit {
     this.searchModel.isRead = false
     this.getNotifications(this.searchModel)
   }
-  getReadable() 
+  getReadable()
   {
     this.searchModel.keyword = null
     this.searchModel.page = 1
@@ -270,10 +270,10 @@ markAsRead(){
   }
   this.notificationsList.map((res)=>{
     {
-      return sentData.NotificationId.push(res.id) 
+      return sentData.NotificationId.push(res.id)
     }
   })
-  
+
   this.notificationService.updateNotifications(sentData).subscribe(res=>{
     this.toastr.success(res.message)
     this.getNotReadable()

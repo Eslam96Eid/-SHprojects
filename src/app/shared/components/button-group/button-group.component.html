@@ -1,0 +1,8 @@
+<div class="btn-group">
+    <ul class="btn-group__list">
+        <li 
+        class="btn-group__list__item"
+        [class.active]="item.active"
+         *ngFor="let item of items let i=index" (click)="setActive(i)">{{item.label}}</li>
+    </ul>
+</div>

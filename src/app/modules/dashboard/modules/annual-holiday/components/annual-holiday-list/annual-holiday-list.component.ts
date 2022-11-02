@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
-import { IAnnualHoliday } from 'src/app/core/Models/iannual-holiday';
+import { IAnnualHoliday } from 'src/app/core/Models/annual-holidays/annual-holiday';
 import { TranslateService } from '@ngx-translate/core';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { AnnualHolidayService } from '../../service/annual-holiday.service';
@@ -50,9 +50,10 @@ export class AnnualHolidayComponent implements OnInit {
 
   }
   ngOnInit(): void {
-     this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;})
-    this.getAllHolidays();
-    
+    //  this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
+    // this.getAllHolidays();
+    this.annualHolidayList=this.annualHolidayService.annualHolidayList;
+
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('schoolId'));
     });
@@ -65,7 +66,7 @@ export class AnnualHolidayComponent implements OnInit {
       }
     );
 
-    this.annualHolidayService.getAllCurriculum().subscribe((res)=>{this.curriculumList=res.data;})
+    this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
     this.holidayStatusList=this.annualHolidayService.holidayStatusList;
     this.yearList=this.annualHolidayService.yearList;
     

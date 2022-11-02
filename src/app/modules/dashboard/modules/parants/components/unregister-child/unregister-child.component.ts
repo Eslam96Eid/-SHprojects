@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IunregisterChild } from '../../models/IunregisterChild';
+import { IunregisterChild } from 'src/app/core/Models/IunregisterChild';
+// import { IunregisterChild } from '../../models/IunregisterChild';
 import { ParentService } from '../../services/parent.service';
 
 @Component({
@@ -26,7 +27,7 @@ unregisterChild : IunregisterChild;
   }
 
 
-  
+
   constructor(private parentService : ParentService,
      private _router: ActivatedRoute) { }
 

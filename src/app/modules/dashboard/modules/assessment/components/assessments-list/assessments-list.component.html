@@ -1,34 +1,21 @@
 <app-add-btn bg-primary [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
     <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
 </app-add-btn>
-<div class="prim-table" *ngIf="assessmentList.totalAllData || assessmentList.loading" >
+<div class="prim-table" *ngIf="assessmentList.totalAllData || assessmentList.loading">
 
 
-    <p-table #dt  [value]="assessmentList.list" (onSort)="onSort($event)" [lazy]="true">
+    <p-table #dt [value]="assessmentList.list" (onSort)="onSort($event)" [lazy]="true">
 
         <!-- Table Caption -->
         <ng-template pTemplate="caption">
-            <app-table-caption 
-            (onExport)="onExport($event)" 
-            (onFilter)="getRate()" 
-            (onSearch)="filtration.KeyWord = $event; getRate()" 
-            (onClear)="clearFilter()">
-            <div class="row gx-5 form-set">
-                <div class="col">
-                    <label class="label">{{'shared.activated'|translate}}</label>
-                    <p-dropdown  
-                    (onChange)="onChange($event)"
-                    [options]="filteration_status"
-                    optionLabel="name"></p-dropdown>
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="getRate()" (onSearch)="filtration.KeyWord = $event; getRate()" (onClear)="clearFilter()">
+                <div class="row gx-5 form-set">
+                    <div class="col">
+                        <label class="label">{{'shared.activated'|translate}}</label>
+                        <p-dropdown (onChange)="onChange($event)" [options]="filteration_status" optionLabel="name"></p-dropdown>
+                    </div>
                 </div>
-            </div>
-<!-- 
-            <div class="col-xs-4 col-lg-4">
-                <label for="PID8" class="label"><b>{{'shared.activated'|translate}}</b></label>
-                <p-inputSwitch (onChange)="isToggleLabelFiltration($event)"></p-inputSwitch>
-                <span class="Label" *ngIf="isShownfiltration">{{'shared.no'|translate}}</span>
-                <span class="Label" *ngIf="!isShownfiltration">{{'shared.yes'|translate}}</span>
-            </div> -->
+
             </app-table-caption>
 
         </ng-template>
@@ -37,39 +24,40 @@
     <div class="row">
         <ng-container *ngIf="assessmentList.list.length > 0">
             <ng-container *ngFor="let rate of assessmentList.list">
-                    <div class="col-md-4 ml-3">
+                <div class="col-md-4 ml-3">
                     <p-card class="p-5 m-4 radius-5">
                         <ng-template pTemplate="header">
-                            <div class="row gx-5 p-3  radius-5">
+                            <div class="row  p-3  radius-5">
                                 <div class="col-md-6">
-                                    <h3 class="heading color-primary">تقييم الأكاديمي</h3>
+                                    <h3 class="color-primary  fs-3 mt-4">{{'dashboard.Assessment.Academicevaluation'|translate}}</h3>
                                 </div>
-                                <div class="col-md-6 " *ngIf="isAdmin">
-                                    <label class="Label_toggle">{{'shared.activated'|translate}}</label>
-                                    <p-inputSwitch (onChange)="isToggleLabel($event)" [(ngModel)]="rate.isActive"></p-inputSwitch>
-                                    <span class="Label_toggle" *ngIf="!rate.isActive">{{'shared.no'|translate}}</span>
-                                    <span class="Label_toggle" *ngIf="rate.isActive">{{'shared.yes'|translate}}</span>
+
+                                <div class="col-md-6 mt-3 " *ngIf="isAdmin">
+                                    <label class="Label fs-3 m-3 fw-300">{{'shared.activated'|translate}}</label>
+                                    <p-inputSwitch (onChange)="isToggleLabel($event)" [(ngModel)]="rate.isActive" id="switchbtn"></p-inputSwitch>
+                                    <span class="Label" *ngIf="!rate.isActive">{{'shared.no'|translate}}</span>
+                                    <span class="Label" *ngIf="rate.isActive">{{'shared.yes'|translate}}</span>
                                 </div>
                             </div>
                         </ng-template>
                         <div class="row gx-5 p-3 bg-gray-50  radius-5">
                             <div class="col-md-6">
-                                <span class="color-skyBlue-500 fs-3 fw-700">الدرجة الدنيا: {{rate.min}} </span>
+                                <span class="color-skyBlue-500 Minmum fw-500">{{'dashboard.Assessment.Minmum Degree'|translate}}: {{rate.min}} </span>
                             </div>
                             <div class="col-md-6">
-                                <span class="color-skyBlue-500 fs-3 fw-700"> الدرجه العظمي :{{rate.max}}</span>
+                                <span class="color-skyBlue-500  Minmum fw-500"> {{'dashboard.Assessment.Maximum Degree'|translate}} :{{rate.max}}</span>
                             </div>
                         </div>
-                        <div class="row"  [style]="{height: '360px'}">
+                        <div class="row" [style]="{height: '230px'}">
                             <ng-container *ngIf="rate.rateScores.length > 0">
                                 <div class="col-md-4">
-                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">رمز التقييم</p>
+                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">{{'dashboard.Assessment.RatingCode'|translate}}</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">المدلول</p>
+                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">{{'dashboard.Assessment.sign'|translate}}</p>
                                 </div>
                                 <div class="col-md-4">
-                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">حدود الدرجة</p>
+                                    <p class="color-skyBlue-300 fs-4 mb-4 mt-4">{{'dashboard.Assessment.degreeLimit'|translate}}</p>
                                 </div>
                                 <ng-container *ngFor="let sc of rate.rateScores">
                                     <div class="col-md-4">
@@ -87,8 +75,8 @@
                                     <div class="col-md-4">
                                         <ul>
                                             <li class="m-1 pt-2">
-                                                <p class="color-gray-300 fs-4">الدرجة المستحقة</p>
-                                                <span class="color-black mb-4">  من {{sc.from}} ل {{sc.to}}</span>
+                                                <p class="color-gray-300 fs-4">{{'dashboard.Assessment.Deserving Degrees'|translate}}</p>
+                                                <span class="color-black mb-4">  {{'dashboard.Assessment.From'|translate}} {{sc.from}} {{'dashboard.Assessment.To'|translate}}{{sc.to}}</span>
                                             </li>
                                         </ul>
                                     </div>
@@ -107,7 +95,7 @@
         </ng-container>
     </div>
     <div *ngIf="assessmentList.total > paginationState.rows">
-        <app-pagination [totalItems]="assessmentList.total"  (paginationChanged)="paginationChanged($event)"></app-pagination>
+        <app-pagination [totalItems]="assessmentList.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 
 

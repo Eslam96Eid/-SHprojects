@@ -1,0 +1,9 @@
+@import '../../../../../../../../assets/css/utils/variables.scss';
+@import '../../../../../../../../assets/css/components/primng-table';
+
+::ng-deep app-table-caption{
+    .export{
+        flex-grow: 1;
+        flex-shrink: 0;
+    }
+}

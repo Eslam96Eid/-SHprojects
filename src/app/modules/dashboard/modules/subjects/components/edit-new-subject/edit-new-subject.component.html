@@ -3,7 +3,11 @@
        <div id="content" >
         <div class=" d-flex align-items-center justify-content-end ">
             <div class="Btn-group d-flex">
-                <button type="submit"  class="btn  btn-primary" [disabled]="subjectFormGrp.invalid">{{'shared.save'|translate}}</button>
+                <button type="submit" (click)="succeeded()" class="btn  btn-primary" [disabled]="subjectFormGrp.invalid||isBtnLoading">
+                    {{'shared.save'|translate}}
+                    <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
+                </button>
+                <button  ><a routerLink="/dashboard/educational-settings/subject/subjects-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
             </div>
         </div>
   
@@ -123,7 +127,7 @@
                     </div>
                     <div class="col-xs-4 col-lg-7 evaluationSys" >
                         <div *ngFor="let type of evaluationTypeList" class="field-checkbox">
-                            <p-radioButton [inputId]="type.id" [ngModelOptions]="{standalone: true}" formControlName="evaluationType"  (onClick)="checkEvaluationType($event)"  [value]="type"  ></p-radioButton>
+                            <p-radioButton [inputId]="type.id" [ngModelOptions]="{standalone: true}" formControlName="evaluationType"  (onClick)="checkEvaluationType($event.value)"  [value]="type"  ></p-radioButton>
                             <label [for]="type.id">{{type.name.ar}}</label>
                         </div>
                     </div>
@@ -193,7 +197,7 @@
                                
                                 <div class="col-xs-2 col-lg-4">
                                     <label for="cal4 + {{i}}" class="label">{{'dashboard.Subjects.successed'|translate}}/{{'dashboard.Subjects.retry'|translate}}</label>
-                                    <p-dropdown [options]="cities"  formControlName="successStatus" placeholder="{{'dashboard.Subjects.successed'|translate}}\{{'dashboard.Subjects.retry'|translate}}" name="calO4 + {{i}}" id="cal4 + {{i}}" class="form-control" appValidation  ></p-dropdown>
+                                    <p-dropdown [options]="successStatusList" optionLabel="name.ar" optionValue="name.ar" formControlName="successStatus" placeholder="{{'dashboard.Subjects.successed'|translate}}\{{'dashboard.Subjects.retry'|translate}}" name="calO4 + {{i}}" id="cal4 + {{i}}" class="form-control" appValidation  ></p-dropdown>
                                </div>
                             </div>
                             <div class="btn btn-outline-primary Addnew mb-5" role="button" (click)="addNew()">

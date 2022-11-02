@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { IIndexs } from 'src/app/core/Models/iindex';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { IndexesService } from '../../service/indexes.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -19,14 +18,12 @@ import { LoaderService } from 'src/app/shared/services/loader/loader.service';
   styleUrls: ['./indexes-list.component.scss']
 })
 export class IndexesComponent implements OnInit {
-  filtration = {...Filtration,IndexTypeId: '',indexStatus:''};
-  indexesList: IIndexs[] = [];
   faEllipsisVertical = faEllipsisVertical;
-   first:boolean=true;
-  allIndexesLength:number=1;
+  first:boolean=true;
   fixedLength:number=0;
   indexListType;
   indexStatusList;
+  filtration = {...Filtration,IndexTypeId: '',indexStatus:''};
   paginationState= {...paginationInitialState};
   indexes={
     total:0,
@@ -65,22 +62,19 @@ export class IndexesComponent implements OnInit {
   }
 
   getAllIndexes(){
-   console.log(this.filtration);
+    this.indexes.loading=true;
+    this.indexes.list=[];
     this.indexesService.getAllIndexes(this.filtration).subscribe((res)=>{
-        this.indexes.loading = false;
-      console.log(this.filtration)
-     this.allIndexesLength=res.total;
-     console.log(res.data);
-     if(this.first)
-     {
-      this.fixedLength=this.allIndexesLength;
-      this.indexes.total=this.fixedLength;
-    }
-     console.log(this.fixedLength)
-      this.indexesList=res.data;
 
+        this.indexes.loading=false;
+        this.indexes.total=res.total;
+        this.indexes.list=res.data;
 
+        if(this.first)
+        {
+          this.fixedLength= this.indexes.total;
 
+        }
       },(err)=>{this.indexes.loading = false;
         this.indexes.total=0
       });
@@ -97,7 +91,7 @@ export class IndexesComponent implements OnInit {
 
 
   onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.indexesList)
+    this.exportService.exportFile(fileType, table,this.indexes.list)
   }
 
 

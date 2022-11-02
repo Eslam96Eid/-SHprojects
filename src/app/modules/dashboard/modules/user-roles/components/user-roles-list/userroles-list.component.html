@@ -1,14 +1,23 @@
 
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/manager-tools/user-roles/new-role'" [content]="'dashboard.UserRole.Add New Role'"></app-add-btn>
-    <div class="prim-table">
-    <p-table  #dt [value]=" userRolesList" [paginator]="true" [(rows)]="rows" [(first)]="first"    sortMode="multiple"   >
+    
+<div class="prim-table mt-4" *ngIf="roles.totalAllData || roles.loading">
+    <p-table  #dt [value]="roles.list" (onSort)="sortMe($event)" [lazy]="true"  >
      
          <!-- Table Caption -->
-    <ng-template pTemplate="caption">
+         <ng-template pTemplate="caption">
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="getAllRole()" (onSearch)="filtration.KeyWord = $event; getAllRole()" (onClear)="clearFilter()">
 
-        <app-table-caption [filterFormControls]="['JobRole Name','User Name']"></app-table-caption>
-    
-    </ng-template>
+                <div class="row gx-5 form-set">
+                    <div class="col-6">
+                        <label class="label" for="roleStatus">{{'dashboard.UserRole.Status'|translate }} </label>
+                        <p-dropdown [options]="roleStatusList" [(ngModel)]="filtration.isactive" inputId="roleStatus" optionLabel="name.ar" optionValue="name.en" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate }}"></p-dropdown>
+                    </div>
+                </div>
+
+            </app-table-caption>
+
+         </ng-template>
       
       
       <ng-template pTemplate="header" >
@@ -26,22 +35,27 @@
         </ng-template>
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  >{{e.jobRoleName|translate}}</td>
-                <td   >{{e.userName|translate}}</td>
-                <td ><a (click)="showUserList(e.jobRoleName)"  *ngIf="e.roleUsers>0" class="users">{{e.roleUsers|translate}}{{'shared.Users'|translate}}</a>
+               
+                <td  >{{e.jobRoleName.ar|translate}}</td>
+                <td   >{{e.creatorName|translate}}</td>
+                <td ><a (click)="showUserList(e.id)"  *ngIf="e.roleUsers>0" class="users">{{e.roleUsers|translate}}{{'shared.Users'|translate}}</a>
                 <span  *ngIf="e.roleUsers==0"  >{{'shared.not found'|translate}}</span>
                 </td>
-                <td  >{{e.createdDate|translate}}</td>
+                <td  >{{e.createdDate|date:'dd/mm/yyyy'|translate}}</td>
                 <td  >
                 
                     <div class="d-flex align-items-center gap-4">
                        
-                        <div [ngClass]="e.status=='فعال'?'alerting success':'alerting danger'">{{e.status|translate}}</div>
+                        <div [ngClass]="e.status==true?'alerting success':'alerting danger'">
+                           <span *ngIf="e.status">{{'shared.allStatus.active'|translate}}</span> 
+                           <span *ngIf="!e.status">{{'shared.allStatus.inActive'|translate}}</span> 
+                        </div>
+                        
                         
                     </div>
                 </td>
-                <td> 
-                      <div class="dropdown">
+                <td class="dropdown"> 
+                      
                         <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
                             <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon>
                         </div>
@@ -53,75 +67,76 @@
                                 </a>
                             </li>
                             <li class="dropdown-item">
-                                <a class="link" (click)="deleteRole(e)" >
+                                <a class="link" (click)="this.confirmModelService.openModel();  selectedRole=e;" >
        
                                   <img src="assets/images/shared/delete.svg" alt="">
                                   <p>{{'dashboard.UserRole.Delete Job Role'|translate}}</p>
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                  
                 </td>
             
             </tr>
         </ng-template>
 
-        <ng-template pTemplate="emptymessage" let-columns>
 
+          <ng-template pTemplate="emptymessage" let-columns>
             <tr>
-    
-                <td [attr.colspan]="20" [att.rowspan]="10">
-    
-                    <app-informative-block title="{{'emptyList.UserRoles List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
-    
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="roles.totalAllData && roles.list.length == 0 &&  !roles.loading">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+
+                    <app-loader></app-loader>
+
                 </td>
-    
             </tr>
-    
-          </ng-template>
+        </ng-template>
     </p-table>
   
-    <div >
-        <app-pagination [totalItems]=" userRolesList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
-      </div>
-    
+    <div *ngIf="paginationState.rows<roles.total">
+        <app-pagination [totalItems]="roles.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
-
+    
+ </div>
+<!-- emptymessage -->
+<ng-container *ngIf="!roles.totalAllData && !roles.loading">
+    <app-informative-block title="{{'emptyList.UserRoles List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>
     
     
 
-   <!-- confirm dialog on delete role  -->
-        <p-confirmDialog #cd [style]="{width: '35vw',height:'15vw'}"  >
-            <ng-template pTemplate="footer">
-                <button type="button"  pButton  label="{{'shared.yes'|translate}}" (click)="cd.accept()"></button>
-                <button type="button"   pButton  label="{{'shared.no'|translate}}" (click)="cd.reject()"></button>
-                
-            </ng-template>
-        </p-confirmDialog>
+ 
 
    <!-- popup to show userlist of this role  -->
    <div class="prim-table" >
    <p-dialog header="{{'dashboard.UserInformation.List Of Users'|translate}}" [draggable]="false" [resizable]="false" [modal]="true"  [(visible)]="displayUserList" [style]="{width: '20vw',height:'20vw'}">
     <div class="container">
         <div  >
-                <div class="row">
-                    <div *ngFor="let user of userListForSpecificRole;let i=index " class="col-6">
-                       {{i+1}}- {{user}}
+                <div class="row" *ngIf="!showLoader">
+                    <div *ngFor="let user of userListForSpecificRole;let i=index " class="col-lg-6">
+                       {{i+1}}- {{user.name.ar}}
                     </div>
 
+                </div>
+
+                <div class="row" *ngIf="showLoader">
+                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                    <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
                 </div>
         </div>
 
     </div>
 
-        <!-- <ng-template pTemplate="footer">
-        
-            <button class="btn btn-primary" (click)="displayUserList=false"   styleClass="p-button-text">{{'shared.close'|translate}}</button>
-        </ng-template> -->
+    
    </p-dialog>
 </div>
     
-
-
-
 

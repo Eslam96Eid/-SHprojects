@@ -1,0 +1,27 @@
+@import '../../../../assets/css/utils/variables.scss';
+
+.btn-group{
+    border-radius: 15px;
+    background-color: $color-gray-50;
+    overflow: hidden;
+
+    &__list{
+        display: flex;
+
+        &__item{
+            border-radius: 15px;
+            background-color: transparent;
+            color: $color-gray-150;
+            padding: 1.2rem 2.7rem;
+            cursor: pointer;
+            transition: all .3s ease-in-out;
+
+            &.active{
+                background-color: $color-primary;
+                color: #fff;
+
+            }
+
+        }
+    }
+}

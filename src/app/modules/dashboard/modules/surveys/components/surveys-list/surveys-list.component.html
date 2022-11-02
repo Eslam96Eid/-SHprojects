@@ -7,146 +7,89 @@
 
 <div class="parents">
 
-    <div class="prim-table mt-4">
-        <p-table #dt [value]="schoolClasses" [paginator]="true" [(rows)]="rows" [(first)]="first">
+    <div class="prim-table " *ngIf="isLoaded">
+        <p-table #dt [value]="assignmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
-            <!-- Table Caption -->
-            <ng-template pTemplate="caption">
-                <app-table-caption [filterFormControls]="['status','city','state','course']"></app-table-caption>
 
-            </ng-template>
-            <ng-template pTemplate="header" let-columns="columns">
+
+            <ng-template pTemplate="header">
                 <tr>
-                    <th pSortableColumn="code">
-                        <div class="content">
-                            {{'dashboard.surveys.surveyNumber'|translate }}
-                            <p-sortIcon field="code"></p-sortIcon>
-                        </div>
+                    <th pSortableColumn="surveyNumber">
+                        <p-sortIcon field="surveyNumber"></p-sortIcon>{{'dashboard.surveys.surveyNumber' | translate}}
                     </th>
-                    <th pSortableColumn="name">
-                        {{'dashboard.surveys.surveyAddress'|translate }}
-                        <p-sortIcon field="name"></p-sortIcon>
+
+                    <th pSortableColumn="arabicTitle">
+                        <p-sortIcon field="arabicTitle"></p-sortIcon>{{'dashboard.surveys.surveyAddress' | translate}}
                     </th>
-                    <th pSortableColumn="category">{{'dashboard.surveys.surveyType'|translate }}
-                        <p-sortIcon field="category"></p-sortIcon>
+
+                    <th pSortableColumn="surveyType">
+                        <p-sortIcon field="surveyType"></p-sortIcon>{{'dashboard.surveys.surveyType' | translate}}
                     </th>
-                    <th pSortableColumn="quantity">{{'dashboard.surveys.targetsNumber'|translate }}
-                        <p-sortIcon field="quantity"></p-sortIcon>
+
+                    <th pSortableColumn="arabicUserName">
+                        <p-sortIcon field="arabicUserName"></p-sortIcon>{{'dashboard.surveys.targetsNumber' | translate}}
                     </th>
-                    <th pSortableColumn="price">{{'dashboard.surveys.responsesNumber'|translate }}
-                        <p-sortIcon field="price"></p-sortIcon>
+
+
+                    <th pSortableColumn="targetGuardians">
+                        <p-sortIcon field="targetGuardians"></p-sortIcon>{{'dashboard.surveys.responsesNumber' | translate}}
                     </th>
-                    <th pSortableColumn="actions">{{'dashboard.surveys.surveyStatus'|translate }}
-                        <p-sortIcon field="price"></p-sortIcon>
+                    <th pSortableColumn="surveyStatus">
+                        <p-sortIcon field="surveyStatus"></p-sortIcon>{{'dashboard.surveys.surveyStatus' | translate}}
                     </th>
-                    <th class="actions"></th>
+
+                    <th></th>
+
+
                 </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-product let-columns="columns">
+            <ng-template pTemplate="body" let-product>
                 <tr>
-                    <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
-                        {{product[col.field]}}
-                    </td> -->
-                    <td>{{product.code}}</td>
-                    <td>{{product.name}}</td>
-                    <td>{{product.name}}</td>
-                    <td>{{product.quantity}}</td>
-                    <td>
-                        <div class="color-skyBlue-500 ">
-                            <a role="button" class="color-skyBlue-500  text-decoration-underline fs-4" (click)="openResponsesModal()">
-                                <p>6</p>
-                            </a>
-                        </div>
-                    </td>
-                    <td>
-                        <!-- <div class="alerting success">جديد</div>
-                        <div class="alerting warning">مرسل</div> -->
+                    <td>{{product.surveyNumber| translate}}</td>
+                    <td>{{product.arabicTitle| translate}}</td>
+                    <td>{{product.surveyType| translate}}</td>
+                    <td>{{product.arabicUserName| translate}}</td>
+                    <td>{{product.targetGuardians| translate}}</td>
 
-                        <div class="alerting danger">مغلق</div>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <div [ngSwitch]="product.surveyStatus">
+                                <div class="alerting primary" *ngSwitchCase="StatusEnum.New"> {{'dashboard.surveys.'+StatusEnum.New| translate}}</div>
+                                <div class="alerting success" *ngSwitchCase="StatusEnum.Sent "> {{'dashboard.surveys.'+StatusEnum.Sent | translate}}</div>
+                                <div class="alerting warning " *ngSwitchCase="StatusEnum.Close "> {{'dashboard.surveys.'+StatusEnum.Close | translate}}</div>
 
-                    </td>
-                    <td class="edit">
-                        <button routerLink="/dashboard/educational-settings/surveys/survey-details">
-                        {{'shared.details'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
-                     </button>
-                    </td>
-                    <!-- <td>
-/dashboard/educational-settings/surveys/
-                        <div class="dropdown">
-                            <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
-                                <fa-icon class="fs-4" [icon]="faEllipsisVertical"></fa-icon>
                             </div>
-                            <ul class="dropdown-menu shadow-lg " aria-labelledby="dropdownMenuButton1">
-                                <li class="dropdown-item">
-                                    <a class="link" routerLink="send-survey">
-                                        <img src="assets/images/dropdown/send.svg" alt="">
-                                        <p>{{'dashboard.surveys.sendSurvey' |translate}}</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown-item">
-                                    <a class="link" routerLink="survey-report">
-                                        <img src="assets/images/dropdown/report.svg" alt="">
-                                        <p>{{'dashboard.surveys.generateSurveyReport' |translate}}</p>
-                                    </a>
-                                </li>
-                                <li class="dropdown-item">
-                                    <a class="link" routerLink="survey-details">
-                                        <img src="assets/images/dropdown/pen.svg" alt="">
-                                        <p>{{'dashboard.surveys.surveyDetails' |translate}}</p>
-                                    </a>
-                                </li>
 
-
-                            </ul>
                         </div>
-                    </td> -->
+                    </td>
+                    <td class=" edit ">
+                        <button routerLink=" ">
+                                {{'shared.details'|translate}} <img src="assets/images/shared/arrow.svg " alt=" ">
+                        </button>
+                    </td>
                 </tr>
             </ng-template>
+            <ng-template pTemplate="emptymessage " let-columns>
 
+                <tr>
+
+                    <td [attr.colspan]="20 " [att.rowspan]="10 ">
+
+                        <app-informative-block title="{{ 'emptyList.Survey List is empty' |translate}} " src="assets/images/empty-list/empty-list.svg "></app-informative-block>
+
+                    </td>
+
+                </tr>
+
+            </ng-template>
         </p-table>
 
-        <div class="">
-            <app-pagination [totalItems]="schoolClasses.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+
+        <div>
+
+            <app-pagination [totalItems]="assignmentList.length " (paginationChanged)="onTableDataChange($event) ">
+            </app-pagination>
         </div>
+
     </div>
 </div>
-
-
-<p-dialog header="عددالردود الكلى" [(visible)]="openResponsesModel" [draggable]="false" [modal]="true" [style]="{width: 'max(60vw)'}">
-    <ng-template pTemplate="content">
-        <div class="prim-table mt-4 px-4">
-            <p-table #dt [value]="schoolClasses">
-
-                <ng-template pTemplate="header" let-columns="columns">
-                    <tr>
-                        <th pSortableColumn="category">{{'dashboard.surveys.parentName'|translate }}
-                            <p-sortIcon field="category"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="quantity">{{'dashboard.surveys.questionType'|translate }}
-                            <p-sortIcon field="quantity"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="price">{{'shared.options'|translate }}
-                            <p-sortIcon field="price"></p-sortIcon>
-                        </th>
-                        <th pSortableColumn="actions">{{'dashboard.surveys.answerDateAndTime'|translate }}
-                            <p-sortIcon field="price"></p-sortIcon>
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-product let-columns="columns">
-                    <tr>
-                        <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
-                            {{product[col.field]}}
-                        </td> -->
-                        <td>{{product.code}}</td>
-                        <td>{{product.name}}</td>
-                        <td>{{product.name}}</td>
-                        <td>{{product.quantity}}</td>
-
-                    </tr>
-                </ng-template>
-
-            </p-table>
-        </div>
-    </ng-template>
-</p-dialog>

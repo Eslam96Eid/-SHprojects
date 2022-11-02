@@ -20,10 +20,10 @@
             </p-card>
         </div>
         <div class="col-md-5">
-            <p-card id="card-chart-bar" hight>
+            <p-card id="card-chart-bar">
                 <div class="row">
                     <div class="col-md-8">
-                        <canvas id="bar" baseChart [data]="model.regionSchoolsData" [options]="model.regionSchoolsOptions" [plugins]="model.regionSchoolPlugins" [legend]="false" [type]="'bar'" height="220" width="365" style="font-size: large;">
+                        <canvas id="bar" baseChart [data]="model.regionSchoolsData" [options]="model.regionSchoolsOptions" [plugins]="model.regionSchoolPlugins" [legend]="false" [type]="'bar'" height="212" width="365" style="font-size: large;">
                         </canvas>
                     </div>
                     <div *ngIf="model.chartData" class="col-md-4 mt-5 Bar-char-Info">
@@ -55,7 +55,7 @@
                         <ng-template [ngTemplateOutlet]="totalSchoolCount"></ng-template>
                     </div>
                     <div class="col-md-6">
-                        <ul class="chart-Info">
+                        <ul class="chart-Info-active">
                             <li class="notActive mb-4">
                                 <span class="color-gray-300 fs-4">غير مفعله</span>
                             </li>

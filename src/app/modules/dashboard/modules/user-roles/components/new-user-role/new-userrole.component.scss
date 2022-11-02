@@ -18,20 +18,63 @@
         font-weight: 400;
         margin-right: 2rem;
       }
+
      
     }
     .switch{
-      
+
       .Label{margin-right: 0.5rem;margin-top: 0.5rem;}
        .status{margin-top: 2rem;}
        .text{margin-top: 0.5rem;}
       
    }
+   .curriclums{
+    flex-wrap:wrap;
+    line-height: 4rem;
+   }
+   .actions{text-align: center;max-width:5rem;width: 3rem;}
+   ::ng-deep {
+         .p-dropdown{
+              .p-dropdown-item {
+                    width: max-content;
+                   }
+               }
+           }
    
 }
 
+.alert{
+  p{color: $color-skyBlue-400;font-weight: 700;font-size: 16px;font-family: "Droid";}
+  border-radius: 16px;
+  padding: 1.5rem;
+  background-color: rgba(239, 253, 255, 0.72);
+}
 
-
+::ng-deep p-dialog{
+    
+  .p-dialog{
+      overflow: hidden;
+      border-radius: 15px;
+      .p-dialog-header{
+          padding:1.2rem 3.2rem !important;
+          display: block;
+          .headeritem{
+              font-weight: 700;
+              font-size: 20px;
+              font-family: 'Droid';
+              line-height: 5rem;
+         }
+         button{
+          margin-right: 42rem;
+        }
+          
+      }
+      .p-dialog-footer{
+        padding:1.2rem 3.2rem !important;
+      }
+  
+  }
+}
 
 
   

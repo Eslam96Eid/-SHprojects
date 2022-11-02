@@ -14,19 +14,11 @@
         font-family: 'Droid';
     }
 
-    &.popup{
-      
-        .title{
-            width: 70%;
-            
-        }
-        
-        min-height: 4rem;
-        height: 2rem;
+    &.sm{
+        min-height: 20rem;
         justify-content: start;
         position: relative;
-        bottom:4.2rem;
-        left: 1rem;
-        img{width: 40%;}
+        bottom:2rem;
+
     }
 }

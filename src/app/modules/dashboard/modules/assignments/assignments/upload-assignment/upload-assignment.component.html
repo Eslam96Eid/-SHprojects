@@ -7,78 +7,13 @@
     <div class="d-flex ">
 
         <div id="content">
-            <!-- <div class="actions d-flex align-items-center gap-3 mb-5 mt-3">
-                <app-back [route]="'/dashboard/performance-managment/assignments/assignments-list'"></app-back>
-                <button class="btn btn-primary btn--sm">
-                    <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
-                    <span routerLink=''>{{'shared.save'| translate}} </span>
-                </button>
-            </div> -->
+
 
             <!-- ---------------- -->
 
             <div class="container mt-5 custom-form custom-validation-form">
                 <form [formGroup]="assignmentFormGrp" class="container-fluid ">
-                    <!-- <div class="form-group">
 
-                        <label class="label" for="">
-                            {{'School' | translate}}
-                        </label>
-                        <div class="first-filter d-flex ">
-
-                            <p-dropdown [options]="cities"
-                                placeholder="{{'Sharjah Primary School for Special Education' | translate}}"
-                                class="form-control " [style]="{width:'99%'}" appValidation></p-dropdown>
-
-                            <p-button (click)="showMaximizableDialog()" styleClass="filerBtn "><img
-                                    src="assets/images/shared/filter.svg" alt=""></p-button>
-                            <p-dialog header="{{'Filter' | translate}}" [(visible)]="displayMaximizable" [modal]="true"
-                                [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
-
-                                <div class="caption__filter caption__filter--box filterform">
-                                    <div class="row gx-5 mb-0 inputs">
-                                        <div class="col-5 ">
-                                            <label for="description"
-                                                class="label">{{'dashboard.Assignments.Region'|translate}}</label>
-
-                                            <span class="p-input-icon-left w-100">
-                                                <i class="pi pi-map-marker"></i>
-                                                <input type="text" pInputText inputId="description"
-                                                    placeholder="{{'dashboard.Assignments.Select Region'|translate}}">
-
-                                            </span>
-
-                                        </div>
-                                        <div class="col-5 ">
-                                            <label for="description"
-                                                class="label">{{'dashboard.Assignments.curriculum'|translate}}</label>
-                                            <p-dropdown [options]="cities" inputId="description"
-                                                placeholder="{{'dashboard.Assignments.Select curriculum'|translate}}">
-                                            </p-dropdown>
-                                        </div>
-                                    </div>
-                                    <div class="row gx-5 mb-0 inputs">
-                                        <div class="col-5 ">
-                                            <label for="description" class="label">{{'dashboard.Assignments.School
-                                                Number'|translate}}</label>
-                                            <input type="text" pInputText inputId="description"
-                                                placeholder="{{'dashboard.Assignments.Write School Number'|translate}}">
-                                        </div>
-
-                                    </div>
-                                </div>
-
-
-                                <ng-template pTemplate="footer">
-                                    <button class="btn btn-primary btn--sm saveBtn">
-                                        <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
-                                        <span routerLink=''>{{'shared.save'| translate}} </span>
-                                    </button>
-                                    <p-button (click)="displayMaximizable=false" styleClass="p-button-text"></p-button>
-                                </ng-template>
-                            </p-dialog>
-                        </div>
-                    </div> -->
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
                             <div class="form-group">
@@ -99,28 +34,9 @@
 
                             </div>
                         </div>
-                        <!-- <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="label" for="">
-                                    {{'School' | translate}}
-                                </label>
-                                <p-dropdown [(ngModel)]="SchoolSelected" [options]="schools" formControlName="schools" class="form-control "
-                                    [style]="{width:'99%'}" placeholder="{{'Choose School' | translate}}">
-                                    <ng-template let-value pTemplate="selectedItem">
-                                        <div class="country-item country-item-value" *ngIf="SchoolSelected">
-                                            <div>{{SchoolSelected.name.ar}}</div>
-                                        </div>
-                                    </ng-template>
-                                    <ng-template let-item pTemplate="item">
-                                        {{item.name.ar}}
-                                    </ng-template>
-                                </p-dropdown>
-                            </div>
-                        </div> -->
+
                     </div>
 
-
-                    <!-- <hr class="line"> -->
 
                     <div class="row gx-5 form-set">
                         <div class="col-md-4">
@@ -139,8 +55,7 @@
                                         {{item.name.ar}}
                                     </ng-template>
                                 </p-dropdown>
-                                <!-- <p-dropdown [options]="cities" placeholder="{{'Choose Class' | translate}}"
-                                    class="form-control" appValidation></p-dropdown> -->
+
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -160,8 +75,6 @@
                                     </ng-template>
                                 </p-dropdown>
 
-                                <!-- <p-dropdown [options]="cities" placeholder="{{'Choose Subject' | translate}}"
-                                    class="form-control" appValidation></p-dropdown> -->
                             </div>
                         </div>
                         <div class="col-md-4">
@@ -192,7 +105,7 @@
                                 </label>
                                 <div class="field col-12 md:col-4">
 
-                                    <p-calendar formControlName="ExamDate" [showIcon]="true" inputId="icon" selectionMode="range" class="form-control" appValidation placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
+                                    <p-calendar formControlName="ExamDate" [showIcon]="true" inputId="icon" class="form-control" [minDate]="minDateValue" appValidation placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
 
                                 </div>
                             </div>
@@ -210,18 +123,14 @@
                     </div>
                     <div class="row gx-5 form-set">
                         <div class="col-lg-10 files-upload">
-                            <h5 class="label">{{'Exam questions in both paper and audio formats' | translate}}</h5>
 
-                            <!-- <app-file-upload></app-file-upload> -->
-                            <div class="image-uploader__upload upload-btn">
-                                <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple" accept="image/*" maxFileSize="1000000">
-                                    <ng-template pTemplate="content">
-                                        <ul *ngIf="uploadedFiles.length">
-                                            <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
-                                        </ul>
-                                    </ng-template>
-                                </p-fileUpload>
+
+                            <div class="col ">
+
+
+                                <app-exam-upload (onFileUpload)="onFileUpload($event)" (onImageOrPdfDeleted)="onImageOrPdfDeleted()" (onAudioDeleted)="onAudioDeleted()" accept="image/*" [url]="" view="box" title="{{ 'dashboard.schools.exam'|translate }}" label=" انقر لإرفاق ملف"></app-exam-upload>
                             </div>
+
 
                         </div>
                     </div>

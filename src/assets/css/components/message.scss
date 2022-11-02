@@ -3,6 +3,8 @@
          .toast-container .ngx-toastr{
                         width: max-content;
                         color:#fff;
+                        position: fixed;
+                        bottom:1%;
                        
                   }
                   .toast-error{

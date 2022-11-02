@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
-import { ISubject } from 'src/app/core/Models/isubject';
+import { ISubject } from 'src/app/core/Models/subjects/subject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { SubjectService } from '../../service/subject.service';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -13,35 +13,36 @@ import { Table } from 'primeng/table';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import {ConfirmationService, MessageService} from 'primeng/api';
-import { ToastrService } from 'ngx-toastr';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-subjects',
   templateUrl: './subjects-list.component.html',
   styleUrls: ['./subjects-list.component.scss'],
   providers: [ConfirmationService, MessageService]
 })
-export class SubjectsComponent implements OnInit {
-  filtration = {...Filtration,evaluation: ''};
+export class SubjectsComponent implements OnInit,OnDestroy {
   faEllipsisVertical = faEllipsisVertical;
-  subjectsList: ISubject[] = [];
   evaluationTypeList;
+  deletedSubject;
   first:boolean=true;
-  allSubjectsLength:number=1;
   fixedLength:number=0;
-  message:string=""; 
+  subscription:Subscription;
+  filtration = {...Filtration,evaluation: ''};
   paginationState= {...paginationInitialState};
   subjects={
+    totalAllData:0,
     total:0,
     list:[],
     loading:true
   }
-  cities: string[];
-  constructor(private exportService: ExportService,private layoutService:LayoutService,private toastr:ToastrService,private confirmationService: ConfirmationService,private headerService: HeaderService, private router: Router, private translate: TranslateService, private subjectService: SubjectService) {
+
+  constructor(private exportService: ExportService, public confirmModelService: ConfirmModelService, private toastService: ToastService, private headerService: HeaderService, private router: Router, private translate: TranslateService, private subjectService: SubjectService) {
   }
 
   ngOnInit(): void {
-
+    this.confirmDeleteListener();
     this.getAllSubjects();
     this.evaluationTypeList=this.subjectService.evaluationTypeList;
     console.log(...this.evaluationTypeList);
@@ -51,12 +52,13 @@ export class SubjectsComponent implements OnInit {
           { label: this.translate.instant('dashboard.Subjects.List Of Subjects'),routerLink: '/dashboard/educational-settings/subject/subjects-list'}],
       }
     );
-    this.cities = this.subjectService.cities;
+ 
    
 
   }
   sortMe(e)
   {
+    
     console.log(e);
     if(e.order==-1)
     {this.filtration.SortBy="update "+e.field;}
@@ -65,61 +67,54 @@ export class SubjectsComponent implements OnInit {
 
     this.getAllSubjects();
   }
+  confirmDeleteListener(){
+    this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
+      if (val) this.deleteSubject(this.deletedSubject)
+      
+    })
+  }
 
   getAllSubjects(){
-   console.log(this.filtration);
+    this.subjects.loading=true;
+    this.subjects.list=[];
     this.subjectService.getAllSubjects(this.filtration).subscribe((res)=>{
         this.subjects.loading = false;
-   
-     this.allSubjectsLength=res.total;
-    
+        this.subjects.total=res.total;
+        this.subjects.list=res.data;
      if(this.first)
      {
-      this.fixedLength=this.allSubjectsLength;
-      this.subjects.total=this.fixedLength;
+      this.fixedLength=this.subjects.total;
     }
-     console.log(this.fixedLength)
-      this.subjectsList=res.data;
-      
-    
-    
-      },(err)=>{this.subjects.loading = false;
+
+      },(err)=>{
+        this.subjects.loading = false;
         this.subjects.total=0
       });
      
    
   }
+ 
 
-  deleteSubject(subject:ISubject)
+  deleteSubject(subject)
   {
-    
-
-    this.confirmationService.confirm({
-      message: this.translate.instant('dashboard.Subjects.Are you sure that you want to delete Subject')+" \" "+subject.subjectName.ar+" \" "+this.translate.instant('shared.?'),
-      header: this.translate.instant('shared.Delete Confirmation'),
-      icon: 'pi pi-exclamation-circle',
-      accept:() => { 
-        console.log(subject.id);
+        
         this.subjectService.deleteSubject(subject.id).subscribe((res)=>{
           this.getAllSubjects();
-          this.toastr.clear();
-          this.layoutService.message.next('dashboard.Subjects.Subject deleted Successfully');
-          this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
-          this.toastr.success( this.translate.instant(this. message));
-
+          this.toastService.success(this.translate.instant('dashboard.Subjects.Subject deleted Successfully'));
+          // this.confirmModelService.confirmed$.next(null);
         }
         ,
         (err)=>{
           this.getAllSubjects();
-          this.toastr.clear();
-          this.layoutService.message.next('dashboard.Subjects.error happened,try again');
-          this.layoutService.message.subscribe((res)=>{console.log("init");this.message=res;});
-          this.toastr.error( this.translate.instant(this. message));
+          this.toastService.error(this.translate.instant('dashboard.Subjects.error happened,try again'));
+          // this.confirmModelService.confirmed$.next(null);
         })
        
-      }
-  });
+      
+  
 }
+
+
   clearFilter(){
     
     this.filtration.KeyWord =''
@@ -129,7 +124,7 @@ export class SubjectsComponent implements OnInit {
 
 
   onExport(fileType:FileEnum, table:Table){
-    this.exportService.exportFile(fileType, table,this.subjectsList)
+    this.exportService.exportFile(fileType, table,this.subjects.list)
   }
 
 
@@ -139,6 +134,9 @@ export class SubjectsComponent implements OnInit {
     this.getAllSubjects();
 
   }
-
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+    this.confirmModelService.confirmed$.next(null);
+  }
  
 }

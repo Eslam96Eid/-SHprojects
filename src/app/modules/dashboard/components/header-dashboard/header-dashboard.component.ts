@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MenuItem } from 'primeng/api';
-import { IHeader, ITitle } from 'src/app/core/Models/iheader';
+import { IHeader, ITitle } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { faCheck, faClose } from '@fortawesome/free-solid-svg-icons';

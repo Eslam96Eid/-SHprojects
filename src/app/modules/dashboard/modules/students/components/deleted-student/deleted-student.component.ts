@@ -2,7 +2,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import {IHeader } from 'src/app/core/Models/iheader';
+import {IHeader } from 'src/app/core/Models/header-dashboard';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 @Component({
   selector: 'app-deleted-student',

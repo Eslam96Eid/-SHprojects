@@ -1,0 +1,84 @@
+<div class="image-uploader flex-grow-1" [class]="view">
+    <h3 class="heading heading--tertiary mb-4"> {{title}}</h3>
+
+    <div class="row gx-4 gap-4 gap-xxl-5">
+
+        <div class="image-uploader__upload upload-btn" (click)="upload.click()">
+            <input type="file" #upload [accept]="accept" [multiple]="multiple" [hidden]="true" (change)="uploadFile($event)">
+            <div class="icon-upload">
+                <img class="" src="assets/images/shared/upload.svg" alt="upload">
+            </div>
+
+            <p class="title text-center">{{ label }}</p>
+
+        </div>
+
+
+
+
+        <ng-container *ngIf="audioFile">
+            <div class="d-flex">
+                <div class="px-2">{{audioFile.name}}</div>
+                <fa-icon *ngIf="audioFile.url" class="icon-close" [icon]="faXmark" (click)="removeAudioFile()"></fa-icon>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="pdfFile">
+            <div class="d-flex">
+                <div class="px-2">{{pdfFile.name}}</div>
+                <fa-icon *ngIf="pdfFile.url" class="icon-close" [icon]="faXmark" (click)="removePdfFile()"></fa-icon>
+            </div>
+        </ng-container>
+
+
+
+
+        <ng-container *ngIf="view=='list'">
+            <div class="list flex-column ">
+                <ul>
+                    <ng-container *ngFor="let file of files; let i = index">
+                        <li class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
+                            <img src="assets/images/shared/pdf.svg" alt="">
+                            <span>{{file?.name}}</span>
+                            <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+        </ng-container>
+
+    </div>
+
+
+    <ng-container *ngIf="view=='rows'">
+        <div class="row gx-5 mt-5 rows">
+            <ng-container *ngFor="let file of files; let i = index">
+                <div class="col-md-6 ps-6">
+                    <label class="label color-gray-700" for="day">{{'dashboard.students.studentIdentity' |translate}}  </label>
+                    <div class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
+                        <img src="assets/images/shared/pdf.svg" alt="">
+                        <span>{{file?.name}}</span>
+                        <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+
+
+
+    <ng-container *ngIf="view=='full'">
+        <div class="row gx-5 mt-5 rows">
+            <ng-container *ngFor="let file of files; let i = index">
+                <div class="ps-6">
+                    <!-- <label class="label color-gray-700" for="day">{{'dashboard.students.studentIdentity' |translate}}  </label> -->
+                    <div class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-3">
+                        <img src="assets/images/shared/pdf.svg" alt="">
+                        <span>{{file?.name}}</span>
+                        <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container>
+</div>

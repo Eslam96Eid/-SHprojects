@@ -94,6 +94,10 @@
     "Active": "فعال",
     "Inactive": "غير فعال",
     "flexible": "مرنة",
+    "warning": "تحذير",
+    "updatedSuccessfully": "تم التعديل بنجاح",
+    "savedSuccessfully": "تم الحفظ بنجاح",
+    "pleaseFillTheAboveRate": "إملا البيانات من فضلك",
     "Not flexible": "غير مرنة",
     "mission Succeeded": "تمت العملية بنجاح",
     "error happened": "حدث خطأ",
@@ -103,8 +107,10 @@
         "Login With Digital Identity": "الدخول عن طريق الهوية الرقمية",
         "IdentityNumber,Email,PhoneNumber.Example:971500000000": "رقم الهوية,البريد الإلكتروني,أو رقم الهاتف.مثال:971500000000",
         "remember me": "تذكرني",
-        "wrong,pleaze check examples and try again": "معرف خاطي , يرجي التأكد من الأمثلة والمحاولة مرة أخري"
-
+        "wrong,pleaze check examples and try again": "معرف خاطي , يرجي التأكد من الأمثلة والمحاولة مرة أخري",
+        "Available": "متاح",
+        "Unavailable": "غير متاح",
+        "noURLFound": "لا يوجد لينك للتحميل"
     },
 
     "sideBar": {
@@ -203,6 +209,7 @@
         "Assessment List is empty": "لا توجد تقييمات بعد",
         "Subject List is Empty": "لا توجد مواد دراسية بعد",
         "Users List is empty": "لا يوجد مستخدمين بعد",
+        "Parent List is empty": "لا يوجد اولياءالأمور ",
         "UserRoles List is empty": "لا توجد أدوار وظيفية بعد",
         "Indexes List is empty": "لا توجد فهارس بعد",
         "schools": " يبدو انه لايوجد مدارس فى الوقت الحالى ",
@@ -211,14 +218,21 @@
         "Notifications List is empty": "لا يوجد لديك إشعارات",
         "SchoolYear List is empty": "لا توجد سنوات دراسية بعد",
         "Assignments List is empty": "لاتوجد إمتحانات بعد",
+        "Survey List is empty": "لاتوجد استبيانات ",
         "noInfo": "لا يوجد معلومات",
         "youShouldSelectGarde": "يجب ان تختار الصف لاظهر المعلومات",
         "UserRole list for this role is empty": "لايوجد مستخدمين لهذا الدور بعد",
         "Curriculum List is empty": "لا توجد مناهج بعد",
-        "childern List is empty": "لا توجد اي بيانات بعد"
+        "childern List is empty": "لا توجد اي بيانات بعد",
 
-
-
+        "No Information setting": "لا توجد بيانات",
+        "NoNotification": "لا توجد إشعارات",
+        "Schools not selected yet": "لم يتم تحديد أي مدرسة بعد !",
+        "Pleaze, Select School": "يرجى تحديد المدارس المخصصة لهذا الدور",
+        "divisions": "يبدو انه لايوجد شعب فى الوقت الحالى ",
+        "grades": "يبدو انه لايوجد صفوف فى الوقت الحالى ",
+        "editList": "يبدو انه لايوجد تعديلات فى الوقت الحالى ",
+        "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب"
 
     },
 
@@ -357,6 +371,7 @@
         "nationalIdExpireDate": "تاريخ انتهاء الهوية",
         "nationalityClass": "فئة الجنسية",
         "emara": "الإمارة",
+
         "religion": "الديانة",
         "mobile": "حاسب محمول",
         "internet": "إنترنت",
@@ -400,10 +415,24 @@
             "Inactive": "غير مفعله",
             "Active": "مفعله",
             "passed": "ناجح",
-            "notPassed": "راسب"
+            "notPassed": "راسب",
+            "active": "فعال",
+            "inActive": "غير فعال",
+            "Deleted": "محذوف"
+
         },
 
-        "Delete Confirmation": "تاكيد حذف"
+        "Delete Confirmation": "تاكيد حذف",
+        "writeLanguage": "اكتب اللغه",
+        "nativeLanguage": "اللغة الأم",
+        "homeLanguage": "اللغة المنزل",
+        "mostUsedLanguage": "اللغة الأكثر استخداماً",
+        "confirmDelete": "هل أنت متأكد من رغبتك بحذف هذا العنصر؟",
+        "export": "استيراد ",
+        "genderType": {
+            "Female": "انثى",
+            "Male": "ذكر"
+        }
 
     },
     "Notifications": {
@@ -422,11 +451,12 @@
     "dashboard": {
         "Assessment": {
             "AssessmentName": "أسم التقييم",
+            "Academicevaluation": "تقييم الأكاديمي",
             "Maximum Degree": "الدرجة العظمي",
             "Minmum Degree": "الدرجة الدنيا",
             "AssessmentTable": "جدول درجات التقيم",
             "Assessment": "رمز التقييم",
-            "Deserving Degrees": "الدرجات المستحقة",
+            "Deserving Degrees": "الدرجة المستحقة",
             "succeeded": "ناجح",
             "Try again": "إعادة المحاوله",
             "Write AssessmentName": "أكتب أسم التقييم",
@@ -437,7 +467,12 @@
             "Add Assessment System": "إضافة نظام التقييمات",
             "Degrees must be more than or equal Zero": "لابد أن تكون عدد الدرجات أكثر من او تساوي صفر",
             "From": "من",
-            "To": "إلي",
+            "To": "ل",
+            "sign": "مدلول",
+            "degreeLimit": "حدود الدرجه",
+            "RatingCode": "رمز التقييم",
+            "maxdegree": "الدرجه العظمي",
+            "mindegree": "الدرجه الدنيا",
             "successful": "ناجح",
             "unSuccessful": "غير ناجح"
         },
@@ -526,6 +561,7 @@
             "employeeRole": "دور الموظف",
             "employeeStatus": "حالة الموظف",
             "SchoolLogo": "شعار المدرسة",
+            "exam": "أسئلة الامتحان بالصيغتين الورقية والصوتية",
             "enterForAttachSchoolLogo": "انقر لارفاق شعار المدرسه",
             "reliableLogo": "شعار الاعتماد الخاص بالدبلوم",
             "enSchoolName": "مسمى المدرسه (باللغه العربيه)",
@@ -707,12 +743,13 @@
             "studentperformance": "اداء الطالب",
             "GPA": "المعدل التراكمي",
             "Credithour": "الساعات الدراسيه",
-
+            "school": "المدرسه",
+            "grade": "المستوي الدراسي",
+            "Register": "مسجل ف مدرسة",
+            "Unregister": "غير مسجل ف مدرسة",
+            "registerSons": "الابناء المسجلين ",
+            "UnregisterSons": "الابناء الغير مسجلين ",
             "selectParents": "اختر  أولياء الأمور"
-
-
-
-
 
         },
         "students": {
@@ -790,6 +827,7 @@
             "academic year": "السنه الدراسية",
             "School Name": "اسم المدرسة",
             "Class": "الصف",
+            "school": "المدرسه",
             "insideEmara": "داخل الاماره",
             "outSideEmara": "خارج الاماره",
             "outsideCountry": "خارج البلد"
@@ -819,6 +857,8 @@
 
         "UserRole": {
             "JobRole Name": "أسم الدور الوظيفي",
+            "JobRole Name In Arabic": "أسم الدور الوظيفي (باللغة العربية)",
+            "JobRole Name In English": "أسم الدور الوظيفي (باللغة الأنجليزية)",
             "Role Users": "مستخدمين الدور",
             "Status": "الحالة",
             "List Of Job Roles": "قائمة الأدوار الوظيفية",
@@ -826,6 +866,8 @@
             "Job Role Details": "تفاصيل الدور الوظيفي",
             "Delete Job Role": "حذف دور وظيفي",
             "Description": "الوصف",
+            "Description In Arabic": "الوصف (باللغة العربية)",
+            "Description In English": "الوصف (باللغة الأنجليزية)",
             "RolePowers": "صلاحيات الدور",
             "DataRestrictionLevel": "مستوي تقييد البيانات",
             "JobRole Status": "حالة الدور الوظيفي",
@@ -841,11 +883,23 @@
             "Job Role deleted Successfully": "تم حذف هذا الدور الوظيفي بنجاح",
             "error, you can’t delete this JobRole": "حدث خطأ أثناء محاولة حذف دور وظيفي. لايمكن حذف هذا الدور الوظيفي",
             "JobRole added Successfully": "تمّ إنشاء دور جديد بنجاح",
+            "JobRole edited Successfully": "تمّ تعديل الدور الوظيفي بنجاح",
             "JobRole already exist ,Pleaze change JobRole and try again": "الدور متوفر مسبقا في النظام، يرجى تغيير اسم الدور والمحاولة من جديد",
             "created by": "تم الإنشاء بواسطة",
-            "Are you sure that you want to delete JobRole": "هل متاكد أنك تريد حذف الدور الوظيفي "
-
-
+            "Are you sure that you want to delete JobRole": "هل متاكد أنك تريد حذف الدور الوظيفي ",
+            "JobRole duplicated": "حدث خطأ. هذا الدور الوظيفي موجود بالفعل",
+            "error,please try again": "حدث خطأ. من فضلك حاول مجددا",
+            "Select curriculums": "تحديد المناهج",
+            "Select School": "تحديد المدارس",
+            "You Select": "لقد قمت بتحديد ",
+            "From School": "من المدارس",
+            "exist": "يوجد",
+            "school selected for this role": "مدارس محددة من أجل هذا الدور",
+            "AccessToAllSchoolInformation": "إمكانية وصول المستخدم إلى كافة معلومات المدارس",
+            "AccessToInformationRelatedToCurriculums": "إمكانية وصول المستخدم إلى المعلومات التابعة لمنهج محدد أو أكثر",
+            "AccessToInformationRelatedToSchool": "إمكانية وصول المستخدم إلى المعلومات التابعة لمدرسة معينة أو أكثر",
+            "error,please add one school at least": "حدث خطأ. من فضلك  حدد مدرسة علي الأقل",
+            "error,please add one curriculum at least": "حدث خطأ. من فضلك  حدد منهج علي الأقل"
 
         },
         "surveys": {
@@ -869,9 +923,9 @@
             "surveyDetails": "تفاصيل الاستبيان",
             "createdDate": "تاريخ الإنشاء",
             "createdBefore": "أنشأ من قبل",
-            "sended": "مرسل",
-            "new": "جديد",
-            "closed": "مغلق",
+            "Sent": "مرسل",
+            "New": "جديد",
+            "Close": "مغلق",
             "sendedBy": "تمّ الإرسال من قبل",
             "sendDate": "تاريخ الإرسال",
             "seenDate": "تاريخ الظهور",
@@ -913,6 +967,7 @@
             "maxdegree": "الدرجة العظمى",
             "result": "النتيجة"
         },
+
 
         "AnnualHoliday": {
             "List Of Annual Holidays": " قائمة الأجازات السنويه",
@@ -1003,6 +1058,22 @@
 
 
         },
+        "Requests": {
+            "RequestList": "قائمة الطلبات",
+            "requestNumber": "معرّف الطلب",
+            "RequestDetails": "تفاصيل الطلبات",
+            "requestType": "نوع الطلب",
+            "Status": "حالة الطلب",
+            "RequestID": "حالة الطلب",
+            "CurrentParent": "اسم ولي الامر الحالي",
+            "StudentStatus": "حالة الطالب",
+            "CreatedBy": "تم انشاؤه من قبل ",
+            "DateandTimeCreate": "تاريخ ووقت الانشاء"
+
+
+
+        },
+
         "Indexes": {
 
             "Add Item": "إضافة عنصر",
@@ -1046,7 +1117,11 @@
         "SharjahCity": "مدينه الشارقه",
         "CentralRegion": "المنطقه الوسطى",
         "EasternProvince": "المنطقه الشرقيه"
-    }
+    },
+
+    "Available": "متاح",
+    "Unavailable": "غير متاح",
+    "noURLFound": "لا يوجد لينك للتحميل"
 
 
 
