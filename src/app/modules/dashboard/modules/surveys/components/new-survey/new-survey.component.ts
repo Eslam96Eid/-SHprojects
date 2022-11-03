@@ -58,7 +58,7 @@ export class NewSurveyComponent implements OnInit {
 
 
   fileName = 'file.pdf'
-  _fileName :string[];
+  _fileName :string[] = [];
 
   values = ['A', 'B']
 
@@ -156,7 +156,8 @@ export class NewSurveyComponent implements OnInit {
   }
 
   uploadFile(e) {
-    this.fileName = e.target.files[0].name
+    this._fileName.push(e.target.files[0].name)
+    // this.fileName = e.target.files[0].name
   }
   goToCancle() {
     this.router.navigateByUrl('/dashboard/educational-settings/surveys');
