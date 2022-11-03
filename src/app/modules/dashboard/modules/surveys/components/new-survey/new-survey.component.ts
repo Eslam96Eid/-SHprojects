@@ -21,13 +21,15 @@ import { SurveyService } from './../../service/survey.service';
 export class NewSurveyComponent implements OnInit {
   title = <ITitle>{};
   dropdownList = [];
-  addSurvey : IAddSurvey= <IAddSurvey>{};
-  addsurveyQuestion : ISurveyQuestion= <ISurveyQuestion>{};
+  addSurvey: IAddSurvey = <IAddSurvey>{};
+  addsurveyQuestion: ISurveyQuestion = <ISurveyQuestion>{};
   subjects: ISurveyQuestion[];
   selectedItems = [];
   cities: string[];
   choices: string[];
   faPlus = faPlus;
+  isQuestionChoicesShow = false;
+  isAttachShow = false;
   surveyType = [
     { name: 'اجباري', code: 1 },
     { name: 'اختياري', code: 0 }
@@ -56,6 +58,8 @@ export class NewSurveyComponent implements OnInit {
 
 
   fileName = 'file.pdf'
+  _fileName :string[];
+
   values = ['A', 'B']
 
   // breadCrumb
@@ -140,14 +144,6 @@ export class NewSurveyComponent implements OnInit {
       questionChoices: ['']
     })
   }
-  newSubjectGroup2() {
-    return this.fb.group({
-      surveyQuestionType: [''],
-      questionText: [''],
-      attachment: [''],
-      questionChoices: ['']
-    })
-  }
   addSubject() {
     this.classSubjects.push(this.newSubjectGroup())
   }
@@ -166,30 +162,60 @@ export class NewSurveyComponent implements OnInit {
     this.router.navigateByUrl('/dashboard/educational-settings/surveys');
   }
   goToAddNew() {
-    debugger
-
-    this.addsurveyQuestion.questionChoices=[];
-    this.addSurvey.surveyQuestions=[];
-    this.addSurvey.title={ar:'',en:''};
+    this.addsurveyQuestion.questionChoices = [];
+    this.addSurvey.surveyQuestions = [];
+    this.addSurvey.title = { ar: '', en: '' };
     this.addSurvey.title.ar = this.assesmentFormGrp.value.surveyTitle;
     this.addSurvey.title.en = this.assesmentFormGrp.value.surveyTitle;
     this.addSurvey.surveyType = this.assesmentFormGrp.value.surveyType.code;
 
-    this.assesmentFormGrp.value.subjects.forEach(element=>{
+    this.assesmentFormGrp.value.subjects.forEach(element => {
       this.addsurveyQuestion.attachment = element.attachment;
       this.addsurveyQuestion.questionText = element.questionText;
       this.addsurveyQuestion.surveyQuestionType = element.surveyQuestionType.code;
-            element.questionChoices.forEach(ele=>{
-              this.addsurveyQuestion.questionChoices.push(ele.name);
-            })
+    if(element.questionChoices){
+      element.questionChoices.forEach(ele => {
+        this.addsurveyQuestion.questionChoices.push(ele.name);
+      })
+    }
       this.addSurvey.surveyQuestions.push(this.addsurveyQuestion);
     })
-    console.log(this.addSurvey);
     this.Surveyservice.AddSurvey(this.addSurvey).subscribe(res => {
       console.log(res);
-      this.toastr.success('Add Successfully','');
+      this.toastr.success('Add Successfully', '');
       this.router.navigateByUrl('/dashboard/educational-settings/surveys');
-     });
-    
+    });
+
+  }
+
+  onChangesurveyQuestionType(event: any , i:any) {
+    const QuestionChoicesDiv = document.getElementById( `div_questionChoices_${i}`) as HTMLInputElement | null;
+    const attachmentDiv = document.getElementById( `div_attachment_${i}`) as HTMLInputElement | null;
+    let typeOfQuestion = event.value.name.toString();
+    switch (typeOfQuestion) {
+      case 'اختياري من متعدد': {
+        QuestionChoicesDiv.style.display = 'block';
+        attachmentDiv.style.display = 'none';
+        break;
+      }
+      case 'ملف': {
+        QuestionChoicesDiv.style.display = 'none';
+        attachmentDiv.style.display = 'block';
+        break;
+      }
+      case 'نجوم': {
+        QuestionChoicesDiv.style.display = 'none';
+        attachmentDiv.style.display = 'none';
+        break;
+      }
+      case 'نص حر ': {
+        QuestionChoicesDiv.style.display = 'block';
+        attachmentDiv.style.display = 'none';
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }
 }
