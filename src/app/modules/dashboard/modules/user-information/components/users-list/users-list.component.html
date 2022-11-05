@@ -28,8 +28,18 @@
                         </button>
 
                             <div class="filter__model custom-form" [class.show]="showFilterModel">
-                                <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" class="form-control" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
-                                </p-dropdown>
+                                <div class="row gx-5 form-set">
+                                    <div class="col">
+                                        <label class="label" for="status">{{'shared.status'|translate }} </label>
+                                        <p-dropdown [options]="usersStatus" [(ngModel)]="isactive" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                                    </div>
+                                    <div class="col">
+                                        <label class="label" for="city">{{'shared.city'|translate }} </label>
+                                        <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                                        </p-dropdown>
+                                    </div>
+                                </div>
+                               
                                 <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
                                     <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح
                                     الكل</span>
@@ -74,9 +84,8 @@
                     <td>{{e.createdDate | date:"MM/dd/yyyy" }}</td>
                     <td>
                         <div class="d-flex align-items-center gap-4">
-                            <div *ngIf="e.status =='Active'" [ngClass]="e.status=='Active'?'alerting success':'alerting danger'">{{e.status |translate}}
-                            </div>
-                            <div *ngIf="e.status !='Active'" [ngClass]="e.status==' فعال'?'alerting success':'alerting danger'">{{e.status |translate}}</div>
+                            <div *ngIf="e.isActive" [ngClass]="e.isActive?'alerting success':'alerting danger'">فعال</div>
+                            <div *ngIf="!e.isActive" [ngClass]="!e.isActive?'alerting danger' : 'alerting success'">غير فعال </div>
                         </div>
                     </td>
 

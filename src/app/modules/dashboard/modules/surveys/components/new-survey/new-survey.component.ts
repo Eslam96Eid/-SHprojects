@@ -28,6 +28,7 @@ export class NewSurveyComponent implements OnInit {
   cities: string[];
   choices: string[];
   faPlus = faPlus;
+  step =1
   isQuestionChoicesShow = false;
   isAttachShow = false;
   surveyType = [

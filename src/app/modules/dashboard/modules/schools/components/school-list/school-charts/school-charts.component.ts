@@ -17,7 +17,7 @@ import { SchoolChartsModel } from './school-chart.models';
 export class SchoolChartsComponent implements OnInit {
   isSkeletonVisible = true;
   model: SchoolChartsModel;
-
+  value=0
   constructor(
     private schoolService: SchoolsService,
     private translate: TranslateService,

@@ -10,8 +10,8 @@
                     </div>
                     <div *ngIf="model.chartData && model.shoolCurriculumChartLabels.length > 0" class="col-md-6">
                         <ul class="chart-Info">
-                            <li *ngFor="let item of model.shoolCurriculumChartLabels" class="Active">
-                                <span class="color-primary-700 mb-2 percentage">{{item.value}}%</span>
+                            <li *ngFor="let item of model.shoolCurriculumChartLabels " value="0" class="Active">
+                                <span class="color-primary-700 mb-2 percentage">%{{item.value}}</span>
                                 <span class="color-gray-300 fs-4">{{item.key}}</span>
                             </li>
                         </ul>
@@ -30,7 +30,7 @@
                         <h2 class="title">عدد المدارس</h2>
                         <ul class="chart-Info-bar">
                             <li class="Active mb-2">
-                                <span class="color-primary-700 mb-2 percentage">{{model.chartData.schoolCountInCentralRegion}}</span>
+                                <span class="color-primary-700 mb-2 percentage">{{model.chartData.schoolCountInCentralRegion}}%0</span>
                                 <span class="color-gray-300 fs-5">المنطقة الوسطى</span>
                             </li>
                             <li class="second">

@@ -1,7 +1,7 @@
 <app-add-btn bg-primary [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
     <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
 </app-add-btn>
-<div class="prim-table" *ngIf="assessmentList.totalAllData || assessmentList.loading">
+<div class="prim-table" *ngIf="assessmentList.totalAllData || assessmentList.loading" >
 
 
     <p-table #dt [value]="assessmentList.list" (onSort)="onSort($event)" [lazy]="true">
@@ -48,7 +48,8 @@
                                 <span class="color-skyBlue-500  Minmum fw-500"> {{'dashboard.Assessment.Maximum Degree'|translate}} :{{rate.max}}</span>
                             </div>
                         </div>
-                        <div class="row" [style]="{height: '230px'}">
+                        <div class="row" id="cardSize">
+
                             <ng-container *ngIf="rate.rateScores.length > 0">
                                 <div class="col-md-4">
                                     <p class="color-skyBlue-300 fs-4 mb-4 mt-4">{{'dashboard.Assessment.RatingCode'|translate}}</p>
@@ -98,5 +99,10 @@
         <app-pagination [totalItems]="assessmentList.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 
+    
+    <ng-container *ngIf="assessmentList.total == 0" >
+        <app-informative-block title="{{'emptyList.Assessment List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    </ng-container>
 
+    <app-loader></app-loader>
 </div>

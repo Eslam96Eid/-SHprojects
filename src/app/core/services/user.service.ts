@@ -85,15 +85,31 @@ export class UserService {
       })
     )
   }
-  getUsersListByRoled(roleId:number , isactive : boolean = true , keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
+  getUsersListByRoled(roleId?:number , isactive? : boolean  , keyword?:string ,sortby?:string ,page? :number , pagesize? :number): Observable<any>{
     let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
-    return this.http.post('/Account/Search?roleId='+roleId+'&isactive='+isactive,body ,{observe:'body',headers:this._headers }).pipe(
-      map(response => {
-        debugger;
-         return response ;
-      })
-    )
-  }
+
+if(roleId == null && isactive != null){
+  return this.http.post('/Account/Search?isactive='+isactive,body ,{observe:'body',headers:this._headers }).pipe(
+    map(response => {
+       return response ;
+    })
+  )
+}
+if(roleId != null && isactive == null){
+  return this.http.post('/Account/Search?roleId='+roleId,body ,{observe:'body',headers:this._headers }).pipe(
+    map(response => {
+       return response ;
+    })
+  )
+}
+else{
+  return this.http.post('/Account/Search?roleId='+roleId+'&isactive='+isactive,body ,{observe:'body',headers:this._headers }).pipe(
+    map(response => {
+       return response ;
+    })
+  )
+}
+}
 
   getUsersById(id:number): Observable<IAccount>{
     return this.http.get('/Account/Get/'+id);
