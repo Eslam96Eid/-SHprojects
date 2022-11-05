@@ -3,57 +3,51 @@
 
 
 </app-add-btn>
-<div class="parents">
+<div class="parents"  *ngIf="isLoaded">
+    <!-- Table Caption -->
+    <div class="caption">
+        <!-- Serach and Filter Button -->
+        <div class="col-8  caption__filter caption__filter--actions">
+            <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+                <i class="pi pi-search fs-3 "></i>
+                <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
+            </div>
+        </div>
 
-    <div class="prim-table" *ngIf="users.totalAllData || users.loading">
-        <p-table #dt [value]="users_List" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
+        <div class="col-3 actions">
+            <div class="filter" (clickOutside)="showFilterModel=false" *ngIf="hasFilter">
+                <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel">
+                <img class="icon" src="assets/images/shared/filter.svg" alt="">
+                <span>{{'shared.filter'|translate}}</span>
+            </button>
 
-            <!-- Table Caption -->
-            <ng-template pTemplate="caption">
-
-                <div class="caption">
-                    <!-- Serach and Filter Button -->
-                    <div class="col-8  caption__filter caption__filter--actions">
-                        <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
-                            <i class="pi pi-search fs-3 "></i>
-                            <input class="input" [(ngModel)]="searchKey" (keyup)="applyFilter()" type="text" pInputText placeholder="{{'shared.Search...'|translate}}" />
+                <div class="filter__model custom-form" [class.show]="showFilterModel">
+                    <div class="row gx-5 form-set">
+                        <div class="col">
+                            <label class="label" for="status">{{'shared.status'|translate }} </label>
+                            <p-dropdown [options]="usersStatus" [(ngModel)]="isactive" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
+                        </div>
+                        <div class="col">
+                            <label class="label" for="city">{{'shared.city'|translate }} </label>
+                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            </p-dropdown>
                         </div>
                     </div>
-
-                    <div class="col-3 actions">
-                        <div class="filter" (clickOutside)="showFilterModel=false" *ngIf="hasFilter">
-                            <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel">
-                            <img class="icon" src="assets/images/shared/filter.svg" alt="">
-                            <span>{{'shared.filter'|translate}}</span>
-                        </button>
-
-                            <div class="filter__model custom-form" [class.show]="showFilterModel">
-                                <div class="row gx-5 form-set">
-                                    <div class="col">
-                                        <label class="label" for="status">{{'shared.status'|translate }} </label>
-                                        <p-dropdown [options]="usersStatus" [(ngModel)]="isactive" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
-                                    </div>
-                                    <div class="col">
-                                        <label class="label" for="city">{{'shared.city'|translate }} </label>
-                                        <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
-                                        </p-dropdown>
-                                    </div>
-                                </div>
-                               
-                                <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
-                                    <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح
-                                    الكل</span>
-                                    <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">بحث</button>
-                                </div>
-                            </div>
-
-                        </div>
+                   
+                    <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
+                        <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح
+                        الكل</span>
+                        <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">بحث</button>
                     </div>
-
-
                 </div>
 
-            </ng-template>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="prim-table">
+        <p-table #dt [value]="users_List" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
             <ng-template pTemplate="header" et-columns="columns">
                 <tr>
@@ -97,27 +91,31 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage" let-columns>
+            
                 <tr>
                     <td [attr.colspan]="20">
-                        <ng-container *ngIf="parent.totalAllData && parent.list.length == 0 &&  !parent.loading">
-                            <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        <ng-container  *ngIf=" users_List.length == 0 &&  !indexes.loading">
+            
+                            <app-informative-block title="{{'emptyList.Users List is empty' |translate}}"
+                                src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
-
                         <app-loader></app-loader>
+            
                     </td>
+            
                 </tr>
+            
             </ng-template>
-
-
-
         </p-table>
 
         <div>
-            <app-pagination [totalItems]="users_List.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+            <div>
+                <app-pagination [totalItems]="users_List.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+            </div>
         </div>
 
     </div>
-    <ng-container *ngIf="!users.totalAllData && !users.loading">
-        <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    <ng-container *ngIf="users_List.length == 0 &&  !indexes.loading">
+        <app-informative-block title="{{'emptyList.Users List is empty |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 </div>

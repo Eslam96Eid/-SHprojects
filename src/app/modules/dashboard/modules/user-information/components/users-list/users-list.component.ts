@@ -12,6 +12,7 @@ import { paginationState } from 'src/app/core/models/pagination/pagination.model
 import { IRole } from 'src/app/core/Models/IRole';
 import { IAccount } from 'src/app/core/Models/IAccount';
 import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { paginationInitialState } from 'src/app/core/classes/pagination';
 
 
 
@@ -21,6 +22,7 @@ import { SharedService } from 'src/app/shared/services/shared/shared.service';
   styleUrls: ['./users-list.component.scss']
 })
 export class ViewListOfUsersComponent implements OnInit {
+  paginationState= {...paginationInitialState}
   @Input('hasFilter') hasFilter:boolean=true;
   roles: IRole[] = [];
   isLoaded = false;
@@ -36,12 +38,19 @@ export class ViewListOfUsersComponent implements OnInit {
   showFilterBox = false
   searchText=""
   showFilterModel=false
+  totalItems: number = 1;
   users={
 	totalAllData:0,
 		total:0,
 		list:[],
 		loading:true
   }
+  indexes={
+    totalAllData:0,
+    total:0,
+    list:[],
+    loading:true
+    }
   filterForm
   isSkeletonVisible = true;
   constructor(private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder,private sharedService: SharedService) {}
@@ -61,21 +70,26 @@ export class ViewListOfUsersComponent implements OnInit {
       }
     );
     this.cities = this.userInformation.cities;
-    this.usersList = this.userInformation.usersList;
     this.getUsersList();
   }
   getUsersList(search = '', sortby = '', pageNum = 1, pageSize = 100){
     this.isSkeletonVisible = true;
+    this.indexes.loading=true
     this.userInformation.getUsersList(search, sortby, pageNum, pageSize).subscribe(response => {
       this.users_List = response?.data;
+      this.indexes.totalAllData = response.total
+      this.totalItems =response.total;
+      this.indexes.loading = false;
       this.isLoaded = true;
-      this.isSkeletonVisible = false;
 
     },err=> {
-      this.isSkeletonVisible=false;
+      this.indexes.loading=false
+      this.indexes.total=0;
     })
   }
   onTableDataChange(event: paginationState) {
+    debugger
+    console.log(event)
     this.first = event.first
     this.rows = event.rows
 
@@ -138,7 +152,6 @@ clearFilter(){
 }
 
 onFilterActivated(){
-  debugger;
   let isUserActive :boolean;
   if (this.isactive == 'Active') {
     isUserActive = true;
@@ -149,7 +162,6 @@ onFilterActivated(){
   this.userInformation.getUsersListByRoled(
     this.selectedItems==undefined ? null :  this.selectedItems.id ,isUserActive == undefined ? null : isUserActive ,
     '','',1,100).subscribe(response => {
-    debugger
     console.log(response)
     this.users_List = response?.data;
     this.isLoaded = true;
