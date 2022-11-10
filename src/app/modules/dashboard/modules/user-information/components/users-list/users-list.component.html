@@ -3,7 +3,7 @@
 
 
 </app-add-btn>
-<div class="parents"  *ngIf="isLoaded">
+<div class="parents" *ngIf="isLoaded">
     <!-- Table Caption -->
     <div class="caption">
         <!-- Serach and Filter Button -->
@@ -28,12 +28,29 @@
                             <p-dropdown [options]="usersStatus" [(ngModel)]="isactive" optionValue="value" optionLabel="name" placeholder="{{'shared.status'|translate }}"></p-dropdown>
                         </div>
                         <div class="col">
-                            <label class="label" for="city">{{'shared.city'|translate }} </label>
-                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            <label class="label" for="city">{{'dashboard.UserInformation.Select Private Roles'|translate }} </label>
+                            <p-dropdown  
+                            (onChange)="onChange($event)"
+                            [(ngModel)]="selectedRole" 
+                            [options]="roles" 
+                            formControlName="privateRole" 
+                            placeholder="{{'dashboard.UserInformation.Select Private Roles' | translate}}">
+                                <ng-template let-value pTemplate="selectedItem">
+                                    <div class="country-item country-item-value" *ngIf="selectedRole">
+                                        <div>
+                                        {{translationService.lang=='ar'?selectedRole.name.ar :selectedRole.name.en}}
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-item pTemplate="item">
+                                    {{translationService.lang=='ar'?item.name.ar :item.name.en}}
+                                </ng-template>
                             </p-dropdown>
+                            <!-- <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" optionLabel="name.ar" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            </p-dropdown> -->
                         </div>
                     </div>
-                   
+
                     <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
                         <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()">امسح
                         الكل</span>
@@ -41,6 +58,22 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="export" (clickOutside)="showExportModel=false" [ngClass]="small?'sm':''">
+                <button class="btn btn--sm btn-secondary" (click)="showExportModel=!showExportModel">
+                  <img class="icon" src="assets/images/shared/download.svg" alt="">
+                  <span>{{'shared.downloadFiles'|translate}}</span>
+              </button>
+                <div class="export__model " [class.show]="showExportModel">
+                    <div role="button" (click)="exportCsv()">
+                        <p>{{'shared.export file as'|translate}}.csv</p>
+                    </div>
+                    <hr>
+                    <div role="button" (click)="exportXslx()">
+                        <p>{{'shared.export file as'|translate}}.xslx</p>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -91,20 +124,19 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage" let-columns>
-            
+
                 <tr>
                     <td [attr.colspan]="20">
-                        <ng-container  *ngIf=" users_List.length == 0 &&  !indexes.loading">
-            
-                            <app-informative-block title="{{'emptyList.Users List is empty' |translate}}"
-                                src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                        <ng-container *ngIf=" users_List.length == 0 &&  !indexes.loading">
+
+                            <app-informative-block title="{{'emptyList.Users List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                         </ng-container>
                         <app-loader></app-loader>
-            
+
                     </td>
-            
+
                 </tr>
-            
+
             </ng-template>
         </p-table>
 

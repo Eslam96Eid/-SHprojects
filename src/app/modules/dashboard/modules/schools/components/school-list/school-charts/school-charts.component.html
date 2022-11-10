@@ -1,6 +1,6 @@
 <div class="ui-g" *ngIf="!isSkeletonVisible">
     <div class="row" [lazy]="true">
-        <div class="col-md-4">
+        <div class="col-md-4 ">
             <p-card id="card-chart">
                 <div class="row">
                     <div *ngIf="model.schoolCurriculumDatasets" class="col-md-6" id="shoolCurriculumChart">
@@ -10,9 +10,9 @@
                     </div>
                     <div *ngIf="model.chartData && model.shoolCurriculumChartLabels.length > 0" class="col-md-6">
                         <ul class="chart-Info">
-                            <li *ngFor="let item of model.shoolCurriculumChartLabels " value="0" class="Active">
-                                <span class="color-primary-700 mb-2 percentage">%{{item.value}}</span>
-                                <span class="color-gray-300 fs-4">{{item.key}}</span>
+                            <li *ngFor="let item of model.shoolCurriculumChartLabels" class="second-card">
+                                <span class="color-primary-700 mb-2 percentage">%{{item.value || value}}</span>
+                                <span class="color-gray-300 fs-4 titlechart">{{item.key}}</span>
                             </li>
                         </ul>
                     </div>
@@ -23,26 +23,44 @@
             <p-card id="card-chart-bar">
                 <div class="row">
                     <div class="col-md-8">
-                        <canvas id="bar" baseChart [data]="model.regionSchoolsData" [options]="model.regionSchoolsOptions" [plugins]="model.regionSchoolPlugins" [legend]="false" [type]="'bar'" height="212" width="365" style="font-size: large;">
-                        </canvas>
+                        <!-- <canvas id="bar" baseChart [data]="model.regionSchoolsData" [options]="model.regionSchoolsOptions" [plugins]="model.regionSchoolPlugins" [legend]="false" [type]="'bar'" height="212" width="365" style="font-size: large;">
+                        </canvas> -->
+                        <div *ngIf="model.schoolCityDatasets">
+                            <canvas id="bar " baseChart [datasets]="model.schoolCityDatasets " [options]="model.schoolCityOptions " [legend]="false" [plugins]="model.regionSchoolPlugins" [type]=" 'bar' " height="212" width="310">
+                          </canvas>
+
+                        </div>
+
                     </div>
-                    <div *ngIf="model.chartData" class="col-md-4 mt-5 Bar-char-Info">
-                        <h2 class="title">عدد المدارس</h2>
+                    <div class="col-md-4">
+                        <div *ngIf="model.chartData && model.schoolCityChartLabels.length> 0" class="mt-3 Bar-char-Info">
+                            <h2 class="title">عدد المدارس</h2>
+                            <ul class="chart-Info-bar">
+                                <li *ngFor="let item of model.schoolCityChartLabels" class="second-card">
+                                    <span class="color-primary-700 mb-2 percentage">{{item.value || value}}</span>
+                                    <span class="color-gray-300 fs-5 titlechart">{{item.key}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- <div *ngIf="model.chartData" class="col-md-4 mt-5 Bar-char-Info">
+                        <h2 class="title mb-3">عدد المدارس</h2>
                         <ul class="chart-Info-bar">
-                            <li class="Active mb-2">
-                                <span class="color-primary-700 mb-2 percentage">{{model.chartData.schoolCountInCentralRegion}}%0</span>
+                            <li class="Active">
+                                <span class="color-primary-700 mb-2 percentage">{{model.chartData.schoolCountInCentralRegion|| value}}</span>
                                 <span class="color-gray-300 fs-5">المنطقة الوسطى</span>
                             </li>
                             <li class="second">
-                                <span class="color-primary-700 mb-2 percentage">{{model.chartData.schoolCountInEasternProvince}}</span>
+                                <span class="color-primary-700 mb-2 percentage">{{model.chartData.schoolCountInEasternProvince || value}}</span>
                                 <span class="color-gray-300 fs-5">المنطقة الشرقية</span>
                             </li>
                             <li class="notActive">
-                                <span class="color-primary-700 mb-2 percentage">{{model.chartData.schoolCountInSharjahCity}}</span>
+                                <span class="color-primary-700 mb-2 percentage">{{model.chartData.schoolCountInSharjahCity|| value}}</span>
                                 <span class="color-gray-300 fs-5"> المنطقة الشارقة</span>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
             </p-card>
         </div>
@@ -72,11 +90,11 @@
 
 <ng-template #totalSchoolCount>
     <div *ngIf="model.chartData" class="mt-4">
-        <h2 class="chart-title">عدد المدارس الكلية</h2>
-        <h2 class="number-chart">{{model.chartData.totalSchoolCount}}</h2>
+        <h2 class="chart-title">العدد الإجمالي</h2>
+        <h2 class="number-chart fw-300">{{model.chartData.totalSchoolCount}}</h2>
     </div>
 </ng-template>
-<!-- <app-loader [loadingStatus]="isLoading"></app-loader> -->
+
 <ng-container *ngIf="isSkeletonVisible">
 
     <ngx-skeleton-loader count="7" [theme]="{

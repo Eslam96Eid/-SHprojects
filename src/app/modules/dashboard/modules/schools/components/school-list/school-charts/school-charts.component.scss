@@ -1,9 +1,14 @@
 @import 'src/assets/css/utils/variables.scss';
 @import 'src/assets/css/components/primng-table';
 @import 'src/assets/css/components/forms';
-p-card.p-component {
+::ng-deep .p-card.p-component {
     height: 100%;
     min-height: 100%;
+    width: 95%;
+    background: #FFFFFF;
+    border: 1px solid #F5F5F5;
+    border-radius: 15px;
+    box-shadow: 0 1px 1px -1px rgb(0 0 0 / 20%), 0 1px 1px 0 rgb(0 0 0 / 14%), 0 1px 1px 0 rgb(103 103 103 / 12%)
 }
 
 .chart-Info-active {
@@ -45,7 +50,7 @@ p-card.p-component {
 
 .Bar-char-Info .title {
     color: #000000;
-    font-weight: 900;
+    font-weight: 700;
     // font-size: 19px;
     text-align: justify;
 }
@@ -53,11 +58,90 @@ p-card.p-component {
 .Bar-char-Info {
     // z-index: 9999;
     position: static;
+    height: 194px;
+    overflow: auto;
 }
 
 ul li.second::before {
     content: "\2022";
     color: #CD578A;
+    font-weight: bold;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 0.6em;
+    font-size: 2rem;
+}
+
+ul li.second-card:nth-child(1):before {
+    content: "\2022";
+    color: #CD578A;
+    font-weight: bold;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 0.6em;
+    font-size: 2rem;
+}
+
+ul li.second-card:nth-child(2):before {
+    content: "\2022";
+    color: #86c7f3;
+    font-weight: bold;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 0.6em;
+    font-size: 2rem;
+}
+
+ul li.second-card:nth-child(3):before {
+    content: "\2022";
+    color: #F8C073;
+    font-weight: bold;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 0.6em;
+    font-size: 2rem;
+}
+
+ul li.second-card:nth-child(4):before {
+    content: "\2022";
+    color: #f1f2f4;
+    font-weight: bold;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 0.6em;
+    font-size: 2rem;
+}
+
+ul li.second-card:nth-child(5):before {
+    content: "\2022";
+    color: #93d9d9;
+    font-weight: bold;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 0.6em;
+    font-size: 2rem;
+}
+
+ul li.second-card:nth-child(6):before {
+    content: "\2022";
+    color: #c1d6e1;
+    font-weight: bold;
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 0.6em;
+    font-size: 2rem;
+}
+
+ul li.second-card:nth-child(7):before {
+    content: "\2022";
+    color: #20448a;
     font-weight: bold;
     display: inline-block;
     width: 7px;
@@ -113,18 +197,28 @@ h2 {
 }
 
 .number-chart {
-    color: #1D2129
+    color: #1D2129;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 32px;
+}
+
+span.titlechart {
+    font-weight: 300;
 }
 
 .percentage {
-    font-size: 18px;
+    font-size: 16px;
     margin-left: 0.8em;
     color: #3052A1;
+    font-weight: 700;
+    line-height: 28px;
 }
 
 canvas#bar {
     width: 99% !important;
     height: 212px;
+    width: 291.6px;
 }
 
 .row>* {

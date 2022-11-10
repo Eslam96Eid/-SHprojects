@@ -1,8 +1,15 @@
 @import '../../../../../../../assets/css/utils/variables.scss';
 @import '../../../../../../../assets/css/components/primng-table';
 @import '../../../../../../../assets/css/components/breadcrumb';
+.my-disable {
+    pointer-events: none;
+    color: gray;
+}
 
+.shown {
+    color: #41AEBC;
+}
 
-.my-disable{
-    pointer-events:none;
+.shown:hover {
+    text-decoration: underline;
 }

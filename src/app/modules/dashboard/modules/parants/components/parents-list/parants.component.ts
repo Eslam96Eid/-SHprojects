@@ -76,6 +76,7 @@ if(res.data){
 			this.parent.totalAllData = res.totalAllData
 			this.parent.total =res.total
       this.parent.loading = false
+	  this.isLoaded = true;
 }
 		},err=> {
 			this.parent.loading=false

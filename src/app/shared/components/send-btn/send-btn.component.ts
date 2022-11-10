@@ -33,7 +33,7 @@ export class SendBtnComponent implements OnInit {
 
 
   constructor(private _router: ActivatedRoute,private router: Router,private route:ActivatedRoute ,
-    private userService : UserService,
+    private userService : UserService, private translate: TranslateService,
     private assignmentService : AssignmentServiceService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -92,7 +92,7 @@ export class SendBtnComponent implements OnInit {
       // });
       this.userService.AddAccount(this.accountModel).subscribe(res => {
       console.log(res);
-      this.toastr.success('Add Successfully','');
+      this.toastr.success(this.translate.instant('Add Successfully'),'');
      });
     }
     else{
@@ -129,7 +129,7 @@ export class SendBtnComponent implements OnInit {
 
        this.userService.EditAccount(this.accountModel).subscribe(res => {
        console.log(res);
-       this.toastr.success('Updated Successfully','');
+       this.toastr.success(this.translate.instant('Updated Successfully'),'');
       });
     }
   }

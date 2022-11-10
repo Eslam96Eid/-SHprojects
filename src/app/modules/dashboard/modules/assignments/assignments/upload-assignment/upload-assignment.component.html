@@ -63,7 +63,6 @@
                                 <label class="label" for="">
                                     {{'Subject' | translate}}
                                 </label>
-
                                 <p-dropdown [(ngModel)]="SubjectSelected" [options]="subjects" formControlName="subjects" class="form-control " [style]="{width:'99%'}" placeholder="{{'Choose Subject' | translate}}">
                                     <ng-template let-value pTemplate="selectedItem">
                                         <div class="country-item country-item-value" *ngIf="SubjectSelected">
@@ -94,7 +93,6 @@
                                 <label class="label" for="">
                                     {{'Exam duration (in minutes)' | translate}}
                                 </label>
-
                                 <input formControlName="ExamDuration" type="text" pInputText class="form-control basicinput" appValidatorsInput placeholder="{{'Minute' | translate}}">
                             </div>
                         </div>
@@ -104,9 +102,7 @@
                                     {{'dashboard.Assignments.Exam Date' | translate}}
                                 </label>
                                 <div class="field col-12 md:col-4">
-
                                     <p-calendar formControlName="ExamDate" [showIcon]="true" inputId="icon" class="form-control" [minDate]="minDateValue" appValidation placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
-
                                 </div>
                             </div>
                         </div>
@@ -125,9 +121,7 @@
                         <div class="col-lg-10 files-upload">
 
 
-                            <div class="col ">
-
-
+                            <div class="col-md">
                                 <app-exam-upload (onFileUpload)="onFileUpload($event)" (onImageOrPdfDeleted)="onImageOrPdfDeleted()" (onAudioDeleted)="onAudioDeleted()" accept="image/*" [url]="" view="box" title="{{ 'dashboard.schools.exam'|translate }}" label=" انقر لإرفاق ملف"></app-exam-upload>
                             </div>
 

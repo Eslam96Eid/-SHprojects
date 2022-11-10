@@ -50,6 +50,8 @@
     "School": "المدرسه",
     "Sharjah Primary School for Special Education": "مدرسة الشارقة الابتدائية للتربية الخاصة",
     "Class": "الصف",
+    "Add Successfully": "تم الحفظ بنجاح",
+    "Updated Successfully": "تم التعديل بنجاح",
 
     "Choose Class": "اختر الصف",
     "Subject": "الماده الدراسيه",
@@ -691,7 +693,7 @@
             "childName": "اسم الابن",
             "parentNickname": "كنية ولي الأمر",
             "childrenNumber": "عدد الأبناء",
-            "viewChildrenList": "(عرض قائمة الابناء)",
+            "viewChildrenList": "عرض قائمة الابناء",
             "academicLevel": "المستوى الدراسي",
             "relativeRelation": "صلة القرابة",
             "registerdInSchool": "سجل في مدرسة",

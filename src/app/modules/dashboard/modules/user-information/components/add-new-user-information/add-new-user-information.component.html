@@ -95,9 +95,22 @@
                                 <option *ngFor="let options of roles" [ngValue]="options.id">{{options.name}}</option>
                             </select> -->
 
-                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" formControlName="privateRole" class="form-control" optionLabel="name" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
-                            </p-dropdown>
+                            <!-- <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedItems" [options]="roles" formControlName="privateRole" class="form-control" optionLabel="name.ar" placeholder="{{'dashboard.UserInformation.Select Private Roles'|translate}}">
+                            </p-dropdown> -->
+                            <p-dropdown [(ngModel)]="selectedRole" [options]="roles" formControlName="privateRole" class="form-control " [style]="{width:'99%'}" placeholder="{{'dashboard.UserInformation.Select Private Roles' | translate}}">
+                                <ng-template let-value pTemplate="selectedItem">
+                                    <div class="country-item country-item-value" *ngIf="selectedRole">
+                                        <div>
+                                        {{translationService.lang=='ar'?selectedRole.name.ar :selectedRole.name.en}}
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template let-item pTemplate="item">
+                                    {{translationService.lang=='ar'?item.name.ar :item.name.en}}
 
+                                    <!-- {{item.name.ar}} -->
+                                </ng-template>
+                            </p-dropdown>
 
                             <div>
                                 <div [hidden]="privateRole.valid || privateRole.untouched">
@@ -113,7 +126,8 @@
 
                         <div class="col-xs-4 col-lg-4">
                             <label for="PID8" class="label"><b>{{'dashboard.UserInformation.User Status'|translate}}</b></label>{{'shared.activated'|translate}}
-                            <p-inputSwitch (onChange)="isToggleLabel($event)" [(ngModel)]="checked" id="switchbtn"></p-inputSwitch>
+                            <p-inputSwitch (onChange)="isToggleLabel($event)" [(ngModel)]="checked" id="switchbtn" [ngModelOptions]="{standalone: true}">
+                            </p-inputSwitch>
                             <span class="Label" *ngIf="isShown">{{'shared.no'|translate}}</span>
                             <span class="Label" *ngIf="!isShown">{{'shared.yes'|translate}}</span>
 

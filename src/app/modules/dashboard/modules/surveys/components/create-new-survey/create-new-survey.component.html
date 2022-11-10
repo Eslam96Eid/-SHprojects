@@ -1,0 +1,84 @@
+<!------------------------------------------------------------------------->
+<div class="school position-relative">
+    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn " *ngIf="step==3">
+        <!-- <app-add-btn [backGroundColor]="'btn-primary'" [content]="'breadcrumb.downloadfiles'"></app-add-btn> -->
+        <button class="btn btn-primary btn--md">
+      <span>{{'dashboard.surveys.downloadfiles'| translate}}</span>
+  </button>
+
+
+    </div>
+    <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn " *ngIf="step==2 || step==1">
+        <!-- <app-add-btn [backGroundColor]="'btn-primary'" [content]="'breadcrumb.downloadfiles'"></app-add-btn> -->
+        <button class="btn btn-primary btn--md">
+      <span>{{'shared.save'| translate}}</span>
+  </button>
+        <button class="btn color-orange-200 cancelbtn" routerLink="/dashboard/educational-settings/surveys">
+      <span>{{'shared.Cancel'| translate}}</span>
+  </button>
+
+
+    </div>
+
+    <div class="tabView">
+        <!-- Navigations Options -->
+        <div class="radius-15 border p-5 mb-5 bg-white">
+
+            <div class="radius-15 border p-5 mb-5 bg-white">
+                <div class="row gx-5 form-set  custom-form ">
+                    <div class="col-md-4">
+                        <label class="label" for="day">عنوان الاستبيان </label>
+                        <input type="text" formControlName="surveyTitle" id="day" pInputText placeholder="اكتب عنوان الاستبيان" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="label" for="day">نوع الاستبيان </label>
+                        <p-dropdown [options]="surveyType" formControlName="surveyType" optionLabel="name" placeholder="اجباري / اختياري"></p-dropdown>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 
+            <div class="row gx-5 p-4 bg-gray-30 my-5" *ngIf="step==2 || step==1">
+                <div class="col-md-3 d-flex align-items-center  gap-4">
+                    <span class="color-gray-300">حالة الأستبيان</span>
+                    <span class="color-green-600 Surveystatus">جديد</span>
+                </div>
+            </div> -->
+
+
+        </div>
+
+
+        <ul class="tabView__nav">
+            <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{'dashboard.surveys.surveyquestion'| translate}}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{'dashboard.surveys.surveyInfo'|translate}}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span>{{'dashboard.surveys.surveyAnswer'|translate}}
+            <label style="color: #CD578A;" *ngIf="step==3">(11)</label></span>
+            </li>
+
+        </ul>
+        <!-- Navigations Options -->
+
+        <div class="tabView__content-survey">
+            <!-- general Info -->
+            <ng-container *ngIf="step==1">
+                <app-new-survey>
+                </app-new-survey>
+            </ng-container>
+            <!-- general Info -->
+            <!-- school manager -->
+            <ng-container *ngIf="step==2">
+                <app-send-survey></app-send-survey>
+            </ng-container>
+            <!-- school managar -->
+
+
+            <!-- school Classes -->
+            <ng-container *ngIf="step==3">
+                <app-survey-report></app-survey-report>
+            </ng-container>
+            <!-- school Classes -->
+        </div>
+    </div>
+</div>

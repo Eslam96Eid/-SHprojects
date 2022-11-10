@@ -4,7 +4,7 @@
         line-height: 23px;
         bottom: 0.5rem
     }
-
+    
     @import '../../../../../../../assets/css/utils/variables.scss';
     %box {
         color: $color-gray-250;
@@ -21,31 +21,31 @@
         overflow: hidden;
         cursor: pointer;
     }
-
+    
     .uploadattach-upload {
         width: 50%;
         background-color: #EFEFEF;
         padding: 1rem;
         color: #3052a1;
     }
-
+    
     .uploadattach {
         width: 50%;
         background-color: #EFEFEF;
         padding: 1rem;
         color: #3052a1;
     }
-
+    
      :host {
         flex-grow: 1;
     }
-
+    
     .attach {
         padding: 25px 40px;
         background-color: #F8FAFB;
         margin: 36px 0px;
     }
-
+    
     .image-uploader {
         &__upload {
             @extend %box;
@@ -122,15 +122,15 @@
             }
         }
     }
-
+    
      ::ng-deep .p-timeline {
         display: inline-block !important;
         flex-grow: 1;
         flex-direction: column;
     }
-
+    
     .inforequest {
-        margin-right: 14rem;
+        margin-right: 8rem;
         width: 100rem;
     } // ::ng-deep .p-timeline-right .p-timeline-event {
     //     flex-direction: initial !important;
@@ -145,42 +145,42 @@
         padding: 50px;
         list-style: none;
         // text-align: left;
-        max-width: 15%;
+        max-width: 2%;
     }
-
+    
     @media (max-width: 767px) {
         .timeline-1 {
             max-width: 98%;
             padding: 25px;
         }
     }
-
+    
     .timeline-1 .event {
         // border-bottom: 1px dashed #000;
         padding-bottom: 25px;
         margin-bottom: 25px;
         position: relative;
     }
-
+    
     @media (max-width: 767px) {
         .timeline-1 .event {
             padding-top: 30px;
         }
     }
-
+    
     .timeline-1 .event:last-of-type {
         padding-bottom: 0;
         margin-bottom: 0;
         border: none;
     }
-
+    
     .timeline-1 .event:before,
     .timeline-1 .event:after {
         position: absolute;
         display: block;
         top: 0;
     }
-
+    
     .timeline-1 .event:before {
         left: -106px;
         content: attr(data-date);
@@ -189,14 +189,14 @@
         font-size: 0.9em;
         min-width: 120px;
     }
-
+    
     @media (max-width: 767px) {
         .timeline-1 .event:before {
             left: 0px;
             text-align: left;
         }
     }
-
+    
     .timeline-1 .event.active:after {
         -webkit-box-shadow: 0 0 0 3px#5CD0DF;
         box-shadow: 0 0 0 3px #5CD0DF;
@@ -208,7 +208,7 @@
         content: "";
         top: 5px;
     }
-
+    
     .timeline-1 .event.active:after {
         -webkit-box-shadow: 0 0 0 3px#5CD0DF;
         box-shadow: 0 0 0 5px #5CD0DF;
@@ -220,7 +220,7 @@
         content: "";
         top: 5px;
     }
-
+    
     .timeline-1 .event:after {
         -webkit-box-shadow: 0 0 0 3px#EFEFEF;
         box-shadow: 0 0 0 5px #EFEFEF;
@@ -232,12 +232,12 @@
         content: "";
         top: 5px;
     }
-
+    
     .reject {
         margin-right: 34vw;
         font-weight: 700;
     }
-
+    
     @media (max-width: 767px) {
         .timeline-1 .event:after {
             left: 31.8px;

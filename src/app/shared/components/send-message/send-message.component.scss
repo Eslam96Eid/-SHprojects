@@ -1,0 +1,115 @@
+@import "../../../../assets/css/utils/variables.scss";
+@import "../../../../../src/assets/css/components/input";
+@import "../../../../../src/assets/css/components/buttons";
+@import "../../../../assets/css/components/forms.scss";
+@import "../../../../assets/css/components/validation-form.scss";
+@import '../../../../../src/assets/css/components/inputswitch';
+
+
+.custom-form{
+    font-size: 1.5rem;
+    .El-form{
+        .field1{
+            margin-left: 7rem;
+        }
+    }
+    .form-group{
+       ::ng-deep .p-autocomplete{
+      width: 100%!important;
+      input{
+        padding: 0 4rem;
+      }
+    }
+    i{
+      position: absolute;
+    right: 0.5rem;
+    top: 4.2rem;
+    }
+    }
+   
+}
+
+
+
+
+.uploaded {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.uploadfilecontainer {
+  text-align: center;
+  font-size: 1.3rem;
+  padding: 60px 0;
+  height: 200px;
+  width: 100%;
+  border: 1px solid #D7D7D7;
+  border-radius: 10px;
+  img{
+    width: 4rem;
+    padding: 1rem;
+    border-radius: 45%;
+    background-color: #F5F8FF;
+  }
+}
+
+.uploadfilecontainer:hover {
+  cursor: pointer;
+  background-color: #9ecbec !important;
+  opacity: 0.8;
+}
+
+.files-list {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  border: 1px solid #2F4576;
+  border-radius: 12px;
+  padding: 5px;
+  margin: 2rem 0;
+
+}
+
+.files-list .delete-file {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.files-list .delete-file img {
+  width: 30px;
+}
+
+::ng-deep .p-autocomplete {
+  display: block !important;
+  ul{
+    padding: 0rem 1rem !important;
+    border-radius: 2rem !important;
+    .p-autocomplete-token,.p-autocomplete-item {
+      margin-right: 1.5rem !important;
+      height: 4rem !important;
+      span{
+        font-size: 1.5rem;
+        &::before{
+          margin: 0rem 1rem 0 0;
+        }
+      }
+    }
+    .p-autocomplete-input-token{
+      padding: 0rem 0 !important;
+      margin-right: 2.5rem !important;
+      input{
+        padding: 0 !important;
+        font-size: 1.5rem !important;
+        &:focus{
+        box-shadow: none !important
+        }
+      }
+    }
+  }
+}
+
+.elbutton{
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}

@@ -35,7 +35,7 @@ unregisterChild : IunregisterChild;
     this.getUnregisterChild();
   }
   getUnregisterChild(){
-    debugger;
+    
     let id = Number(this._router.snapshot.paramMap.get('id'));
     this.parentService.getUnregisterChildern(id).subscribe(response=>{
       this.unregisterChild = response;

@@ -20,7 +20,7 @@
 </app-add-btn>
 
 <!-- ------Table------- -->
-<div class="prim-table mt-4" *ngIf="indexes.totalAllData || indexes.loading">
+<div class="prim-table mt-4" *ngIf="isLoaded">
     <p-table #dt [value]="assignmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
 
@@ -122,7 +122,7 @@
 
     <div>
         <div>
-            <app-pagination [totalItems]="assignmentList.length" (paginationChanged)="onTableDataChange($event)"></app-pagination>
+            <app-pagination [totalItems]="totalItems" (paginationChanged)="onTableDataChange($event)"></app-pagination>
         </div>
         <!-- <app-pagination [totalItems]="assignmentList.length" (paginationChanged)="onTableDataChange($event)">
         </app-pagination> -->

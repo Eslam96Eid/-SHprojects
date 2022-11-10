@@ -12,7 +12,8 @@ const routes: Routes = [
   {path:'new-survey' , component: NewSurveyComponent},
   {path:'send-survey' , component: SendSurveyComponent},
   {path:'survey-report' , component: SurveyReportComponent},
-  {path:'survey-details' , component: SurveyDetailsComponent}
+ // {path:'survey-details' , component: SurveyDetailsComponent}
+  {path:"Survey/:surveyId",component:SurveyDetailsComponent}
 ];
 
 @NgModule({

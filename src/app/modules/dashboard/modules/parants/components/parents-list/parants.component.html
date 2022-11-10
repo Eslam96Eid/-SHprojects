@@ -1,7 +1,7 @@
 <div class="parents">
 
 
-    <div class="prim-table mt-4" *ngIf="parent.totalAllData || parent.loading">
+    <div class="prim-table mt-4" *ngIf="isLoaded">
         <p-table #dt [value]="parent.list" (onSort)="onSort($event)" [lazy]="true">
             <!-- Table Caption -->
             <ng-template pTemplate="caption">
@@ -56,8 +56,8 @@
                     <td>{{product.email}}</td>
                     <td>{{product.childrenCount}}</td>
                     <td (click)="product.childrenCount == 0 ? showToastr(product.childrenCount) :null  ">
-                        <div [ngClass]="{'my-disable':product.childrenCount === 0}" class="color-skyBlue-500 ">
-                            <a role="button" class="gap-2 color-skyBlue-500  text-decoration-underline fs-4" routerLink="parent/{{product.id}}/all-children">
+                        <div>
+                            <a role="button" [ngClass]="{'my-disable':product.childrenCount === 0 ,'shown':product.childrenCount> 0}" class="gap-2 fs-4" routerLink="parent/{{product.id}}/all-children">
                                 <p><span class=""></span>&nbsp;<span>{{'dashboard.parents.viewChildrenList'|translate }}</span></p>
                             </a>
                         </div>
@@ -78,7 +78,7 @@
 
         </p-table>
 
-        <div *ngIf="parent.totalAllData > paginationState.rows">
+        <div>
             <app-pagination [totalItems]="parent.totalAllData" (paginationChanged)="paginationChanged($event)"></app-pagination>
         </div>
     </div>

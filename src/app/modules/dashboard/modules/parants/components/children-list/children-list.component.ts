@@ -58,14 +58,14 @@ export class ChildrenListComponent implements OnInit {
       console.log(this.chiledren);
       console.log(this.students);
       this.isSkeletonVisible = false;
-    
+
     },err=> {
       this.isSkeletonVisible=false;
     })
   }
 
   displayUnregisterChild(chiledId : number){
-    debugger
+  
     let parentId = Number(this._router.snapshot.paramMap.get('id'));
     this.router.navigateByUrl(`/dashboard/schools-and-students/all-parents/parent/${parentId}/child/${chiledId}/unregister-child`);
   }
