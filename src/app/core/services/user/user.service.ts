@@ -4,12 +4,15 @@ declare var Object: any;
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { BehaviorSubject, map, Observable } from 'rxjs';
+import { BehaviorSubject, finalize, map, Observable, take } from 'rxjs';
+import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 import { environment } from 'src/environments/environment';
 import { IUser, Token } from '../../Models/base.models';
+import { Filter } from '../../models/filter/filter';
 import { IAccount } from '../../Models/IAccount';
 import { IAccountAddOrEdit } from '../../Models/IAccountAddOrEdit';
+import { HttpHandlerService } from '../http/http-handler.service';
 
 
 @Injectable({
@@ -27,7 +30,7 @@ export class UserService {
 
   selectedCities: string[];
   usersList: IUser[] = [];
-  constructor(private router: Router ,private http: HttpClient
+  constructor(private router: Router ,private http: HttpClient,private tableLoaderService: LoaderService
 ) {
   this.headers = this.headers.set('content-type', 'application/json');
   this.headers = this.headers.set('Accept', 'application/json');
@@ -54,16 +57,45 @@ export class UserService {
     'content-type': 'application/json-patch+json'
 
 });
-  getUsersList(keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
+getUsersList(filter?:Partial<Filter>){
+  debugger
+  this.tableLoaderService.isLoading$.next(true)
+  let params = new HttpParams();
+  if (filter.SortColumn)
+    params = params.append('SortColumn', filter.SortColumn);
+  if (filter.SortDirection)
+    params = params.append('SortDirection', filter.SortDirection);
+  if (filter.KeyWord)
+    params = params.append('KeyWord', filter.KeyWord);
+  if (filter.SortBy)
+    params = params.append('SortBy', filter.SortBy);
+  if (filter.isactive != null)
+    params = params.append('isactive', filter.isactive);
+  if (filter.roleId != null)
+    params = params.append('roleId', filter.roleId);
+  return this.http.get<any>(`${this.baseUrl}` + '/Account/Search' , {observe:'response' , params}).pipe(
+    map(response => {
+       return response.body ;
+    })
+  )
 
-    let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
-console.log(body)
-    return this.http.post<any>(`${this.baseUrl+'/Account/Search'}`,body ,{observe:'body',headers:this._headers }).pipe(
-      map(response => {
-         return response ;
-      })
-    )
-  }
+  // return this.http.get('/Account/Search',filter)
+  // .pipe(
+  //   take(1),
+  //   finalize(()=> {
+  //     this.tableLoaderService.isLoading$.next(false)
+  //   }))
+}
+//   getUsersList(keyword:string ,sortby:string ,page :number , pagesize :number): Observable<any>{
+
+//     let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
+// console.log(body)
+//     return this.http.post<any>(`${this.baseUrl+'/Account/Search'}`,body ,{observe:'body',headers:this._headers }).pipe(
+//       map(response => {
+//          return response ;
+//       })
+//     )
+//   }
   getUsersListByRoled(roleId?:number , isactive? : boolean  , keyword?:string ,sortby?:string ,page? :number , pagesize? :number): Observable<any>{
     debugger
     let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}

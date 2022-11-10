@@ -30,7 +30,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   roleStatusList;
   selectedRole;
   subscription:Subscription;
-  filtration = {...Filtration,isactive:''};
+  filtration = {...Filtration,isactive:null};
   paginationState= {...paginationInitialState};
   roles={
     totalAllData:0,

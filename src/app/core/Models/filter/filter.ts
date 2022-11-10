@@ -37,6 +37,7 @@ export interface Filter{
 
       //Assessment
       status?:boolean
+      isactive?:boolean
 
 
   }
