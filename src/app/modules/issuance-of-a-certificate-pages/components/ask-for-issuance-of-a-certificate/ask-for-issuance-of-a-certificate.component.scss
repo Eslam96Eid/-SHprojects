@@ -1,0 +1,115 @@
+@import "src/assets/css/utils/variables.scss";
+@import "src/assets/css/components/input";
+@import "src/assets/css/components/buttons";
+@import "../../../../../assets/css/components/forms.scss";
+@import "../../../../../assets/css/components/validation-form.scss";
+.issune-certificate-content {
+  padding-right: 4rem;
+  .all {
+    box-shadow: 0px 6px 21px 0px #0000000d;
+    padding: 1rem 1rem;
+
+    h4 {
+      font-weight: 700;
+    }
+    .header {
+      h3 {
+        color: #3052a1;
+        font-weight: 700;
+      }
+    }
+    .content-body {
+      .right {
+        p {
+          color: #afafaf;
+          font-weight: 400;
+          padding: 1rem 0;
+        }
+      }
+      .left {
+        padding-right: 2rem;
+        span {
+          padding: 0.8rem 0;
+        }
+      }
+    }
+    .footer {
+      button {
+        width: 100%;
+      }
+    }
+  }
+
+
+
+  .custom-form{
+    .title {
+    .form-group {
+      width: 35rem;
+    }
+    .ellink {
+      margin: 0 8rem;
+      padding-top: 4rem;
+      color: #5bcedd;
+      text-decoration: underline;
+    }
+  
+  }
+  .body{
+    margin-top: 7rem;
+    background: #F8FAFB;
+    padding: 3rem 3rem;
+
+    .elcard{
+      padding: 3rem 3rem;
+      background: #FFF;
+      width: 100rem;
+      border: 1px solid #F5F5F5;
+      padding: 3rem;
+
+      .elcard-certificate ,.elcard-pay ,.elcard-name{
+        p{
+          color: #AFAFAF;
+        }
+        span{
+          font-weight: 700;
+        }
+      }
+
+
+      }
+  }
+  
+  .elcardo{
+        
+    border: 1px solid #EEEEEE;
+    border-radius: 1rem;
+    padding: 2rem;
+      .elcardo-body{
+         padding: 2rem;
+         background-color: #F8C0731F;
+         border-radius: 1rem;
+         margin: 2rem 0;
+         h4{
+          color: #F6AE4B;
+         }
+     }
+    }
+  }
+}
+
+.end-of-content {
+  width: 100rem;
+  p {
+    color: #000000;
+    span {
+      color: #5bcedd;
+    }
+  }
+}
+
+.submitBtn{
+  position: absolute;
+  top: 26rem;
+  left: 32rem;
+}

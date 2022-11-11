@@ -90,7 +90,7 @@
                     {{'A unified and certified digital identity that provides a unified digital identity solution for all service providers' | translate}}
                 </p>
                 <div class="signup">
-                    <span class="mx-2" >{{'Login with' | translate}}</span><a href="" class="color-skyBlue-400">{{'New account' | translate}}</a>
+                    <span class="mx-2" >{{'Login with' | translate}}</span><button (click)="openLoginModel=true"><a  class="color-skyBlue-400" >{{'login.New account of parent' | translate}}</a></button>
                 </div>
             </div>
 
@@ -101,6 +101,222 @@
 </div>
 
 
+<p-dialog header="{{'sign up.New account of parent'|translate}}" [baseZIndex]="10000"   [resizable]="false" [(visible)]="openLoginModel" (onHide)="closeLoginModel()" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+
+    <ng-template pTemplate="content">
+
+         <div class="sign up">
+            <div class=" mt-5 custom-form custom-validation-form " >
+                <form   >
+                            <div class="row gx-5 form-set">
+                                    <div class="col-12">
+                                        <label class="label" for="nationality">{{'sign up.with'|translate }} </label>
+                                        <p-dropdown [options]="signUpWaysList" optionLabel="name.ar" optionValue="id" (onChange)="changeLoginField($event.value)" inputId="nationality" placeholder="{{'sign up.select...'|translate }}"></p-dropdown>
+                                    </div>
+                            </div>
+                                <div class="row gx-5 form-set">
+                                    <div class="col-12" *ngIf="showPhoneField">
+                                        <label class="label" for="precantage">{{'sign up.phoneNumber'|translate}}</label>
+                                        <input type="text" pInputText   class="form-control basicinput" appValidatorsInput  placeholder="{{'sign up.enter phoneNumber'|translate}}" > 
+                                    </div>
+                                    <div class="col-12" *ngIf="showIdentityField">
+                                        <label class="label" for="precantage">{{'sign up.digitalIdentity'|translate}}</label>
+                                        <input type="text" pInputText   class="form-control basicinput" appValidatorsInput  placeholder="{{'sign up.enter personal digitalIdentity'|translate}}" >  
+                                    </div>
+                                    <div class="col-12" *ngIf="showEmailField">
+                                        <label class="label" for="precantage">{{'sign up.email'|translate}}</label>
+                                        <input type="text" pInputText   class="form-control basicinput" appValidatorsInput  placeholder="{{'sign up.enter email'|translate}}" > 
+                                    </div>
+                            </div>
+                   </form>
+               </div>
+        </div>
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+      
+      <div class="d-flex align-items-center justify-content-end  ">
+        
+        <button class="btn btn-primary btn--sm  " (click)="saveMe()">
+            <span>{{'sign up.Next'| translate}} </span>
+        </button>
+    </div>
+  
+    </ng-template>
+</p-dialog>
 
 
+<p-dialog header="{{'sign up.confirmed with OTP'|translate}}" styleClass="OTP" [baseZIndex]="10000"   [resizable]="false" [(visible)]="openOTPModel"  [draggable]="false" [modal]="true" [style]="{width: '40vw',height:'33.2vw'}">
 
+    <ng-template pTemplate="content">
+
+       
+            <div class="OTP">
+                <span>{{'sign up.Pleaze enter OTP that send to phoneNumber'|translate}}</span>
+                <span class="phonenumber">635********</span>
+            </div>
+            <div class=" mt-5 custom-form custom-validation-form OTP-form" >
+                <form   >
+                          
+                                <div class=" gx-5 form-set d-flex">
+                                    <div >
+                             
+                                        <input type="text" pInputText   class="form-control basicinput" appValidatorsInput  placeholder="-" > 
+                                    </div>
+                                    <div >
+                                  
+                                        <input type="text" pInputText   class="form-control basicinput" appValidatorsInput  placeholder="-" >  
+                                    </div>
+                                    <div >
+                                        
+                                        <input type="text" pInputText   class="form-control basicinput" appValidatorsInput  placeholder="-" > 
+                                    </div>
+                                    <div >
+                                        
+                                        <input type="text" pInputText   class="form-control basicinput" appValidatorsInput  placeholder="-" > 
+                                    </div>
+                                  
+                            </div>
+
+                   </form>
+                  
+               </div>
+               <div class="again-OTP">
+                          
+                      <div>
+                        <span>{{'sign up.not have OTP yet ?'|translate}}</span>
+                        <button class=""><a class="color-skyBlue-400">{{'sign up.send OTP again'|translate}}</a></button>
+                        <span >{{'sign up.through'|translate}}</span>
+                      </div>         
+             
+                        <div>
+                            <span class="second" >0:32 {{'sign up.second'|translate}}</span>
+                        </div>
+               
+            
+</div>
+              
+       
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+      
+      <div class="d-flex align-items-center justify-content-start OTP ">
+        
+        <button class="btn btn-primary btn--sm  " (click)="saveOTP()">
+            <span>{{'sign up.confirm'| translate}} </span>
+        </button>
+        <button class="btn btn-outline-primary btn--sm  " (click)="returnMe()">
+            <span>{{'sign up.return'| translate}} </span>
+        </button>
+    </div>
+  
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog header="{{'Enter Your password'|translate}}" [baseZIndex]="10000"   [resizable]="false" [(visible)]="openPasswordModel"  [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+
+    <ng-template pTemplate="content">
+
+         <div class="sign up">
+            <div class=" mt-5 custom-form custom-validation-form " >
+                <form   >
+                            <div class="row gx-5 form-set">
+                                    <div class="col-12">
+                                        <label class="label" for="nationality">{{'Your password'|translate }} </label>
+                                        <p-password iconPos="left" class="form-control" appValidation [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Enter Your password'| translate}}"></p-password> 
+                                    </div>
+                            </div>
+                                <div class="row gx-5 form-set">
+                                    <div class="col-12" >
+                                        <label class="label" for="precantage">{{'Confirm ypur Password'|translate}}</label>
+                                        <p-password iconPos="left" class="form-control" appValidation [feedback]="false" [toggleMask]="true" name="password" placeholder="{{'Confirm ypur Password'| translate}}"></p-password> 
+                                    </div>
+                            </div>
+                   </form>
+               </div>
+        </div>
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+      
+      <div class="d-flex align-items-center justify-content-end  ">
+        
+        <button class="btn btn-primary btn--sm  " (click)="savePassword()">
+            <span>{{'sign up.Next'| translate}} </span>
+        </button>
+    </div>
+  
+    </ng-template>
+</p-dialog>
+
+
+<p-dialog header="{{'sign up.in case identity not exist'|translate}}" [baseZIndex]="10000"   [resizable]="false" [(visible)]="openNotIdentityModel"  [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+
+    <ng-template pTemplate="content">
+
+         <div class="sign up">
+            <div class=" mt-5 custom-form custom-validation-form " >
+                <form   >
+                    <div class="row gx-5 form-set">
+                        <div class="col-12">
+                            <label class="label" for="nationality">{{'sign up.reason of identity not exist'|translate }} </label>
+                            <p-dropdown [options]="signUpWaysList" optionLabel="name.ar" optionValue="id"  inputId="nationality" placeholder="{{'sign up.reason of identity not exist'|translate }}"></p-dropdown>
+                        </div>
+                      
+                    </div>
+                    <div class="row gx-5 form-set">
+                       
+                        <div class="col-12">
+                            <label class="label" for="day">{{'sign up.pleaze upload image to approve that you don’t have digital identity' |translate}}</label>
+                            <app-file-upload (onFileUpload)="onFileUpload($event)"  view="list" label=" انقر لإرفاق ملف"></app-file-upload>
+                        </div>
+                    </div>
+
+                    <div class="row gx-5 form-set">
+                        <div class="col-6">
+                            <label class="label" for="nationality">{{'sign up.Name'|translate }} </label>
+                            <input type="text" pInputText   class="form-control basicinput" appValidatorsInput  placeholder="{{'sign up.Enter Name'|translate}}" > 
+                        </div>
+                        <div class="col-6">
+                            <label class="label" for="nationality">{{'sign up.NickName'|translate }} </label>
+                            <input type="text" pInputText   class="form-control basicinput" appValidatorsInput  placeholder="{{'sign up.Enter NickName'|translate}}" > 
+                        </div>
+                      
+                    </div>
+                    <div class="row gx-5 form-set">
+                        <div class="col-6">
+                            <label class="label" for="nationality">{{'sign up.Gender'|translate }} </label>
+                            <p-dropdown [options]="signUpWaysList" optionLabel="name.ar" optionValue="id"  inputId="nationality" placeholder="{{'sign up.Enter Gender'|translate }}"></p-dropdown>
+                        </div>
+                        <div class="col-6">
+                            <label class="label" for="nationality">{{'sign up.Nationality'|translate }} </label>
+                            <p-dropdown [options]="signUpWaysList" optionLabel="name.ar" optionValue="id"  inputId="nationality" placeholder="{{'sign up.Enter Nationality'|translate }}"></p-dropdown>
+                        </div>
+                      
+                    </div>
+                    <div class="row gx-5 form-set">
+                        <div class="col-12">
+                            <label class="label" for="nationality">{{'sign up.Birthday'|translate }} </label>
+                            <p-calendar formControlName="dateFrom"  [showIcon]="true" inputId="icon"  class="form-control" appValidation    placeholder="dd/mm"   [readonlyInput]="true"    ></p-calendar>
+                        </div>
+                       
+                      
+                    </div>
+                   </form>
+               </div>
+        </div>
+
+    </ng-template>
+    <ng-template pTemplate="footer">
+      
+      <div class="d-flex align-items-center justify-content-end  ">
+        
+        <button class="btn btn-primary btn--sm  " (click)="savePersonalInformation()">
+            <span>{{'sign up.Next'| translate}} </span>
+        </button>
+    </div>
+  
+    </ng-template>
+</p-dialog>

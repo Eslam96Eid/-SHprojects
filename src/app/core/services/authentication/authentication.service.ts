@@ -3,14 +3,21 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Router } from '@angular/router';
 import { HttpHandlerService } from '../http/http-handler.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   MAIN_LINK: string = 'https://jobs-nodejs.herokuapp.com/api/users/signin/';
-  constructor(private http: HttpHandlerService, private router: Router) { }
+  signUpWaysList;
 
+  constructor(private http: HttpHandlerService, private router: Router,private translate:TranslateService) { 
+
+  this.signUpWaysList=[{id:1,name:{ar:this.translate.instant("sign up.phoneNumber"),en:"Phone Number"}},
+  {id:2,name:{ar:this.translate.instant("sign up.email"),en:"Email"}},
+  {id:3,name:{ar:this.translate.instant("sign up.digitalIdentity"),en:"Digital Identity"}}]
+  }
   // login(user: any) {
   //   return this.http.post<{ token: string }>(this.MAIN_LINK, user);
   // }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, ReplaySubject, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
@@ -10,15 +11,14 @@ import { UserService } from './user/user.service';
 export class AuthenticationService {
   private currentUserEmailSourrce = new BehaviorSubject<any>('');
   currentUserEmail = this.currentUserEmailSourrce.asObservable();
-
   private sidebarCountsSource = new BehaviorSubject<any>({});
   sidebarCounts = this.sidebarCountsSource.asObservable();
-
   private accountingPeriodSource = new ReplaySubject<any>();
   accountingPeriod = this.accountingPeriodSource.asObservable();
 
-  constructor(private http: HttpHandlerService,
-    private userService: UserService) {
+  constructor(private http: HttpHandlerService,private userService: UserService) 
+  {
+
   }
 
   validateUsername(userName: string) {

@@ -1,0 +1,37 @@
+<form [formGroup]="stdForm">
+  <div formArrayName="certificates">
+    <div *ngFor="let employee of certificates.controls; let i=index">
+      <div [formGroupName]="i">
+
+
+        <div class="row g-5 form-set custom-form">
+          <div class="col-md-4 field">
+            <label class="mb-3">{{'dashboard.students.academic year'|translate}}</label> <br>
+            <p-calendar formControlName="certificateId" [readonlyInput]="true" [showIcon]="true" inputId="icon"
+              selectionMode="range" optionValue="id" appValidation placeholder="dd/mm/yy" dateFormat="dd/mm/yy">
+            </p-calendar>
+
+          </div>
+          <div class="col-md-4">
+            <label>{{'dashboard.students.School Name'| translate}}</label> <br>
+            <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
+              formControlName="schoolId" optionLabel="name.ar" optionValue="id" appValidation></p-dropdown>
+
+          </div>
+          <div class="col-md-4">
+            <label>{{'dashboard.students.Class'|translate}}</label> <br>
+            <p-dropdown placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades"
+              formControlName="gradeId" optionLabel="name.ar" optionValue="id" appValidation></p-dropdown>
+          </div>
+
+        </div>
+
+
+
+      </div>
+
+    </div>
+  </div>
+</form>
+
+<pre>{{this.stdForm.value | json}}</pre>

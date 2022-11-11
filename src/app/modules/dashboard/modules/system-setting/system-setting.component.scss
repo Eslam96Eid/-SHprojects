@@ -1,0 +1,61 @@
+@import 'src/assets/css/utils/variables.scss';
+@import '../../../../../assets/css/components/forms.scss';
+
+// .content {
+//     width: 100%;
+//     .Btn-group {
+//         position: absolute;
+//         right: 79.2%;
+//         bottom: 100%;
+//         padding-bottom: 3%;
+//         // top:-9rem;
+//         .leftbtn {
+//             width: 14.5rem;
+//             margin-right: 1rem;
+//         }
+//         .addBtn {
+//             margin-right: 14.8rem;
+//         }
+//     }
+//     .tabView {
+//         .tabView__nav {
+//             column-gap: 7rem;
+//         }
+//         .tabView__content {
+//             .custom-validation-form {
+//                 padding-top: 0rem;
+//             }
+//             .curriculum,
+//             .class {
+//                 .btn {
+//                     width: 20%;
+//                     margin-right: 39.5rem;
+//                 }
+//                 .btn-outline-primary {
+//                     border: none;
+//                 }
+//             }
+//         }
+//     }
+// }
+
+
+
+.actions-btn{
+    position: absolute;
+    left: 0;
+    top: -12rem;
+
+}
+.tabView__content{
+    min-height: 70vh;
+}
+
+::ng-deep{
+    app-informative-block {
+        .informative-block{
+            height: 30rem;
+            min-height: 30rem !important;
+        }
+    }
+}

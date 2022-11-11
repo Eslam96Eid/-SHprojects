@@ -1,6 +1,17 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { AfterViewInit, Component, ElementRef, EventEmitter, inject, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { Observable, share } from 'rxjs';
+import { GenericResponse } from 'src/app/core/models/global/global.model';
+import { Student } from 'src/app/core/models/student/student.model';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
+import { IndexesEnum } from 'src/app/shared/enums/indexes/indexes.enum';
 import { PermissionsEnum } from 'src/app/shared/enums/permissions/permissions.enum';
+import { CountriesService } from 'src/app/shared/services/countries/countries.service';
+import { SharedService } from 'src/app/shared/services/shared/shared.service';
+import { IndexesService } from '../../../../indexes/service/indexes.service';
+import { StudentsService } from '../../../../students/services/students/students.service';
 import { RegisterChildService } from '../../../services/register-child/register-child.service';
 
 @Component({
@@ -8,180 +19,63 @@ import { RegisterChildService } from '../../../services/register-child/register-
   templateUrl: './personal-information.component.html',
   styleUrls: ['./personal-information.component.scss']
 })
-export class PersonalInformationComponent implements OnInit, AfterViewInit {
-  // @Input('student') student
+export class PersonalInformationComponent implements OnInit {
+  lang =inject(TranslationService).lang;
   @Input('mode') mode : 'edit'| 'view'= 'view'
-  @Output() onEdit = new EventEmitter()
-  @ViewChild('nav') nav: ElementRef
+  @Input('formGroup') studentForm:FormGroup
+  
+  faXmark =faXmark
 
-  navListLength
 
-  get permissionEnum(){ return PermissionsEnum }
 
-  step=0
+  student$: Observable<Student> = this.childService.Student$
+
+  isLoading=false
   editStudentinfoMode =false
 
-  diseases=[{name:'أمراض القلب'},{name:'فوبيا'},{name:'حساسيه'},{name:'السكرى'}];
+  studentId = +this.route.snapshot.paramMap.get('id')
 
-
+  changeIdentityModelOpened=false
+  
     // << DATA PLACEHOLDER >> //
 
-    schoolClasses: any[] = [
-
-      {
-        "id": "1001",
-        "code": "nvklal433",
-        "name": "Black Watch",
-        "description": "Product Description",
-        "image": "black-watch.jpg",
-        "price": 72,
-        "category": "Accessories",
-        "quantity": 61,
-        "inventoryStatus": "INSTOCK",
-        "rating": 4
-      },
-      {
-        "id": "1001",
-        "code": "nvklal433",
-        "name": "Black Watch",
-        "description": "Product Description",
-        "image": "black-watch.jpg",
-        "price": 72,
-        "category": "Accessories",
-        "quantity": 61,
-        "inventoryStatus": "INSTOCK",
-        "rating": 4
-      },
-      {
-        "id": "1000",
-        "code": "f230fh0g3",
-        "name": "Bamboo Watch",
-        "description": "Product Description",
-        "image": "bamboo-watch.jpg",
-        "price": 65,
-        "category": "Accessories",
-        "quantity": 24,
-        "inventoryStatus": "INSTOCK",
-        "rating": 5
-      },
-      {
-        "id": "1001",
-        "code": "nvklal433",
-        "name": "Black Watch",
-        "description": "Product Description",
-        "image": "black-watch.jpg",
-        "price": 72,
-        "category": "Accessories",
-        "quantity": 61,
-        "inventoryStatus": "INSTOCK",
-        "rating": 4
-      },
-      {
-        "id": "1000",
-        "code": "f230fh0g3",
-        "name": "Bamboo Watch",
-        "description": "Product Description",
-        "image": "bamboo-watch.jpg",
-        "price": 65,
-        "category": "Accessories",
-        "quantity": 24,
-        "inventoryStatus": "INSTOCK",
-        "rating": 5
-      },
-      {
-        "id": "1001",
-        "code": "nvklal433",
-        "name": "Black Watch",
-        "description": "Product Description",
-        "image": "black-watch.jpg",
-        "price": 72,
-        "category": "Accessories",
-        "quantity": 61,
-        "inventoryStatus": "INSTOCK",
-        "rating": 4
-      },
-      {
-        "id": "1002",
-        "code": "zz21cz3c1",
-        "name": "Blue Band",
-        "description": "Product Description",
-        "image": "blue-band.jpg",
-        "price": 79,
-        "category": "Fitness",
-        "quantity": 2,
-        "inventoryStatus": "LOWSTOCK",
-        "rating": 3
-      },
-
-    ]
-  studentFormm = this.fb.group({
-    id: [] ,
-    arabicName: [],
-    englishName: [],
-    surName: [],
-    guardianId: [],
-    schoolId: [],
-    gradeId: [],
-    classRoomId: [] ,
-    schoolYearId: [] ,
-    genderId: [] ,
-    religionId: [] ,
-    curriculumId: [] ,
-    trackId: [] ,
-    nationalityId: [] ,
-    expireDate:[], //missing
-    nationalId:[], //missing
-    birthDate: [],
-    daleelId: [] ,
-    ministerialId: [] ,
-    schoolCode: [] ,
-    isSpecialAbilities: [] ,
-    isSpecialClass: [] ,
-    isChildOfAMartyr : [],
-    isPassed : [],
-    isGifted: [] ,
-    emiratesIdPath: [],
-    addressId: [] ,
-    behaviorId: [],
-    city:[], //missing
-    emara:[], //missing
-    state:[], //missing
-    requiredAmount:[], //missing
-    paidAmount:[], //missing
-    restAmount:[], //missing
-    accountantComment:[], //missing
-  })
-
+  genderOptions=this.sharedService.genderOptions
+  booleanOptions = this.sharedService.booleanOptions
+  countries$ = this.CountriesService.getCountries()
+  cities = this.CountriesService.cities
+  cities$ = this.CountriesService.getCities()
+  states$ = this.CountriesService.getAllStates()
+  talents$ = this.studentsService.getTalents()
+  nationalitiesCategory$ = this.indexService.getIndext(IndexesEnum.NationalityCategory)
+  religions= this.sharedService.religions
     // << FORMS >> //
 
   constructor(
     private fb:FormBuilder,
-    public childService:RegisterChildService) { }
+    private sharedService: SharedService,
+    private CountriesService:CountriesService,
+    private route: ActivatedRoute,
+    private studentsService: StudentsService,
+    public childService:RegisterChildService,
+    private indexService:IndexesService) { }
 
-
-  ngAfterViewInit(): void {
-    let navItemsList =this.nav.nativeElement.children
-    navItemsList[0].classList.add('active')
-    this.navListLength = navItemsList.length
-
-  }
 
   ngOnInit(): void {
+    // this.getStudent(this.studentId)
+    setTimeout(()=>{
+
+      console.log(this.studentForm.value);
+    },2000)
+    
   }
 
+  getStudent(studentId){
+    this.isLoading = true
+    this.studentsService.getStudent(studentId).subscribe((res:GenericResponse<Student>) =>{
+      this.isLoading = true
+    })
+  }
 
-	hideNavControl=true;
-
-	scrollLeft(el :ElementRef){
-		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft - 175, behavior:'smooth'})
-		this.hideNavControl = false;
-	}
-
-	scrollRight(el :ElementRef){
-		this.nav.nativeElement.scrollTo({left: this.nav.nativeElement.scrollLeft + 175, behavior:'smooth'})
-		if(this.nav.nativeElement.scrollLeft === 0) this.hideNavControl = true;
-
-	}
 
   ngOnDestroy(): void {
     this.childService.onEditMode$.next(false)

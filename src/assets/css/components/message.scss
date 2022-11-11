@@ -1,28 +1,23 @@
-
 ::ng-deep {
-         .toast-container .ngx-toastr{
-                        width: max-content;
-                        color:#fff;
-                        position: fixed;
-                        bottom:1%;
-                       
-                  }
-                  .toast-error{
-                    background-color:#f35154;
-                  }
-                  .toast-success{
-                    background-color: rgb(29, 152, 91);
-                  }
-          .toast-message{ 
-            font-size: 1.6rem;
-            font-weight: 400;
-            margin-right: 2rem;
-            font-family: "Droid";
-           
-        }
-
-           .toast-bottom-right{
-                
-                right: 0px !important;
-        }
+    .toast-container .ngx-toastr {
+        width: max-content;
+        color: #fff;
+        position: fixed !important;
+        bottom: 1%;
+    }
+    .toast-error {
+        background-color: #f35154;
+    }
+    .toast-success {
+        background-color: rgb(29, 152, 91);
+    }
+    .toast-message {
+        font-size: 1.6rem;
+        font-weight: 400;
+        margin-right: 2rem;
+        font-family: "Droid";
+    }
+    .toast-bottom-right {
+        right: 0px !important;
+    }
 }

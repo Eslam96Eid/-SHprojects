@@ -5,7 +5,8 @@ import { faChevronLeft, faPlus, faClose } from '@fortawesome/free-solid-svg-icon
 import { TranslateService } from '@ngx-translate/core';
 import { CalendarEvent } from 'angular-calendar';
 import { addDays, addHours, startOfDay, subDays } from 'date-fns';
-import { IHeader, paginationState } from 'src/app/core/Models';
+import { IHeader } from 'src/app/core/Models';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { CalendarService } from 'src/app/shared/services/calendar/calendar.service';
 

@@ -15,8 +15,29 @@
 
 
     <!-- NavBar Menu -->
+    <div class="nav__menu__container ms-auto " *ngIf="currentUserScope ==ScopeEnum.Guardian">
+        <ul class="nav__menu">
+            <div class="mx-5"></div>
+            <li class="nav__menu__item">
+                <a routerLinkActive="active" routerLink="">
+                    <div class="text">الصفحة الرئيسية</div>
+                </a>
+            </li>
+            <li class="nav__menu__item">
+                <a routerLinkActive="active" routerLink="my-requests">
+                    <div class="text">طلباتي</div>
+                </a>
+            </li>
+            <li class="nav__menu__item">
+                <a routerLinkActive="active" routerLink="about-us">
+                    <div class="text">عن دليل</div>
+                </a>
+            </li>
+        </ul>
+    </div>
 
-    <div class="mx-auto" (clickOutside)="atclickOutside()">
+
+    <div class="mx-auto" (clickOutside)="atclickOutside()" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
 
         <div class="nav__menu__container ">
             <ul class="nav__menu">
@@ -43,8 +64,7 @@
                 <div class="links" *ngIf="activeMenuItemChanged" @slide>
                     <h2 class="heading heading--secondary">{{activeMenuItem?.title}}</h2>
                     <ul>
-                        <li *ngFor="let link of activeMenuItem?.links" (click)="isMenuOpend=false"
-                            [routerLink]="[link.url]">
+                        <li *ngFor="let link of activeMenuItem?.links" (click)="isMenuOpend=false" [routerLink]="[link.url]">
                             {{link.name}}
                         </li>
                     </ul>
@@ -63,8 +83,7 @@
                                 <h4 class="heading heading--tertiary">تقرير الدرجات</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه
-                                لهئه الشارقه </p>
+                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه </p>
                         </div>
                     </li>
                     <li>
@@ -76,8 +95,7 @@
                                 <h4 class="heading heading--tertiary">اعدادات النظام</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه
-                                لهئه الشارقه </p>
+                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه </p>
                         </div>
                     </li>
                     <li>
@@ -89,8 +107,7 @@
                                 <h4 class="heading heading--tertiary">الدرجات</h4>
                                 <fa-icon [icon]="faArrowLeft"></fa-icon>
                             </div>
-                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه
-                                لهئه الشارقه</p>
+                            <p class="">موظف هيئه الشارقه للتعليم الخاص يقوم بتحكم واداره العلاقات مع المدارس التابعه لهئه الشارقه</p>
                         </div>
                     </li>
                 </ul>
@@ -124,7 +141,7 @@
                             <div class="link">
 
                                 <div id="notification-content">
-                                    <div class="Notifications__cards">
+                                    <div class="Notifications__cards" infiniteScroll [infiniteScrollDistance]="0.1" [infiniteScrollThrottle]="500" (scrolled)="onScroll()" [scrollWindow]="false">
                                         <div class="header-notification d-flex justify-content-between">
                                             <div class="left d-flex">
                                                 <h2>{{'Notifications.Notifications'|translate}}</h2>
@@ -134,35 +151,30 @@
                                                     <option  value="2">{{'Notifications.Not readable' | translate}}</option>
                                                 </select>
                                             </div>
-                                            <div *ngIf="isChecked" class="right d-flex align-items-center" (click)="markAsRead()">
+                                            <div *ngIf="isChecked  && notificationsList.length !==0" class="right d-flex align-items-center" (click)="markAsRead()">
                                                 <img class="px-1" src="assets/images/shared/outline.svg" alt="">
                                                 <h5>{{'Notifications.Mark As Read'|translate}}</h5>
                                             </div>
                                         </div>
                                         <div class="container-fluid">
                                             <div class="row">
-                                                <div class="p-0 mb-4"
-                                                    *ngFor="let card of notificationsList; let i=index">
-                                                    <div class="name-description" (click)="goToNotificationDetails(card.pageLink)">
+                                                <div class="text-center my-2" *ngIf="notificationsList.length == 0">
+                                                    <img src="assets/images/empty-list/empty-list.svg" alt="">
+                                                    <h2>{{'emptyList.Notifications List is empty' |translate}}</h2>
+                                                </div>
+                                                <div class="p-0 mb-4" *ngFor="let card of notificationsList; let i=index">
+                                                    <div *ngIf="notificationsList.length !==0" class="name-description" (click)="goToNotificationDetails(card.pageLink)">
                                                         <div class="title position-relative">
-                                                            <img class="NotReadable"
-                                                                src="assets/images/shared/bluecircle.svg"
-                                                                *ngIf="!card.isRead">
-                                                            <img class="cardimage"
-                                                                src="assets/images/shared/Person.jpg">
-                                                            <span class="tittle"
-                                                                *ngIf="checkLanguage">{{card.userName.ar}}</span>
-                                                            <span class="tittle"
-                                                                *ngIf="!checkLanguage">{{card.userName.en}}</span>
+                                                            <img class="NotReadable" src="assets/images/shared/bluecircle.svg" *ngIf="!card.isRead">
+                                                            <img class="cardimage" src="assets/images/shared/Person.jpg">
+                                                            <span class="tittle" *ngIf="checkLanguage">{{card.userName.ar}}</span>
+                                                            <span class="tittle" *ngIf="!checkLanguage">{{card.userName.en}}</span>
                                                             <span>{{'Notifications.Ask'|translate}}</span>
-                                                            <span class="headerName"
-                                                                *ngIf="checkLanguage">{{card.title.ar}}</span>
-                                                            <span class="headerName"
-                                                                *ngIf="!checkLanguage">{{card.title.en}}</span>
+                                                            <span class="headerName" *ngIf="checkLanguage">{{card.title.ar}}</span>
+                                                            <span class="headerName" *ngIf="!checkLanguage">{{card.title.en}}</span>
                                                         </div>
                                                         <div class="Description my-2">
-                                                            <span
-                                                                class="tittle">{{'Notifications.Description'|translate}}</span>
+                                                            <span class="tittle">{{'Notifications.Description'|translate}}</span>
                                                             <p class="paragraph ">{{card.description|translate}}</p>
                                                         </div>
                                                         <span class="receviedTime">{{card.createdDate|date
@@ -178,7 +190,7 @@
                             </div>
                         </div>
                     </li>
-                    <button class="detail-btn p-relative" routerLink="/notifications/notifications-list">
+                    <button *ngIf="notificationsList.length !==0" class="detail-btn p-relative" routerLink="/notifications/notifications-list">
                         {{'Notifications.Show All' | translate}}
                         <img src="assets/images/shared/detail-arrow.png">
                     </button>
@@ -187,7 +199,7 @@
         </div>
     </div>
 
-    <div class="nav__calender">
+    <!-- <div class="nav__calender" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
         <div class="icon arrow" (click)="calendar.toggle()">
             <fa-icon class="" [icon]="faAngleDown"></fa-icon>
         </div>
@@ -199,9 +211,46 @@
         <div class="icon calendar" (click)="calendar.toggle()">
             <img src="assets/images/navBar/calendar.svg" alt="">
         </div>
+    </div> -->
+
+    <div class="nav__dropdown custom-form" *ngIf="!(currentUserScope ==ScopeEnum.Guardian)">
+        <div class="icon arrow" (click)="dropdown.show()">
+            <fa-icon class="" [icon]="faAngleDown"></fa-icon>
+        </div>
+
+        <p-dropdown #dropdown [options]="[{id: '',name:'2022'}, {id: '',name:'2023'}, {id: '',name:'2024'}]" optionLabel="name" [(ngModel)]="YEAR_Id" optionValue="id" placeholder="2022 / 2023"></p-dropdown>
+        <div class="icon calendar" (click)="dropdown.show()">
+            <img src="assets/images/navBar/calendar.svg" alt="">
+        </div>
     </div>
 
 
 
+    <div class="nav__user" *ngIf="(currentUserScope ==ScopeEnum.Guardian)">
+        <div class="dropdown">
+            <div class="" id="dropdownMenuButton1" data-bs-toggle="dropdown">
+                <fa-icon class="icon" [icon]="faAngleDown"></fa-icon>
+                <!-- <fa-icon class="fs-4" [icon]="faEllipsisVertical" ></fa-icon> -->
+            </div>
+            <ul class="dropdown-menu dropdown-menu-end shadow-lg " aria-labelledby="dropdownMenuButton1">
+                <li class="dropdown-item">
+                    <a class="link" routerLink="track/1">
+                        <img src="assets/images/shared/user.svg" alt="">
+                        <p>{{'shared.account' |translate}}</p>
+                    </a>
+                </li>
+                <li class="dropdown-item">
+                    <a class="link" routerLink="track/1">
+                        <img src="assets/images/shared/logout.svg" alt="">
+                        <p class="red">{{'shared.signOut' |translate}}</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <span class="name">علي مصطفى</span>
+        <div class="image">
+            <img src="assets/images/navBar/user-img.png" alt="">
+        </div>
+    </div>
 
 </nav>

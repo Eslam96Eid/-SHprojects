@@ -30,7 +30,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
   roleStatusList;
   selectedRole;
   subscription:Subscription;
-  filtration = {...Filtration,isactive:null};
+  filtration = {...Filtration,isactive:''};
   paginationState= {...paginationInitialState};
   roles={
     totalAllData:0,
@@ -50,54 +50,54 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
           { label: this.translate.instant('dashboard.UserRole.List Of Job Roles'),routerLink:'/dashboard/manager-tools/user-roles/user-roles-list'}],
       }
     );
-   
+
     this.roleStatusList = this.userRolesService.roleStatusList;
- 
+
   }
   confirmDeleteListener(){
     this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
       if (val) this.deleteRole(this.selectedRole)
-      
+
     })
   }
 
 
   deleteRole(role)
-  { 
+  {
 
-  
+
         this.userRolesService.deleteRole(role.id).subscribe((res)=>{
-       
+
           this.getAllRole();
           this.toastService.success(this.translate.instant('dashboard.UserRole.Job Role deleted Successfully'));
           this.confirmModelService.confirmed$.next(null);
           },(err)=>{
-         
+
             this.getAllRole();
             this.toastService.error(this.translate.instant('dashboard.UserRole.error,please try again'));
             this.confirmModelService.confirmed$.next(null);
 
           });
-        
+
  }
 
   getAllRole()
   {
     this.roles.loading=true;
     this.roles.list=[];
-    this.userRolesService.getAllRoles(this.filtration).subscribe((res)=>{
-      this.roles.loading = false;
-      this.roles.list=res.data;
-      this.roles.totalAllData = res.totalAllData;
-      this.roles.total=res.total;
- console.log(this.roles.list)
-      },(err)=>{this.roles.loading = false;
-        this.roles.total=0
-      });
+    // this.userRolesService.getAllRoles(this.filtration).subscribe((res)=>{
+    //   this.roles.loading = false;
+    //   this.roles.total=res.total;
+    //   this.roles.totalAllData = res.totalAllData;
+    //   this.roles.list=res.data;
+
+    //   },(err)=>{this.roles.loading = false;
+    //     this.roles.total=0
+    //   });
 
   }
   clearFilter(){
-    
+
     this.filtration.KeyWord =''
     this.filtration.isactive= null;
     this.getAllRole();
@@ -125,7 +125,7 @@ export class UserRolesListComponent implements OnInit,OnDestroy {
 
   }
   showUserList(roleId:number) {
-   
+
 
     this.userRolesService.getRoleByID(roleId).subscribe((res)=>{
       this.showLoader=false;

@@ -9,14 +9,16 @@
             <app-table-caption (onExport)="first=false;onExport($event)" (onFilter)="first=false;getAllIndexes()" (onSearch)="first=false;filtration.KeyWord = $event; getAllIndexes()" (onClear)="first=false;clearFilter()">
 
                 <div class="row gx-5 form-set">
-                    <div class="col-6">
+                    <div class="col-8">
                         <label class="label" for="indexType">{{'dashboard.Indexes.List Type'|translate }} </label>
-                        <p-dropdown [options]="indexListType" [(ngModel)]="filtration.IndexTypeId" inputId="indexType" optionLabel="indexType.ar" optionValue="id"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="indexListType" [(ngModel)]="filtration.IndexType" inputId="indexType" optionLabel="indexType.ar" optionValue="id"  placeholder="{{'dashboard.Indexes.Select Index Type'|translate }}"></p-dropdown>
 
                     </div>
-                    <div class="col-6">
+                </div>
+                <div class="row gx-5 form-set">
+                    <div class="col-8">
                         <label class="label" for="indexStatus">{{'dashboard.Indexes.Index Status'|translate }} </label>
-                        <p-dropdown [options]="indexStatusList" [(ngModel)]="filtration.indexStatus" inputId="indexStatus" optionLabel="arabicName" optionValue="id" placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
+                        <p-dropdown [options]="indexStatusList" [(ngModel)]="filtration.IndexStatus" inputId="indexStatus" optionLabel="arabicName" optionValue="id" placeholder="{{'dashboard.Indexes.Select Index Status'|translate }}"></p-dropdown>
                     </div>
                 </div>
 
@@ -43,7 +45,7 @@
 
         <ng-template pTemplate="body" let-e  >
             <tr  >
-                <td  >{{e.indexType.ar|translate}}</td>
+                <td  >{{e.indexType|translate}}</td>
                 <td  class="mediumrow" >{{e.indexName.ar|translate}}</td>
                 <td  Class="longrow" >
 

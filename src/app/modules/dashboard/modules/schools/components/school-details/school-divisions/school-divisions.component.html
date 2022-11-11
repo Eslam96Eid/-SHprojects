@@ -1,44 +1,68 @@
-
-<div class="prim-table mt-4">
-    <p-table #dt [value]="students" [columns]="cols" [paginator]="true"  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rows]="rows" [(first)]="first">
+<div class="prim-table mt-4" *ngIf="divisions.totalAllData || divisions.loading">
+    <p-table #dt [value]="divisions.list">
         <ng-template pTemplate="caption">
-            <app-table-caption 
-            (onExport)="onExport($event)" 
-            (onFilter)="getSchoolDivisions()" 
-            (onSearch)="filtration.KeyWord = $event; getSchoolDivisions()"
-            (onClear)="clearFilter()"></app-table-caption>
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="getSchoolDivisions()" (onSearch)="filtration.KeyWord = $event; getSchoolDivisions()" (onClear)="clearFilter()">
+
+                <div class="row gx-5 form-set">
+                    <div class="col">
+                        <label class="label" for="status">{{'shared.status'|translate }} </label>
+                        <p-dropdown [options]="schoolGrades$ |async" [(ngModel)]="filtration.gradeid" optionValue="id" optionLabel="name.ar" placeholder="{{'shared.grade'|translate }}"></p-dropdown>
+                    </div>
+
+                </div>
+            </app-table-caption>
 
         </ng-template>
-        
+
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="code">{{'dashboard.schools.sectionName' |translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.schools.gradeName' |translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="category">{{'dashboard.schools.roomNumber' |translate}} <p-sortIcon field="category"></p-sortIcon></th>
-                <th pSortableColumn="quantity">{{'dashboard.schools.studentNumber' |translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
-                <th pSortableColumn="price">{{'dashboard.schools.spetialAbilities' |translate}} <p-sortIcon field="price"></p-sortIcon></th>
-                <th pSortableColumn="quantity">{{'dashboard.schools.sectionTeacher' |translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
-                 <th class="actions" pSortableColumn="actions"></th>
+                <th pSortableColumn="code">{{'dashboard.schools.sectionName' |translate}}
+                    <p-sortIcon field="code"></p-sortIcon>
+                </th>
+                <th pSortableColumn="name">{{'dashboard.schools.gradeName' |translate}}
+                    <p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="category">{{'dashboard.schools.roomNumber' |translate}}
+                    <p-sortIcon field="category"></p-sortIcon>
+                </th>
+                <th pSortableColumn="quantity">{{'dashboard.schools.studentsNumber' |translate}}
+                    <p-sortIcon field="quantity"></p-sortIcon>
+                </th>
+                <th pSortableColumn="price">{{'dashboard.students.withDisabilities' |translate}}
+                    <p-sortIcon field="price"></p-sortIcon>
+                </th>
+                <th pSortableColumn="quantity">{{'dashboard.schools.sectionManager' |translate}}
+                    <p-sortIcon field="quantity"></p-sortIcon>
+                </th>
+                <!-- <th class="actions" pSortableColumn="actions"></th> -->
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product>
+        <ng-template pTemplate="body" let-division>
+            <tr [routerLink]="['division/',divisions.id]">
+                <td>{{division.name |currentLang}}</td>
+                <td>{{division.gradeName |currentLang}}</td>
+                <td>{{division.classRoomNumber}}</td>
+                <td>{{division.studentCount}}</td>
+                <td>{{division.isSpecialAbilities}}</td>
+                <td>{{division.teacherName |currentLang}}</td>
+                <!-- <td ><app-dropdown [items]="menuItems"></app-dropdown></td> -->
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
             <tr>
-                <td>{{product.code}}</td>
-                <td>{{product.name}}</td>
-                <td>{{product.category}}</td>
-                <td>{{product.quantity}}</td>
-                <td>{{product.quantity}}</td>
-                <td>{{product.price | currency: 'USD'}}</td>
-                <td >
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="divisions.totalAllData && divisions.list.length == 0 &&  !divisions.loading">
+                        <app-informative-block subTitle="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
 
-                    <app-dropdown [items]="menuItems"></app-dropdown>
-
+                    <app-loader></app-loader>
                 </td>
             </tr>
         </ng-template>
     </p-table>
 
-    <div class="">
-        <app-pagination [totalItems]="students.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
-    </div>
 </div>
+<ng-container *ngIf="!divisions.totalAllData && !divisions.loading">
+    <app-informative-block subTitle="{{'emptyList.divisions' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>

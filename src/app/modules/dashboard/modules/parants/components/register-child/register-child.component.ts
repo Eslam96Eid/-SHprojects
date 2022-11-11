@@ -1,9 +1,10 @@
 import { Component, EventEmitter, HostBinding, HostListener, OnInit, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { paginationState } from 'src/app/core/models/pagination/pagination';
+
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { faHome, faFilter, faSearch, faAngleLeft, faAngleRight, faHouse } from '@fortawesome/free-solid-svg-icons';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 @Component({
   selector: 'app-register-child',
   templateUrl: './register-child.component.html',

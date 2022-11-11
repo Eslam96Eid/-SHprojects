@@ -53,12 +53,12 @@ export class EditNewIndexComponent implements OnInit {
       }
     );
 
-    this.indexService.getIndextTypeList().subscribe((res)=>{this.indexListType=res;})
+    this.indexListType=this.indexService.indexListType;
 
     this.indexService.getIndexByID(Number(this.urlParameter)).subscribe((res)=>{
       
       this.index=res;
- 
+ console.log(this.index)
       this.bindOldIndex(this.index);
     });
   
@@ -83,7 +83,7 @@ export class EditNewIndexComponent implements OnInit {
     this.isBtnLoading = true;
     this.index.indexStatus=this.indexFormGrp.value.indexStatus==true? "1":"2";
     this.index={  indexName:{ar:this.indexFormGrp.value.arabicIndexName,en:this.indexFormGrp.value.englishIndexName}, 
-                  indexTypeId:this.indexFormGrp.value.indexType, 
+                  indexType:this.indexFormGrp.value.indexType, 
                   indexStatus: this.index.indexStatus
     };
 
@@ -150,7 +150,7 @@ export class EditNewIndexComponent implements OnInit {
  
         this.indexFormGrp.patchValue({arabicIndexName:index.indexName.ar, 
           englishIndexName:index.indexName.en,
-          indexType:index.indexTypeId,
+          indexType:index.indexType,
           indexStatus:index.indexStatus
         });
     

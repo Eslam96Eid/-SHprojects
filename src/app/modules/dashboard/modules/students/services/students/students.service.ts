@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { delay, finalize, take } from 'rxjs';
+import { delay, finalize, Observable, take } from 'rxjs';
 import { Filter } from 'src/app/core/Models/filter/filter';
+import { GenericResponse } from 'src/app/core/models/global/global.model';
+import { Student } from 'src/app/core/models/student/student.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
@@ -23,8 +25,8 @@ export class StudentsService {
       }))
   }
 
-  getStudent(id){
-    return this.http.get(`/Student${id}`)
+  getStudent(id): Observable<GenericResponse<Student>>{
+    return this.http.get(`/Student/${id}`,{yearId:1})
   }
 
   updateStudent(id, studentData){
@@ -75,8 +77,8 @@ export class StudentsService {
   getStudentInfo(id){
     return this.http.get(`/Student/${id}`)
   }
-    getAllGrades(searchModel){
-      return this.http.get('/Grade',searchModel)
+    getAllGrades(){
+      return this.http.get('/Grade')
     }
 
     getAllSchoolNames(){
@@ -85,5 +87,12 @@ export class StudentsService {
 
     getAllCertificate(){ // no data :(
       return this.http.get('/Certificate')
+    }
+
+    getCetificateManually(id){
+      return this.http.get(`/Student/${id}/certificatemanually`)
+    }
+    postCertificate(obj){
+      return this.http.post('/student/sentCertificate',obj)
     }
 }

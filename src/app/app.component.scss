@@ -1,4 +1,9 @@
 @import 'src/assets/css/utils/variables';
+// -----------
+@import "../assets/css/components/forms.scss";
+@import 'src/assets/css/components/inputswitch';
+@import '../assets/css/components/message.scss';
+// -----------
 .panal-wrapper {
     position: fixed;
     top: 50%;

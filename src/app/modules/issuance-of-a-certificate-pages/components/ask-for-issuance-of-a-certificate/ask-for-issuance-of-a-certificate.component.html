@@ -1,0 +1,154 @@
+<div class="notification-header dashboard d-flex justify-content-between">
+    <div class="right">
+        <app-header-dashboard></app-header-dashboard>
+    </div>
+</div>
+
+<div *ngIf="step" class="issune-certificate-content">
+    <h4>{{'dashboard.issue of certificate.Please select a student' | translate}}</h4>
+
+    <div class="row my-5">
+        <div class="col-md-4" *ngFor="let item of childList; let i = index">
+            <app-card-student [student]="item" (addStudent)="increaseOrDecrease($event,item)"></app-card-student>
+        </div>   
+    </div>
+
+    <div class="end-of-content d-flex justify-content-between">
+        <p>لقد قمت بتحديد <span>{{choosenStudents.length}}</span> من الأبناء</p>
+        <button class="btn btn-primary" (click)="changeRoute(item)">التالي</button>
+    </div>
+    
+</div>
+
+
+<div *ngIf="step1" class="issune-certificate-content">
+    <div class="custom-form align-items-center">
+        <div class="title d-flex">
+            <div class="form-group">
+                <h4 class="mb-4">{{'breadcrumb.Request to issue a certificate' | translate}}</h4>
+                <p-dropdown (onChange)="checkDropValue($event)" placeholder="{{'dashboard.issue of certificate.choose certificate'| translate}}"	 [options]="cities" optionLabel="name"></p-dropdown>
+            </div>
+            <a class="ellink" (click)="changeRoute2()">{{'dashboard.issue of certificate.Click here to add the required
+                information' |
+                translate}}</a>
+        </div>
+
+        <div class="body">
+            <h4>{{'dashboard.issue of certificate.Certificates to be issued' | translate}}</h4>
+
+            <div class="elcard d-flex justify-content-between my-5" *ngFor="let item of [1,2,3]">
+                <div class="elcard-content d-flex">
+                    <div class="elcard-img">
+                        <img src="assets/images/shared/User male 2.png" alt="">
+                    </div>
+                    <div class="elcard-certificate mx-5">
+                        <p>{{'dashboard.issue of certificate.Certificate name' | translate}}</p>
+                        <span>التسلسل الدراسي</span>
+                    </div>
+                    <div class="elcard-pay mx-5">
+                        <p>{{'dashboard.issue of certificate.Certificate fee' | translate}}</p>
+                        <span>15 درهم</span>
+                    </div>
+                    <div class="elcard-name mx-5">
+                        <p>{{'dashboard.issue of certificate.sons name' | translate}}</p>
+                        <span>محمد سمير</span>
+                    </div>
+                </div>
+                <div class="elcard-slice">
+                    <img src="assets/images/shared/Close small.svg" alt="">
+                </div>
+
+            </div>
+            <div class="end-of-content d-flex justify-content-between">
+                <p>المبلغ النهائي =<span class="mx-3">{{NumberOfSelectionItem}} درهم</span> </p>
+                <div class="buttons d-flex">
+                    <button class="btn btn-primary mx-2" (click)="changeRoute2()">التالي</button>
+                     <button class="btn btn-light" (click)="prevroute()">السابق</button>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div *ngIf="step2" class="issune-certificate-content">
+    <form>
+        <div class="custom-form">
+            <h4 class="mb-4" style="font-weight: 700;">اضافة المعلومات المطلوبة - شهادة التسلسل الدراسي</h4>
+            <span class="mb-4" style="color:#AFAFAF">يرجى من حضرتك تاكيد المعلومات التالية او تعديلها لارسال طلب لهيئة الشارقة للتعليم الخاص
+                من اجل مراجعة طلبكم </span> <br>
+
+
+            <button class="btn btn-primary submitBtn" (click)="postData()">حفظ</button>
+            <div class="eltitle mx-5 my-5 d-flex">
+                <p class="mx-2" style="color:#AFAFAF">{{'Student Name' | translate}}</p>
+                <span>محمد سمير</span>
+            </div>
+<!-- {
+    students:[
+    { // اول طالب
+        id:1,
+        studentInfo:[{schoolId:1,classId:1,schoolYearId:1}, // اول سنه 
+        {schoolId:1,classId:1,schoolYearId:1}], // تاني سنه
+        ....etc
+    },
+    {  // تاني طالب
+        id:2,
+        studentInfo:[{schoolId:1,classId:1,schoolYearId:1}, // اول سنه
+        {schoolId:1,classId:1,schoolYearId:1}], // تاني سنه 
+        ....etc
+    },
+    ....etc
+    ]
+} -->
+            
+
+                <app-add-student-certificate *ngFor="let student of choosenStudents; let i = index" [student]="student" (sendData)="sendDataFromParent($event,i)"></app-add-student-certificate>
+               
+            <button class="btn btn-primary" (click)="prevroute2()">السابق</button>
+
+        </div>
+    </form>
+
+</div>
+
+
+<div *ngIf="step3" class="issune-certificate-content">
+    <div class="custom-form">
+        <h4 class="mb-4" style="font-weight: 700;">اضافة المعلومات المطلوبة - شهادة البورد</h4>
+        <span class="mb-4" style="color:#AFAFAF"> يرجى اختيار المرفقات المطلوب وجودها في شهادة البورد المطلوبة </span>
+        <br>
+
+        <div class="submitBtn d-flex">
+            <p class="mx-4 my-2 fw-500">تم اختيار 2 من مرفقات الابن</p>
+            <button class="btn btn-primary">حفظ</button>
+        </div>
+
+        <div class="eltitle mx-0 my-5 d-flex">
+            <p class="mx-2" style="color:#AFAFAF">{{'Student Name' | translate}}</p>
+            <span>محمد سمير</span>
+        </div>
+        <div class="row" *ngFor="let item of [1,2]">
+
+            <div class="col-md-4 my-4" *ngFor="let item of [1,2]">
+                <h4 class="mb-4">هوية الطالب</h4>
+                <div class="elcardo">
+                    <div class="elcardo-title d-flex">
+                        <img src="assets/images/shared/pdf.svg" alt="pdf">
+                        <p class="mx-5 my-2"> ملف المرفقات.pdf</p>
+                    </div>
+                    <div class="elcardo-body">
+                        <h4>ملاحظة:</h4>
+                        <p>وريم ايبسوم دولار سيت أميت ,كونسيكتيتور أدايبا يسكينج أليايت</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn btn-primary" (click)="prevroute2()">السابق</button>
+
+    </div>
+</div>

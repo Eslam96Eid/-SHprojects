@@ -2,7 +2,7 @@
     
        <div id="content" >
         <div class=" d-flex align-items-center justify-content-end ">
-            <div class="Btn-group d-flex">
+            <div class="Btn-group d-flex align-items-center justify-content-end">
                 <button type="submit" (click)="succeeded()" class="btn  btn-primary" [disabled]="subjectFormGrp.invalid||isBtnLoading">
                     {{'shared.save'|translate}}
                     <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
@@ -16,7 +16,7 @@
                   <div class="row gx-5 form-set container-fluid ">
                       <div class="col-xs-2 col-lg-4 left">
                           <label for="PID" class="label">{{'dashboard.Subjects.Subject Name in Arabic'|translate}}</label>
-                          <input  type="text" pInputText  formControlName="subjectNameInArabic" (ngModelChange)="checkUniqueSubjectNameInArabic($event)" class="form-control basicinput" appValidatorsInput  placeholder="{{'dashboard.Subjects.Subject Name in Arabic'|translate}}" name="PID" id="PID"> 
+                          <input  type="text" pInputText  formControlName="subjectNameInArabic"  class="form-control basicinput" appValidatorsInput  placeholder="{{'dashboard.Subjects.Write Subject Name'|translate}}" name="PID" id="PID"> 
                           <div>
                             <div [hidden]="subjectNameInArabic.valid || subjectNameInArabic.untouched">
                                 <small *ngIf="subjectNameInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -41,7 +41,7 @@
                       <div class="col-xs-2 col-lg-4">
                          
                           <label for="PID2" class="label">{{'dashboard.Subjects.Subject Name in English'|translate}}</label>
-                          <input type="text" pInputText  formControlName="subjectNameInEnglish" (ngModelChange)="checkUniqueSubjectNameInEnglish($event)" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.Subject Name in English'|translate}}" name="PID2" id="PID2"> 
+                          <input type="text" pInputText  formControlName="subjectNameInEnglish"  class="form-control basicinput leftaction" appValidatorsInput placeholder="{{'dashboard.Subjects.Write Subject Name'|translate}}" name="PID2" id="PID2"> 
                           <div>
                             <div [hidden]="subjectNameInEnglish.valid || subjectNameInEnglish.untouched">
                                 <small *ngIf="subjectNameInEnglish.errors?.['required']"   class="form-text text-muted d-block  " class="alert-danger">
@@ -63,13 +63,21 @@
                             </div>
                          
                       </div>
+                      <div class="col-xs-2 col-lg-3 switch" >
+                        <span class="status">{{'dashboard.Subjects.isExemptable'|translate}}</span>
+                        <p-inputSwitch  (onChange)="isToggleLabel($event)" formControlName="exemptableStatus"  ></p-inputSwitch>
+                        <span class="Label" *ngIf="!isLabelShown && !urlParameter">{{'shared.no'|translate}}</span>
+                        <span class="Label" *ngIf="isLabelShown && !urlParameter">{{'shared.yes'|translate}}</span>
+                        <span class="Label" *ngIf="!subject.isExemptableToLeave && urlParameter">{{'shared.no'|translate}}</span>
+                        <span class="Label" *ngIf="subject.isExemptableToLeave && urlParameter">{{'shared.yes'|translate}}</span>
+                    </div>
                  
                   </div>
                   <div class=" row gx-5 form-set container-fluid ">
                     <div class="col-xs-2 col-lg-4 left">
                         
                         <label for="PID3" class="label">{{'dashboard.Subjects.Name in results screen in Arabic'|translate}}</label>
-                        <input type="text" pInputText  formControlName="nameInResultsScreenInArabic" (ngModelChange)="checkUniqueNameInResultsScreenInArabic($event)" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.Write Name in results screen in Arabic'|translate}}"  name="PID3" id="PID3"> 
+                        <input type="text" pInputText  formControlName="nameInResultsScreenInArabic"  class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.Write Name in results screen'|translate}}"  name="PID3" id="PID3"> 
                         <div>
                             <div [hidden]="nameInResultsScreenInArabic.valid || nameInResultsScreenInArabic.untouched">
                                 <small *ngIf="nameInResultsScreenInArabic.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -93,7 +101,7 @@
                     <div class="col-xs-2 col-lg-4 "  >
                        
                         <label for="PID4"  class="label">{{'dashboard.Subjects.Name in results screen in English'|translate}}</label>
-                        <input type="text" pInputText  formControlName="nameInResultsScreenInEnglish" (ngModelChange)="checkUniqueNameInResultsScreenInEnglish($event)" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.Write Name in results screen in English'|translate}}"  name="PID4" id="PID4"> 
+                        <input type="text" pInputText  formControlName="nameInResultsScreenInEnglish"  class="form-control basicinput leftaction" appValidatorsInput placeholder="{{'dashboard.Subjects.Write Name in results screen'|translate}}"  name="PID4" id="PID4"> 
                         <div>
                             <div [hidden]="nameInResultsScreenInEnglish.valid || nameInResultsScreenInEnglish.untouched">
                                 <small *ngIf="nameInResultsScreenInEnglish.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -122,12 +130,12 @@
                     <div class="col-xs-2 col-lg-4 left">
                          
                         <label for="PID7" class="label"> {{'dashboard.Subjects.subject Code'| translate}}</label>
-                        <input type="text" pInputText formControlName="SubjectCode"  class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.write Subject Code'| translate}}"  name="PID7" id="PID7"> 
+                        <input type="text" pInputText formControlName="subjectCode"  class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.write Subject Code'| translate}}"  name="PID7" id="PID7"> 
                  
                     </div>
                     <div class="col-xs-4 col-lg-7 evaluationSys" >
                         <div *ngFor="let type of evaluationTypeList" class="field-checkbox">
-                            <p-radioButton [inputId]="type.id" [ngModelOptions]="{standalone: true}" formControlName="evaluationType"  (onClick)="checkEvaluationType($event.value)"  [value]="type"  ></p-radioButton>
+                            <p-radioButton [inputId]="type.id" [ngModelOptions]="{standalone: true}" formControlName="evaluationType"  (onClick)="checkEvaluationType($event.value)"  [value]="type.id"  ></p-radioButton>
                             <label [for]="type.id">{{type.name.ar}}</label>
                         </div>
                     </div>
@@ -137,7 +145,7 @@
                 <div class=" row gx-5 form-set mt-5 container-fluid " *ngIf="showEvaluation">
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID8" class="label">{{'dashboard.Subjects.select evaluation from old known evaluation'|translate}}</label>
-                          <p-dropdown [options]="cities"  formControlName="oldEvaluation"   placeholder="{{'dashboard.Subjects.select evaluation from old known evaluation'|translate}}" name="PID8" id="PID8" class="form-control" appValidation  ></p-dropdown>
+                          <p-dropdown [options]="oldAssesmentList" optionLabel="name.ar" optionValue="id"  formControlName="oldEvaluation"   placeholder="{{'dashboard.Subjects.select evaluation from old known evaluation'|translate}}" name="PID8" id="PID8" class="form-control" appValidation  ></p-dropdown>
                     </div>
                  
                 </div>  
@@ -181,12 +189,12 @@
                  
                 </div> 
                 <div  *ngIf="showDescription">
-                    <div formArrayName="description" >
-                        <div *ngFor="let item of description.controls ; let i=index" [formGroupName]="i">
+                    <div formArrayName="descriptionArr" >
+                        <div *ngFor="let item of descriptionArr.controls ; let i=index" [formGroupName]="i">
                             <div class="row gx-5 form-set container-fluid ">
                                 <div class="col-xs-2 col-lg-4">
                                     <label for="PP + {{i}}" class="label">{{'dashboard.Subjects.explanation'|translate}}</label>
-                                    <input type="text" pInputText  formControlName="explanation" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.explanation'|translate}}"  id="PP + {{i}}" name="PPO + {{i}}">
+                                    <input type="text" pInputText  formControlName="description" class="form-control basicinput" appValidatorsInput placeholder="{{'dashboard.Subjects.explanation'|translate}}"  id="PP + {{i}}" name="PPO + {{i}}">
  
                                 </div>
                                 <div class="col-xs-2 col-lg-4">
@@ -197,7 +205,7 @@
                                
                                 <div class="col-xs-2 col-lg-4">
                                     <label for="cal4 + {{i}}" class="label">{{'dashboard.Subjects.successed'|translate}}/{{'dashboard.Subjects.retry'|translate}}</label>
-                                    <p-dropdown [options]="successStatusList" optionLabel="name.ar" optionValue="name.ar" formControlName="successStatus" placeholder="{{'dashboard.Subjects.successed'|translate}}\{{'dashboard.Subjects.retry'|translate}}" name="calO4 + {{i}}" id="cal4 + {{i}}" class="form-control" appValidation  ></p-dropdown>
+                                    <p-dropdown [options]="successStatusList" optionLabel="name.ar" optionValue="status" formControlName="successfulRetry" placeholder="{{'dashboard.Subjects.successed'|translate}}\{{'dashboard.Subjects.retry'|translate}}" name="calO4 + {{i}}" id="cal4 + {{i}}" class="form-control" appValidation  ></p-dropdown>
                                </div>
                             </div>
                             <div class="btn btn-outline-primary Addnew mb-5" role="button" (click)="addNew()">

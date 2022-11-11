@@ -15,7 +15,7 @@
             width : 100%;
             height: 42px;
             padding-inline-start: 1.3rem ;
-            border: 1px solid #E9E9E9;
+            border: 1px solid #E9E9E9 !important;
             // &::-webkit-input-placeholder{font-size: 1.6rem;}
             &::placeholder{
                 font-family: 'Droid';

@@ -13,11 +13,7 @@
         position: absolute;
         bottom:100% ;
         padding-bottom: 2.6%;
-      .cancelbtn{
-        color:#EF8071;
-        font-weight: 400;
-        margin-right: 2rem;
-      }
+    
 
      
     }
@@ -31,15 +27,10 @@
    .curriclums{
     flex-wrap:wrap;
     line-height: 4rem;
+    max-width: 90rem;
    }
    .actions{text-align: center;max-width:5rem;width: 3rem;}
-   ::ng-deep {
-         .p-dropdown{
-              .p-dropdown-item {
-                    width: max-content;
-                   }
-               }
-           }
+
    
 }
 
@@ -76,5 +67,19 @@
   }
 }
 
+
+
+  ::ng-deep app-informative-block{
+
+         .informative-block{
+              
+                    min-height: 20rem !important;
+                    justify-content: start !important;
+                    position: relative;
+                    bottom:2rem;
+              }
+            }
+
+ 
 
   

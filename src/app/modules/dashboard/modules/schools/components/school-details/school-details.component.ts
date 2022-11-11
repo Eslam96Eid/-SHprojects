@@ -220,6 +220,10 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 		mainTitle: { main: 'مدرسه الشارقه الابتدائيه' }
 	}
 
+	// from tab 4
+	selectedGradeId
+
+
 	map: any
 
 	// << Conditions >> //
@@ -261,6 +265,7 @@ export class SchoolDetailsComponent implements OnInit, AfterViewInit {
 			else this.step = 1
 		}
 	}
+
 
 	getSchool(id){
 		this.schoolsService.getSchool(id).subscribe(res =>{

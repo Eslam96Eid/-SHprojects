@@ -10,13 +10,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Paginator } from 'primeng/paginator';
 
-import { IHeader, paginationState } from 'src/app/core/Models';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 import { Iassignments } from '../../../../../../core/Models/Iassignments';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { Filtration } from 'src/app/core/classes/filtration';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
 
 
 

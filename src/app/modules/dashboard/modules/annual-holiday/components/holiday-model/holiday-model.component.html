@@ -1,0 +1,130 @@
+<p-dialog header="{{Title|translate}}" [baseZIndex]="10000" (onHide)="clearForm()"  [resizable]="false" [(visible)]="isOpened" [draggable]="false" [modal]="true" [style]="{width: '50vw',height:'70vw'}">
+    <ng-template pTemplate="content">
+   
+        
+   
+    
+    <div class=" mt-5 custom-form custom-validation-form " >
+      <form [formGroup]="holidayFormGrp" (ngSubmit)="saveMe()" >
+        <div class="row   gx-5 container-fluid form-set">
+          <div class="col-6">
+            <label class="label" for="nationality">{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}:</label>
+                <span *ngIf="annualCalendarName" class="label-1">
+                 {{annualCalendarName}}
+                </span>
+                <span *ngIf="!annualCalendarName" class="label-1">
+                 -
+                 </span>
+         </div>
+
+            <div class="col-6">
+              <label class="label" for="nationality">{{'dashboard.AnnualHoliday.Year'|translate}}:</label>
+                  <span *ngIf="year" class="label-1">
+                    {{year}}
+                  </span>
+                  <span *ngIf="!year" class="label-1">
+                    -
+                    </span>
+          </div>
+        </div>
+        <div class="row  gx-5 container-fluid form-set">
+          <div class="col-6">
+              <label class="label" for="nationality">{{'dashboard.AnnualHoliday.DateFrom'|translate}}</label>
+              <p-calendar formControlName="dateFrom"  [showIcon]="true" inputId="icon"  class="form-control" appValidation    placeholder="dd/mm"   [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
+              <span [hidden]="dateFrom.valid|| dateFrom.untouched" class="errorcalender">
+                  <small *ngIf="dateFrom.errors?.['required'] " id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                      {{'shared.This Field is Required'|translate}}
+                      <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                  </small>
+                
+              </span>
+            
+          </div>
+          <div class="col-6">
+              <label class="label" for="precantage">{{'dashboard.AnnualHoliday.DateTo'|translate}} </label>
+              <p-calendar   [showIcon]="true" inputId="icon"    formControlName="dateTo"    placeholder="dd/mm" class="form-control" appValidation   [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
+              <span [hidden]="dateTo.valid|| dateTo.untouched" class="errorcalender">
+                  <small *ngIf="dateTo.errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
+                      {{'shared.This Field is Required'|translate}}
+                      <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                  </small>
+                  
+              </span>
+          </div>
+    </div>
+        <div class="row  gx-5 container-fluid form-set">
+         
+          <div class="col-6">
+            <label class="label" for="nationality">{{'dashboard.AnnualHoliday.curriculum'|translate}}</label>
+            <p-multiSelect [options]="curriculamList" optionLabel="name.ar" optionValue="id" display="chip" formControlName="curriculumName" class="form-control"  appValidation  styleClass="p-multiselect"  defaultLabel="{{'dashboard.AnnualHoliday.Select curriculum'|translate}}"></p-multiSelect>
+            <div [hidden]="curriculumName.valid||curriculumName.untouched">
+              <small *ngIf="curriculumName.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>
+          </div>
+          </div>
+
+          <div class="col-6">
+      
+            <label class="label" for="precantage">{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</label>
+            <div class="d-flex switch">
+            <span class="text">{{'shared.allStatus.NotFlexible'|translate}}</span>
+            <p-inputSwitch   formControlName="flexibilityStatus"></p-inputSwitch>
+            <span class="text px-3">{{'shared.allStatus.Flexible'|translate}}</span>
+            </div>
+          </div>
+    
+    
+        </div>
+
+  <div class="row  gx-5 container-fluid form-set">
+    <div class="col-6">
+      <label class="label" for="precantage">{{'dashboard.AnnualHoliday.Holiday Name in Arabic'|translate}}</label>
+      <input type="text" pInputText formControlName="arabicName"  class="form-control basicinput" appValidatorsInput  placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" > 
+      <div [hidden]="arabicName.valid|| arabicName.untouched">
+          <small *ngIf="arabicName.errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
+              {{'shared.This Field is Required'|translate}}
+              <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+          </small>
+        
+          <small *ngIf="arabicName.errors?.['maxength']" id="helpId2" class="form-text text-muted d-block" class="alert-danger" >
+              {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
+              <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+          </small>
+      </div>
+  </div>
+  <div class="col-6">
+    <label class="label" for="precantage">{{'dashboard.AnnualHoliday.Holiday Name in English'|translate}}</label>
+    <input type="text" pInputText formControlName="englishName"  class="form-control basicinput leftaction" appValidatorsInput  placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" > 
+    <div [hidden]="englishName.valid|| englishName.untouched">
+        <small *ngIf="englishName.errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
+            {{'shared.This Field is Required'|translate}}
+            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+        </small>
+      
+        <small *ngIf="englishName.errors?.['maxength']" id="helpId2" class="form-text text-muted d-block" class="alert-danger" >
+            {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
+            <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+        </small>
+    </div>
+</div>
+        
+    </div>
+
+      </form>
+    </div>
+ 
+    </ng-template>
+    
+  
+    <ng-template pTemplate="footer">
+      
+      <div class="d-flex align-items-center justify-content-end  ">
+        
+        <button class="btn btn-primary btn--sm  " (click)="saveMe()">
+            <span>{{'shared.save'| translate}} </span>
+        </button>
+    </div>
+  
+    </ng-template>
+  </p-dialog>
+  
+   

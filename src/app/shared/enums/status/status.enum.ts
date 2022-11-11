@@ -4,7 +4,7 @@ export enum StatusEnum {
 
     Available = 'Available',
     Unavailable = 'Unavailable',
-
+    Deleted ='Deleted',
     Pending = 'Pending',
     TentativeAccepted = 'TentativeAccepted',
     Accepted = 'Accepted',

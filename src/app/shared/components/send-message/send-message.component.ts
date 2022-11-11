@@ -93,7 +93,7 @@ export class SendMessageComponent implements OnInit {
   getCurr(){
     this.messageService.getcurr().subscribe(res=>{
       this.curricuulum = res.data
-      console.log(this.curricuulum);
+      // console.log(this.curricuulum);
       
     })
   }
@@ -108,9 +108,9 @@ export class SendMessageComponent implements OnInit {
 
   getMessagesTypes(){
     this.messageService.getmessagesTypes().subscribe(res=>{
-      console.log(res);
+      // console.log(res);
       
-      this.messagesTypes = res
+      this.messagesTypes = res.data
     })
   }
   
@@ -125,53 +125,65 @@ export class SendMessageComponent implements OnInit {
     
  }
 
+ messageUpload(files){
+  this.imagesResult = files
+  // console.log(this.imagesResult);
+  
+ }
 
-  onUpload(event) {
+  messageDeleted(event){
+    this.imagesResult = event
+    // console.log(event);
+  // console.log(this.imagesResult);
+    
+ }
 
-    for(let file of event.files) {
+  // onUpload(event) {
+
+  //   for(let file of event.files) {
   
-        this.uploadedFiles.push(file);
+  //       this.uploadedFiles.push(file);
   
-    }
+  //   }
   
-    }
-    onFileUpload(data: {files: Array<File>}): void {
+  //   }
+  //   onFileUpload(data: {files: Array<File>}): void {
   
-      const requests = [];
+  //     const requests = [];
   
-      data.files.forEach(file => {
+  //     data.files.forEach(file => {
   
-        const formData = new FormData();
+  //       const formData = new FormData();
   
-        formData.append('file', file, file.name);
+  //       formData.append('file', file, file.name);
   
-        requests.push(this.messageService.onFileUpload(formData));
+  //       requests.push(this.messageService.onFileUpload(formData));
   
-      });
+  //     });
   
-      forkJoin(requests).subscribe((res: Array<{url: string}>) => {
-        console.log(res);
+  //     forkJoin(requests).subscribe((res: Array<{url: string}>) => {
+  //       console.log(res);
         
-        if (res && res.length > 0) {
+  //       if (res && res.length > 0) {
   
-          res.forEach(item => {
-            console.log(item);
+  //         res.forEach(item => {
+  //           console.log(item);
             
-            const extension = item.url.split('.').pop();
-            console.log(extension);
+  //           const extension = item.url.split('.').pop();
+  //           console.log(extension);
             
   
-              console.log(item.url);
+  //             console.log(item.url);
               
-                this.imagesResult.push(item.url)
-              console.log(this.imagesResult);
-          });
+  //               this.imagesResult.push(item.url)
+  //             console.log(this.imagesResult);
+  //         });
   
-        }
+  //       }
   
-      });
+  //     });
   
-    }
+  //   }
     isToggleLabel(e)
     {
       if(e.checked)
@@ -204,12 +216,12 @@ export class SendMessageComponent implements OnInit {
           this.isShown2=false;
       }
     }
-      sendMessage(){
+      sendMessage(){    
         if(this.scope == "SPEA"){
         const form = {
           "senderId": Number(localStorage.getItem('$AJ$userId')),
-          "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
-          "messageType": this.speaEmpForm.value.messageType,
+          // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
+          "messageTypeId": this.speaEmpForm.value.messageType,
           "schoolId": this.speaEmpForm.value.schoolId.map(res=>res.id), 
           "title": this.speaEmpForm.value.title,
           "confirmationRecive": this.speaEmpForm.value.switch1,
@@ -232,10 +244,10 @@ export class SendMessageComponent implements OnInit {
       if(this.scope == "Guardian"){
         const form ={
           "senderId": Number(localStorage.getItem('$AJ$userId')),
-          "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
+          // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
           "title": this.parentForm.value.title,
           "messegeText": this.parentForm.value.description,
-          "messageType": this.parentForm.value.messageType,
+          "messageTypeId": this.parentForm.value.messageType,
           "schoolId": Number(localStorage.getItem('schoolId')),
           'attachment': this.imagesResult || null
         }
@@ -254,12 +266,12 @@ export class SendMessageComponent implements OnInit {
         if(this.scope == "Employee"){
         const form ={
           "senderId": Number(localStorage.getItem('$AJ$userId')),
-          "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
+          // "roleId": JSON.parse(localStorage.getItem('$AJ$user')).roles[0].id,
           "guardianIds": this.schoolEmpForm.value.guardian.map(res=>res.id),
           "title": this.schoolEmpForm.value.title,
           "replyPossibility": this.schoolEmpForm.value.switch2,
           "messegeText": this.schoolEmpForm.value.description,
-          "messageType": this.schoolEmpForm.value.messageType,
+          "messageTypeId": this.schoolEmpForm.value.messageType,
           'attachment': this.imagesResult || null
         }
         this.messageService.sendDataFromEmpToGuardian(form).subscribe(res=>{

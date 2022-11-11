@@ -8,11 +8,7 @@
         <p-table #dt [value]="users_List" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
 
             <ng-template pTemplate="caption">
-                <app-table-caption 
-                (onExport)="onExport($event)" 
-                (onFilter)="getUsersList()" 
-                (onSearch)="filtration.KeyWord = $event; getUsersList()" 
-                (onClear)="clearFilter()">
+                <app-table-caption (onExport)="onExport($event)" (onFilter)="getUsersList()" (onSearch)="filtration.KeyWord = $event; getUsersList()" (onClear)="clearFilter()">
 
                     <div class="row gx-5 form-set">
                         <div class="col">
@@ -21,16 +17,11 @@
                         </div>
                         <div class="col">
                             <label class="label" for="city">{{'dashboard.UserInformation.Select Private Roles'|translate }} </label>
-                            <p-dropdown  
-                            (onChange)="onChange($event)"
-                            [(ngModel)]="selectedRole" 
-                            [options]="roles" 
-                            formControlName="privateRole" 
-                            placeholder="{{'dashboard.UserInformation.Select Private Roles' | translate}}">
+                            <p-dropdown (onChange)="onChange($event)" [(ngModel)]="selectedRole" [options]="roles" formControlName="privateRole" placeholder="{{'dashboard.UserInformation.Select Private Roles' | translate}}">
                                 <ng-template let-value pTemplate="selectedItem">
                                     <div class="country-item country-item-value" *ngIf="selectedRole">
                                         <div>
-                                        {{translationService.lang=='ar'?selectedRole.name.ar :selectedRole.name.en}}
+                                            {{translationService.lang=='ar'?selectedRole.name.ar :selectedRole.name.en}}
                                         </div>
                                     </div>
                                 </ng-template>
@@ -40,7 +31,7 @@
                             </p-dropdown>
                         </div>
                     </div>
-                
+
                 </app-table-caption>
 
             </ng-template>
@@ -67,7 +58,8 @@
             </ng-template>
             <ng-template pTemplate="body" let-e let-columns="columns">
                 <tr>
-                    <td>{{translationService.lang=='ar'?e.fullName.ar :e.fullName.en}}</td>
+                    <!-- <td>{{translationService.lang=='ar'?e.fullName.ar :e.fullName.en}}</td> -->
+                    <td>{{e.fullName.en}}</td>
                     <td>{{e.email|translate}}</td>
                     <td>{{e.emiratesIdNumber|translate}}</td>
                     <td>{{e.phoneNumber|translate}}</td>

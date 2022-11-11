@@ -8,7 +8,7 @@
     
         <div class="container mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
             <form [formGroup]="roleFormGrp" class="container-fluid  " (ngSubmit)="succeeded()">
-                <div class=" row gx-4 form-set ">
+                <div class=" row gx-5 form-set ">
                     <div class="col-xs-2 col-lg-4">
                         <label for="PID" class="label">{{'dashboard.UserRole.JobRole Name In Arabic'|translate}}</label>
                         <input type="text" pInputText formControlName="jobRoleNameInArabic"  class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-xs-2 col-lg-4">
                       <label for="PID" class="label">{{'dashboard.UserRole.JobRole Name In English'|translate}}</label>
-                      <input type="text" pInputText formControlName="jobRoleNameInEnglish"  class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
+                      <input type="text" pInputText formControlName="jobRoleNameInEnglish"  class="form-control basicinput leftaction" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.UserRole.Write Job Role Name'|translate}}">
                       <div>
                         <div [hidden]="jobRoleNameInEnglish.valid || jobRoleNameInEnglish.untouched">
                             <small *ngIf="jobRoleNameInEnglish.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
@@ -51,35 +51,23 @@
                             
                         </div>
                   </div>
-                  <div class="col-xs-2 col-lg-4">
-                   
-                    <label for="rolePowers" class="label">{{'dashboard.UserRole.RolePowers'|translate}}</label>
-                    <p-multiSelect [options]="rolePowersList" display="chip" optionLabel="name.ar" optionValue="id" formControlName="rolePowers" class="form-control" appValidation name="PID4" id="PID4" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserRole.Select Role Powers'|translate}}"></p-multiSelect>
-             
-                    <div>
-                        <div [hidden]="rolePowers.valid || rolePowers.untouched">
-                            <small *ngIf="rolePowers.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                              {{'shared.This Field is Required'|translate}}
-                               <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                            </small>
-                           
-                            
-                         </div>
-                         
-                            
+                  <div class="col-xs-2 col-lg-2  switch">
+                    <label for="PID2" class="label">{{'dashboard.UserRole.JobRole Status'|translate}}</label>
+                    <div class="d-flex status">
+                        <span class="text">{{'shared.activated'|translate}}</span>
+                        <p-inputSwitch  (onChange)="isToggleLabel($event)" formControlName="status"  ></p-inputSwitch>
+                        <span class="Label" *ngIf="!isShown && !urlParameter">{{'shared.no'|translate}}</span>
+                        <span class="Label" *ngIf="isShown && !urlParameter">{{'shared.yes'|translate}}</span>
+                        <span class="Label" *ngIf=" urlParameter&&!jobRole.status ">{{'shared.no'|translate}}</span>
+                        <span class="Label" *ngIf="urlParameter&&jobRole.status">{{'shared.yes'|translate}}</span>
                     </div>
                    
                 </div>
+               
 
-                    <!-- <div class="col-xs-2 col-lg-4">
-                       
-                      <label for="PID2" class="label">{{'dashboard.UserRole.JobRole Status'|translate}}</label>
-                      <p-dropdown [options]="cities" formControlName="status" [(ngModel)]="jobRole.status" *ngIf="!urlParameter" placeholder="{{'dashboard.UserRole.Select Job Role Status'|translate}}" class="form-control" appValidation name="PID2" id="PID2" ></p-dropdown>
-                      <p-dropdown [options]="cities" formControlName="status" [(ngModel)]="jobRole.status" *ngIf="urlParameter" class="form-control" appValidation name="PID2" id="PID2" ></p-dropdown>
-                     
-                  </div> -->
+                 
                 </div>
-                <div class=" row gx-4 form-set ">
+                <div class=" row gx-5 form-set ">
 
                <div class="col-xs-2 col-lg-4" >
                      
@@ -103,7 +91,7 @@
                  
               <label for="PID5" class="label">{{'dashboard.UserRole.Description In English'|translate}}</label>
        
-              <input type="text" pInputText formControlName="descriptionInEnglish" class="form-control basicinput"  appValidatorsInput  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
+              <input type="text" pInputText formControlName="descriptionInEnglish" class="form-control basicinput leftaction"  appValidatorsInput  name="PID5" id="PID5" placeholder="{{'dashboard.UserRole.Write Description'|translate}}">
               <div>
                   <div [hidden]="descriptionInEnglish.valid || descriptionInEnglish.untouched">
                      
@@ -118,22 +106,47 @@
               
              </div>
                 <div class="col-xs-2 col-lg-4">
-                            
-                  <label for="PID3" class="label">{{'dashboard.UserRole.DataRestrictionLevel'|translate}}</label>
-
-                    <p-dropdown [options]="dataRestrictionLevelList" (onChange)="changedRestriction($event.value)" optionLabel="name.ar" optionValue="name.en" formControlName="datarestrictionLevel"   placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}" class="form-control" appValidation name="PID3" id="PID3"  ></p-dropdown>
+                   
+                    <label for="rolePowers" class="label">{{'dashboard.UserRole.RolePowers'|translate}}</label>
+                    <p-multiSelect [options]="rolePowersList" display="chip" optionLabel="name.ar" optionValue="id" formControlName="rolePowers" class="form-control" appValidation name="PID4" id="PID4" styleClass="p-multiselect" defaultLabel="{{'dashboard.UserRole.Select Role Powers'|translate}}"></p-multiSelect>
+             
                     <div>
-                      <div [hidden]="datarestrictionLevel.valid || datarestrictionLevel.untouched">
-                          <small *ngIf="datarestrictionLevel.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                            {{'shared.This Field is Required'|translate}}
-                             <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                          </small>
-                      </div>
+                        <div [hidden]="rolePowers.valid || rolePowers.untouched">
+                            <small *ngIf="rolePowers.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                              {{'shared.This Field is Required'|translate}}
+                               <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                           
+                            
+                         </div>
+                         
+                            
                     </div>
-          
-              </div>
+                   
+                </div>
+
                  
              </div>
+             <div class=" row gx-4 form-set ">
+
+
+              <div class="col-xs-2 col-lg-8">
+                          
+                <label for="PID3" class="label">{{'dashboard.UserRole.DataRestrictionLevel'|translate}}</label>
+
+                  <p-dropdown [options]="dataRestrictionLevelList" (onChange)="changedRestriction($event.value)" optionLabel="name.ar" optionValue="name.en" formControlName="datarestrictionLevel"   placeholder="{{'dashboard.UserRole.Select Data Restriction Level'|translate}}" class="form-control" appValidation name="PID3" id="PID3"  ></p-dropdown>
+                  <div>
+                    <div [hidden]="datarestrictionLevel.valid || datarestrictionLevel.untouched">
+                        <small *ngIf="datarestrictionLevel.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                          {{'shared.This Field is Required'|translate}}
+                           <fa-icon  [icon]="exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                        </small>
+                    </div>
+                  </div>
+        
+            </div>
+             
+          </div>
              <div class="row gx-4 gy-5 form-set "  *ngIf="showCurriculamList">
              
                     <p class="heading heading--tertiary mb-3 mt-5">{{'dashboard.UserRole.Select curriculums' | translate}}</p>
@@ -143,7 +156,7 @@
                       
                         <div class=" d-flex gap-2 align-items-center col-lg-3"  >
                         
-                            <p-checkbox  class="col-lg-1" [formControlName]="i" binary="true" (onChange)="getCurriculumsAdded($event,curriculamList[i].id)"  [inputId]="i" ></p-checkbox>
+                            <p-checkbox *ngIf="curriculamList[i].name.ar" class="col-lg-1" [formControlName]="i" binary="true" (onChange)="getCurriculumsAdded($event,curriculamList[i].id)"  [inputId]="i" ></p-checkbox>
                             <label class="label label--sm  col-lg-7" > {{curriculamList[i]?.name.ar}}</label>
                         </div>
                      
@@ -208,7 +221,7 @@
               </div>
             
               <ng-container *ngIf="!MarkedListLength&&!selectSchoolModelOpened">
-                  <app-informative-block title="{{'emptyList.Schools not selected yet' |translate}}" size="small" subTitle="{{'emptyList.Pleaze, Select School' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                  <app-informative-block title="{{'emptyList.Schools not selected yet' |translate}}" subTitle="{{'emptyList.Pleaze, Select School' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
               </ng-container>
               <div class="alert col-lg-8" *ngIf="MarkedListLength&&!selectSchoolModelOpened">
                 <p>{{'dashboard.UserRole.exist'|translate}} {{MarkedListLength}} {{'dashboard.UserRole.school selected for this role'|translate}}</p>
@@ -216,23 +229,7 @@
     
            </div>
 
-              <div class=" row gx-4 form-set ">
 
-
-              <div class="col-xs-2 col-lg-2  switch">
-                <label for="PID2" class="label">{{'dashboard.UserRole.JobRole Status'|translate}}</label>
-                <div class="d-flex status">
-                    <span class="text">{{'shared.activated'|translate}}</span>
-                    <p-inputSwitch  (onChange)="isToggleLabel($event)" formControlName="status"  ></p-inputSwitch>
-                    <span class="Label" *ngIf="!isShown && !urlParameter">{{'shared.no'|translate}}</span>
-                    <span class="Label" *ngIf="isShown && !urlParameter">{{'shared.yes'|translate}}</span>
-                    <span class="Label" *ngIf="!jobRole.status && urlParameter">{{'shared.no'|translate}}</span>
-                    <span class="Label" *ngIf="jobRole.status && urlParameter">{{'shared.yes'|translate}}</span>
-                </div>
-               
-            </div>
-               
-            </div>
               <div class=" d-flex align-items-center justify-content-end ">
                     <div class="Btn-group d-flex ">
                       <button class="btn  btn-primary addBtn" [disabled]="roleFormGrp.invalid||isBtnLoading">
@@ -338,7 +335,7 @@
               <tr>
                   <td [attr.colspan]="20">
                       <ng-container *ngIf="schools.totalAllData && schools.list.length == 0 &&  !schools.loading">
-                          <app-informative-block  size="small" title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                          <app-informative-block  title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                       </ng-container>
 
                       <app-loader></app-loader>

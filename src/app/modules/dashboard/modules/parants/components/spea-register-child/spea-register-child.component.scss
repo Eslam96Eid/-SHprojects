@@ -1,0 +1,47 @@
+@import '../../../../../../../assets/css/utils/variables.scss';
+@import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/profile';
+
+.h-0{height: 0; overflow: hidden;}
+.student{
+    padding: 7rem 0;
+    &__avatar{
+        background-color: #fff;
+        box-shadow: 2px 4px 32px 2px rgba(0, 0, 0, 0.07);
+        border-radius: 12px;
+        padding: 2rem 3.25rem;
+
+        .info{
+            margin-inline-end: 5rem;
+        }
+
+        .badge{
+            padding: .7rem 7rem;
+            font-size: 1.6rem;
+            font-weight: 400;
+        }
+
+        button{
+            margin-inline-start: auto;
+        }
+    }
+
+    &__content{
+        padding: 5rem 3rem 10rem;
+    }
+
+    ::ng-deep input.p-inputtext:hover {border-color: #DBDBDB;}
+
+    .cards{
+        // display: grid;
+        // grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+        // gap: 3rem;
+
+        .card{
+            border: none;
+            cursor: pointer;
+            transition: all .25s ease-in-out;
+            &.checked{border: 1px solid $color-primary !important;}
+        }
+    }
+}

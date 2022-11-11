@@ -5,7 +5,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { PrimngModule } from '../modules/primng/primng.module';
 import { LayoutModule } from '../layout/layout.module';
-import { InputSwitchComponent } from './components/input-switch/input-switch.component';
 import { InformativeBlockComponent } from './components/informative-block/informative-block.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { CalenderComponent } from './components/calender/calender.component';
@@ -22,14 +21,22 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { AddBtnComponent } from './components/add-btn/add-btn.component';
 import { SendBtnComponent } from './components/send-btn/send-btn.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { CustomDatePipe } from './pipes/custom-date.pipe';
-import { PermissionDirective } from './directives/permission/permission.directive';
-
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { LoaderComponent } from './components/loader/loader/loader.component';
 import { SkeletonComponent } from './components/skeleton/skeleton.component';
 import { ToastrModule } from 'ngx-toastr';
+
+import { ButtonGroupComponent } from './components/button-group/button-group.component';
 import { ConfirmModelComponent } from './components/confirm-model/confirm-model.component';
+import { PermissionDirective } from './directives/permission/permission.directive';
+import { CustomDatePipe } from './pipes/custom-date.pipe';
+import { SendMessageComponent } from './components/send-message/send-message.component';
+import { FileUploadModule } from 'primeng/fileupload';
+import { CurrentLangPipe } from './pipes/current-lang/current-lang.pipe';
+import { CardStudentComponent } from './components/card-student/card-student.component';
+import { DialogModule } from 'primeng/dialog';
+import { DropdownModule } from 'primeng/dropdown/dropdown';
+import { InputSwitchModule } from 'primeng/inputswitch';
 registerLocaleData(localeAr);
 
 
@@ -42,7 +49,6 @@ registerLocaleData(localeAr);
     PaginationComponent,
     InformativeBlockComponent,
     FileUploadComponent,
-    InputSwitchComponent,
     CalenderComponent,
     BackComponent,
     ValidationDirective,
@@ -56,7 +62,15 @@ registerLocaleData(localeAr);
     PermissionDirective,
     LoaderComponent,
     SkeletonComponent,
-    ConfirmModelComponent
+    ConfirmModelComponent,
+    ButtonGroupComponent,
+    ConfirmModelComponent,
+    SendMessageComponent,
+
+
+    // ButtonGroupComponent,
+    CurrentLangPipe,
+        CardStudentComponent
 
   ],
   imports: [
@@ -70,6 +84,12 @@ registerLocaleData(localeAr);
     PrimngModule,
     LayoutModule,
     TranslateModule,
+    DialogModule,
+
+    FileUploadModule,
+
+
+    InputSwitchModule,
     NgxSkeletonLoaderModule,
     CalendarModule.forRoot({
       provide: DateAdapter,
@@ -86,7 +106,6 @@ registerLocaleData(localeAr);
     LayoutModule,
     InformativeBlockComponent,
     FileUploadComponent,
-    InputSwitchComponent,
     CalenderComponent,
     TranslateModule,
     BackComponent,
@@ -100,7 +119,13 @@ registerLocaleData(localeAr);
     NgxSkeletonLoaderModule,
     LoaderComponent,
     SkeletonComponent,
-    ConfirmModelComponent
+    ConfirmModelComponent,
+    ButtonGroupComponent,
+    ConfirmModelComponent,
+    SendMessageComponent,
+    CurrentLangPipe,
+    CardStudentComponent,
+    
 
   ]
 })

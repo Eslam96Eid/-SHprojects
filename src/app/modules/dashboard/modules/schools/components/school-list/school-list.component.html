@@ -22,7 +22,7 @@
                         </div>
                         <div class="col">
                             <label class="label" for="city">{{'shared.city'|translate }} </label>
-                            <p-dropdown [options]="cities" [(ngModel)]="filtration.City" optionValue="value" optionLabel="name" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
+                            <p-dropdown [options]="cities$ |async" [(ngModel)]="filtration.City" optionValue="id" optionLabel="{{lang=='ar' ? 'ar': 'en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
                         </div>
                     </div>
                     <div class="row gx-5 form-set">
@@ -69,10 +69,10 @@
 
                 <!-- <ng-container *ngIf="false then thenBlock else emptyList"></ng-container> -->
                     <tr [routerLink]="['school/', school.id]">
-                        <td>{{school.name.ar}}</td>
-                        <td>{{school.city}}</td>
-                        <td>{{school.state.ar}}</td>
-                        <td>{{school.curriculum.ar}}</td>
+                        <td>{{school.name|currentLang}}</td>
+                        <td>{{school.city |currentLang}}</td>
+                        <td>{{school.state|currentLang}}</td>
+                        <td>{{school.curriculum|currentLang}}</td>
                         <td>{{school.studentCount}}</td>
                         <td>{{school.establishmentDate | date}}</td>
                         <td>

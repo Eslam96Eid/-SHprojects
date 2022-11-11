@@ -12,6 +12,34 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
   }
 
 
+
+
+  export function passwordMatch(password: string, confirmPassword: string) {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const passwordControl = formGroup.get(password);
+      const confirmPasswordControl = formGroup.get(confirmPassword);
+
+      if (!passwordControl || !confirmPasswordControl) {
+        return null;
+      }
+
+      if (
+        confirmPasswordControl.errors &&
+        !confirmPasswordControl.errors['missMatching']
+      ) {
+        return null;
+      }
+
+      if (passwordControl.value !== confirmPasswordControl.value) {
+        confirmPasswordControl.setErrors({ missMatching: true });
+        return { missMatching: true };
+      } else {
+        confirmPasswordControl.setErrors(null);
+        return null;
+      }
+    };
+  }
+
   export const DateValidator: ValidatorFn = (control: AbstractControl<any, any>): null | { [key: string]: boolean } => {
 
     const Year = control.get('year');
@@ -21,25 +49,25 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
     const holidayarr = control.get('holiday').value;
     var DateFrom: string = "";
     var DateTo: string = "";
-  
+
     holidayarr.forEach(element => {
       DateFrom = Object.values(element)[3] as string;
       DateTo = Object.values(element)[4] as string;
-  
+
       if (DateFrom != "" && DateTo != "") {
         yearTo = DateTo.toString().substring(11, 15);
         yearFrom = DateFrom.toString().substring(11, 15);
-  
+
         if (yearFrom != valYear && yearTo != valYear) {
-  
+
         }
-  
+
       }
-  
+
     });
-  
+
     return (valYear == yearFrom && valYear == yearTo) ? null : { yearmatch: true };
-  
+
   };
 
   export class DateValidators {
@@ -58,11 +86,11 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
         console.log(startDateCtr.value, endDateCtr.value);
 
         if(endDateCtr.errors && !endDateCtr.errors['not']) return null;
-        
+
         if(endDateCtr.value <= startDateCtr.value) endDateCtr.setErrors({not: true})
-        
+
         return  null
-        
+
       }
     }
 
@@ -70,12 +98,12 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
     static dateRange(startDate:string , endDate:string) : ValidatorFn{
       const DAY_START= addHours(startOfDay(new Date()), 8)
       const DAY_END = addHours(startOfDay(new Date()), 14)
-      
+
       return (formGroup: AbstractControl): ValidationErrors | null =>{
 
         const startDateCtr = formGroup.get(startDate)
         const endDateCtr = formGroup.get(endDate)
-        
+
         this.resetSeconds(formGroup.get(startDate).value)
         this.resetSeconds(formGroup.get(endDate).value)
 
@@ -83,14 +111,14 @@ export function	matchValues(matchTo: string ): (AbstractControl) => ValidationEr
 
         if(startDateCtr.errors && !startDateCtr.errors['outRang']) return null;
         if(endDateCtr.errors && !endDateCtr.errors['outRang']) return null;
-        
+
         if(startDateCtr.value < DAY_START) startDateCtr.setErrors({outRang: true})
         if(endDateCtr.value > DAY_END) endDateCtr.setErrors({outRang: true})
         console.log(DAY_END> endDateCtr.value);
-        
-        
+
+
         return  null
-        
+
       }
     }
 

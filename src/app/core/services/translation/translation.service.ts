@@ -3,6 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 
 import { environment } from 'src/environments/environment';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +24,13 @@ export class TranslationService {
     return localStorage.getItem(this.languageKey)
 
   }
-  constructor(private translateService: TranslateService, @Inject(DOCUMENT) private document: Document) {
+
+
+  constructor(
+    private translateService: TranslateService,
+     @Inject(DOCUMENT) private document: Document,
+     private config: PrimeNGConfig,) {
+
     this.html =  this.document.getElementsByTagName('html')[0];
     this.currentLanguage = localStorage.getItem(this.languageKey || environment.defaultLang);
   }
@@ -33,11 +40,15 @@ export class TranslationService {
     // const lang = environment.defaultLang;
     this.translateService.setDefaultLang(this.currentLanguage );
     this.handleLanguageChange(this.currentLanguage);
+
   }
 
 
   handleLanguageChange(lang: string): void {
     this.translateService.use(lang);
+    // this.translateService.stream('primeng').subscribe((res) => {
+    //   this.config.setTranslation(res)
+    // });
     localStorage.setItem(this.languageKey, lang === this.ar ? this.ar : this.en);
     this.html.lang = lang;
     const currentDirection = lang === this.ar ? 'rtl' : 'ltr';

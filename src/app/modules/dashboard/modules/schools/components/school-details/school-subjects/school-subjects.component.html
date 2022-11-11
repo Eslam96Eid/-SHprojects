@@ -1,14 +1,15 @@
-<div class="prim-table" *ngIf="subjectsObj.total || subjectsObj.loading">
-    <p-table #dt [value]="subjectsObj.list" [paginator]="true" [(rows)]="rows" [(first)]="first">
+<div class="prim-table" *ngIf="subjectsObj.totalAllData || subjectsObj.loading">
+    <p-table #dt [value]="subjectsObj.list" [lazy]="true">
         <ng-template pTemplate="caption">
 
             <app-table-caption
+            [hasFilter]="false"
             (onExport)="onExport($event)" 
             (onFilter)="getSubjects()" 
             (onSearch)="filtration.KeyWord = $event; getSubjects()"
             (onClear)="clearFilter()">
 
-                <div class="row gx-5 form-set">
+                <!-- <div class="row gx-5 form-set">
                     <div class="col">
                         <label class="label" for="description">{{'shared.class'|translate }} </label>
                         <p-dropdown [options]="[{name:'الرابع'}, {name:'الخامس'}]" ([ngModel])="filtration.grade" optionValue="id" inputId="description" optionLabel="name"></p-dropdown>
@@ -17,28 +18,36 @@
                         <label class="label" for="description">{{'shared.track'|translate }}  </label>
                         <p-dropdown [options]="booleanOptions" ([ngModel])="filtration.track" optionValue="id" inputId="description" optionLabel="name"></p-dropdown>
                     </div>
-                </div>
+                </div> -->
             </app-table-caption>
 
             <div class="row custom-form gx-5 align-items-baseline mb-5">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="">
                         <label class="label" for="description">{{'shared.grade'|translate }} </label>
-                        <p-dropdown [options]="[(AllGrades$ | async)]" [(ngModel)]="filtration.GradeId" (onChange)="getSubjects(); subjectsObj.isGradeSelected=true" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                        <p-dropdown  [options]="(schoolGrades$ | async)?.data" [(ngModel)]="filtration.GradeId" (onChange)="subjectsObj.isGradeSelected=true;getTracks()" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" optionValue="id" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"> </p-dropdown>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="">
                         <label class="label" for="description">{{'shared.track'|translate }}  </label>
-                        <p-dropdown [options]="(AllGrades$ | async)" [(ngModel)]="filtration.TrackId" (onChange)="getSubjects()" optionValue="id" optionLabel="name.ar" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
+                        <p-dropdown [options]="(gradeTracks$ | async)" [(ngModel)]="filtration.TrackId"  optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'dashboard.students.chooseClasse' |translate}}" emptyMessage="لايوجد عناصر"></p-dropdown>
                     </div>
                 </div>
-                <div class="col-md-4 d-flex justify-content-end align-self-end">
-                    <button class="btn btn-primary btn--sm px-5">
-                        <span>{{'dashboard.schools.addSubjectToschool'| translate}}</span>
-                    </button>
+                <div class="col d-flex gap-5 justify-content-end align-items-center align-self-end" >
 
+                    <div class="actions d-flex align-items-center justify-content-end gap-4">
+                        <span role="button" class="color-red-500 text-decoration-underline" (click)="clearFilter()" >امسح الكل</span>
+                        <button class="btn btn-primary btn-sm" (click)="getSubjects();filterApplied=true" [disabled]="!subjectsObj.isGradeSelected">تطبيق</button>
+                    </div>
+                    <div class="">
+                        <button class="btn btn-primary btn--sm px-5">
+                            <span>{{'dashboard.schools.addSubjectToschool'| translate}}</span>
+                        </button>
+    
+                    </div>
                 </div>
+
             </div>
             
 
@@ -51,39 +60,40 @@
                     {{col.header}}
                 </th>
                 <th pSortableColumn="actions"></th> -->
-                <th pSortableColumn="code">{{'dashboard.Subjects.subjectName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.Subjects.subjectHours'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="category">{{'dashboard.Subjects.gpaReliable'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
-                <th pSortableColumn="quantity">{{'dashboard.Subjects.Evaluation System'|translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
-                <th pSortableColumn="price">{{'dashboard.Subjects.createdDate'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
-                <th pSortableColumn="actions">{{'dashboard.Subjects.Subject Minimum grade'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
+                <th pSortableColumn="name">{{'dashboard.Subjects.subjectName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
+                <th pSortableColumn="gradeName">{{'shared.grade'|translate}} <p-sortIcon field="gradeName"></p-sortIcon></th>
+                <th pSortableColumn="trackName">{{'shared.division'|translate}} <p-sortIcon field="trackName"></p-sortIcon></th>
+                <th pSortableColumn="speaSubject">{{'dashboard.schools.authoritySubjects'|translate}} <p-sortIcon field="speaSubject"></p-sortIcon></th>
+                <th pSortableColumn="evaluationSystem">{{'dashboard.Subjects.gpaReliable'|translate}} <p-sortIcon field="evaluationSystem"></p-sortIcon></th>
+                <th pSortableColumn="isElective">{{'shared.optionalOrMandatory'|translate}} <p-sortIcon field="isElective"></p-sortIcon></th>
+                <!-- <th pSortableColumn="actions" class="actions"></th> -->
+
+                <!-- <th pSortableColumn="subjectHours">{{'dashboard.Subjects.Evaluation System'|translate}} <p-sortIcon field="subjectHours"></p-sortIcon></th> -->
+                <!-- <th pSortableColumn="minimumDegree">{{'dashboard.Subjects.Subject Minimum grade'|translate}} <p-sortIcon field="minimumDegree"></p-sortIcon></th> -->
+
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product let-columns="columns">
+        <ng-template pTemplate="body" let-subject let-columns="columns">
             <tr>
-                <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
-                    {{product[col.field]}}
-                </td> -->
-                <td>{{product.code}}</td>
-                <td>{{product.name}}</td>
-                <td>{{product.name}}</td>
-                <td>{{product.quantity}}</td>
-                <td>{{product.price | currency: 'USD'}}</td>
-                <td >
-                    <app-dropdown></app-dropdown>
-                </td>
+                <td>{{subject.name|currentLang}}</td>
+                <td>{{subject.gradeName|currentLang}}</td>
+                <td>{{subject.trackName|currentLang}}</td>
+                <td>{{subject.speaSubject}}</td>
+                <td>{{subject.evaluationSystem }}</td>
+                <td>{{subject.isElective ? ('shared.optional' |translate) : ('shared.mandatory' |translate) }}</td>
+                <!-- <td></td> -->
             </tr>
         </ng-template>
 
         <ng-template pTemplate="emptymessage" let-columns>
             <tr>
                 <td [attr.colspan]="20">
-                    <ng-container *ngIf="subjectsObj.total && subjectsObj.list.length == 0 &&  !subjectsObj.loading">
+                    <ng-container *ngIf="subjectsObj.totalAllData && subjectsObj.list.length == 0 &&  !subjectsObj.loading">
                         <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
-                    <ng-container *ngIf="!subjectsObj.isGradeSelected">
-                        <app-informative-block title="{{'emptyList.noInfo' |translate}}" subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    <ng-container *ngIf="!subjectsObj.isGradeSelected && !filterApplied">
+                        <app-informative-block subTitle="{{'emptyList.noInfo' |translate}}" subTitle="{{'emptyList.youShouldSelectGarde' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                     </ng-container>
 
                     <app-loader></app-loader>
@@ -103,5 +113,5 @@
 </div>
 
 <ng-container *ngIf="!subjectsObj.total && !subjectsObj.loading">
-    <app-informative-block title="{{'emptyList.schools' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+    <app-informative-block subTitle="{{'emptyList.Subject List is Empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>

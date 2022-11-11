@@ -1,0 +1,67 @@
+@import 'src/assets/css/utils/variables.scss';
+@import 'src/assets/css/components/primng-table';
+@import'src/assets/css/components/input';
+@import'src/assets/css/components/buttons';
+@import '../../../../../../../assets/css/components/forms.scss';
+@import '../../../../../../../assets/css/components/validation-form.scss';
+@import 'src/assets/css/components/inputswitch';
+
+
+::ng-deep{
+    .p-dialog{
+
+       border: none;
+      
+         .p-dialog-header {
+            font-family: 'Droid';
+            border-top-right-radius: 12px;
+            border-top-left-radius: 12px;
+            padding:1.2rem  !important;
+ 
+             .custom-form{
+               
+                &.p-inputtext{font-size: 14px !important;}
+             
+                .label{margin-bottom: 1rem;font-size: 13px;font-weight: 400;}
+               .row{padding-left: 0rem;}
+             
+            }
+
+
+
+            } 
+            .p-dialog-content{
+                flex-grow: 0;
+                padding-top: 0rem;
+               
+                line-height: 24px;
+                font-family: "Droid";
+                font-weight: 400;
+              
+            }
+            .p-dialog-footer{
+                padding-top: 0rem;
+                border-bottom-right-radius: 12px;
+                border-bottom-left-radius: 12px;
+
+                
+            }
+  
+ }
+
+}
+
+.switch{
+    margin-top: 2.7rem;
+    .text{
+        margin-left: 1rem;
+        font-size: 1.4rem;
+        margin-top: 0.5rem;
+    }
+}
+
+.custom-validation-form{
+    padding-bottom: 0rem;
+    padding-top: 0rem;
+    .label-1{font-size: 1.5rem;}
+}

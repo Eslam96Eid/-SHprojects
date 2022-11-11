@@ -1,6 +1,7 @@
 @import '../../../../assets/css/utils/variables.scss';
-%box {
-    color: $color-gray-250;
+
+%box{
+    color:$color-gray-250;
     // background-color: $color-gray-50;
     border: 1px solid $color-gray-200;
     border-radius: 15px;
@@ -13,31 +14,38 @@
     height: 13rem;
     overflow: hidden;
     cursor: pointer;
+    position: relative;
 }
 
-.uploadattach-upload {
-    width: 50%;
-    background-color: #EFEFEF;
-    padding: 1rem;
-    color: #3052a1;
-}
 
-.uploadattach {
-    width: 50%;
-    background-color: #EFEFEF;
-    padding: 1rem;
-    color: #3052a1;
-}
 
-:host {
+.pi-spinner,
+.pi-check-circle,
+.pi-times-circle{
+    position: absolute;
+    top: 1.5rem;
+    left: 1.5rem;
+    font-size: 2.3rem;
+}
+.pi-spinner{color: $color-primary !important;}
+.pi-check-circle{color:$color-green-600}
+.pi-times-circle{color:$color-red-500}
+
+
+
+:host{
     flex-grow: 1;
 }
+.image-uploader{
+    
+    font-size: 1.6rem;
 
-.image-uploader {
-    &__upload {
-        @extend %box;
+    &__upload{
+       @extend %box;
+        // width: 28rem;
         width: 47%;
-        .icon-upload {
+
+        .icon-upload{
             width: 5.5rem;
             height: 5.5rem;
             padding: 2rem;
@@ -48,29 +56,42 @@
             border-radius: 50%;
             background-color: #F5F8FF;
         }
-        &.upload-btn {
-            .sub-title {
-                font-size: 1.3rem;
-            }
+
+    
+        &.upload-btn{
+            .title{font-size: 1.6rem;}
+            .sub-title{font-size: 1.3rem;}
         }
+
+        
+        
     }
+
+    &.full &__upload{
+        width: 100%;
+        height: 16rem
+    }
+
     // &.blue-theme &__box{
     //     background-color:  rgba(46, 80, 163, 0.12);
     //     border: 1px dashed $color-primary;
     //     height: 10rem;
     // }
-    .box {
+
+    .box{
         @extend %box;
         width: 47%;
-        &.image-wrapper {
+        &.image-wrapper{
             position: relative;
             // height: 100%;
-            img {
+            img{
                 object-fit: contain;
                 height: 100%;
+                width: 100%;
             }
         }
-        .icon-close {
+
+        .icon-close{
             position: absolute;
             top: 1rem;
             left: 2rem;
@@ -79,18 +100,25 @@
             cursor: pointer;
         }
     }
-    .list {
+
+
+    .list{
         width: 47%;
     }
-    &.rows {
-        .image-uploader__upload {
+
+    &.rows{
+
+        .image-uploader__upload{
             width: 28rem;
         }
     }
-    .file {
-        &__list {
+
+    .file{
+
+        &__list{
             margin-top: 1rem;
-            &__item {
+
+            &__item{
                 display: flex;
                 align-items: center;
                 gap: 2rem;
@@ -99,8 +127,10 @@
                 border-radius: 10px;
                 font-size: 1.5rem;
                 margin-bottom: .75rem;
-                .icon {
-                    &--delete {
+
+                .icon{
+
+                    &--delete{
                         margin-inline-start: auto;
                         cursor: pointer;
                     }
@@ -108,7 +138,10 @@
             }
         }
     }
+
+
 }
+
 
 // .uploadfilecontainer {
 //     text-align: center;
@@ -122,11 +155,13 @@
 //     border-radius: 10px;
 //     color: #2E50A3;
 // }
+
 // .uploadfilecontainer:hover {
 //     cursor: pointer;
 //     background-color: #9ecbec !important;
 //     opacity: 0.8;
 // }
+
 // .files-list {
 //     display: flex;
 //     justify-content: space-between;
@@ -137,11 +172,13 @@
 //     color: #1c8adb;
 //     background: #EFEFEF;
 // }
+
 // .files-list .delete-file {
 //     background: transparent;
 //     border: none;
 //     cursor: pointer;
 // }
+
 // .files-list .delete-file img {
 //     width: 30px;
 // }

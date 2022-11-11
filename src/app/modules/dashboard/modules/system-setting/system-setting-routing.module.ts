@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SystemSettingComponent } from './components/system-setting/system-setting.component';
+import { GracePeriodComponent } from './components/grace-period/grace-period.component';
+import { SystemSettingComponent } from './system-setting.component';
 
 const routes: Routes = [
-  { path: "System-Setting", component: SystemSettingComponent},
+  { path: "", component: SystemSettingComponent},
+  { path: "grace-period/new", component: GracePeriodComponent},
+  { path: "grace-period/edit/id", component: GracePeriodComponent},
 ];
 
 @NgModule({

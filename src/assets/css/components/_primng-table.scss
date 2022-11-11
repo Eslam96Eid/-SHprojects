@@ -30,15 +30,7 @@
             padding: 1.4rem .5rem;
             font-weight: 400;
             min-width: 11rem;
-            &.expand{
-                background-color: #F9F9F9 ;color: #AAAAAA;
-                p-sorticon .p-sortable-column-icon {color: #AAAAAA;}
-                &:hover{
-                    background-color: #F9F9F9;
-                    color:  #AAAAAA;
-                    p-sorticon .p-sortable-column-icon {color: #AAAAAA;}
-                }
-            }
+           
                
              
            
@@ -46,11 +38,11 @@
             &.actions{min-width: 4rem; text-align: end; padding: 1.5rem;}
 
             &:first-of-type {border-top-right-radius: 12px; padding-inline-start: 3rem;
-                &.expand{border-top-right-radius: 0px}
+               
             }
      
             &:last-of-type {border-top-left-radius: 12px;
-                &.expand{border-top-left-radius: 0px}
+             
             }
         
             p-sorticon i{color: $color-white;}
@@ -70,6 +62,7 @@
 
         .p-datatable-tbody tr:not(:last-child){
            border-bottom:1px solid #EEEEEE;
+        
         }
         
         .p-datatable-tbody tr td{ 
@@ -88,7 +81,7 @@
             color: $color-gray-800;
           
             text-align: start;
-            &.expandd{background-color:  #F9F9F9;}
+           
             &.center{ text-align: center;}
            
             border-width:  0px ;
@@ -96,7 +89,7 @@
              &.list{text-align: end;padding-left: 1.5rem;}
           
              &:first-child{padding: 3rem;
-                &.expand{padding:0rem}
+              
             }
            
         }

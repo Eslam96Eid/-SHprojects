@@ -1,0 +1,67 @@
+<div class="prim-table" *ngIf="periods.totalAllData || periods.loading">
+    <p-table #dt [value]="schoolClasses" [lazy]="true">
+        <!-- Table Caption -->
+        <ng-template pTemplate="caption">
+
+            <app-table-caption 
+            (onFilter)="getPeriods()" 
+            (onSearch)="filtration.KeyWord = $event; getPeriods()" 
+            (onClear)="clearFilter()">></app-table-caption>
+
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name">#</th>
+                <th pSortableColumn="name"> {{'dashboard.SystemSetting.Type'|translate}} <p-sortIcon field="city"></p-sortIcon></th>
+                <th pSortableColumn="id" >{{'dashboard.SystemSetting.SchoolNumber'|translate}} <p-sortIcon field="city"></p-sortIcon> </th>
+                <th pSortableColumn="id" >{{'dashboard.SystemSetting.ClassNumber'|translate}} <p-sortIcon field="city"></p-sortIcon> </th>
+                <th pSortableColumn="id" >{{'dashboard.SystemSetting.TimeFrom'|translate}} <p-sortIcon field="city"></p-sortIcon> </th>
+                <th pSortableColumn="id" >{{'dashboard.SystemSetting.TimeTo'|translate}} <p-sortIcon field="city"></p-sortIcon> </th>
+                <th pSortableColumn="id" >{{'dashboard.SystemSetting.CreatedBy'|translate}} <p-sortIcon field="city"></p-sortIcon> </th>
+                <th pSortableColumn="id" >{{'dashboard.SystemSetting.CreatedDate'|translate}} <p-sortIcon field="city"></p-sortIcon> </th>
+                <th class="actions" pSortableColumn="edit"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e>
+            <tr>
+                <td>{{e.code}}</td>
+                <td>{{e.name}}</td>
+                <td>{{e.quantity}}</td>
+                <td>{{e.quantity}}</td>
+                <td>{{e.name}}</td>
+                <td>{{e.price}}</td>
+                <td>{{e.quantity}}</td>
+                <td>{{e.name}}</td>
+                <td>
+                    <div class="dropdown">
+                        <app-dropdown [items]="Items" (onItemClicked)="true"></app-dropdown>
+                    </div>
+                </td>
+
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="periods.totalAllData && periods.list.length == 0 &&  !periods.loading">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+
+                    <app-loader></app-loader>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+
+
+    <div *ngIf="periods.total > paginationState.rows">
+        <app-pagination [totalItems]="periods.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    </div>
+
+</div>
+
+<ng-container *ngIf="!periods.totalAllData && !periods.loading">
+    <app-informative-block title="{{'emptyList.periods' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>

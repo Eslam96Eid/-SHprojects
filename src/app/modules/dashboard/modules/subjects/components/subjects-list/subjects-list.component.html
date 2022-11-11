@@ -1,10 +1,10 @@
 <app-add-btn [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/subject/new-subject'" [content]="'dashboard.Subjects.Add New Subject'"></app-add-btn>
-<div class="prim-table mt-4" *ngIf="fixedLength || subjects.loading">
+<div class="prim-table mt-4" *ngIf="subjects.totalAllData|| subjects.loading">
     <p-table #dt [lazy]="true" [value]="subjects.list" (onSort)="sortMe($event)">
 
 
         <ng-template pTemplate="caption">
-            <app-table-caption (onExport)="first=false;onExport($event)" (onFilter)="first=false;getAllSubjects()" (onSearch)="first=false;filtration.KeyWord = $event; getAllSubjects()" (onClear)="first=false;clearFilter()">
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="getAllSubjects()" (onSearch)="filtration.KeyWord = $event; getAllSubjects()" (onClear)="clearFilter()">
 
                 <div class="row gx-5 form-set">
                    
@@ -86,7 +86,7 @@
       <ng-template pTemplate="emptymessage" let-columns>
         <tr>
             <td [attr.colspan]="20">
-                <ng-container *ngIf="fixedLength && subjects.list.length == 0 &&  !subjects.loading">
+                <ng-container *ngIf="subjects.totalAllData && subjects.list.length == 0 &&  !subjects.loading">
                     <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
                 </ng-container>
 
@@ -102,7 +102,7 @@
 </div>
 </div>
 <!-- emptymessage -->
-<ng-container *ngIf="!fixedLength && !subjects.loading">
+<ng-container *ngIf="!subjects.totalAllData && !subjects.loading">
 <app-informative-block title="{{'emptyList.Subject List is Empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
 </ng-container>
 

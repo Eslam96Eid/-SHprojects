@@ -15,12 +15,12 @@ export class SubjectService {
   constructor(private http:HttpHandlerService,private translate:TranslateService, private loaderService: LoaderService) {
     this.evaluationTypeList=
     [{id:1,name:{en:"IPpoints",ar:this.translate.instant('IPpoints')}},
-    {id:2,name:{en:"Grades",ar:this.translate.instant('dashboard.Subjects.Grades')}},
-    {id:3,name:{en:"Discription",ar:this.translate.instant('dashboard.Subjects.Discription')}},
-    {id:4,name:{en:"Evaluation",ar:this.translate.instant('dashboard.Subjects.Evaluation')}}];
+    {id:2,name:{en:"Grades",ar:this.translate.instant('Grades')}},
+    {id:3,name:{en:"Discription",ar:this.translate.instant('Discription')}},
+    {id:4,name:{en:"Evaluation",ar:this.translate.instant('Evaluation')}}];
     this.successStatus = [
-    {id:1,name:{ar:'ناجح',en:'dashboard.Subjects.successed'}},
-    {id:2,name:{ar:'إعادة المحاولة',en:'dashboard.Subjects.retry'}}
+    {id:1,name:{ar:'ناجح',en:'dashboard.Subjects.successed'},status:true},
+    {id:2,name:{ar:'إعادة المحاولة',en:'dashboard.Subjects.retry'},status:false}
     ];
   }
 

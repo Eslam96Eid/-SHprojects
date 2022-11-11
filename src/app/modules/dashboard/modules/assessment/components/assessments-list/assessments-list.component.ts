@@ -7,7 +7,6 @@ import { IAssesment } from 'src/app/core/models/iassesment';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 
 import { AssessmentService } from '../../service/assessment.service';
-import { IHeader, paginationState } from 'src/app/core/Models';
 import { IRate } from '../edit-new-assessment/edit-new-assessment.model';
 import { Filter } from 'src/app/core/models/filter/filter';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -15,6 +14,8 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
+import { IHeader } from 'src/app/core/Models/header-dashboard';
+import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 @Component({
   selector: 'app-assessments-list',
   templateUrl: './assessments-list.component.html',

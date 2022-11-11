@@ -32,7 +32,7 @@ export class NotificationListComponent implements OnInit {
   }
   componentHeaderData: IHeader={
 		breadCrump: [
-			{label: this.translate.instant('breadcrumb.Notifications') }
+			{label: this.translate.instant('breadcrumb.Notifications'), routerLink:'/notifications/notifications-list' }
 			
 		],
 		mainTitle:{ main:this.translate.instant('breadcrumb.Notifications'),sub:this.notificationTotal}	}
@@ -93,6 +93,9 @@ export class NotificationListComponent implements OnInit {
     this.searchModel.keyword = e.target.value
     this.searchModel.page = 1
     this.getNotifications(this.searchModel)
+    if(this.notificationsList.length == 0){
+      this.skeletonLoading = false
+    }
   }
  
   // loadMore()
@@ -119,8 +122,11 @@ export class NotificationListComponent implements OnInit {
     // }
     // else
     // { this.showSpinner=true;}  
-
-    this.loadMore();
+    if(this.notificationsList.length==0){
+      this.skeletonLoading = false
+    }else{
+        this.loadMore();
+    }
   }
  
   loadMore()

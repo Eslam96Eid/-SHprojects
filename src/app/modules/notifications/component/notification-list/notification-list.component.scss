@@ -18,6 +18,9 @@
     width:120px;
     padding: 1rem;
     // &:focus,&:active, &:visited, &:target{background-color: $color-primary;color: #fff;}
+    &:hover{
+        color: #fff;
+    }
 }
 }
 }

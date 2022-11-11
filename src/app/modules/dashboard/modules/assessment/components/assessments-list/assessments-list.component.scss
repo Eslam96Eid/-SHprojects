@@ -8,6 +8,7 @@
 @import 'src/assets/css/components/primng-table';
 @import '../../../../../../../assets/css/components/forms.scss';
 @import '../../../../../../../assets/css/components/validation-form.scss';
+@import '../../../../../../../assets/css/components/message.scss';
 // #paginationdiv {
 //     direction: ltr;
 //     margin-top: 2.5%;
@@ -116,7 +117,7 @@ h3 {
 
 ::ng-deep #cardSize {
     overflow-y: auto!important;
-    height: 230px;
+    height: 210px;
 }
 
 ::-webkit-scrollbar-thumb:hover {

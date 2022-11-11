@@ -6,9 +6,10 @@ import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { faArrowRight ,faExclamationCircle,faEyeSlash,faEye } from '@fortawesome/free-solid-svg-icons';
 import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
-import { UserService } from 'src/app/core/services/user/user.service';
-import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+
 import {MessageService} from 'primeng/api';
+import { ArrayOperations } from 'src/app/core/classes/array';
+import { UserService } from 'src/app/core/services/user/user.service';
 
 @Component({
   selector: 'app-authentication-main',
@@ -23,6 +24,15 @@ export class AuthenticationMainComponent implements OnInit {
     password: 'password_mode',
     setPassword: 'setPassword_mode',
   }
+  openLoginModel:boolean=false;
+  openOTPModel:boolean=false;
+  openPasswordModel:boolean=false;
+  openNotIdentityModel:boolean=false;
+  showPhoneField:boolean=false;
+  showIdentityField:boolean=false;
+  showEmailField:boolean=false;
+  signUpWaysList;
+
   showMessage:boolean=false;
   eyeIcon=faEye;
   slashEyeIcon=faEyeSlash;
@@ -41,7 +51,7 @@ export class AuthenticationMainComponent implements OnInit {
   ValidatePassword:number=0;
   nextBtnText: string = "Next";
   message:string="";
-  lang; 
+  lang;
   mywindow
   constructor(
     private messageService: MessageService,
@@ -56,20 +66,25 @@ export class AuthenticationMainComponent implements OnInit {
   ) {
     activatedRoute.queryParams.subscribe(params =>{
       console.log(params['code']);
-      
-      this.authService.getUAEUSER(params['code']).subscribe(res=>{
-        console.log(res.token);
-        this.userService.setUser(res);
-        localStorage.setItem('$AJ$token',res.token)
-        localStorage.setItem('UaeLogged','true')
-        this.router.navigateByUrl('');
-      })
+      if(params['code'] == undefined){
+        return
+      }else{
+        this.authService.getUAEUSER(params['code']).subscribe(res=>{
+          console.log(res.token);
+          this.userService.setUser(res);
+          localStorage.setItem('$AJ$token',res.token)
+          localStorage.setItem('UaeLogged','true')
+          this.router.navigateByUrl('');
+        })
+      }
+
     })
   }
 
   ngOnInit(): void {
-   
+
      this.initLoginForm();
+     this.signUpWaysList=this.authService.signUpWaysList;
      this.translationService.handleLanguageChange('ar');
      localStorage.setItem('currentLang', 'ar')
      this.lang = localStorage.getItem('preferredLanguage')
@@ -172,24 +187,26 @@ export class AuthenticationMainComponent implements OnInit {
   }
 
   authenticate() {
-   
+
     this.authService.authenticate(this.token, this.password.value).subscribe((res: any) => {
       this.isBtnLoading = false;
       this.userService.setUser(res.user);
       this.userService.setToken(res);
+      this.userService.setScope(res.user.scope);
+      this.userService.setClaims(ArrayOperations.arrayOfStringsToObject(res.claims))
       this.showSuccess();
       console.log(res.token);
       // this.userService.persist("token",res.token);
       this.router.navigateByUrl('/');
-     
- 
+
+
     },err=>{this.isBtnLoading = false;this.showError()})
   }
   validate() {
-   
+
     this.authService.validateUsername(this.email.value).subscribe((res: any) => {
       this.token = res.token
-   
+
       this.authenticate();
 
     },err=>{this.isBtnLoading = false;this.showError()})
@@ -239,10 +256,64 @@ export class AuthenticationMainComponent implements OnInit {
   signWithIdentity(){
     this.authService.signInWithIdentity(this.lang).subscribe(res=>{
       window.location.href = res.massege
-     
+
     })
   }
+  changeLoginField(e)
+  {
+    if(e==1)
+    {
+      this.showEmailField=false;
+      this.showPhoneField=true;
+      this.showIdentityField=false;
 
+    }
+    else if(e==2)
+    {
 
+      this.showEmailField=true;
+      this.showPhoneField=false;
+      this.showIdentityField=false;
 
+    }
+    else if(e==3)
+    {
+      this.showEmailField=false;
+      this.showPhoneField=false;
+      this.showIdentityField=true;
+    }
+
+  }
+  closeLoginModel()
+  {
+    // this.openOTPModel=false;
+    this.showEmailField=false;
+    this.showPhoneField=false;
+    this.showIdentityField=false;
+  }
+
+saveMe()
+{
+  // this.openLoginModel=false;
+  this.openOTPModel=true;
+}
+returnMe(){
+  this.openLoginModel=true;
+  this.openOTPModel=false;
+}
+saveOTP()
+{
+  this.openPasswordModel=true;
+}
+savePassword()
+{
+  this.openNotIdentityModel=true;
+}
+savePersonalInformation()
+{
+   this.openLoginModel=false;
+   this.openNotIdentityModel=false;
+   this.openPasswordModel=false;
+   this.openOTPModel=false;
+}
 }

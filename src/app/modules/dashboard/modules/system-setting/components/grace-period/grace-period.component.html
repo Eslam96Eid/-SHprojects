@@ -1,0 +1,218 @@
+<div class="border-dark custom-form p-5 radius-15">
+
+    <div class="row gx-5 mb-6">
+        <div class="col-md-4 form-set">
+            <label  class="label">{{'dashboard.SystemSetting.gracePeriodType'|translate}}</label>
+            <p-dropdown  [options]="gracePeriodList" [(ngModel)]="type" optionValue="value" optionLabel="name" placeholder="{{'dashboard.SystemSetting.gracePeriodType'|translate}}"></p-dropdown>
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <label  class="label">{{'dashboard.SystemSetting.gracePeriodTimePeriod'|translate}}</label>
+                <div class="col-6">
+                    <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="{{'shared.From'|translate}}"></p-calendar>
+                </div>
+                <div class="col-6">
+                    <p-calendar [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="{{'shared.To'|translate}}"></p-calendar>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <hr class="py-6">
+
+    <!-- Transfer student Grace Period -->
+    <div class="" [formGroup]="transferStudentsForm" *ngIf="type== gracePeriodEnum.transferStudents">
+        <div class="form-set">
+            <h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.chooseSchoolsThatAllowedToTransferGroup'|translate}}</h3>
+            <div class="row gx-5 mb-6" 
+            formArrayName="schoolsFrom"
+            *ngFor="let item of schoolsFrom.controls; let i=index">
+                <ng-container  [formGroupName]="i">
+                    <div class="col-md-6">
+                        <label  class="label">{{'shared.schools'|translate}}</label>
+                        <p-dropdown [options]="schools.list" formControlName="schoolId"  placeholder="{{'shared.choose'|translate}}" 
+                        [lazy]="true" 
+                        [filter]="true"
+                        optionLabel="name.ar"
+                        [virtualScrollItemSize]="30" 
+                        [virtualScroll]="true" 
+                        [virtualScrollOptions]="{ showLoader: true,delay: 250 }"
+                        >
+                        <!-- (onLazyLoad)="onLazyLoad($event)"  -->
+                        <ng-template pTemplate="filter" let-options="options">
+                                <app-table-caption 
+                                [hasExport]="false"
+                                (onFilter)="getSchools()" 
+                                (onSearch)="filtration.KeyWord = $event; getSchools()" 
+                                (onClear)="clearFilter()">
+                                    <div class="row gx-5 form-set">
+                                        <div class="col">
+                                            <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                                            <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                                        </div>
+                                    </div>
+                                </app-table-caption>
+                
+                        </ng-template>
+                
+                            <ng-template pTemplate="loader" let-options="options">
+                                <div class="flex align-items-center py-2 px-3" style="height: 38px">
+                                    <p-skeleton [width]="options.even ? '60%' : '50%'" height="1rem"></p-skeleton>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+        
+                    <div class="col-md-4">
+                        <label  class="label">{{'shared.grades'|translate}}</label>
+                        <p-multiSelect formControlName="gradesIds"  [options]="diseases" optionLabel="name" display="chip" placeholder="{{'dashboard.SystemSetting.chooseGrades'|translate}}"></p-multiSelect>
+                    </div>
+                    
+                    <div role="button" class="col-md-2 mb-3 d-flex align-items-end justify-content-end" (click)="deleteSchoolFrom(i)">
+                        <img src="assets/images/shared/rect-xmark.svg" alt="">
+                    </div>
+                </ng-container>
+                
+            </div>
+    
+            <div role="button" 
+            class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
+            (click)="addNewSchooleToTranser()">
+                <fa-icon [icon]="faPlus"></fa-icon>
+                <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
+            </div>
+        </div>
+    
+        <hr class="my-6">
+    
+    
+        <div class="form-set">
+            <h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.schoolsAllowedToTransferToIt'|translate}}</h3>
+    
+            <div class="row gx-5 mb-6" 
+            formArrayName="schoolsTo"
+            *ngFor="let item of schoolsTo.controls; let i=index" >
+
+                <ng-container [formGroupName]="i">
+                    <div class="col-md-5 ">
+                        <label  class="label">{{'shared.schools'|translate}}</label>
+                        <p-dropdown [options]="schools.list" formControlName="schoolId" placeholder="{{'shared.choose'|translate}}" 
+                        [lazy]="true" 
+                        [filter]="true"
+                        optionLabel="name.ar"
+                        [virtualScrollItemSize]="30" 
+                        [virtualScroll]="true" 
+                        [virtualScrollOptions]="{ showLoader: true,delay: 250 }"
+                        >
+                        <!-- (onLazyLoad)="onLazyLoad($event)"  -->
+                        <ng-template pTemplate="filter" let-options="options">
+                                <app-table-caption 
+                                [hasExport]="false"
+                                (onFilter)="getSchools()" 
+                                (onSearch)="filtration.KeyWord = $event; getSchools()" 
+                                (onClear)="clearFilter()">
+                                    <div class="row gx-5 form-set">
+                                        <div class="col">
+                                            <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                                            <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                                        </div>
+                                    </div>
+                                </app-table-caption>
+                
+                        </ng-template>
+                
+                            <ng-template pTemplate="loader" let-options="options">
+                                <div class="flex align-items-center py-2 px-3" style="height: 38px">
+                                    <p-skeleton [width]="options.even ? '60%' : '50%'" height="1rem"></p-skeleton>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+        
+                    <div class="col-md-3">
+                        <label  class="label">{{'dashboard.SystemSetting.gradesAllowedToTransferToIt'|translate}}</label>
+                        <p-multiSelect   [options]="diseases" formControlName="gradesIds" optionLabel="name" display="chip" placeholder="{{'dashboard.SystemSetting.chooseGrades'|translate}}"></p-multiSelect>
+                    </div>
+                    <div class="col-md-3">
+                        <label  class="label">{{'dashboard.SystemSetting.divisionsAllowedToTransferToIt'|translate}}</label>
+                        <p-multiSelect   [options]="diseases" formControlName="divisionsIds" optionLabel="name" display="chip" placeholder="{{'dashboard.SystemSetting.chooseDivisions'|translate}}"></p-multiSelect>
+                        </div>
+                    
+                    <div role="button" class="col-md-1 mb-3 d-flex align-items-end justify-content-end" (click)="deleteSchoolToAccept(i)">
+                        <img src="assets/images/shared/rect-xmark.svg" alt="">
+                    </div>
+                </ng-container>
+    
+            </div>
+    
+            <div role="button" 
+                class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
+                (click)="addNewSchooleToAccept()">
+                <fa-icon [icon]="faPlus"></fa-icon>
+                <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
+            </div>
+        </div>  
+    </div>
+
+
+    <!-- Other Grace Periods -->
+    <div class="" *ngIf="type != gracePeriodEnum.transferStudents && type" [formGroup]="gracePeriodForm">
+        <div class="row gx-5 mb-6" 
+            formArrayName="schools"
+            *ngFor="let item of GP_Schools.controls; let i=index">
+                <ng-container  [formGroupName]="i">
+                    <div class="col-md-6">
+                        <label  class="label">{{'shared.schools'|translate}}</label>
+                        <p-dropdown [options]="schools.list" formControlName="schoolId"  placeholder="{{'shared.choose'|translate}}" 
+                        [lazy]="true" 
+                        [filter]="true"
+                        optionLabel="name.ar"
+                        [virtualScrollItemSize]="30" 
+                        [virtualScroll]="true" 
+                        [virtualScrollOptions]="{ showLoader: true,delay: 250 }"
+                        >
+                        <!-- (onLazyLoad)="onLazyLoad($event)"  -->
+                        <ng-template pTemplate="filter" let-options="options">
+                                <app-table-caption 
+                                [hasExport]="false"
+                                (onFilter)="getSchools()" 
+                                (onSearch)="filtration.KeyWord = $event; getSchools()" 
+                                (onClear)="clearFilter()">
+                                    <div class="row gx-5 form-set">
+                                        <div class="col">
+                                            <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                                            <p-dropdown [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                                        </div>
+                                    </div>
+                                </app-table-caption>
+                
+                        </ng-template>
+                
+                            <ng-template pTemplate="loader" let-options="options">
+                                <div class="flex align-items-center py-2 px-3" style="height: 38px">
+                                    <p-skeleton [width]="options.even ? '60%' : '50%'" height="1rem"></p-skeleton>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+        
+                    <div class="col-md-4">
+                        <label  class="label">{{'shared.grades'|translate}}</label>
+                        <p-multiSelect formControlName="gradesIds"  [options]="diseases" optionLabel="name" display="chip" placeholder="{{'dashboard.SystemSetting.chooseGrades'|translate}}"></p-multiSelect>
+                    </div>
+                    
+                    <div role="button" class="col-md-2 mb-4 d-flex align-items-end justify-content-end" (click)="deleteGpSchool(i)">
+                        <img src="assets/images/shared/rect-xmark.svg" alt="">
+                    </div>
+                </ng-container>
+                
+        </div>
+    
+        <div role="button" 
+        class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
+        (click)="addNewSchoolToGarcePeriod()">
+            <fa-icon [icon]="faPlus"></fa-icon>
+            <span>{{'dashboard.SystemSetting.addSchool' |translate}}</span>
+        </div>
+    </div>
+</div>

@@ -11,10 +11,10 @@ export interface ISubject {
     lastEditedDate:Date,
     subjectMinmumDegree:number,
     subjectNameInReport:Localization,
-    oldEvaluation:string,
+    rateId:number,
     subjectMaxmumDegree:number,
     explanation:string,
     meaning:string,
-    successStatus:string
-
+    successStatus:string,
+    isExemptableToLeave:boolean
 }

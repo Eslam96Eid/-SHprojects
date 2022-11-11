@@ -9,5 +9,3 @@ export * from './school-years/school-year';
 
 export * from './indexes';
 export * from './base.models';
-export * from './pagination/pagination.model';
-export * from './pagination/pagination.model';

@@ -61,9 +61,9 @@
                 <td>
                     <button type="button" pButton pRipple [pRowToggler]="e" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                 </td>
-                <td  >{{e.annualCalendarName|translate}}</td>
-                <td   >{{e.year|translate}}</td>
-                <td class="edit"> 
+                <td  class="boldaction">{{e.annualCalendarName|translate}}</td>
+                <td  class="boldaction" >{{e.year|translate}}</td>
+                <td class="edit actions--sm"> 
                         <button  routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{e.id}}">
                             {{'shared.edit'|translate}}   <img  src="assets/images/shared/arrow.svg" alt="">
                          </button>
@@ -73,17 +73,17 @@
         </ng-template>
         <ng-template  pTemplate="rowexpansion" let-e>
             <tr>
-                <td colspan="15"  class="expand expandd">
+                <td colspan="15"  class="expand color-gray-50">
                     <div class="">
 
                         <div class="prim-table mt-4" *ngIf="holiday.total || holiday.loading">
                             <p-table  #dt [value]="e.holidayList" (onSort)="sortMe($event)"   dataKey="id"   >
 
                               <ng-template pTemplate="header"  >
-                                    <tr class="expand">
-                                    <th style="width: 3rem" class="expand" ></th>
-                                      <th  class="expand" pSortableColumn="arabicName" ><p-sortIcon  class="expand" field="arabicName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
-                                      <th class="expand"  pSortableColumn="curriculumName"><p-sortIcon class="expand" field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
+                                    <tr class="expand"  >
+                                      <th style="width: 3rem" class="expand" ></th>
+                                      <th  class="expand" pSortableColumn="arabicName" ><p-sortIcon  field="arabicName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
+                                      <th class="expand"  pSortableColumn="curriculumName"><p-sortIcon field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
                                       <th class="expand"  pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
                                       <th class="expand"  pSortableColumn="createdDate" ><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
                                       <th class="expand"  pSortableColumn="flexibilityStatus"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
@@ -94,17 +94,18 @@
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-holiday  let-expanded="expanded">
-                                    <tr  >
+                                    <tr [ngClass]="expanded ? 'expandrow' : ''" >
                                         
-                                        <td style="width: 3rem" class="expand expandd" ></td>
-                                        <td  class=" expandd" >
+                                      
+                                        <td  class="color-gray-50" >
                                             <button type="button" pButton pRipple [pRowToggler]="holiday" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-                                            {{holiday.arabicName|translate}}
+                                          
                                         </td>
-                                        <td  class="expandd">{{holiday.curriculumName[0].name|translate}}</td>
-                                        <td   class="expandd">{{'shared.From'|translate}} {{holiday.dateFrom|translate}} - {{'shared.To'|translate}} {{holiday.dateTo|translate}}</td>
-                                        <td class="expandd" >{{holiday.createdDate |date:'yyyy/mm/dd'|translate}}</td>
-                                        <td class="expandd">
+                                        <td [ngClass]="expanded ? 'boldaction' : ''" class="color-gray-50" >{{holiday.arabicName|translate}}</td>
+                                        <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{holiday.curriculumName[0].name|translate}}</td>
+                                        <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50">{{'shared.From'|translate}} {{holiday.dateFrom|translate}} - {{'shared.To'|translate}} {{holiday.dateTo|translate}}</td>
+                                        <td [ngClass]="expanded ? 'color-black' : ''" class="color-gray-50" >{{holiday.createdDate |date:'yyyy/mm/dd'|translate}}</td>
+                                        <td  class="color-gray-50">
                                             <div class="d-flex align-items-center gap-4">
                                                
                                                 <div [ngClass]="holiday.flexibilityStatus=='مرنة'?'alerting success':'alerting danger'">{{holiday.flexibilityStatus|translate}}</div>
@@ -114,14 +115,14 @@
                                       
                                 
                                            
-                                        <td class="edit expandd"> 
+                                        <td class="edit color-gray-50"> 
                                         
-                                                <button  routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{holiday.id}}">
-                                                    <img  src="assets/images/shared/pen.svg" alt="">
+                                                <button  (click)="editHoliday()">
+                                                    <img  src="assets/images/shared/rect-bluepen.svg" alt="">
                                                  </button>
 
                                                  <button  routerLink="/dashboard/educational-settings/annual-holiday/edit-holiday/{{holiday.id}}">
-                                                    <img  src="assets/images/shared/cancel.svg" alt="">
+                                                    <img  src="assets/images/shared/rect-xmark.svg" alt="">
                                                  </button>
                                         </td>
                                         
@@ -131,7 +132,7 @@
                               </ng-template>
                               <ng-template  pTemplate="rowexpansion" let-holiday>
                                 <tr>
-                                    <td colspan="15"  class="expand expandd">
+                                    <td colspan="15"  class="expand color-gray-50">
                                         <div class="">
                     
                                           
@@ -140,15 +141,14 @@
                                                  
                                                   
                                                     <ng-template pTemplate="body" let-curriculum  let-expanded="expanded">
-                                                        <tr  >
-                                                            
-                                                            <td style="min-width: 1.95rem" class="expand expandd" ></td>
-                                                            <td style="min-width: 1.95rem" class=" expandd" ></td>
-                                                            <td  class="expandd">{{curriculum.name|translate}}</td>
-                                                            <td  style="width: 3rem" class="expandd"></td>
-                                                            <td style="width: 3rem" class="expandd" ></td>
-                                                            <td style="width: 3rem" class="expandd"></td>
-                                                            <td style="width: 3rem" class="expandd"></td>
+                                                        <tr  class="border-bottom-0"  *ngIf="curriculum.name!=holiday.curriculumName[0].name">
+                                                        
+                                                            <td class="color-gray-50 w-25" ></td>
+                                                            <td   class="color-black color-gray-50 w-25" >{{curriculum.name|translate}}</td>
+                                                            <td class="color-gray-50 " ><span class="leftpostion">-</span></td>
+                                                            <td class="color-gray-50"  >-</td>
+                                                            <td class="color-gray-50"  ></td>
+                                                            <td class="color-gray-50"  ></td>
                                                     
                                                             
                                                           
@@ -191,7 +191,7 @@
    </ng-container>
 
 
-
+   <app-holiday-model (onSave)="saveForm($event)" Title="dashboard.AnnualHoliday.Edit Holiday" isOpened="false"></app-holiday-model>
     
 
 

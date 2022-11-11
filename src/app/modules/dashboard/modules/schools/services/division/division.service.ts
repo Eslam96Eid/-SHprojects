@@ -11,7 +11,7 @@ export class DivisionService {
 
   // << SCHOOL DIVISIONS >> //
   getSchoolDivisions(schoolId, filter={}){
-    return this.http.get(`/School/${schoolId}/division`,filter).pipe(take(1))
+    return this.http.get(`/School/${schoolId}/divisions`,filter).pipe(take(1))
   }
 
   getDivision(schoolId, id){
@@ -29,10 +29,10 @@ export class DivisionService {
     this.http.get(`${schoolId}`,filter).pipe(take(1))
   }
 
-  getDivisionTracks(schoolId,gardeId, divisionId){
+  getDivisionTracks( divisionId){
     // return this.http.get(`/SchoolTrack/school-tracks/${divisionId}`).pipe(take(1))
-    // return this.http.get(`/Track/${divisionId}/division-tracks`).pipe(take(1))
-    return this.http.get(`/School/${schoolId}/grade/${gardeId}/division/${divisionId}`).pipe(take(1))
+    // return this.http.get(`/School/${schoolId}/grade/${gardeId}/division/${divisionId}/tracks`).pipe(take(1))
+    return this.http.get(`/Track/${divisionId}/division-tracks`).pipe(take(1))
   
   }
   

@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,OnDestroy} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 import { IAnnualHoliday } from 'src/app/core/Models/annual-holidays/annual-holiday';
@@ -18,7 +18,8 @@ import { paginationInitialState } from 'src/app/core/classes/pagination';
   templateUrl: './annual-holiday-list.component.html',
   styleUrls: ['./annual-holiday-list.component.scss']
 })
-export class AnnualHolidayComponent implements OnInit {
+export class AnnualHolidayComponent implements OnInit,OnDestroy{
+  openModel:boolean=false;
   filtration = {...Filtration,year: '',curriculumName:'',holidayStatus: ''}
   allHolidayLength:number=1;
   col:string="";
@@ -50,9 +51,10 @@ export class AnnualHolidayComponent implements OnInit {
 
   }
   ngOnInit(): void {
+    this.annualHolidayService.openModel.subscribe((res)=>{this.openModel=res;})
     //  this.annualHolidayService.getAllcurriculumName().subscribe((res)=>{this.curriculumList=res.data;})
     // this.getAllHolidays();
-    this.annualHolidayList=this.annualHolidayService.annualHolidayList;
+    // this.annualHolidayList=this.annualHolidayService.annualHolidayList;
 
     this.route.paramMap.subscribe(param => {
       this.urlParameter = Number(param.get('schoolId'));
@@ -125,4 +127,20 @@ export class AnnualHolidayComponent implements OnInit {
   gotoAddHoliday() {
     this.router.navigate(['/dashboard/educational-settings/annual-holiday/new-holiday']);
   }
+
+  saveForm(e)
+  {
+   this.annualHolidayService.openModel.next(false);
+  }
+ 
+  editHoliday()
+  {
+ 
+   this.annualHolidayService.openModel.next(true);
+ 
+  }
+  ngOnDestroy(): void {
+   this.annualHolidayService.openModel.next(false);
+ 
+ }
 }

@@ -1,264 +1,491 @@
-<ng-container *ngIf="editStudentinfoMode==false">
-    <div class="float-btn " (click)="childService.onEditMode$.next(true)">
-        <img src="assets/images/shared/pen-blue-filled.svg" alt="">
-    </div>
-    <div class="row gx-5">
-        <div class="col-md-4">
-            <h3 class="heading heading--tertiary mb-5">معلومات عن طالب</h3>
-            <div class="grid-container">
-                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentName'|translate }}</p>
-                <span class="color-primary mb-2">محمد على</span>
 
-                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentNickname'|translate }}</p>
-                <span class="color-primary mb-2">طارق</span>
-
-                <p class="color-gray-300 fs-4">{{'dashboard.parents.sectionName'|translate }}</p>
-                <span class="color-primary mb-2">2002/07/04</span>
-
-                <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
-                <span class="color-primary mb-2">مصرى</span>
-
-                <p class="color-gray-300 fs-4">{{'shared.nationalId'|translate }}</p>
-                <span class="color-primary mb-2">2002/07/04</span>
-
-                <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
-                <span class="color-primary mb-2">مصرى</span>
+    <ng-container *ngIf="!(student$ |async)">
+        <div class="row g-5">
+            <div class="col-md-4">
+                <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+            </div>
+            <div class="col-md-4">
+                <app-skeleton count="5" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+            </div>
+            <div class="col-md-4">
+                <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
             </div>
         </div>
 
+    </ng-container>
 
-        <div class="col-md-4">
-            <h3 class="heading heading--tertiary mb-5">معلومات عن مدرسه الطالب</h3>
-            <div class="grid-container">
 
-                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.currentSchoolName'|translate }}</p>
-                <span class="color-primary mb-2">
-                  <a class="color-skyBlue-500 text-decoration-underline">مدرسه الشارقه الابتدائيه</a>
-              </span>
-
-                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.trackName'|translate }}</p>
-                <span class="color-primary mb-2">علمى</span>
-
-                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.className'|translate }}</p>
-                <span class="color-primary mb-2">
-                  <a class="color-skyBlue-500 text-decoration-underline">A 3</a>
-              </span>
-
-                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
-                <span class="color-primary mb-2">234144</span>
-
-                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
-                <span class="color-primary mb-2">234144</span>
-
-                <p class="color-gray-300 fs-4">{{'dashboard.parents.sectionName'|translate }}</p>
-                <span class="color-primary mb-2">2002/07/04</span>
-
-                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
-                <span class="color-primary mb-2">345315252</span>
-
+    <ng-container *ngIf="(student$ |async) as student">
+        <ng-container *ngIf="mode=='view' && !(childService.onEditMode$| async)">
+            <div class="float-btn " (click)="childService.onEditMode$.next(true)">
+                <img src="assets/images/shared/pen-blue-filled.svg" alt="">
             </div>
-        </div>
+            <div class="row gx-5">
+                <div class="col-md-4">
+                    <h3 class="heading heading--tertiary mb-5">معلومات عن طالب</h3>
+                    <div class="grid-container">
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentName'|translate }}</p>
+                        <span class="color-primary mb-2">{{student.name |currentLang}}</span>
+        
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.studentNickname'|translate }}</p>
+                        <span class="color-primary mb-2">{{student.surname |currentLang}}</span>
+        
+                        <p class="color-gray-300 fs-4">{{'shared.birthDay'|translate }}</p>
+                        <span class="color-primary mb-2">{{student.birthDate |date}}</span>
 
-
-
-        <div class="col-md-4">
-            <h3 class="heading heading--tertiary mb-5">معلومات عن عنوان طالب</h3>
-            <div class="grid-container">
-
-                <p class="color-gray-300 fs-4">{{'shared.city'|translate }}</p>
-                <span class="color-primary mb-2">الرياض</span>
-
-                <p class="color-gray-300 fs-4">{{ 'shared.emara'|translate }}</p>
-                <span class="color-primary mb-2">الشارقه</span>
-
-                <p class="color-gray-300 fs-4">{{ 'shared.state'|translate }}</p>
-                <span class="color-primary mb-2">الاهليه</span>
-            </div>
-            <h3 class="heading heading--tertiary mb-5">دليل اثبات الهوية</h3>
-            <div class="grid-container">
-
-                <div class="col-md-12  d-flex align-items-center">
-                    <span class="color-gray-300 ml-4"> رقم جواز السفر / الهوية</span>
-                    <span class="color-primary">204204205</span>
+                        <p class="color-gray-300 fs-4">{{ 'shared.gender'|translate }}</p>
+                        <span class="color-primary mb-2">{{student.gender}}</span>
+        
+                        <p class="color-gray-300 fs-4">{{ 'shared.nationality'|translate }}</p>
+                        <span class="color-primary mb-2">{{student.nationality.name |currentLang}}</span>
+        
+                        <p class="color-gray-300 fs-4">{{ 'shared.religion'|translate }}</p>
+                        <span class="color-primary mb-2">{{student?.religion?.name |currentLang}}</span>
+                        <!-- 
+                        <p class="color-gray-300 fs-4">{{'shared.nationalId'|translate }}</p>
+                        <span class="color-primary mb-2">2002/07/04</span>
+        
+                        <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
+                        <span class="color-primary mb-2">مصرى</span> -->
+        
+                        <p class="color-gray-300 fs-4">{{ 'shared.nativeLanguage'|translate }}</p>
+                        <span class="color-primary mb-2">{{student?.motherLanguage}}</span>
+        
+                        <p class="color-gray-300 fs-4">{{ 'shared.homeLanguage'|translate }}</p>
+                        <span class="color-primary mb-2">{{student?.languageAtHome}}</span>
+                            
+                    </div>
+                    <div class="d-flex gap-5 mt-5">
+                        <p class="color-gray-300 fs-4">{{ 'shared.mostUsedLanguage'|translate }}</p>
+                        <span class="color-primary mb-2">{{student?.mostUsedLanguage}}</span>
+                    </div>
                 </div>
-                <div class="col-md-12 d-flex align-items-center">
-                    <span class="color-gray-300"> تاريخ انتهاء </span>
-                    <span class="color-primary">204204205</span>
-                </div>
-                <div class="col-md-12 d-flex align-items-center">
-                    <ul class="file__list">
-                        <li class="file__list__item">
-                            <div class="icon--file mb-4">
-                                <img src="assets/images/shared/PDFSEC.svg" alt="">
-                                <span class="text color-primary"> ملف خلاصة القيد.pdf</span>
-                            </div>
-                            <div class="icon--file mt-6">
-                                <img src="assets/images/shared/PDFSEC.svg" alt="">
-                                <span class="text color-primary"> ملف خلاصة القيد.pdf</span>
-                            </div>
-                        </li>
+        
+        
+                <div class="col-md-4">
+                    <h3 class="heading heading--tertiary mb-5">معلومات عن مدرسه الطالب</h3>
 
-                    </ul>
+                    <div class="d-flex gap-4 mb-4">
+                        <p class="color-gray-300 fs-4 flex-shrink-0">{{ 'dashboard.parents.currentSchoolName'|translate }}</p>
+                        <span class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student?.school?.id]">
+                          <a class="color-skyBlue-500">{{student?.school?.name |currentLang}}</a>
+                        </span>
+                    </div>
+                    <div class="grid-container">
+                        <p class="color-gray-300 fs-4">{{ 'shared.grade'|translate }}</p>
+                        <span class="color-primary mb-2">{{student?.grade.name |currentLang}}</span>
+        
+        
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.trackName'|translate }}</p>
+                        <span class="color-primary mb-2">{{student?.track.name |currentLang}}</span>
+        
+        
+                        
+                        <p class="color-gray-300 fs-4">{{'dashboard.parents.sectionName'|translate }}</p>
+                        <span class="color-primary mb-2">
+                            <a class="color-skyBlue-500">{{student?.division.name |currentLang}}</a>
+                        </span>
+                        
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
+                        <span class="color-primary mb-2">{{student?.schoolCode}}</span>
+
+                        <!-- <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
+                        <span class="color-primary mb-2">234144</span>
+        
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.ministerialNumber'|translate }}</p>
+                        <span class="color-primary mb-2">234144</span> -->
+        
+                    </div>
+                </div>
+        
+        
+        
+                <div class="col-md-4">
+                    <h3 class="heading heading--tertiary mb-5">معلومات عن عنوان طالب</h3>
+                    <div class="grid-container">
+        
+                        <p class="color-gray-300 fs-4">{{'shared.city'|translate }}</p>
+                        <span class="color-primary mb-2">{{student?.address?.city |translate}}</span>
+        
+                        <p class="color-gray-300 fs-4">{{ 'shared.emara'|translate }}</p>
+                        <span class="color-primary mb-2">{{student?.emirate}}</span>
+        
+                        <p class="color-gray-300 fs-4">{{ 'shared.state'|translate }}</p>
+                        <span class="color-primary mb-2">{{student?.address?.state.name |currentLang}}</span>
+                    </div>
+        
+                    <h3 class="heading heading--tertiary mb-5 mt-6">دليل اثبات الهوية</h3>
+
+                    <!-- <div class="grid-container">
+                        <p class="color-gray-300 fs-4 ml-4"> رقم جواز السفر / الهوية</p>
+                        <span class="color-primary">{{student?.passportId}}</span>
+       
+                        <p class="color-gray-300 fs-4">{{'shared.nationalIdExpireDate'|translate}}</p>
+                        <span class="color-primary">{{student?.passportIdExpirationDate |date}}</span>
+                    </div> -->
+
+                    <ng-container *ngIf="student.emiratesId">
+                        <div class="d-flex gap-5 align-items-center mt-4 fs-4">
+                            <p class="color-gray-300 "> رقم الهوية</p>
+                            <span class="color-primary">{{student.emiratesId}}</span>
+                            <!-- <a class="color-skyBlue-500" (click)="changeIdentityModelOpened=true">ارسال طلب تعديل </a> -->
+                        </div>
+                        <div class="grid-container mt-5">
+            
+                            <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
+                            <span class="color-primary mb-2">{{student.emiratesIdExpirationDate}}</span>
+            
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="!student.emiratesId">
+    
+                        <div class="grid-container mt-5">
+                            
+                            <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
+                            <span class="color-primary mb-2">لا يوجد</span>
+
+                            <p class="color-gray-300 fs-4">{{ 'shared.cause'|translate }}</p>
+                            <span class="color-primary mb-2">{{student.reasonForNotHavingEmiratesId}}</span>
+
+                            <p class="color-gray-300 fs-4">{{ 'shared.passportId'|translate }}</p>
+                            <span class="color-primary mb-2">{{student.passportId}}</span>
+                            
+                            <p class="color-gray-300 fs-4">{{'shared.expireDate'|translate}}</p>
+                            <span class="color-primary mb-2">{{student.passportIdExpirationDate}}</span>
+            
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="!student.emiratesId">
+                        <ul class="mt-4">
+                            <li class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
+                                <img src="assets/images/shared/pdf.svg" alt="">
+                                <span> ملف خلاصة القيد.pdf                            </span>
+                            </li>
+                            <li class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-5">
+                                <img src="assets/images/shared/pdf.svg" alt="">
+                                <span> ملف خلاصة القيد.pdf</span>
+                            </li>
+        
+                        </ul>
+                    </ng-container>
+                </div>
+        
+            </div>
+        
+            <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15">
+                <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
+                <div class="col d-flex align-items-center gap-3">
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.paidAmount'|translate }}</p>
+                    <span class="color-primary mb-2">{{student?.paidAmount}} AED</span>
+                </div>
+                <div class="col d-flex align-items-center gap-3">
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.requiredAmount'|translate }}</p>
+                    <span class="color-primary mb-2">{{student?.fullAmountToBePaid}} AED</span>
+                </div>
+                <div class="col d-flex align-items-center gap-3">
+                    <p class="color-gray-300 fs-4">{{ 'dashboard.parents.restAmount'|translate }}</p>
+                    <span class="color-primary mb-2">{{student?.remainingAmount}} AED</span>
+                </div>
+                <div class="col d-flex align-items-center gap-3">
+                    <p class="color-gray-800 fs-4 fw-bold">{{'dashboard.parents.accountantComment'|translate }}</p>
+                    <span class="mb-2">
+                      <a class="color-skyBlue-500 ">عرض التعليق</a>
+                  </span>
                 </div>
             </div>
-        </div>
+        </ng-container>
+    </ng-container>
 
-    </div>
 
-    <div class="row gx-5 p-4 bg-gray-50 mt-6 radius-15">
-        <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
-        <div class="col d-flex align-items-center gap-3">
-            <p class="color-gray-300 fs-4">{{ 'dashboard.parents.paidAmount'|translate }}</p>
-            <span class="color-primary mb-2">10,000 AED</span>
-        </div>
-        <div class="col d-flex align-items-center gap-3">
-            <p class="color-gray-300 fs-4">{{ 'dashboard.parents.requiredAmount'|translate }}</p>
-            <span class="color-primary mb-2">10,000 AED</span>
-        </div>
-        <div class="col d-flex align-items-center gap-3">
-            <p class="color-gray-300 fs-4">{{ 'dashboard.parents.restAmount'|translate }}</p>
-            <span class="color-primary mb-2">5,000 AED</span>
-        </div>
-        <div class="col d-flex align-items-center gap-3">
-            <p class="color-gray-800 fs-4 fw-bold">{{'dashboard.parents.accountantComment'|translate }}</p>
-            <span class="mb-2">
-              <a class="color-skyBlue-500">عرض التعليق</a>
-          </span>
-        </div>
-    </div>
-</ng-container>
+
+
+
+
+
+
+
+
+
+
+
 <!----------------edit mode------------------->
-<ng-container *ngIf="editStudentinfoMode==true">
-    <div class="row gx-5">
-        <div class="col-md-4">
-            <h3 class="heading heading--tertiary mb-5">معلومات عن طالب</h3>
-            <div class="form-set">
-                <label class="label" for="trackId">{{'dashboard.students.studentName'|translate}}<span>(للاطلاع فقط)</span></label>
-                <input type="text" id="trackId" readonly="true" formControlName="arabicName" pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
-            </div>
 
-            <div class="form-set">
-                <label class="label" for="trackId">{{'dashboard.students.studentNickname'|translate}}</label>
-                <input type="text" id="trackId" formControlName="surName" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
-            </div>
+<ng-container *ngIf="student$ |async as student">
+    <ng-container *ngIf="mode=='edit' || (childService.onEditMode$ | async)">
+        <div class="row gx-5" [formGroup]="studentForm">
+            <div class="col-md-4">
+                <h3 class="heading heading--tertiary mb-5">معلومات عن طالب</h3>
+                
+                <div class="form-set " formGroupName="name">
+                    <label class="label">{{'dashboard.students.studentName'|translate}}</label>
+                    <input type="text" formControlName="ar"  pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
+                </div>
+    
+                <div class="form-set" formGroupName="surname">
+                    <label class="label">{{'dashboard.students.studentNickname'|translate}}</label>
+                    <input type="text" formControlName="ar" pInputText placeholder="{{'dashboard.students.studentNickname'|translate}}" />
+                </div>
+    
+                <div class="form-set">
+                    <label class="label">{{'shared.birthDay'|translate}}</label>
+                    <p-calendar formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
+                </div>
+    
+                <div class="form-set">
+                    <label class="label">{{'shared.gender'|translate}}</label>
+                    <p-dropdown formControlName="gender" [options]="genderOptions" optionValue="value" optionLabel="name"></p-dropdown>
+                </div>
+    
+                <div class="form-set">
+                    <label class="label">{{'shared.nationality'|translate}}</label>
+                    <!-- <input type="text" formControlName="nationalityId" pInputText placeholder="اماراتى" /> -->
+                    <p-dropdown formControlName="nationalityId" [options]="countries$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
+                </div>
 
-            <div class="form-set">
-                <label class="label" for="trackId">{{'shared.birthDay'|translate}}<span>(للاطلاع فقط)</span></label>
-                <p-calendar [disabled]="true" formControlName="birthDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" placeholder="2002/07/04"></p-calendar>
+                <div class="form-set">
+                    <label class="label">{{'shared.nationalityCategory'|translate}}</label>
+                    <p-dropdown formControlName="NationalityCategoryId" [options]="nationalitiesCategory$ |async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}"></p-dropdown>
+                </div>
+    
+                <div class="form-set">
+                    <label class="label">{{'shared.religion'|translate}}</label>
+                    <p-dropdown formControlName="religion" [options]="religions" optionValue="value" optionLabel="name" placeholder="{{'shared.writeReligion' |translate}}"></p-dropdown>
+                    <!-- <input type="text" formControlName="religionId" pInputText placeholder="{{'shared.writeReligion' |translate}}"/> -->
+                </div>
+    
+                <div class="form-set">
+                    <label class="label">{{'shared.nativeLanguage'|translate}}</label>
+                    <input type="text" formControlName="motherLanguage" pInputText placeholder="{{'shared.writeLanguage' |translate}}" />
+                </div>
+    
+                <div class="form-set">
+                    <label class="label">{{'shared.homeLanguage'|translate}}</label>
+                    <input type="text" formControlName="languageAtHome" pInputText placeholder="{{'shared.writeLanguage' |translate}}" />
+                </div>
+    
+                <div class="form-set">
+                    <label class="label">{{'shared.mostUsedLanguage'|translate}}</label>
+                    <input type="text" formControlName="mostUsedLanguage" pInputText placeholder="{{'shared.writeLanguage' |translate}}" />
+                </div>
+    
+                
+                <!-- <div class="form-set" *ngIf="student.isGifted">
+                    <label class="label">{{'dashboard.students.talent'|translate}}</label>
+                    <p-multiSelect formControlName="talents" [options]="talents$ |async" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
+                </div> -->
+    
+    
+    
+                <!-- <div class="form-set">
+                    <label class="label">{{'shared.nationalId'|translate}}</label>
+                    <input type="text" pInputText placeholder="23545" />
+                </div>
+                    
+                </div> -->
+    
+                
+    
             </div>
+    
+    
+            <div class="col-md-4">
+                <h3 class="heading heading--tertiary mb-5">معلومات عن مدرسه الطالب</h3>
+            
+    
+                <div class=" ">
+                    <div class="d-flex gap-4 mb-4">
+                        <p class="color-gray-300 fs-4 flex-shrink-0">{{ 'dashboard.parents.currentSchoolName'|translate }}</p>
+                        <span class="color-primary mb-2 flex-shrink-0" [routerLink]="['../../../schools/school/', student.school?.id]">
+                          <a class="color-skyBlue-500">{{student.school?.name | currentLang}}</a>
+                        </span>
+                    </div>
+                    <div class="grid-container">
+                        
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.schoolNumber'|translate }}</p>
+                        <span class="color-primary mb-2">{{student.schoolCode}}</span>
 
-            <div class="form-set">
-                <label class="label" for="trackId">{{'shared.gender'|translate}}<span>(للاطلاع فقط)</span></label>
-                <p-dropdown [options]="['yes', 'now']" readonly="true" formControlName="genderId" inputId="description" optionLabel="name"></p-dropdown>
+                        <p class="color-gray-300 fs-4">{{ 'shared.grade'|translate }}</p>
+                        <span class="color-primary mb-2">{{student.grade.name |currentLang}}</span>
+        
+        
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.parents.trackName'|translate }}</p>
+                        <span class="color-primary mb-2">{{student.track.name |currentLang}}</span>
+        
+        
+                        
+                        <p class="color-gray-300 fs-4">{{'dashboard.parents.sectionName'|translate }}</p>
+                        <span class="color-primary mb-2">
+                            <a class="color-skyBlue-500">{{student.division.name |currentLang}}</a>
+                        </span>
+
+                        <p class="color-gray-300 fs-4">{{ 'dashboard.students.studentStatus'|translate }}</p>
+                        <span class="color-primary mb-2">{{student.isPassed ? 'ناجح' : 'راسب'}}</span>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <!-- <div class="form-set">
+                            <label class="label" for="description">{{'shared.track'| translate}}</label>
+                            <p-dropdown formControlName="trackId" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                        </div> -->
+            
+                        <div class="form-set">
+                            <label class="label" for="description">{{'dashboard.students.specialStudent'| translate}}</label>
+                            <p-dropdown formControlName="isSpecialAbilities" [options]="booleanOptions" optionValue="id" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        </div>
+                        <div class="form-set">
+                            <label class="label" for="description">{{'dashboard.students.isChildOfAMartyr'| translate}}</label>
+                            <p-dropdown formControlName="isChildOfAMartyr" [options]="booleanOptions" optionValue="id" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        </div>
+                        <div class="form-set">
+                            <label class="label" for="description">{{'dashboard.students.isGifted'| translate}}</label>
+                            <p-dropdown #isGifted formControlName="isTalented" [options]="booleanOptions" optionValue="value" optionLabel="name" placeholder="{{'shared.yesOrNo' |translate}}"></p-dropdown>
+                        </div>
+
+                        <div class="form-set" *ngIf="isGifted.value">
+                            <label class="label" for="description">{{'dashboard.students.chooseTalent'| translate}}</label>
+                            <p-multiSelect formControlName="talents" [options]="talents$ |async" optionValue="id" optionLabel="arabicName" placeholder="{{'dashboard.students.chooseTalent' |translate}}" display="chip"></p-multiSelect>
+                        </div>
+
+                            
+
+
+                    </div>
+
+                    <ng-container *ngIf="student.emiratesId">
+                        <div class="d-flex gap-5 align-items-center mt-4 fs-4">
+                            <p class="color-gray-300 "> رقم الهوية</p>
+                            <span class="color-primary">{{student.emiratesId}}</span>
+                            <a class="color-skyBlue-500" (click)="changeIdentityModelOpened=true">ارسال طلب تعديل </a>
+                        </div>
+                        <div class="grid-container mt-5">
+            
+                            <p class="color-gray-300 fs-4">{{ 'shared.nationalIdExpireDate'|translate }}</p>
+                            <span class="color-primary mb-2">{{student.emiratesIdExpirationDate}}</span>
+            
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="!student.emiratesId">
+    
+                        <div class="grid-container mt-5">
+                            
+                            <p class="color-gray-300 fs-4">{{ 'shared.Identity Number'|translate }}</p>
+                            <span class="color-primary mb-2">لا يوجد</span>
+
+                            <p class="color-gray-300 fs-4">{{ 'shared.cause'|translate }}</p>
+                            <span class="color-primary mb-2">{{student.reasonForNotHavingEmiratesId}}</span>
+
+                            <p class="color-gray-300 fs-4">{{ 'shared.passportId'|translate }}</p>
+                            <span class="color-primary mb-2">{{student.passportId}}</span>
+                            
+                            <p class="color-gray-300 fs-4">{{'shared.expireDate'|translate}}</p>
+                            <span class="color-primary mb-2">{{student.passportIdExpirationDate}}</span>
+            
+                        </div>
+                    </ng-container>
+                    
+    
+                </div>
+    
+
+    
             </div>
-
-            <div class="form-set">
-                <label class="label" for="trackId">{{'shared.nationality'|translate}}<span>(للاطلاع فقط)</span></label>
-                <input type="text" id="trackId" readonly="true" formControlName="nationalityId" pInputText placeholder="اماراتى" />
+    
+    
+    
+            <div class="col-md-4" formArrayName="address">
+                <h3 class="heading heading--tertiary mb-5">معلومات عن عنوان طالب</h3>
+                <!-- <div class="form-set">
+                    <label class="label" for="description">{{'shared.religion'| translate}}</label>
+                    <p-dropdown [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
+                </div> -->
+                <div class="form-set">
+                    <label class="label">{{'shared.emara'|translate}}</label>
+                    <input type="text" formControlName="emirate" pInputText placeholder="{{'shared.writeEmara'|translate}}" />
+                </div>
+    
+                <div class="form-set">
+                    <label class="label">{{'shared.city'|translate}}</label>
+                    <p-dropdown formControlName="city" [options]="cities$|async" optionValue="id" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseCity'|translate }}"></p-dropdown>
+                </div>
+                <div class="form-set">
+                    <label class="label">{{'shared.state'|translate}}</label>
+                    <p-dropdown formControlName="state" [options]="(states$|async)" optionValue="value" optionLabel="{{lang=='ar'? 'name.ar' : 'name.en'}}" placeholder="{{'shared.chooseState'|translate }}"></p-dropdown>
+                </div>
+    
             </div>
+        </div>
+    
+        <div class="py-6"></div>
+    
 
-            <div class="form-set">
-                <label class="label" for="trackId">{{'shared.nationalId'|translate}}<span>(للاطلاع فقط)</span></label>
-                <input type="text" id="trackId" formControlName="nationalId" pInputText placeholder="23545" />
+        <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15">
+            <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
+            <div class="col d-flex align-items-center gap-3">
+                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.paidAmount'|translate }}</p>
+                <span class="color-primary mb-2">{{student.paidAmount}} AED</span>
             </div>
-
-            <div class="form-set">
-                <label class="label" for="trackId">{{'shared.nationalIdExpireDate'|translate}}</label>
-                <p-calendar formControlName="expireDate" [style]="{'font-size': '1.6rem'}" icon="pi pi-clock" [showIcon]="true" selectionMode="range" placeholder="2002/07/04"></p-calendar>
+            <div class="col d-flex align-items-center gap-3">
+                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.requiredAmount'|translate }}</p>
+                <span class="color-primary mb-2">{{student.fullAmountToBePaid}} AED</span>
             </div>
-
+            <div class="col d-flex align-items-center gap-3">
+                <p class="color-gray-300 fs-4">{{ 'dashboard.parents.restAmount'|translate }}</p>
+                <span class="color-primary mb-2">{{student.remainingAmount}} AED</span>
+            </div>
+            <div class="col d-flex align-items-center gap-3">
+                <p class="color-gray-800 fs-4 fw-bold">{{'dashboard.parents.accountantComment'|translate }}</p>
+                <span class="mb-2">
+                  <a class="color-skyBlue-500">عرض التعليق</a>
+              </span>
+            </div>
         </div>
 
-
-        <div class="col-md-4">
-            <h3 class="heading heading--tertiary mb-5">معلومات عن مدرسه الطالب</h3>
-            <div class="form-set">
-                <label class="label" for="trackId">{{'dashboard.parents.currentSchoolName'|translate}}</label>
-                <p-dropdown [options]="['yes', 'now']" formControlName="schoolId" inputId="description" optionLabel="name"></p-dropdown>
+        <!-- <div class="row gx-5 p-4 bg-gray-30 mt-6 radius-15">
+            <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
+            <div class="col-md-4">
+                <label class="label" for="trackId">{{'dashboard.parents.requiredAmount'|translate}}</label>
+                <input type="text"  pInputText placeholder="50,000 AED" />
             </div>
-
-            <div class="form-set">
-                <label class="label" for="description">{{'dashboard.parents.schoolNumber'| translate}}</label>
-                <input type="text" id="trackId" formControlName="schoolCode" pInputText placeholder="34321" />
+            <div class="col-md-4">
+                <label class="label" for="trackId">{{'dashboard.parents.paidAmount'|translate}}</label>
+                <input type="text" pInputText placeholder="10,000 AED" />
             </div>
-
-            <div class="form-set">
-                <label class="label" for="description">{{'shared.class'| translate}}</label>
-                <p-dropdown [options]="['yes', 'now']" formControlName="classRoomId" inputId="description" optionLabel="name"></p-dropdown>
+            <div class="col-md-4">
+                <label class="label" for="trackId">{{'dashboard.parents.restAmount'|translate}}</label>
+                <input type="text" pInputText placeholder="1,000 AED" />
             </div>
-
-            <div class="form-set">
-                <label class="label" for="description">{{'shared.sectionName'| translate}}</label>
-                <p-dropdown [options]="['yes', 'now']" formControlName="trackId" inputId="description" optionLabel="name"></p-dropdown>
+    
+            <div class="col-md-12 mt-4">
+                <label class="label" for="trackId">{{'dashboard.parents.accountantComment'|translate}}</label>
+                <input type="text"  pInputText placeholder="{{'dashboard.parents.accountantComment'|translate}}" />
             </div>
-
-            <!-- <div class="form-set">
-              <label class="label" for="trackId">{{'dashboard.parents.currentSchoolName'|translate}}</label>
-              <p-dropdown [options]="['yes', 'now']" formControlName="schoolId" inputId="description" optionLabel="name"></p-dropdown>
-          </div> -->
-
-
-            <div class="form-set">
-                <label class="label" for="trackId">{{'dashboard.parents.ministerialStudentNumber'|translate}}</label>
-                <input type="text" id="trackId" formControlName="ministerialId" pInputText placeholder="{{'dashboard.students.studentName'|translate}}" />
-            </div>
-
-            <div class="form-set">
-                <label class="label" for="description">{{'dashboard.students.specialStudent'| translate}}</label>
-                <p-dropdown [options]="['yes', 'now']" formControlName="isSpecialAbilities" inputId="description" optionLabel="name"></p-dropdown>
-            </div>
-
-            <div class="form-set">
-                <label class="label" for="description">{{'dashboard.students.isStudentOneOfFirst'| translate}}</label>
-                <p-dropdown [options]="['yes', 'now']" formControlName="isPassed" inputId="description" optionLabel="name"></p-dropdown>
-            </div>
-        </div>
-
-
-
-        <div class="col-md-4">
-            <h3 class="heading heading--tertiary mb-5">معلومات عن عنوان طالب</h3>
-            <div class="form-set">
-                <label class="label" for="description">{{'shared.religion'| translate}}</label>
-                <p-dropdown [options]="['yes', 'now']" formControlName="religionId" inputId="description" optionLabel="name"></p-dropdown>
-            </div>
-
-            <div class="form-set">
-                <label class="label" for="trackId">{{'shared.city'|translate}}</label>
-                <input type="text" id="trackId" formControlName="city" pInputText placeholder="{{'shared.writeCity'|translate}}" />
-            </div>
-            <div class="form-set">
-                <label class="label" for="trackId">{{'shared.emara'|translate}}</label>
-                <input type="text" id="trackId" formControlName="emara" pInputText placeholder="{{'shared.writeEmara'|translate}}" />
-            </div>
-            <div class="form-set">
-                <label class="label" for="trackId">{{'shared.state'|translate}}</label>
-                <input type="text" id="trackId" formControlName="state" pInputText placeholder="{{'shared.writeState'|translate}}" />
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <div class="row gx-5 p-4 bg-gray-50 mt-6 radius-15">
-        <h3 class="heading heading--tertiary mb-4">مدفوعات</h3>
-        <div class="col-md-4">
-            <label class="label" for="trackId">{{'dashboard.parents.requiredAmount'|translate}}</label>
-            <input type="text" id="trackId" formControlName="requiredAmount" pInputText placeholder="50,000 AED" />
-        </div>
-        <div class="col-md-4">
-            <label class="label" for="trackId">{{'dashboard.parents.paidAmount'|translate}}</label>
-            <input type="text" id="trackId" formControlName="paidAmount" pInputText placeholder="10,000 AED" />
-        </div>
-        <div class="col-md-4">
-            <label class="label" for="trackId">{{'dashboard.parents.restAmount'|translate}}</label>
-            <input type="text" id="trackId" formControlName="restAmount" pInputText placeholder="1,000 AED" />
-        </div>
-
-        <div class="col-md-12 mt-4">
-            <label class="label" for="trackId">{{'dashboard.parents.accountantComment'|translate}}</label>
-            <input type="text" id="trackId" formControlName="accountantComment" pInputText placeholder="{{'dashboard.parents.accountantComment'|translate}}" />
-        </div>
-    </div>
+        </div> -->
+    </ng-container>
 </ng-container>
+
+
+
+
+
+
+
+<p-dialog header="{{'dashboard.students.sendChangeIdentityReq' | translate}}" [(visible)]="changeIdentityModelOpened" [draggable]="false" [modal]="true" [style]="{width: '40vw'}">
+
+    <ng-template pTemplate="content">
+        
+        <div class="custom-form mt-5">
+            <input type="text"  pInputText placeholder="{{'dashboard.students.writeNewIdentityNumber'|translate}}" />
+        </div>
+
+        <app-file-upload accept=".pdf" label="{{'shared.clickToUploadFile'| translate}}" view="full" accept=".xlsx, .xls, .csv"></app-file-upload>
+        <div class="d-flex justify-content-end mt-4">
+            <button class="btn btn-primary">{{'shared.send'| translate}}</button>
+        </div>
+    </ng-template>
+
+</p-dialog>
+
+

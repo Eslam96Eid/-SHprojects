@@ -1,0 +1,177 @@
+<div class="">
+    <div class="Btn-group d-flex">
+
+        <!-- <button type="submit" class="btn  btn-outline-primary  addBtn" [hidden]="urlParameter>0">{{'shared.DefineNewPermission'|translate}}</button>
+
+        <button type="submit" class="btn  btn-primary" [hidden]="!urlParameter" (click)="sendModelOpened=true">{{'shared.send'|translate}}</button>
+
+        <button type="submit" class="btn btn-outline-primary leftbtn" [hidden]="!urlParameter">{{'shared.Save as draft'|translate}}</button> -->
+
+    </div>
+    <div class="tabView overflow-visible">
+
+        <!-- Navigations Options -->
+        <ul class="tabView__nav "  #nav>
+            <li class="tabView__nav__link" [class.active]="step==1" (click)="step=1"><span>{{ 'dashboard.SystemSetting.graceSession'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==2" (click)="step=2;"><span>{{ 'dashboard.SystemSetting.notificationSetting'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==3" (click)="step=3"><span> {{ 'dashboard.SystemSetting.RegistrationConditions'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==4" (click)="step=4"><span>{{ 'dashboard.SystemSetting.attachmentCondition'|translate }}</span></li>
+            <li class="tabView__nav__link" [class.active]="step==5" (click)="step=5"><span>{{ 'dashboard.SystemSetting.attachmentsetting'|translate }}</span></li>
+        </ul>
+        <!-- Navigations Options -->
+
+        <div class="tabView__content">
+
+            <div class="actions-btn d-flex align-items-center gap-4">
+                <button *ngIf="step==1" routerLink="grace-period/new" class="btn btn-outline-primary">{{'dashboard.SystemSetting.newGracePeriod' | translate}}</button>
+                <button *ngIf="step!=1 && step!=2" (click)="onSubmit(step)" class="btn btn-primary">{{'shared.saveChanges' | translate}}</button>
+            </div>
+
+            <div class="">
+                <!--Top Students-->
+                <ng-container *ngIf="step==1">
+
+                    <app-grace-periods-list> </app-grace-periods-list>
+
+                </ng-container>
+
+
+                <!-- Notifications -->
+                <ng-container *ngIf="step==2">
+                    <app-notifications></app-notifications>
+
+                </ng-container>
+
+                <!-- Registration -->
+                <ng-container *ngIf="step==3">
+
+                    <ng-container  [formGroup]="rolesForm" *ngIf="roles.controls">
+                        <ng-container  formArrayName="roles">
+                            <div class=" custom-form" *ngFor="let role of roles.controls; let i=index" [formGroupName]="i">
+                                <div class="row mb-5 ">
+                                    <h3 class="heading heading--tertiary mb-4">قاعده التسجيل {{i+1}}</h3>
+                                    <div class="col-md-4 offset-1">
+                                        <label  class="label">{{'dashboard.SystemSetting.oldCurriculum'|translate}}</label>
+                                        <p-multiSelect formControlName="oldCurriculum" [options]="diseases" optionLabel="name" display="chip"></p-multiSelect>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label  class="label">{{'dashboard.SystemSetting.newCurriculum'|translate}}</label>
+                                        <p-multiSelect formControlName="newCurriculum" [options]="diseases" optionLabel="name" display="chip"></p-multiSelect>
+                                    </div>
+            
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-4 offset-1">
+                                        <label  class="label">{{'shared.grades'|translate}}</label>
+                                        <p-multiSelect formControlName="grades" [options]="diseases" optionLabel="name" display="chip"></p-multiSelect>
+                                    </div>
+                                    <div class="col-md-4 d-flex align-items-center gap-4 align-self-end">
+                                        <label class="mb-2" for="description">{{'shared.activated'|translate}}</label>
+                                        <p-inputSwitch formControlName="status" ></p-inputSwitch>  
+                                        <span class="mb-2">{{'shared.yes' |translate}}</span>
+                                    </div>
+            
+                                </div>
+                                <hr class="my-6">
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    
+                <ng-container *ngIf="!roles.controls.length">
+
+                    <app-informative-block subTitle="{{'emptyList.registrationRoles' |translate}}"></app-informative-block>
+                </ng-container>
+
+                    <div role="button" 
+                    class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
+                    (click)="addNewRole()">
+                        <fa-icon [icon]="faPlus"></fa-icon>
+                        <span>{{'dashboard.SystemSetting.addNewRole' |translate}}</span>
+                    </div>
+                </ng-container>
+
+
+                <!-- Attachment Conditions-->
+                <ng-container *ngIf="step==4">
+                    <h3 class="heading heading--tertiary mb-6"> {{'dashboard.SystemSetting.fileSettingList'|translate}}</h3>
+
+                    <div class="row gx-5 mb-5 custom-form" [formGroup]="attachementConditionsForm">
+                        <div class="col-md-4">
+                            <label  class="label">{{'dashboard.SystemSetting.attachmentType'|translate}}</label>
+                            <p-multiSelect formControlName="files" [options]="diseases" optionLabel="name" display="chip"></p-multiSelect>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label  class="label">{{'dashboard.SystemSetting.chooseRequest'|translate}}</label>
+                            <p-inputNumber formControlName="attachmentSize" [showButtons]="true" [min]="1" [max]="32" placeholder="0"></p-inputNumber>
+                        </div>
+                    </div>
+                </ng-container>
+
+
+                <ng-container *ngIf="step==5">
+                    <h3 class="heading heading--tertiary mb-6"> {{'dashboard.SystemSetting.fileSettingList'|translate}}</h3>
+
+                    <ng-container  [formGroup]="attachementRoleForm" *ngIf="attachmentRoles.controls">
+                        <ng-container  formArrayName="roles">
+                            <div class="pt-4 custom-form" *ngFor="let role of attachmentRoles.controls; let i=index" [formGroupName]="i">
+                                <div class="row gx-5 mb-5 ">
+                                    <div class="col-md-4">
+                                        <label  class="label">{{'dashboard.SystemSetting.chooseRequest'|translate}}</label>
+                                        <p-dropdown formControlName="request" [options]="diseases" optionLabel="name" placeholder="{{'dashboard.SystemSetting.chooseRequest'|translate}}"></p-dropdown>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label  class="label">{{'dashboard.SystemSetting.fileNameAr'|translate}}</label>
+                                        <input pInputText formControlName="nameAr" >
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label  class="label">{{'dashboard.SystemSetting.fileNameEn'|translate}}</label>
+                                        <input pInputText formControlName="nameEn" >
+                                    </div>
+            
+                                </div>
+                                
+                                <div class="row gx-5">
+                                    <div class="col-md-4 d-flex align-items-center gap-4 align-self-end">
+                                        <label class="mb-2" for="description">{{'shared.activated'|translate}}</label>
+                                        <p-inputSwitch formControlName="status" ></p-inputSwitch>  
+                                        <span class="mb-2">{{'shared.yes' |translate}}</span>
+                                    </div>
+                                    <div class="col-md-4 offset-1">
+                                        <label  class="label">{{'dashboard.SystemSetting.maxFilesAllowedToUpload'|translate}}</label>
+                                        <p-inputNumber formControlName="maxCount" [showButtons]="true" [min]="0" [max]="100" placeholder="0" inputId="classCount"></p-inputNumber>
+                                    </div>
+            
+                                </div>
+                                <hr class="my-6">
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    
+                <ng-container *ngIf="!attachmentRoles.controls.length">
+
+                    <app-informative-block subTitle="{{'emptyList.fileSettings' |translate}}"></app-informative-block>
+                </ng-container>
+
+                    <div role="button" 
+                    class="color-primary d-flex align-items-center justify-content-center gap-3 bg-gray-30 p-3 mt-6"
+                    (click)="addNewAttachmentRole()">
+                        <fa-icon [icon]="faPlus"></fa-icon>
+                        <span>{{'dashboard.SystemSetting.addNewCondition' |translate}}</span>
+                    </div>
+                </ng-container>
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+
+</div>
+
+
+
+

@@ -7,32 +7,53 @@
 @import 'src/assets/css/components/message.scss';
 #content {
     width: 100%;
-    .copy{
-        width: 60%;
-        margin-right: 16rem;
-        border: 1px solid #E9E9E9;
-    }
-    .Addnew {
-    
-       border-radius: 0rem;
-       background-color: $color-gray-50;
-       border-color:$color-gray-50; 
-  
-    
+    .border{
+        padding-bottom: 0rem;
     }
     
-    .Btn-group {
+    .Btn-group{
         position: absolute;
-        bottom: 100%;
-        padding-bottom: 3%;
-       
+        bottom:100% ;
+        padding-bottom: 2.6%;
+   
+
+     
     }
+
+    .form-btn-group{
+       
+        margin-left: 1rem;
+        .copy{
+       
+           margin-left: 1.5rem;
+            border: 1px solid #E9E9E9;
+        }
+       
+
+    }
+    .prim-table{
+            .rightpostion{position: relative;right: 5rem;}
+            ::ng-deep p-table{
+                .p-datatable-tbody tr{     
+                    &.expandrow{ border-bottom: none ;}  
+                }
+                .p-datatable-tbody tr td{  
+                    &.action{
+                        color: $color-black;
+                        &-b{font-weight: 700;}
+                    } 
+                  
+                    &:first-child{
+                        &.expand{padding:0rem}
+                    }
+                }
+                
+                .p-datatable-wrapper{
+                            border-top: none;
+                        }
+                    
+            }
+    }
+
 }
 
-
-   hr{
-    width:97%;
-    color:$color-gray-100;
-    margin-right: 1.8rem;
-
-   }

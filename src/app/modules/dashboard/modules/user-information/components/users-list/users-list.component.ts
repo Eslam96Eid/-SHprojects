@@ -88,7 +88,7 @@ export class ViewListOfUsersComponent implements OnInit {
   getUsersList(){
     this.isSkeletonVisible = true;
     this.indexes.loading=true
-    debugger;
+
     this.selectedRole == undefined ? null : this.filtration.roleId = this.selectedRole.id;
     switch(this.selectedUsersStatus) {
       case 'Active': {
@@ -189,8 +189,8 @@ onFilterActivated(){
   } else if (this.isactive == 'Inactive') {
     isUserActive = false;
   }
-  debugger
-  
+
+
 
   // this.userInformation.getUsersListByRoled(
   //   this.selectedRole==undefined ? null :  this.selectedRole.id ,isUserActive == undefined ? null : isUserActive ,

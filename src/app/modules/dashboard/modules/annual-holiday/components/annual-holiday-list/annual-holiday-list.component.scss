@@ -6,7 +6,38 @@
 @import 'src/app/shared/components/dropdown/dropdown.component.scss';
 
 
+.prim-table{
+                .actions--sm{max-width: 4.25rem;}
+                .leftpostion{position: relative;left: 10rem;}
+                ::ng-deep p-table{
+                        thead.p-datatable-thead tr th{
+                            &.expand{
+                                background-color: $color-gray-50; ;color: #AAAAAA;
+                                p-sorticon .p-sortable-column-icon {color: #AAAAAA;}
+                                &:hover{
+                                    background-color: $color-gray-50;
+                                    color:  #AAAAAA;
+                                    p-sorticon .p-sortable-column-icon {color: #AAAAAA;}
+                                }
+                            }
 
+                        }   
+                          .p-datatable-tbody tr{     
+                    &.expandrow{ border-bottom: none ;}  
+                }  
 
-
+                         .p-datatable-tbody tr td{ 
+                          
+                            &.boldaction{font-weight: 700; color: $color-black;}
+                             &:first-child{
+                                &.expand{padding:0rem}
+                            }
+                           
+                        }
+                        .p-datatable-wrapper{
+                            border-top: none;
+                        }
+                    
+            }
+}
 

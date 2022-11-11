@@ -10,12 +10,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { AnnualHolidayRoutingModule } from './annual-holiday-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { HolidayModelComponent } from './components/holiday-model/holiday-model.component';
 
 
 
 @NgModule({
   declarations: [AnnualHolidayComponent,
     EditNewAnnualHolidayComponent,
+    HolidayModelComponent,
     
     
   ],

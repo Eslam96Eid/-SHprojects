@@ -3,32 +3,52 @@
 
     <div class="row gx-4 gap-4 gap-xxl-5">
         <!-- <div class=" px-5 pe-0"> -->
-        <div class="image-uploader__upload upload-btn" (click)="upload.click()">
-            <input type="file" #upload accept="image/*" [hidden]="true" (change)="uploadFile($event)">
-            <div class="icon-upload">
-                <img class="" src="assets/images/shared/upload.svg" alt="upload">
+            <div class="image-uploader__upload upload-btn" (click)="upload.value=null; upload.click()">
+                <!-- <div class="spinner-border text-light" role="status" *ngIf="inProgress"></div> -->
+                <i class="pi pi-spin pi-spinner" *ngIf="inProgress"></i>
+                <i [class.showSuccess]="uploaded" class="pi pi-check-circle" *ngIf="uploaded && !hideCheck"></i>
+                <i [class.showError]="!uploaded" class="pi pi-times-circle" *ngIf="!uploaded && !hideCheck"></i>
+                <!-- <fa-icon class="showError" [icon]="faFileCircleExclamation"></fa-icon> -->
+                <input 
+                type="file" 
+                #upload 
+                [disabled]="files.length > maxFilesToUpload || inProgress"
+                [accept]="accept" 
+                [multiple]="multiple" 
+                [hidden]="true" 
+                (change)="validateSelectedFiles($event)">
+                
+                <div class="icon-upload position-relative">
+                    <img class="" src="assets/images/shared/upload.svg" alt="upload">
+                </div>
+                <!-- <p class="title">{{ 'dashboard.schools.enterForAttachSchoolLogo'|translate }}</p> -->
+                <p class="title text-center" *ngIf="!inProgress && (hideCheck && !uploaded) || uploaded">{{ label }}</p>
+                <p class="title text-center color-red-500" *ngIf="!uploaded && !hideCheck">يرجى المحاوله مره اخرى</p>
+
+                <!-- <p class="sub-title">Photo (Maximum Size: 5mp)</p> -->
             </div>
-            <!-- <p class="title">{{ 'dashboard.schools.enterForAttachSchoolLogo'|translate }}</p> -->
-            <p class="title text-center">{{ label }}</p>
-            <!-- <p class="sub-title">Photo (Maximum Size: 5mp)</p> -->
-        </div>
         <!-- </div> -->
 
-        <ng-container *ngIf="view=='box'">
-            <div class=" box image-wrapper w px-5 d-flex flex-column">
+
+        <!-- ----------------------------- -->
+        <!-- Views Options -->
+        <!-- ----------------------------- -->
+
+        <ng-container  *ngIf="view=='box'">
+            <div class=" box image-wrapper w px-5 d-flex flex-column" >
                 <!-- <h3 class="heading heading--tertiary mb-4">{{'dashboard.schools.reliableLogo'|translate }} </h3> -->
                 <!-- <div class="box images"> -->
-                <fa-icon *ngIf="url" class="icon-close" [icon]="faXmark" (click)="removeImage()"></fa-icon>
-                <img *ngIf="!url" src="assets/images/shared/image.svg" alt="">
-                <img *ngIf="url" [src]="url" alt="img" onerror="this.src='assets/images/shared/image.svg'">
+                    <fa-icon *ngIf="imgUrl" class="icon-close" [icon]="faXmark" (click)="removeImage()"></fa-icon>
+                    <img *ngIf="!imgUrl" src="assets/images/shared/image.svg" alt="">
+                    <img *ngIf="imgUrl" [src]="imgUrl" alt="" onerror="this.src='assets/images/shared/image.svg'">
                 <!-- </div>  -->
             </div>
-
-            <!-- </div>  -->
-
         </ng-container>
 
-        <ng-container *ngIf="view=='list'">
+
+
+
+        <ng-container  *ngIf="view=='list'">
             <div class="list flex-column ">
                 <ul>
                     <ng-container *ngFor="let file of files; let i = index">
@@ -42,9 +62,10 @@
             </div>
         </ng-container>
 
-
     </div>
-    <ng-container *ngIf="view=='rows'">
+
+
+    <ng-container  *ngIf="view=='rows'">
         <div class="row gx-5 mt-5 rows">
             <ng-container *ngFor="let file of files; let i = index">
                 <div class="col-md-6 ps-6">
@@ -60,10 +81,19 @@
     </ng-container>
 
 
-    <ng-container *ngIf="audioFile">
-        <div class="d-flex">
-            <div class="px-2">{{audioFile.url}}</div>
-            <fa-icon *ngIf="audioFile.url" class="icon-close" [icon]="faXmark" (click)="removeAudioFile()"></fa-icon>
+
+    <ng-container  *ngIf="view=='full'">
+        <div class="row gx-5 mt-5 rows">
+            <ng-container *ngFor="let file of files; let i = index">
+                <div class="ps-6">
+                    <!-- <label class="label color-gray-700" for="day">{{'dashboard.students.studentIdentity' |translate}}  </label> -->
+                    <div class="d-flex align-items-center gap-5 border-dark px-4 py-3 color-gray-800 radius-15 mb-3">
+                        <img src="assets/images/shared/pdf.svg" alt="">
+                        <span>{{file?.name}}</span>
+                        <fa-icon role="button" class="color-fuchsia-600 me-auto ms-2" [icon]="faXmark" (click)="removeFile(i)"></fa-icon>
+                    </div>
+                </div>
+            </ng-container>
         </div>
     </ng-container>
 </div>

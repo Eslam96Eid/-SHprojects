@@ -29,6 +29,54 @@
 
     },
 
+    "primeng": {
+        "startsWith": "Starts with",
+        "contains": "Contains",
+        "notContains": "Not contains",
+        "endsWith": "Ends with",
+        "equals": "Equals",
+        "notEquals": "Not equals",
+        "noFilter": "No Filter",
+        "lt": "Less than",
+        "lte": "Less than or equal to",
+        "gt": "Greater than",
+        "gte": "Greater than or equal to",
+        "is": "Is",
+        "isNot": "Is not",
+        "before": "Before",
+        "after": "After",
+        "dateIs": "Date is",
+        "dateIsNot": "Date is not",
+        "dateBefore": "Date is before",
+        "dateAfter": "Date is after",
+        "clear": "Clear",
+        "apply": "Apply",
+        "matchAll": "Match All",
+        "matchAny": "Match Any",
+        "addRule": "Add Rule",
+        "removeRule": "Remove Rule",
+        "accept": "Yes",
+        "reject": "No",
+        "choose": "Choose",
+        "upload": "Upload",
+        "cancel": "Cancel",
+        "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        "dayNamesMin": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+        "monthNames": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        "dateFormat": "mm/dd/yy",
+        "firstDayOfWeek": 0,
+        "today": "Today",
+        "weekHeader": "Wk",
+        "weak": "Weak",
+        "medium": "Medium",
+        "strong": "Strong",
+        "passwordPrompt": "Enter a password",
+        "emptyMessage": "No results found",
+        "emptyFilterMessage": "No results found"
+    },
+
     "breadcrumb": {
         "createNewSurvey": "Create New Survey",
         "sendSurvey": "Send Survey",
@@ -56,7 +104,8 @@
         "Job Role Details": "Job Role Details",
         "AddUser": "Add User",
         "AddASSesment": "Add Assesment",
-        "Add": "Add"
+        "Add": "Add",
+        "Request to issue a certificate": "Request to issue a certificate"
 
     },
 
@@ -458,7 +507,26 @@
             "Enter the text of the message": "Enter the text of the message",
             "Chat Details": "Message Details",
             "Send Reply": "Send Reply",
-            "close the conversation": "close the conversation"
+            "close the conversation": "close the conversation",
+            "descriptionMessage": "Description  is required",
+            "maxLength": "max length is 512 characters",
+            "maxLengtho": "max length is 32 characters",
+            "determine": "Determine which schools you want to send the message to",
+            "Area": "Area",
+            "curriculum": "Curriculum",
+            "School": "School",
+            "senderName": "Show sender's name",
+            "add guardian": "Add the guardian",
+            "MessageType": "Message Type"
+        },
+        "issue of certificate": {
+            "Please select a student": "Please select a student",
+            "Click here to add the required information": "Click here to add the required information",
+            "Certificates to be issued": "Certificates to be issued",
+            "Certificate name": "Certificate name",
+            "Certificate fee": "Certificate fee",
+            "sons name": "son's name",
+            "choose certificate": "Choose Certificate"
         }
     },
     "Notifications": {

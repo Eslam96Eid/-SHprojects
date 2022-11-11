@@ -7,7 +7,7 @@ import { PermissionsEnum } from '../../enums/permissions/permissions.enum';
 export class PermissionDirective implements OnChanges {
   clams={
     [PermissionsEnum.NURSE] : PermissionsEnum.NURSE, 
-    // [PermissionsEnum.S_EMPLOYEE] : PermissionsEnum.S_EMPLOYEE
+    [PermissionsEnum.S_EMPLOYEE] : PermissionsEnum.S_EMPLOYEE
   }
   
 

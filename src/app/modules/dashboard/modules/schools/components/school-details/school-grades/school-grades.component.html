@@ -1,91 +1,122 @@
-<div class="prim-table">
-    <p-table #dt [value]="students" [paginator]="true" [(rows)]="rows" [(first)]="first">
+<div class="prim-table" *ngIf="grades.totalAllData || grades.loading">
+    <p-table #dt [value]="grades.list" [lazy]="true">
         <ng-template pTemplate="caption">
-            <app-table-caption
-            (onExport)="onExport($event)" 
-            (onFilter)="getSchoolGrades()" 
-            (onSearch)="filtration.KeyWord = $event; getSchoolGrades()"
-            (onClear)="clearFilter()">
-        </app-table-caption>
+            <app-table-caption (onExport)="onExport($event)" (onFilter)="getSchoolGrades()" (onSearch)="filtration.KeyWord = $event; getSchoolGrades()" (onClear)="clearFilter()">
+            </app-table-caption>
         </ng-template>
-        
+
         <ng-template pTemplate="header" let-columns="columns">
             <tr>
                 <!-- <th *ngFor="let col of cols">
-                    {{col.header}}
+                  {{col.header}}
+              </th>
+              <th pSortableColumn="actions"></th> -->
+                <th pSortableColumn="name">{{'dashboard.schools.gradeName'|translate}}
+                    <p-sortIcon field="name"></p-sortIcon>
                 </th>
-                <th pSortableColumn="actions"></th> -->
-                <th pSortableColumn="code">{{'dashboard.schools.gradeName'|translate}} <p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="name">{{'dashboard.schools.classeNumberPerWeak'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
-                <th pSortableColumn="category">{{'dashboard.schools.tracksNumber'|translate}} <p-sortIcon field="category"></p-sortIcon></th>
-                <th pSortableColumn="quantity">{{'dashboard.schools.sectionsNumber'|translate}} <p-sortIcon field="quantity"></p-sortIcon></th>
-                <th pSortableColumn="price">{{'dashboard.schools.studentNumber'|translate}} <p-sortIcon field="price"></p-sortIcon></th>
+                <!-- <th pSortableColumn="name">{{'dashboard.schools.classeNumberPerWeak'|translate}} <p-sortIcon field="name"></p-sortIcon></th> -->
+                <th pSortableColumn="trackCount">{{'dashboard.schools.tracksNumber'|translate}}
+                    <p-sortIcon field="trackCount"></p-sortIcon>
+                </th>
+                <th pSortableColumn="divisionCount">{{'dashboard.schools.sectionsNumber'|translate}}
+                    <p-sortIcon field="divisionCount"></p-sortIcon>
+                </th>
+                <th pSortableColumn="studentCount">{{'shared.students'|translate}}
+                    <p-sortIcon field="studentCount"></p-sortIcon>
+                </th>
                 <th pSortableColumn="actions" class="actions"></th>
             </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-product let-columns="columns">
+        <ng-template pTemplate="body" let-grade let-columns="columns">
             <tr>
                 <!-- <td *ngFor="let col of cols | paginate:{ id: 'foo',itemsPerPage: 4 ,currentPage: p,totalItems: 8 }">
-                    {{product[col.field]}}
-                </td> -->
-                <td>{{product.code}}</td>
-                <td>{{product.name}}</td>
+                  {{product[col.field]}}
+              </td> -->
+                <td>{{grade.name|currentLang}}</td>
                 <td>
-                    <div class="color-skyBlue-700 ">
-                        <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4" (click)="openSectionModal()">
-                             <p><span class="">4</span>&nbsp;<span>{{'dashboard.schools.tracks' |translate}}</span></p>
+                    <div class="color-skyBlue-700 " *ngIf="grade.trackCount">
+                        <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4" (click)="grade.trackCount? showTracks(grade.id):''">
+                            <p><span class="">{{grade.trackCount}}</span>&nbsp;<span>{{'dashboard.schools.tracks' |translate}}</span></p>
+                        </a>
+                    </div>
+                    <span *ngIf="!grade.trackCount">-----</span>
+                </td>
+                <td>
+                    <div class="color-skyBlue-700 " (click)="selectedGradeId.emit(grade.id); setActiveTab.emit(5)">
+                        <a role="button" class="gap-2 color-skyBlue-700  text-decoration-underline fs-4" (click)="tab==4">
+                            <span class=""> عدد {{grade.divisionCount}}</span>
                         </a>
                     </div>
                 </td>
-                <td>{{product.quantity}}</td>
-                <td>{{product.price | currency: 'USD'}}</td>
+                <td> عدد{{grade.studentCount}}</td>
                 <td class="actions">
                     <button class="btn btn--sm btn-outline-none" routerLink="grade/1">
-                        <img class="icon" src="assets/images/shared/pen.svg" alt="">
-                        <span>{{'shared.edit' |translate}}</span>
-                    </button>
+                      <img class="icon" src="assets/images/shared/pen.svg" alt="">
+                      <span>{{'shared.edit' |translate}}</span>
+                  </button>
                     <!-- <div class="color-skyBlue-700  d-flex align-items-center gap-2">
-                        <fa-icon [icon]="faPencil"></fa-icon>
-                        <a role="button" routerLink="grade/1" class=" color-skyBlue-700  text-decoration-underline fs-3">{{'shared.edit' |translate}}</a>
-                    </div> -->
+                      <fa-icon [icon]="faPencil"></fa-icon>
+                      <a role="button" routerLink="grade/1" class=" color-skyBlue-700  text-decoration-underline fs-3">{{'shared.edit' |translate}}</a>
+                  </div> -->
+                </td>
+            </tr>
+        </ng-template>
+
+
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="grades.totalAllData && grades.list.length == 0 &&  !grades.loading">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+
+                    <app-loader></app-loader>
                 </td>
             </tr>
         </ng-template>
 
     </p-table>
 
-    <div class="">
-        <app-pagination [totalItems]="students.length" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    <div class="" *ngIf="grades.total > paginationState.rows">
+        <app-pagination [totalItems]="grades.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 </div>
 
+<ng-container *ngIf="!grades.totalAllData && !grades.loading">
+    <app-informative-block subTitle="{{'emptyList.grades'  | translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>
 
-<p-dialog header="4 مسارات" [(visible)]="isDialogOpened"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
+
+<p-dialog header="4 مسارات" [(visible)]="isDialogOpened" [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
     <ng-template pTemplate="content">
         <ul class="color-primary border-top-gray mb-5">
-            <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
-                <img src="assets/images/shared/bullet.svg" alt="">
-                <span>مسار علمى</span>
+            <ng-container *ngFor="let track of gradeTracks">
 
-            </li>
-            <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
-                <img src="assets/images/shared/bullet.svg" alt="">
-                <span>مسار علمى</span>
+                <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
+                    <img src="assets/images/shared/bullet.svg" alt="">
+                    <span> {{track.name | currentLang}}</span>
 
-            </li>
-            <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
-                <img src="assets/images/shared/bullet.svg" alt="">
-                <span>مسار علمى</span>
+                </li>
+            </ng-container>
 
-            </li>
-            <li class=" py-4 d-flex align-items-baseline gap-3">
-                <img src="assets/images/shared/bullet.svg" alt="">
-                <span>مسار علمى</span>
+            <!-- <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
+              <img src="assets/images/shared/bullet.svg" alt="">
+              <span>مسار علمى</span>
 
-            </li>
+          </li>
+          <li class="border-bottom-gray py-4 d-flex align-items-baseline gap-3">
+              <img src="assets/images/shared/bullet.svg" alt="">
+              <span>مسار علمى</span>
+
+          </li>
+          <li class=" py-4 d-flex align-items-baseline gap-3">
+              <img src="assets/images/shared/bullet.svg" alt="">
+              <span>مسار علمى</span>
+
+          </li> -->
             <!-- <li class="border-bottom-gray py-2">مسار آداب</li>
-            <li class="border-bottom-gray py-2">مسار علوم تجريبية</li>
-            <li class="border-bottom-gray py-2">مسار فنون تشكيلية</li> -->
+          <li class="border-bottom-gray py-2">مسار علوم تجريبية</li>
+          <li class="border-bottom-gray py-2">مسار فنون تشكيلية</li> -->
         </ul>
     </ng-template>
 </p-dialog>

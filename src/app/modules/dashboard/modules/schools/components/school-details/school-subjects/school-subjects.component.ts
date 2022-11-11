@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Filtration } from 'src/app/core/classes/filtration';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { GradesService } from '../../../services/grade/class.service';
 import { SchoolsService } from '../../../services/schools/schools.service';
@@ -14,8 +15,7 @@ import { SchoolsService } from '../../../services/schools/schools.service';
   styleUrls: ['./school-subjects.component.scss']
 })
 export class SchoolSubjectsComponent implements OnInit {
-
-  @Input('subjects') subjects=[]
+  lang =inject(TranslationService).lang;
 
   first = 0;
   rows = 4;
@@ -24,16 +24,18 @@ export class SchoolSubjectsComponent implements OnInit {
     total:0,
     list:[],
     loading:true,
+    totalAllData:0,
     isGradeSelected:false
   }
 
+  filterApplied =false
   
   schoolId = this.route.snapshot.paramMap.get('schoolId')
   filtration={...Filtration, GradeId:"", TrackId:"",SchoolId :this.schoolId}
   paginationState={...paginationInitialState}
   
-  schoolGrades$ =this.schoolsService.getSchoolsTracks(this.schoolId)
-  schoolTracks$ =this.schoolsService.getSchoolGardes(this.schoolId)
+  schoolGrades$ =this.schoolsService.getSchoolGardes(this.schoolId)
+  gradeTracks$
 
   constructor(
     private schoolsService:SchoolsService,
@@ -54,19 +56,24 @@ export class SchoolSubjectsComponent implements OnInit {
       this.subjectsObj.loading = false
       this.subjectsObj.list = res.data
       this.subjectsObj.total =res.total
+      this.subjectsObj.totalAllData = res.totalAllData
+
+      this.filterApplied =false
     },err=> {
       this.subjectsObj.loading=false
       this.subjectsObj.total=0
+      this.filterApplied =false
     })
   }
 
   
-  getSchoolClasses(){
-    this.gradesService.getSchoolGardes(this.schoolId,this.filtration).subscribe()
-  }
+  // getSchoolClasses(){
+  //   this.gradesService.getSchoolGardes(this.schoolId,this.filtration).subscribe()
+  // }
 
-  getTracks(schoolId){
-    this.gradesService.getGradeTracks(schoolId).subscribe()
+  getTracks(){   
+    this.gradeTracks$ =this.gradesService.getGradeTracks(this.schoolId,this.filtration.GradeId)
+    
   }
 
 
@@ -80,6 +87,8 @@ export class SchoolSubjectsComponent implements OnInit {
 
   clearFilter(){
     this.filtration.KeyWord =''
+    this.filtration.GradeId=null
+    this.filtration.TrackId =null
     this.getSubjects()
   }
 

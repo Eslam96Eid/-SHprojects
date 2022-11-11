@@ -38,6 +38,8 @@ export class PaginationComponent implements OnInit, AfterViewInit {
 
 
   ngOnInit(): void {
+    console.log(this.totalItems)
+    console.log(this.paginationState)
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -63,6 +65,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.paginationState.page = this.paginationState.page + 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
     this.currentPage=this.paginationState.page;
     this.onPageChange(this.paginationState)
+    console.log(this.paginationState)
   }
 
   prev(state: paginationState) {
@@ -70,6 +73,7 @@ export class PaginationComponent implements OnInit, AfterViewInit {
     this.paginationState.page = this.paginationState.page - 1 //state.page => current page index 1,2,3,.. adding 1 to start with (0,1,2,..)
    this.currentPage=this.paginationState.page;
     this.onPageChange(this.paginationState)
+    console.log(this.paginationState)
   }
 
   reset() {

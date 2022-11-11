@@ -24,8 +24,8 @@
             <tr>
                 <td>{{holiday.annualCalendarName}}</td>
                 <td>{{holiday.year}}</td>
-                <td>{{holiday.name.ar}}</td>
-                <td>من {{holiday.dateFrom}} - الى {{holiday.dateTo}}</td>
+                <td>{{holiday.name |currentLang}}</td>
+                <td>من {{holiday.dateFrom | date :'shortDate'}} - الى {{holiday.dateTo | date :'shortDate'}}</td>
                 <td>
                     {{holiday.createdDate | date :'shortDate'}}
                 </td>
@@ -68,7 +68,7 @@
 
 
 
-<p-dialog [(visible)]="openHolidaytModel"  [modal]="true" [style]="{width: '50vw', fontSize:'2rem'}">
+<p-dialog [(visible)]="openHolidaytModel"  [modal]="true" [style]="{width: '50vw',height: '80%', fontSize:'2rem'}">
     <ng-template pTemplate="header">
         <div class="">
             <div class="fw-bold fs-3">{{'dashboard.schools.editHolidayReq' | translate}}</div>
@@ -97,7 +97,7 @@
                             [showIcon]="true" placeholder="--/--/--"></p-calendar>
 
                             <div class="errors" *ngIf="holidayForm.dateTo.invalid && (holidayForm.dateTo.dirty)">
-                                <div class="color-red-500" *ngIf="holidayForm.dateTo.errors?.['not']">الرقم السر لا يطابق</div>
+                                <div class="color-red-500" *ngIf="holidayForm.dateTo.errors?.['not']">تاريخ النهايه يجب ان يكون بعد تاريخ البدايه</div>
                             </div>
                         </div>
                     </div>
@@ -105,12 +105,12 @@
                     <div class="row">
                         <div class="col">
                             <label class="label">{{'shared.cause' | translate}}</label>
-                            <input type="text" formControlName="description" pInputText placeholder="{{'shared.cause' | translate}}">
+                            <input type="text" formControlName="description" pInputText placeholder="{{'shared.cause' | translate}}" required>
                         </div>
                     </div>
 
-                    <div class="d-flex  align-items-center justify-content-end mt-5">
-                        <button class="btn btn-primary btn--md" (click)="updateFlexableHoliday()">
+                    <div class="d-flex  align-items-center justify-content-end mt-6">
+                        <button class="btn btn-primary btn--md" (click)="updateFlexableHoliday()" [disabled]="editHolidayForm.invalid">
                             <span>{{'shared.send'| translate}} </span>
                         </button>
                     </div>

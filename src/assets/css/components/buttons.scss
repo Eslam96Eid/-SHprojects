@@ -59,6 +59,7 @@
 // }
 
 
+// edit button inside the navstabs content
 .float-btn{
     position: absolute;
     top: 4rem;
@@ -291,7 +292,13 @@
             }
         }
     }
+
     
 }
 
 
+.cancelbtn{
+    color:$color-red-500;
+    font-weight: 400;
+    margin-right: 2rem;
+}

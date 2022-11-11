@@ -12,139 +12,234 @@
   
       
           <div class=" mt-5 custom-form custom-validation-form border" style="margin-bottom: 20rem;">
-              <form [formGroup]=" annualHolidayFormGrp" (ngSubmit)="saveMe()" >
+              <form [formGroup]=" annualHolidayFormGrp"  >
                
-                  <div class="row gx-5 form-set container-fluid" >
-                      <div class="col-xs-2 col-lg-4" >
-                          <label for="PID" class="label">{{'dashboard.AnnualHoliday.Annual Calender Name'|translate}}</label>
-                          <input type="text" pInputText formControlName="smester"  [(ngModel)]="annualHolidayAddedList[0].annualCalendarName" class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
-                      <div>
-                          <div [hidden]="smester.valid || smester.untouched">
-                              <small *ngIf="smester.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
-                                {{'shared.This Field is Required'|translate}}
-                                 <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
-                             
-                              <small *ngIf="smester.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
-                                  {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
-                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
-                           </div>
-                              
-                          </div>
-                     
-                         
-                      </div>
-                      <div class="col-xs-2 col-lg-4">
-                          <label for="PName" class="label">{{'dashboard.AnnualHoliday.Year'|translate}}</label>
-                            <p-dropdown [options]=" yearList" optionLabel="year" optionValue="year"  [(ngModel)]="annualHolidayAddedList[0].year" formControlName="year" placeholder="{{'dashboard.AnnualHoliday.Select Year'|translate}}"   name="PName" id="PName" class="form-control" appValidation  ></p-dropdown>
-                            <div [hidden]="year.valid||year.untouched">
-                              <small *ngIf="year.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>
-                          </div>
-                        
-                      </div>
+                
    
-                      <div class="col-xs-2 col-lg-4  "  *ngIf="urlParameter">
-                        <div class="btn btn-outline-primary copy " role="button" (click)="addNew()">
-                            <img src="assets/images/shared/copy.svg">
-                            {{'dashboard.AnnualHoliday.copy content'|translate}}
+                      <div class="align-items-center justify-content-end d-flex">
+                         <div class="d-flex form-btn-group">
+                                <div class="btn btn-outline-primary copy " *ngIf="!urlParameter" role="button" >
+                                    <img src="assets/images/shared/copy.svg">
+                                    {{'dashboard.AnnualHoliday.copy content'|translate}}
+                                    
+                                </div>
+                                <div class="btn btn-primary mb-5 Add" role="button" (click)="newHoliday()">
+                                    
+                                    {{'dashboard.AnnualHoliday.Add Annual Holiday'|translate}}
+                                    
+                                </div>
+                         </div>
+                    </div>
+   
+
+                  <div class="row gx-5 form-set container-fluid" >
+                    <div class="col-xs-2 col-lg-4" >
+                        <label for="PID" class="label">{{'dashboard.AnnualHoliday.Annual Calender Name in Arabic'|translate}}</label>
+                        <input type="text" pInputText formControlName="arabicSmester"   class="form-control basicinput" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
+                    <div>
+                        <div [hidden]="arabicSmester.valid || arabicSmester.untouched">
+                            <small *ngIf="arabicSmester.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                              {{'shared.This Field is Required'|translate}}
+                               <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                           
+                            <small *ngIf="arabicSmester.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                                {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
+                                <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                            </small>
+                         </div>
                             
-                          </div>
+                        </div>
+                   
+                       
+                    </div>
+                    <div class="col-xs-2 col-lg-4" >
+                      <label for="PID" class="label">{{'dashboard.AnnualHoliday.Annual Calender Name in English'|translate}}</label>
+                      <input type="text" pInputText formControlName="englishSmester"  class="form-control basicinput leftaction" appValidatorsInput  name="PID" id="PID" placeholder="{{'dashboard.AnnualHoliday.Write Annual Calender Name'|translate}}"> 
+                  <div>
+                      <div [hidden]="englishSmester.valid || englishSmester.untouched">
+                          <small *ngIf="englishSmester.errors?.['required']"  id="helpId" class="form-text text-muted d-block  " class="alert-danger">
+                            {{'shared.This Field is Required'|translate}}
+                             <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                          </small>
+                         
+                          <small *ngIf="englishSmester.errors?.['maxlength']" id="helpId2" class="form-text text-muted d-block " class="alert-danger" >
+                              {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
+                              <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
+                          </small>
+                       </div>
+                          
+                      </div>
+                 
+                     
+                  </div>
+                    <div class="col-xs-2 col-lg-4">
+                        <label for="PName" class="label">{{'dashboard.AnnualHoliday.Year'|translate}}</label>
+                          <p-dropdown [options]="yearList" optionLabel="year" optionValue="year"    formControlName="year" placeholder="{{'dashboard.AnnualHoliday.Select Year'|translate}}"   name="PName" id="PName" class="form-control" appValidation  ></p-dropdown>
+                          <div [hidden]="year.valid||year.untouched">
+                            <small *ngIf="year.errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>
+                        </div>
                       
                     </div>
-                      
-                    
-                    
-                  </div>
-                <hr > 
-              <div formArrayName="holiday" >
-                  <div *ngFor="let item of holiday.controls ; let i=index" [formGroupName]="i">
-                
-                  <div class="row gx-5 form-set container-fluid ">
-                      <div class="col-xs-2 col-lg-4">
-                          <label for="PP + {{i}}" class="label">{{'dashboard.AnnualHoliday.curriculum'|translate}}</label>
-                            <!-- <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="id" placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate}}"  [(ngModel)]="annualHolidayAddedList[i].curriculumName" *ngIf="!urlParameter"  formControlName="curriculumName"   id="PP + {{i}}" name="PPO + {{i}}" class="form-control" appValidation   ></p-dropdown> -->
-                            <p-multiSelect  [options]="curriculumList"  optionLabel="name.ar" optionValue="id" display="chip" *ngIf="urlParameter" [(ngModel)]="annualHolidayAddedList[i].curriculumName"  formControlName="curriculumName"   id="PP + {{i}}" name="PPO + {{i}}" class="form-control" styleClass="p-multiselect" appValidation   ></p-multiSelect>
-                            <p-multiSelect [options]="curriculumList" optionLabel="name.ar" optionValue="id" display="chip" formControlName="curriculumName" class="form-control" [(ngModel)]="annualHolidayAddedList[i].curriculumName" appValidation  id="PP + {{i}}" name="PPO + {{i}}" styleClass="p-multiselect" *ngIf="!urlParameter" defaultLabel="{{'dashboard.AnnualHoliday.Select curriculum'|translate}}"></p-multiSelect>
-                            <div [hidden]="item.get('curriculumName').valid||item.get('curriculumName').untouched">
-                              <small *ngIf="item.get('curriculumName').errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>
-                          </div>
-                         
-                      </div>
-                      <div class="col-xs-2 col-lg-4">
-                          
-                          <label for="cal3 + {{i}}" class="label">{{'dashboard.AnnualHoliday.DateFrom'|translate}}</label>  
-                          <p-calendar formControlName="dateFrom" [(ngModel)]="annualHolidayAddedList[i].dateFrom" [showIcon]="true" inputId="icon" name="cal3O + {{i}}" id="cal3 + {{i}}"  class="form-control" appValidation    placeholder="dd/mm"   [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
-                          <span [hidden]="item.get('dateFrom').valid|| item.get('dateFrom').untouched" class="errorcalender">
-                              <small *ngIf="item.get('dateFrom').errors?.['required'] " id="helpId" class="form-text text-muted d-block " class="alert-danger">
-                                  {{'shared.This Field is Required'|translate}}
-                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
-                             
-                          </span>
-                          
-                         
-                      
-                     </div>
-                     
-                      <div class="col-xs-2 col-lg-4">
-                          <label for="cal4 + {{i}}" class="label">{{'dashboard.AnnualHoliday.DateTo'|translate}}</label>
-                          <p-calendar name="calO4 + {{i}}"  [showIcon]="true" inputId="icon" [(ngModel)]="annualHolidayAddedList[i].dateTo" id="cal4 + {{i}}"  formControlName="dateTo"    placeholder="dd/mm" class="form-control" appValidation   [readonlyInput]="true"   dateFormat="dd/mm"  ></p-calendar>
-                          <span [hidden]="item.get('dateTo').valid|| item.get('dateTo').untouched" class="errorcalender">
-                              <small *ngIf="item.get('dateTo').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
-                                  {{'shared.This Field is Required'|translate}}
-                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
-                              
-                          </span>
-                         
-                    
-                     </div>
-                  </div>
-                  <div class="row gx-5 form-set container-fluid ">
-                      <div class="col-xs-4 col-lg-4">
-                          <label for="ID + {{i}}" class="label">{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</label>
-                            <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="id" [(ngModel)]="annualHolidayAddedList[i].flexibilityStatus" *ngIf="!urlParameter" formControlName="flexibilityStatus" placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate}}"  id="ID + {{i}}" name="IDO + {{i}}" class="form-control" appValidation   ></p-dropdown>
-                            <p-dropdown [options]="holidayStatusList" optionLabel="name" optionValue="id" [(ngModel)]="annualHolidayAddedList[i].flexibilityStatus" *ngIf="urlParameter" formControlName="flexibilityStatus"   id="ID + {{i}}" name="IDO + {{i}}" class="form-control" appValidation   ></p-dropdown>
-                            <div [hidden]="item.get('flexibilityStatus').valid||item.get('flexibilityStatus').untouched">
-                              <small *ngIf="item.get('flexibilityStatus').errors?.['required']" id="helpId" class="form-text text-muted d-block alert-danger" class="alert-danger" >{{'shared.This Field is Required'|translate}}<fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon></small>
-                          </div>
-                        
-                      </div>
-                      
-                      <div class="col-xs-4 col-lg-4">
-                          <label for="PN + {{i}}" class="label"  >{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</label>
-                          <input type="text" pInputText formControlName="arabicName" [(ngModel)]="annualHolidayAddedList[i].arabicName" class="form-control basicinput" appValidatorsInput  placeholder="{{'dashboard.AnnualHoliday.Write Holiday Name'|translate}}" name="PNO + {{i}}" id="PN + {{i}}"> 
-                          <div [hidden]="item.get('arabicName').valid|| item.get('arabicName').untouched">
-                              <small *ngIf="item.get('arabicName').errors?.['required']" id="helpId" class="form-text text-muted d-block " class="alert-danger">
-                                  {{'shared.This Field is Required'|translate}}
-                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
-                            
-                              <small *ngIf="item.get('arabicName').errors?.['maxength']" id="helpId2" class="form-text text-muted d-block" class="alert-danger" >
-                                  {{'shared.Numbres Of Characters must not more than 256 character'|translate}}
-                                  <fa-icon  [icon]=" exclamationIcon"  class="dangericon ms-1 "></fa-icon>
-                              </small>
-                          </div>
-                        
 
-                        
-                      </div>
-                   
-                  </div>
-                  <div class="btn btn-outline-primary Addnew mb-5" role="button" (click)="addNew()">
-                    <fa-icon  [icon]="plusIcon" class="icon "></fa-icon>
-                    {{'dashboard.AnnualHoliday.Add Annual Holiday'|translate}}
                     
-                   </div>
-              </div>
-          </div>
-         
-                <div class=" d-flex align-items-center justify-content-end ">
-                  <div class="Btn-group d-flex">
-                    <button type="submit" class="btn  btn-primary" [disabled]="annualHolidayFormGrp.invalid">{{'shared.save'|translate}}</button>
-                  </div>
+                  
+                  
                 </div>
+
+                  <div class="prim-table mt-4" *ngIf="holidayFixedLength>0">
+                    <p-table  #dt [value]="holidayList" sortMode="single"  [scrollable]="true" scrollHeight="550px"   dataKey="id">
+                  
+             <!-- Table Caption -->
+                <ng-template pTemplate="caption">
+                    <app-table-caption 
+                    (onExport)="export($event)" 
+                    (onFilter)="filter()" 
+                    (onSearch)="search($event)"
+                    (onClear)="clearFilter()">
+    
+                    <div class="row gx-5 form-set">
+                        <div class="col-6">
+                            <label class="label" for="curriculumName">{{'dashboard.AnnualHoliday.curriculum'|translate }} </label>
+                            <p-dropdown [options]="curriculumList"  optionLabel="name.ar" optionValue="id"    formControlName="curriculum" inputId="curriculumName"  placeholder="{{'dashboard.AnnualHoliday.Select curriculum'|translate }}"></p-dropdown>
+                        </div>
+                    </div>
+                    <div class="row gx-5 form-set">
+                        <div class="col-6">
+                            <label class="label" for="flexibilityStatus">{{'dashboard.AnnualHoliday.Holiday Status'|translate }}  </label>
+                            <p-dropdown [options]="holidayStatusList" optionLabel="name.ar" optionValue="name.ar"     formControlName="status" inputId="flexibilityStatus"  placeholder="{{'dashboard.AnnualHoliday.Select Holiday Status'|translate }}"></p-dropdown>
+                        </div>
+                       
+                    </div>
+                    </app-table-caption>
+    
+                </ng-template>
+                      
+                      
+                         <ng-template pTemplate="header"  >
+                            <tr >
+                             <th style="max-width: 0rem"  ></th>
+                              <th   pSortableColumn="name.ar" ><p-sortIcon   field="arabicName" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Name'|translate}}</th>
+                              <th   pSortableColumn="curriculums"><p-sortIcon  field="curriculumName" ></p-sortIcon>{{'dashboard.AnnualHoliday.curriculum'|translate}}</th>
+                              <th   pSortableColumn="dateFrom"><p-sortIcon  field="dateFrom" ></p-sortIcon>{{'dashboard.AnnualHoliday.Date'|translate}}</th>
+                              <th   pSortableColumn="createdDate" ><p-sortIcon  field="createdDate"></p-sortIcon>{{'shared.Created Date'|translate}}</th>
+                              <th   pSortableColumn="flexibilityStatus.id"><p-sortIcon  field="flexibilityStatus" ></p-sortIcon>{{'dashboard.AnnualHoliday.Holiday Status'|translate}}</th>
+                              <th   pSortableColumn="edit" class="actions "></th>
+                            
+                
+                              
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-e let-expanded="expanded" >
+                            
+                            <tr [ngClass]="expanded ? 'expandrow' : ''" >
+                             
+                                <td style="max-width:11rem">
+                                   
+                                    <button type="button" pButton pRipple [pRowToggler]="e"  class="p-button-text p-button-rounded p-button-plain" [icon]="(expanded && e.curriculums.length>1) ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                                </td>
+                                <td style="min-width:15rem" [ngClass]="expanded ? 'action action-b' : ''" >{{e.name.ar|translate}}</td>
+                                <td  [ngClass]="expanded ? 'action' : ''" >{{e.curriculums[0].name.ar|translate}}</td>
+                                <td  [ngClass]="expanded ? 'action' : ''" >{{'shared.From'|translate}} {{e.dateFrom|translate}} - {{'shared.To'|translate}} {{e.dateTo|translate}}</td>
+                                <td  [ngClass]="expanded ? 'action' : ''">{{e.createdDate |date:'yyyy/mm/dd'|translate}}</td>
+                                <td >
+                                            <div class="d-flex align-items-center gap-4">
+                                               
+                                                <div [ngClass]="e.flexibilityStatus.id==0?'alerting success':'alerting danger'">{{e.flexibilityStatus.name.ar|translate}}</div>
+                                                
+                                            </div>
+                                 </td>
+                                      
+                                
+                                           
+                                 <td class="edit "> 
+                                        
+                                                <button   (click)="editHoliday(e)">
+                                                    <img  src="assets/images/shared/rect-bluepen.svg" alt="">
+                                                 </button>
+
+                                                 <button  (click)="deleteHoliday(e.id)">
+                                                    <img  src="assets/images/shared/rect-xmark.svg" alt="">
+                                                 </button>
+                                </td>
+                                        
+                                      
+                                        
+                            </tr>
+                        </ng-template>
+                        <ng-template  pTemplate="rowexpansion" let-e>
+                            <tr>
+                                <td colspan="15"  class="expand ">
+                                    <div class="" *ngIf="e.curriculums.length>1">
+                
+                                      
+                                            <p-table  #dt [value]="e.curriculums" dataKey="name"    >
+                                              
+                                             
+                                              
+                                                <ng-template pTemplate="body" let-curriculum  let-expanded="expanded">
+                                                    <tr class="border-bottom-0" *ngIf="curriculum.id!=e.curriculums[0].id">
+                                                        
+                                                        <td  style="min-width:29rem"></td>
+                                                       
+                                                        <td  class=" action " style="min-width:21rem">{{curriculum.name.ar|translate}}</td>
+                                                        <td  style="min-width:18rem"><span  >-</span></td>
+                                                        <td  >-</td>
+                                                        <td  ></td>
+                                                        <td  ></td>
+                                                
+                                                        
+                                                      
+                                                        
+                                                    </tr>
+                                                </ng-template> 
+              
+                    
+                                             </p-table>
+                      
+
+                                    </div>
+                            </td>
+                       </tr>
+
+
+    </ng-template>
+                
+                
+                          <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                                <td [attr.colspan]="20">
+                                    <ng-container >
+                                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                                    </ng-container>
+                
+                                    
+                
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+        
+                    <!-- <div *ngIf="holidayList.length>6">
+                        <app-pagination [totalItems]="holidayFixedLength" (paginationChanged)="paginationChanged($event)"></app-pagination>
+                    </div> -->
+                    
+                 </div>
+                <!-- emptymessage -->
+                <ng-container *ngIf="holidayFixedLength==0">
+                    <app-informative-block title="{{'emptyList.AnnualHoliday List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                </ng-container>
+
+
+                <div class=" d-flex align-items-center justify-content-end ">
+                    <div class="Btn-group d-flex ">
+                      <button class="btn  btn-primary addBtn" type="submit" (click)="save()" [disabled]="annualHolidayFormGrp.invalid||isBtnLoading">
+                        {{'shared.save'|translate}}
+                        <div class="spinner-border text-light" role="status" *ngIf="isBtnLoading"></div>
+                      </button>
+                      <button  ><a routerLink="/dashboard/manager-tools/user-roles/user-roles-list" class="cancelbtn">{{'shared.cancel'|translate}}</a></button>
+                    </div>
+              </div>
               </form>
             </div>                   
      
@@ -153,4 +248,14 @@
   
   </div>
 
-    
+  <div *ngIf="!urlParameter&&parameterInAddHoliday==''">  
+
+                     <app-holiday-model (onSave)="getHoliday($event)" Title="dashboard.AnnualHoliday.Add Holiday" isOpened="openModel"></app-holiday-model>
+
+                    </div>   
+
+  <div *ngIf="urlParameter||parameterInAddHoliday">
+
+                     <app-holiday-model (onSave)="getHoliday($event)" Title="dashboard.AnnualHoliday.Edit Holiday" isOpened="openModel"></app-holiday-model>
+
+</div>

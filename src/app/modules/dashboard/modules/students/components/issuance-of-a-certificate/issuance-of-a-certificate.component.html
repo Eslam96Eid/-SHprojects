@@ -1,28 +1,74 @@
-<form>
-<div class="custom-form">
-    <h4 class="mb-4">{{'dashboard.students.Issuance of certificate'|translate}} ( {{studentName}} )</h4>
-    <span class="mb-4">{{'dashboard.students.type of certificate'|translate}}</span> <br>
-    <p-dropdown  [options]="certificates" optionLabel="name.ar" optionValue="id"  appValidation  ></p-dropdown>
-</div>
-
-
-    <button class="btn btn-primary submitBtn">اصدار الشهاده </button>
-    <div class="row g-5 form-set">
-        <div class="col-md-4">
-            <label class="label">{{'dashboard.students.academic year'|translate}}</label> <br>
-            <p-dropdown  [options]="cities"  optionLabel="name"></p-dropdown> 
-    
-        </div>
-        <div class="col-md-4">
-            <label class="label">{{'dashboard.students.School Name'| translate}}</label> <br>
-            <!-- <p-dropdown  [options]="schoolNames"  optionLabel="name"></p-dropdown>  -->
-            <p-dropdown  [options]="schoolNames" optionLabel="name.ar" optionValue="id"  appValidation  ></p-dropdown>
-
-        </div>
-        <div class="col-md-4">
-            <label class="label">{{'dashboard.students.Class'|translate}}</label> <br>
-            <p-dropdown  [options]="grades" optionLabel="name.ar" optionValue="id"  appValidation  ></p-dropdown>
-        </div>
-    
+<form [formGroup]="certificateFormGrp" class="container-fluid " (ngSubmit)="sendData()">
+    <div class="custom-form">
+        <h4 class="mb-4">{{'dashboard.students.Issuance of certificate'|translate}} ( {{studentName}} )</h4>
+        <span class="mb-4">{{'dashboard.students.type of certificate'|translate}}</span> <br>
+        <p-dropdown placeholder="{{'dashboard.students.type of certificate'|translate}}" [options]="certificates"
+            optionLabel="name.ar" formControlName="certificateId" optionValue="id" appValidation></p-dropdown>
+            <div class="text-danger"
+            *ngIf="this.certificateFormGrp.get('certificateId')?.touched && this.certificateFormGrp.get('certificateId')?.invalid && this.certificateFormGrp.get('certificateId')?.errors">
+            <small *ngIf="this.certificateFormGrp.get('certificateId')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
+            </div>
     </div>
+
+
+    <button [disabled]="certificateFormGrp.invalid" class="btn btn-primary submitBtn">اصدار الشهاده </button>
+    <ng-container formArrayName="certificate">
+        <ng-container *ngFor="let school of certificate.controls; let i = index" [formGroupName]="i">
+            <div class="row g-5 form-set custom-form">
+                <div class="col-md-4 field">
+                    <label class="mb-3">{{'dashboard.students.academic year'|translate}}</label> <br>
+                    <p-calendar formControlName="certificateId" [readonlyInput]="true" [showIcon]="true" inputId="icon"
+                        selectionMode="range" optionValue="id" appValidation placeholder="dd/mm/yy" dateFormat="dd/mm/yy">
+                    </p-calendar>
+
+                </div>
+                <div class="col-md-4">
+                    <label>{{'dashboard.students.School Name'| translate}}</label> <br>
+                    <p-dropdown placeholder="{{'dashboard.students.School Name'| translate}}" [options]="schoolNames"
+                        formControlName="schoolId" optionLabel="name.ar" optionValue="id" appValidation></p-dropdown>
+
+                </div>
+                <div class="col-md-4">
+                    <label>{{'dashboard.students.Class'|translate}}</label> <br>
+                    <p-dropdown placeholder="{{'dashboard.students.Class'|translate}}" [options]="grades"
+                        formControlName="gradeId" optionLabel="name.ar" optionValue="id" appValidation></p-dropdown>
+                </div>
+
+            </div>
+        </ng-container>
+    </ng-container>
 </form>
+<!-- {{this.certificateFormGrp.value | json}} -->
+
+
+<!-- <ng-container formArrayName="topics">
+    <ng-container *ngFor="let topic of topics.controls; let i = index" [formGroupName]="i">
+      <ng-container
+        *ngIf="!form.value.topics[i].name || !form.value.topics[i].scale || !form.value.topics[i]?.checked">
+        <div class="add-new-topic mb-4">
+          <h1>{{ 'ADD_TOPIC_NAME' | translate }} <span>({{ 'MAX_10_TOPICS' | translate}})</span></h1>
+          <div class="d-flex">
+            <input type="text" formControlName="name" placeholder="{{ 'ENTER_TOPIC_NAME' | translate }}"
+                   class="flex-grow-1 form-control">
+            <button mat-flat-button color="primary" type="button" class="add-btn"
+                    [disabled]="topic.get('name')?.invalid"
+                    (click)="addNewTopic(i)">{{ 'ADD' | translate }}</button>
+          </div>
+          <div class="text-danger" *ngIf="topic.get('name')?.dirty && topic.get('name')?.invalid">
+            {{ 'WRITE_TOPIC_NAME_MAX_CHARACTERS' | translate }}
+          </div>
+          <div class="row">
+            <div class="col-12">
+              <h1 class="mt-4">{{ 'KNOWLEDGE_CONFIDENCE_SCALE' | translate }}</h1>
+
+              <mat-slider class="w-100 p-0" [max]="3" [min]="1" formControlName="scale" [step]="1">
+              </mat-slider>
+            </div>
+            <div class="col-12 d-flex justify-content-between titles">
+              <span *ngFor="let scale of topicsScale | keyvalue">{{ scale.value | metutorsUppercase | translate }}</span>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </ng-container> -->

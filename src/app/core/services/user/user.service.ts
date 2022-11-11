@@ -4,7 +4,7 @@ declare var Object: any;
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { BehaviorSubject, finalize, map, Observable, take } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { LoaderService } from 'src/app/shared/services/loader/loader.service';
 
 import { environment } from 'src/environments/environment';
@@ -12,7 +12,6 @@ import { IUser, Token } from '../../Models/base.models';
 import { Filter } from '../../models/filter/filter';
 import { IAccount } from '../../Models/IAccount';
 import { IAccountAddOrEdit } from '../../Models/IAccountAddOrEdit';
-import { HttpHandlerService } from '../http/http-handler.service';
 
 
 @Injectable({
@@ -57,8 +56,9 @@ export class UserService {
     'content-type': 'application/json-patch+json'
 
 });
+
 getUsersList(filter?:Partial<Filter>){
-  debugger
+
   this.tableLoaderService.isLoading$.next(true)
   let params = new HttpParams();
   if (filter.SortColumn)
@@ -97,7 +97,7 @@ getUsersList(filter?:Partial<Filter>){
 //     )
 //   }
   getUsersListByRoled(roleId?:number , isactive? : boolean  , keyword?:string ,sortby?:string ,page? :number , pagesize? :number): Observable<any>{
-    debugger
+
     let body= {keyword:keyword.toString() ,sortBy: sortby.toString() ,page:Number(page) , pageSize:Number(pagesize)}
 
 if(roleId == null && isactive != null){
@@ -127,6 +127,8 @@ else{
     return this.http.get<IAccount>(`${this.baseUrl+'/Account/Get/'+id}`);
   }
 
+
+
   AddAccount(data: IAccountAddOrEdit): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/Account/Add`, data);
   }
@@ -140,6 +142,16 @@ else{
     return this.http.get<IAccount>(`${this.baseUrl+'/role-details/'+id}`);
   }
 
+       public setScope(scope?: any) {
+        this.token.scope = JSON.stringify(scope);
+        this.save();
+      }
+
+  public getCurrentUserScope(): any {
+
+    return typeof this.token.scope === 'string' ?  JSON.parse(this.token.scope)  : this.token.scope;
+
+  }
 
   /**
    * This method will update the user information and persist it

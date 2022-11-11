@@ -43,7 +43,7 @@
 
         <div class="form-group">
             <label for="">{{'dashboard.Messages.MessageType' | translate}}</label>
-            <p-dropdown  [options]="messagesTypes" optionLabel="messageType.ar" optionValue="id" placeholder="{{'dashboard.Messages.MessageType' | translate}}" appValidation  ></p-dropdown>
+            <p-dropdown  [options]="messagesTypes" optionLabel="indexName.ar" optionValue="id" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" appValidation  ></p-dropdown>
             <div class="text-danger"
             *ngIf="this.speaEmpForm.get('messageType')?.touched && this.speaEmpForm.get('messageType')?.invalid && this.speaEmpForm.get('messageType')?.errors">
             <small *ngIf="this.speaEmpForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
@@ -86,7 +86,7 @@
 
                                 <div class="image-uploader__upload upload-btn">
 
-                    <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple">
+                    <!-- <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple">
 
                         <ng-template pTemplate="content">
 
@@ -98,8 +98,8 @@
 
                         </ng-template>
 
-                    </p-fileUpload>
-
+                    </p-fileUpload> -->
+                    <app-file-upload view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
                 </div>
 
     </div>
@@ -131,7 +131,7 @@
 
         <div class="form-group">
             <label for="">{{'dashboard.Messages.MessageType' | translate}}</label>
-            <p-dropdown  [options]="messagesTypes" optionLabel="messageType.ar" optionValue="id"  appValidation  ></p-dropdown>
+            <p-dropdown  [options]="messagesTypes" optionLabel="indexName.ar" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id"  appValidation  ></p-dropdown>
             <div class="text-danger"
             *ngIf="this.parentForm.get('messageType')?.touched && this.parentForm.get('messageType')?.invalid && this.parentForm.get('messageType')?.errors">
             <small *ngIf="this.parentForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
@@ -140,7 +140,7 @@
 
          <div class="image-uploader__upload upload-btn">
 
-                    <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple">
+                    <!-- <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple">
 
                         <ng-template pTemplate="content">
 
@@ -152,8 +152,8 @@
 
                         </ng-template>
 
-                    </p-fileUpload>
-
+                    </p-fileUpload> -->
+                    <app-file-upload view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
                 </div>
 
     </div>
@@ -187,7 +187,7 @@
 
         <div class="form-group">
             <label for="">{{'dashboard.Messages.MessageType' | translate}}</label>
-            <p-dropdown  [options]="messagesTypes" optionLabel="messageType.ar" optionValue="id"  appValidation  ></p-dropdown>
+            <p-dropdown  [options]="messagesTypes" optionLabel="indexName.ar" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id"  appValidation  ></p-dropdown>
             <div class="text-danger"
             *ngIf="this.schoolEmpForm.get('messageType')?.touched && this.schoolEmpForm.get('messageType')?.invalid && this.schoolEmpForm.get('messageType')?.errors">
             <small *ngIf="this.schoolEmpForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
@@ -215,7 +215,7 @@
         
                 <div class="image-uploader__upload upload-btn">
 
-                    <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple">
+                    <!-- <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple">
 
                         <ng-template pTemplate="content">
 
@@ -227,8 +227,8 @@
 
                         </ng-template>
 
-                    </p-fileUpload>
-
+                    </p-fileUpload> -->
+                    <app-file-upload view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
                 </div>
                 
           <!-- <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="upload($event,$event)">

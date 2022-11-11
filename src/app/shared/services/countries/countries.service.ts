@@ -11,6 +11,7 @@ import { CitiesEnum } from '../../enums/cities/city.enum';
 export class CountriesService {
 
   allCountries
+  allCities
   AllStates
 
   cities:{name:string,value: CitiesEnum}[]=[
@@ -34,6 +35,16 @@ export class CountriesService {
       take(1),
       map((res) => {
         this.allCountries = res.data
+        return res.data
+      }))
+  }
+
+  getCities(){
+    if(this.allCities) return of(this.allCountries)
+    return this.http.get('/Address/cities').pipe(
+      take(1),
+      map((res) => {
+        this.allCities = res.data
         return res.data
       }))
   }

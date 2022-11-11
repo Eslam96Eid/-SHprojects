@@ -17,9 +17,16 @@
     }
   }
 }
-
+// .custom-form[_ngcontent-nqm-c202] p-calendar .p-calendar .p-datepicker 
 .form-set {
+  
   .col-md-4 {
+    ::ng-deep .p-calendar {
+    
+      .p-datepicker {
+        display: none!important;
+      }
+     }
     ::ng-deep {
       p-dropdown {
         .p-dropdown {

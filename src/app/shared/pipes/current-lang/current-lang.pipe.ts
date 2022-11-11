@@ -15,7 +15,7 @@ export class CurrentLangPipe implements PipeTransform {
     let newVal 
     
     let lang = this.translationService.lang
-    lang ==='ar' ? newVal= value.ar : newVal=value.en
+    lang ==='ar' ? newVal= value?.ar : newVal=value?.en
 
     return newVal;
   }

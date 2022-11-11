@@ -1,5 +1,5 @@
-
-<div id="app-version" class="color-primary">version : {{version}}</div>
+<div id="app-version" class="color-primary">
+    version : {{version}}</div>
 <app-confirm-model></app-confirm-model>
 <div *ngIf="hideHeader">
     <app-header></app-header>
@@ -58,7 +58,15 @@
                     <span>الاعدادات</span>
                 </div>
             </li>
-<!-- 
+            <li class="panal__list__item" *ngIf="scope== 'Employee'" (click)="showDialog()">
+                <div class="icon">
+                    <img src="assets/images/home/panal/call.svg" alt="">
+                </div>
+                <div class="lable label-2">
+                    <span style="padding: 1rem 7rem;">تواصل مع موظف الهيئة</span>
+                </div>
+            </li>
+            <!-- 
             <li class="panal__list__item">
                 <div class="icon">
                     <img src="assets/images/home/panal/help.svg" alt="">
@@ -91,3 +99,75 @@
     <div class="after" [class.show]="lastChildHoverd"></div>
 </div>
 
+<div class="here">
+
+
+    <p-dialog header="{{'dashboard.Messages.Send a new message' | translate}}" [draggable]="false" [resizable]="false" [modal]="true" [(visible)]="display" [style]="{'width': '50vw'}" class="dialog-header" [baseZIndex]="10000">
+        <form [formGroup]="parentForm">
+            <div class="custom-form">
+                <div class="form-group">
+                    <label for="">{{'dashboard.Messages.Enter the message title' | translate}}</label>
+                    <input class="form-control py-3 my-3" type="text" formControlName="title" placeholder="{{'dashboard.Messages.Enter the message title' | translate}}">
+                    <div class="text-danger" *ngIf="parentForm.get('title')?.touched && parentForm.get('title')?.invalid && parentForm.get('title')?.errors">
+                        <small *ngIf="parentForm.get('title')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
+                        <small *ngIf="parentForm.get('title')?.errors?.['maxlength']">{{'dashboard.Messages.maxLengtho' | translate}}</small>
+                    </div>
+                    <!-- <div class="text-danger"
+            *ngIf="elform.title.touched">
+            <small *ngIf="elform.title?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
+            <small *ngIf="elform.title?.errors?.['maxlength']">{{'dashboard.Messages.maxLengtho' | translate}}</small>
+        </div> -->
+                </div>
+
+                <div class="form-group my-3">
+                    <label for="">{{'dashboard.Messages.Enter the text of the message' | translate}}</label>
+                    <textarea class="form-control" formControlName="description" placeholder="{{'dashboard.Messages.Enter the text of the message' | translate}}" rows="5" cols="30" pInputTextarea></textarea>
+                    <div class="text-danger" *ngIf="parentForm.get('description')?.touched && parentForm.get('description')?.invalid && parentForm.get('description')?.errors">
+                        <small *ngIf="parentForm.get('description')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
+                        <small *ngIf="parentForm.get('description')?.errors?.['maxlength']">{{'dashboard.Messages.maxLength' | translate}}</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="">{{'dashboard.Messages.MessageType' | translate}}</label>
+                    <p-dropdown [options]="messagesTypes" optionLabel="indexName.ar" formControlName="messageType" placeholder="{{'dashboard.Messages.MessageType' | translate}}" optionValue="id" appValidation></p-dropdown>
+                    <div class="text-danger" *ngIf="this.parentForm.get('messageType')?.touched && this.parentForm.get('messageType')?.invalid && this.parentForm.get('messageType')?.errors">
+                        <small *ngIf="this.parentForm.get('messageType')?.errors?.['required']">{{'dashboard.Messages.descriptionMessage' | translate}}</small>
+                    </div>
+                </div>
+                <div class="d-flex El-form my-4">
+                    <div class="form-group d-flex align-items-baseline">
+                        <label class="px-3" for="">  {{'dashboard.Messages.Possibility to reply' | translate}} </label>
+                        <p-inputSwitch (onChange)="isToggleLabel1($event)" class="px-3" formControlName="switch2"></p-inputSwitch>
+                        <span class="Label" *ngIf="!isShown1">{{'shared.no'|translate}}</span>
+                        <span class="Label" *ngIf="isShown1">{{'shared.yes'|translate}}</span>
+                    </div>
+                </div>
+
+                <div class="image-uploader__upload upload-btn">
+
+                    <!-- <p-fileUpload (uploadHandler)="onFileUpload($event)" name="demo[]" customUpload="true" (onUpload)="onUpload($event)" multiple="multiple">
+
+                        <ng-template pTemplate="content">
+
+                            <ul *ngIf="uploadedFiles.length">
+
+                                <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+
+                            </ul>
+
+                        </ng-template>
+
+                    </p-fileUpload> -->
+                    <app-file-upload view="full" (onFileUpload)="messageUpload($event)" (onFileDelete)="messageDeleted($event)"></app-file-upload>
+
+
+                </div>
+
+            </div>
+        </form>
+        <ng-template pTemplate="footer">
+            <button (click)="sendMessage()" style="float: left;" class="btn btn-primary" [disabled]="parentForm.invalid"> {{'dashboard.Messages.Send' | translate}}</button>
+        </ng-template>
+    </p-dialog>
+</div>

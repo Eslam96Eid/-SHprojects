@@ -1,0 +1,122 @@
+
+<h3 class="heading heading--tertiary mb-5">{{'dashboard.SystemSetting.notificationList' |translate}}</h3>
+
+<div class="prim-table" *ngIf="notifications.totalAllData || notifications.loading">
+    <p-table #dt [value]="schoolClasses" [lazy]="true">
+        <!-- Table Caption -->
+        <ng-template pTemplate="caption">
+
+            <app-table-caption 
+            (onFilter)="getnotifications()" 
+            (onSearch)="filtration.KeyWord = $event; getnotifications()" 
+            (onClear)="clearFilter()">></app-table-caption>
+
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name">#</th>
+                <th pSortableColumn="name"> {{'dashboard.SystemSetting.NotficationReason'|translate}} <p-sortIcon field="city"></p-sortIcon></th>
+                <th pSortableColumn="id" >{{'dashboard.SystemSetting.Receiver'|translate}} <p-sortIcon field="city"></p-sortIcon> </th>
+                <th pSortableColumn="id" >{{'dashboard.SystemSetting.NotificationContentAr'|translate}} <p-sortIcon field="city"></p-sortIcon> </th>
+                <th pSortableColumn="id" >{{'dashboard.SystemSetting.NotificationContentEN'|translate}} <p-sortIcon field="city"></p-sortIcon> </th>
+                <th pSortableColumn="id" >{{'dashboard.SystemSetting.NotificationChannel'|translate}} <p-sortIcon field="city"></p-sortIcon> </th>
+                <th class="actions"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-e>
+            <tr>
+                <td>{{e.code}}</td>
+                <td>{{e.name}}</td>
+                <td>{{e.quantity}}</td>
+                <td>{{e.quantity}}</td>
+                <td>{{e.name}}</td>
+                <td>{{e.price}}</td>
+                <td>
+                    <div class="d-flex align-items-center gap-4" (click)="notificationModelOpend=true">
+                        <span class="color-skyBlue-400">تعديل</span>
+                        <fa-icon class="color-skyBlue-400 fs-6" [icon]="faChevronLeft"></fa-icon>
+                    </div>
+                </td>
+
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage" let-columns>
+            <tr>
+                <td [attr.colspan]="20">
+                    <ng-container *ngIf="notifications.totalAllData && notifications.list.length == 0 &&  !notifications.loading">
+                        <app-informative-block title="{{'emptyList.noDataMatch' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+                    </ng-container>
+
+                    <app-loader></app-loader>
+                </td>
+            </tr>
+        </ng-template>
+
+    </p-table>
+
+
+    <div *ngIf="notifications.total > paginationState.rows">
+        <app-pagination [totalItems]="notifications.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
+    </div>
+
+</div>
+
+<ng-container *ngIf="!notifications.totalAllData && !notifications.loading">
+    <app-informative-block title="{{'emptyList.notifications' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
+</ng-container>
+
+
+
+
+
+
+
+<p-dialog header="{{'dashboard.SystemSetting.editNotification' |translate}}" [(visible)]="notificationModelOpend" [modal]="true" [style]="{width: '50vw'}">
+    <ng-template pTemplate="content">
+        <div class="row gx-5 mb-6 mt-4">
+            <div class="col d-flex align-items-center gap-5">
+                <p class="color-gray-300 fs-4">{{ 'dashboard.SystemSetting.NotficationReason'|translate }}</p>
+                <span class="color-primary mb-2">طلب التسجيل الجديد</span>
+            </div>
+
+            <div class="col d-flex align-items-center gap-5">
+                <p class="color-gray-300 fs-4">{{ 'dashboard.SystemSetting.Receiver'|translate }}</p>
+                <span class="color-primary mb-2">أولياء الأمور </span>
+            </div>
+        </div>
+
+        <div class="row mb-5 gx-5 custom-form">
+            <div class="col">
+                <label class="label">{{ 'dashboard.SystemSetting.NotificationContentAr'|translate }}</label>
+                <textarea [rows]="4"  pInputTextarea placeholder="{{'shared.addText' |translate}}"></textarea>
+
+            </div>
+            <div class="col">
+                <label class="label">{{ 'dashboard.SystemSetting.NotificationContentEN'|translate }}</label>
+                <textarea [rows]="4"  pInputTextarea placeholder="{{'shared.addText' |translate}}"></textarea>
+
+            </div>
+        </div>
+
+        <div class="row mb-5  custom-form">
+            <h3 class="heading heading--tertiary mb-4">{{'dashboard.SystemSetting.NotificationChannel'|translate}}</h3>
+            <div class="col d-flex align-items-center gap-3">
+                <p-radioButton label="{{'dashboard.SystemSetting.shortMessage'|translate}}" name="groupname"  value="val1" [(ngModel)]="selectedValue"></p-radioButton>
+                <!-- <span>{{'dashboard.SystemSetting.shortMessage'|translate}}</span> -->
+            </div>
+            <div class="col d-flex align-items-center gap-3">
+                <p-radioButton label="{{'shared.email'|translate}}" name="groupnae"  value="val2" [(ngModel)]="selectedValue"></p-radioButton>
+            </div>
+            <div class="col d-flex align-items-center gap-3">
+                <p-radioButton  label="{{'dashboard.SystemSetting.throwSystem'|translate}}" name="grpname"  value="val3" [(ngModel)]="selectedValue"></p-radioButton>
+            </div>
+        </div>
+
+        <div class="d-flex  align-items-center justify-content-end mt-5">
+            <button class="btn btn-primary btn--md">
+                <span>{{'shared.save'| translate}} </span>
+            </button>
+        </div>
+    </ng-template>
+</p-dialog>

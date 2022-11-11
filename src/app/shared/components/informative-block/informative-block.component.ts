@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-informative-block',
@@ -7,12 +8,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class InformativeBlockComponent implements OnInit {
 
-  @Input() title:string;
+  @Input() title:string = this.translate.instant('emptyList.noData');
   @Input() subTitle:string;
-  @Input() src:string;
+  @Input() src:string ='assets/images/empty-list/empty-list.svg';
   @Input('size') small:string;
   
-  constructor() { }
+  constructor(private translate:TranslateService) { }
 
   ngOnInit(): void {
   }

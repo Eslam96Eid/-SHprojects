@@ -7,7 +7,7 @@ import { ISubject } from 'src/app/core/Models/subjects/subject';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
 import { ToastService } from 'src/app/shared/services/toast/toast.service';
-
+import { AssessmentService } from 'src/app/modules/dashboard/modules/assessment/service/assessment.service';
 import { SubjectService } from '../../service/subject.service';
 
 
@@ -18,8 +18,9 @@ import { SubjectService } from '../../service/subject.service';
   styleUrls: ['./edit-new-subject.component.scss']
 })
 export class EditNewSubjectComponent implements OnInit {
+  isLabelShown:boolean=false;
   subject:ISubject={} as ISubject;
-  addedSubject:{id?:number,name:{ar:'',en:''},nameOnScoreScreen:{ar:'',en:''},evaluationSystem:'',SubjectCode:'',oldEvaluation?:'',maximumDegree:'',minmumDegree:'',};
+  addedSubject;
   subjectList:ISubject[] = [];
   subjectAddedList: ISubject[] = [];
   successStatusList;
@@ -40,9 +41,9 @@ export class EditNewSubjectComponent implements OnInit {
   showIpPoints:boolean=false;
   showDescription:boolean=false;
   showEvaluation:boolean=false;
+  oldAssesmentList;
 
-
-  constructor(private headerService: HeaderService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
+  constructor(private headerService: HeaderService,private assessmentService:AssessmentService,private toastService: ToastService,private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private subjectServise: SubjectService, private translate: TranslateService) {
 
     this.subjectFormGrp = fb.group({
 
@@ -50,31 +51,33 @@ export class EditNewSubjectComponent implements OnInit {
       subjectNameInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
       nameInResultsScreenInArabic: ['', [Validators.required, Validators.maxLength(65)]],
       nameInResultsScreenInEnglish: ['', [Validators.required, Validators.maxLength(65)]],
-      minmumDegree: ['', [Validators.required,Validators.min(0)]],
-      maximumDegree: ['',[Validators.required,Validators.min(0)]],
-      SubjectCode: [''],
+      minmumDegree: [''],
+      maximumDegree: [''],
+      subjectCode: [''],
+      exemptableStatus:[''],
       oldEvaluation: [''],
-      evaluationType: [''],
-      description: fb.array([
-        fb.group({
-          explanation: [''],
-          meaning: [''],
-          successStatus: ['']
-        })])
-
+      evaluationType: ['',[Validators.required]],
+      descriptionArr: fb.array([])
 
     });
   }
 
   ngOnInit(): void {
+   this.assessmentService.getRates().subscribe((res)=>{this.oldAssesmentList=res.data;}) 
     this.subjectAddedList.push({} as ISubject );
     this.evaluationTypeList=this.subjectServise.evaluationTypeList;
     this.successStatusList=this.subjectServise.successStatus;
     this.route.paramMap.subscribe(param => {
       this.urlParameter =param.get('subjectId');
 
+      if(!this.urlParameter)
+      {
+        this.addFieldsinFormArray();
+      }
+
      this.subjectServise.getSubjectByID(Number(this.urlParameter)).subscribe((res)=>{this.subject=res;console.log(res);this.bindOldSubject(this.subject);});
     });
+
 
     this.headerService.Header.next(
       {
@@ -91,71 +94,9 @@ export class EditNewSubjectComponent implements OnInit {
 
 
   }
-  checkUniqueSubjectNameInArabic(e)
-  {
-    // this.isSubjectNotUnique=0;
 
-    //  this.subjectServise.subjectsList.forEach(element => {
 
-    //   if(element.subjectNameInArabic==e)
-    //   {
-    //     this.isSubjectNotUnique=1;
-    //     return;
-    //   }
 
-    //  });
-    //  this.isSubjectNotUnique=0;
-  }
-
-  checkUniqueNameInResultsScreenInArabic(e)
-  {
-    // this.isSubjectNotUnique=0;
-
-    //  this.subjectServise.subjectsList.forEach(element => {
-
-    //   if(element.subjectNameInEnglish==e)
-    //   {
-    //     this.isSubjectNotUnique=1;
-    //     return;
-    //   }
-
-    //  });
-    //  this.isSubjectNotUnique=0;
-
-  }
-
-  checkUniqueNameInResultsScreenInEnglish(e)
-  {
-    // this.isSubjectNotUnique=0;
-
-    //  this.subjectServise.subjectsList.forEach(element => {
-
-    //   if(element.subjectNameInEnglish==e)
-    //   {
-    //     this.isSubjectNotUnique=1;
-    //     return;
-    //   }
-
-    //  });
-    //  this.isSubjectNotUnique=0;
-
-  }
-  checkUniqueSubjectNameInEnglish(e)
-  {
-    // this.isSubjectNotUnique=0;
-
-    //  this.subjectServise.subjectsList.forEach(element => {
-
-    //   if(element.subjectNameInEnglish==e)
-    //   {
-    //     this.isSubjectNotUnique=1;
-    //     return;
-    //   }
-
-    //  });
-    //  this.isSubjectNotUnique=0;
-
-  }
 
   get subjectNameInArabic() {
     return this.subjectFormGrp.controls['subjectNameInArabic'] as FormControl;
@@ -189,54 +130,104 @@ export class EditNewSubjectComponent implements OnInit {
   get oldEvaluation() {
     return this.subjectFormGrp.controls['oldEvaluation'] as FormControl;
   }
-  get description():FormArray {
-    return this.subjectFormGrp.controls['description'] as FormArray;
+  get descriptionArr():FormArray {
+    return this.subjectFormGrp.controls['descriptionArr'] as FormArray;
   }
-  get explanation() {
-    return this.subjectFormGrp.controls['explanation'] as FormControl;
+  get description() {
+    return this.subjectFormGrp.controls['description'] as FormControl;
   }
   get meaning() {
     return this.subjectFormGrp.controls['meaning'] as FormControl;
   }
-  get successStatus() {
-    return this.subjectFormGrp.controls['successStatus'] as FormControl;
+  get successfulRetry() {
+    return this.subjectFormGrp.controls['successfulRetry'] as FormControl;
   }
 
 
+  isToggleLabel(e)
+  {
+    if(e.checked)
+    {
+      if(this.urlParameter)
+      {
+        this.subject.isExemptableToLeave=true;
+      
+      }
+      else
+      {
+        this.isLabelShown=true;
+      }
+  
+    }
+    else{
+      if(this.urlParameter)
+      {
+        this.subject.isExemptableToLeave=false;
+     
+      }
+      else
+      {
+        this.isLabelShown=false;
+      }
+     
+    }
+  }
+
   checkEvaluationType(e)
   {
-
-    console.log(e)
-    if(e.name.en=='Evaluation')
+    
+   console.log(e);
+    if(e==4)
     {
       this.showDegree=false;
       this.showIpPoints=false;
       this.showDescription=false;
       this.showEvaluation=true;
 
+      this.minmumDegree.clearValidators();
+      this.minmumDegree.updateValueAndValidity(); 
+      this.maximumDegree.clearValidators();
+      this.maximumDegree.updateValueAndValidity(); 
+
     }
-    else if(e.name.en=='Grades')
+    else if(e==2)
     {
       this.showIpPoints=false;
       this.showDescription=false;
       this.showEvaluation=false;
       this.showDegree=true;
 
+      this.minmumDegree.setValidators([Validators.required,Validators.min(0)]);
+      this.maximumDegree.setValidators([Validators.required,Validators.min(0)]);
+   
+
     }
-    else if(e.name.en=='IPpoints')
+    else if(e==1)
     {
       this.showDescription=false;
       this.showDegree=false;
       this.showEvaluation=false;
       this.showIpPoints=true;
 
+      this.minmumDegree.setValidators([Validators.required,Validators.min(0)]);
+      this.maximumDegree.setValidators([Validators.required,Validators.min(0)]);
+      
+
+
+
     }
-    else if(e.name.en=='Discription')
+    else if(e==3)
     {
       this.showEvaluation=false;
       this.showDegree=false;
       this.showIpPoints=false;
       this.showDescription=true;
+
+      this.minmumDegree.clearValidators();
+      this.minmumDegree.updateValueAndValidity(); 
+      this.maximumDegree.clearValidators();
+      this.maximumDegree.updateValueAndValidity(); 
+ 
 
     }
     else
@@ -246,17 +237,19 @@ export class EditNewSubjectComponent implements OnInit {
   addNew() {
     var availableadd = 1;
 
-    for(let i in this.description.controls)
-    {
-      if ((!this.subjectFormGrp.value.description[i].meaning ) || (!this.subjectFormGrp.value.description[i].successStatus ) || (!this.subjectFormGrp.value.description[i].explanation))
+    console.log(this.descriptionArr.controls)
+    for(let i in this.descriptionArr.controls)
+    { console.log(this.descriptionArr.controls[i].value)
+      if ((this.descriptionArr.controls[i].value.meaning=='' ) && (this.descriptionArr.controls[i].value.successStatus=='' ) && (this.descriptionArr.controls[i].value.explanation==''))
 
-        {
+        { 
+        console.log("noooooooo");
 
           availableadd = 0;
         }
-        }
+   }
     if (availableadd == 1) {
-      this.description.push(this.fb.group({
+      this.descriptionArr.push(this.fb.group({
         explanation: [''],
         meaning: [''],
         successStatus: ['']
@@ -303,65 +296,113 @@ export class EditNewSubjectComponent implements OnInit {
   }
   succeeded()
   {
+    console.log(this.subjectFormGrp.value);
+    this.addedSubject={};
+    this.addedSubject.isExemptableToLeave=this.subjectFormGrp.value.exemptableStatus!=''?true:false;
+    console.log( this.addedSubject.isExemptableToLeave);
     this.isBtnLoading = true;
     this.addedSubject={
       id:Number(this.urlParameter),
       name:{ar:this.subjectFormGrp.value.subjectNameInArabic,en:this.subjectFormGrp.value.subjectNameInEnglish },
       nameOnScoreScreen:{ar:this.subjectFormGrp.value.nameInResultsScreenInArabic,en:this.subjectFormGrp.value.nameInResultsScreenInEnglish},
       evaluationSystem:this.subjectFormGrp.value.evaluationType,
-      SubjectCode:this.subjectFormGrp.value.subjectCode,
-      maximumDegree:this.subjectFormGrp.value.maximumDegree
-      ,minmumDegree:this.subjectFormGrp.value.minimumDegree,
-      oldEvaluation:this.subjectFormGrp.value.oldEvaluation
+      subjectCode:this.subjectFormGrp.value.subjectCode,
+      isExemptableToLeave:this.addedSubject.isExemptableToLeave
      };
-     console.log( this.subject);
+     if( this.addedSubject.evaluationSystem==1||this.addedSubject.evaluationSystem==2)
+     {
+      this.addedSubject.maximumDegree=this.subjectFormGrp.value.maximumDegree;
+      this.addedSubject.minimumDegree=this.subjectFormGrp.value.minmumDegree;
+      this.addedSubject.subjectDescriptions=[];
+      this.addedSubject.rateId=null;
+     }
+     else if( this.addedSubject.evaluationSystem==4)
+     {
+      this.addedSubject.rateId=this.subjectFormGrp.value.oldEvaluation;
+      this.addedSubject.maximumDegree=null;
+      this.addedSubject.minimumDegree=null;
+      this.addedSubject.subjectDescriptions=[];
+     }
+     else if( this.addedSubject.evaluationSystem==3)
+     {
+      console.log(this.subjectFormGrp.value.description)
+      this.addedSubject.subjectDescriptions=this.subjectFormGrp.value.descriptionArr;
+      this.addedSubject.rateId=null;
+      this.addedSubject.maximumDegree=null;
+      this.addedSubject.minimumDegree=null;
+     }
+     console.log(this.addedSubject)
      if(this.urlParameter)
       {
-        this.subjectServise.updateRole(this.subject).subscribe((res)=>{
+        this.subjectServise.updateRole(this.addedSubject).subscribe((res)=>{
           this.isBtnLoading = false;
-          this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole edited Successfully'));
-          this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
+          this.toastService.success(this.translate.instant('dashboard.Subjects.Subject edited Successfully'));
+          this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
          },(err)=>{
           this.isBtnLoading = false;
+          this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
         });
       }
       else
-      {
-
-        this.subjectServise.addSubject(this.subject).subscribe((res)=>{
+      { 
+          this.subjectServise.addSubject(this.addedSubject).subscribe((res)=>{
           this.isBtnLoading = false;
-          this.toastService.success(this.translate.instant('dashboard.UserRole.JobRole added Successfully'));
-          this.router.navigate(['/dashboard/manager-tools/user-roles/user-roles-list']);
+          this.toastService.success(this.translate.instant('dashboard.Subjects.Subject added Successfully'));
+          this.router.navigate(['/dashboard/educational-settings/subject/subjects-list']);
          },(err)=>{
           this.isBtnLoading = false;
+          this.toastService.error(this.translate.instant('dashboard.Subjects.error,please try again'));
 
         })
       }
   }
   bindOldSubject(subject)
   {
+    if(this.urlParameter)
+    {  
       this.evaluationTypeList.forEach(element => {
-        if(element.name.ar==subject.evaluationSystem)
-        {subject.evaluationSystem=element}
+        if(element.name.en==subject.evaluationSystem)
+        {subject.evaluationSystem=element.id}
        });
         this.subjectFormGrp.patchValue({subjectNameInArabic:subject.name.ar,
           subjectNameInEnglish:subject.name.en,
           nameInResultsScreenInArabic:subject.nameOnScoreScreen.ar,
           nameInResultsScreenInEnglish:subject.nameOnScoreScreen.en,
           evaluationType:subject.evaluationSystem,
-          SubjectCode:subject.subjectCode,
+          exemptableStatus:subject.isExemptableToLeave,
+          subjectCode:subject.subjectCode,
           maximumDegree:subject.maximumDegree
-          ,minmumDegree:subject.minimumDegree
-          ,
-          oldEvaluation:subject.oldEvaluation
-
+          ,minmumDegree:subject.minimumDegree,
+          oldEvaluation:subject.rateId
         });
-        this.description.patchValue([{meaning:subject.meaning,successStatus:subject.successfulRetry
-          ,explanation:subject.evaluationDescription
-        }]);
-     console.log(this.subjectFormGrp.value)
+        
+        if(subject.subjectDescriptions.length)
+        {subject.subjectDescriptions.forEach(element => {
+            this.descriptionArr.push(this.fb.group({
+              description: [element.description],
+              meaning: [element.meaning],
+              successfulRetry: [element.successfulRetry]
+            }));
+          });
+       }
+       else if(!subject.subjectDescriptions.length)
+        {  
+          this.addFieldsinFormArray();
+        }
+
+
      this.checkEvaluationType(subject.evaluationSystem);
 
+      }
+
+  }
+  addFieldsinFormArray()
+  {
+    this.descriptionArr.push(this.fb.group({
+      description: [''],
+      meaning: [''],
+      successfulRetry: ['']
+    }));
   }
 
 }

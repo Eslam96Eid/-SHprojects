@@ -50,11 +50,11 @@
             </div>
         </div>
 
-        <div class="export" (clickOutside)="showExportModel=false" [ngClass]="small?'sm':''">
+        <div class="export" *ngIf="hasExport" (clickOutside)="showExportModel=false" [ngClass]="small?'sm':''">
             <button class="btn btn--sm btn-secondary" (click)="showExportModel=!showExportModel">
-                    <img class="icon" src="assets/images/shared/download.svg" alt="">
-                    <span>{{'shared.downloadFiles'|translate}}</span>
-                </button>
+                <img class="icon" src="assets/images/shared/download.svg" alt="">
+                <span>{{'shared.downloadFiles'|translate}}</span>
+            </button>
             <div class="export__model " [class.show]="showExportModel">
                 <div role="button" (click)="exportCsv()">
                     <p>{{'shared.export file as'|translate}}.csv</p>

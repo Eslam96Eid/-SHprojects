@@ -95,6 +95,69 @@
 }
 
 
+::ng-deep{
+    .p-dialog{
+        .custom-validation-form{padding-top: 0rem;padding-bottom: 1rem;}
+       border: none;
+       &.OTP{
+        .p-dialog-title{
+            margin-top: 4rem;
+            margin-right: 15rem;
+        }
+      }
+         .p-dialog-header {
+            font-family: 'Droid';
+            border-top-right-radius: 12px;
+            border-top-left-radius: 12px;
+            padding:1.2rem  !important;
+            font-weight: 700;
+            font-size: 2rem;
+
+            } 
+            .p-dialog-content{
+                flex-grow: 0;
+                padding-top: 0rem;
+                line-height: 24px;
+                font-family: "Droid";
+                font-weight: 400;
+                font-size: 1.6rem;
+                .custom-validation-form{padding-bottom: 5.5rem;}
+                .OTP{  
+                    margin-right: 14rem;font-size: 1.2rem;display: grid;
+                    .phonenumber{margin-right: 6.5rem}
+                }
+                .OTP-form{
+                    &.custom-validation-form{padding-bottom: 2rem;}
+                    margin-right: 8rem;
+                    input{
+                        width: 6rem;margin-left: 2rem;text-align:center;
+                        &::placeholder{font-size: 2.6rem;}
+                    }
+                }
+                .again-OTP{
+                    font-size: 1.2rem;
+                    margin-right: 9.5rem;
+                    a{
+                        
+                        text-decoration-line: underline;
+                    }
+                    .second{margin-right: 10rem;font-weight: 700;}
+                }
+              
+            }
+            .p-dialog-footer{
+                border-bottom-right-radius: 12px;
+                border-bottom-left-radius: 12px;
+                .OTP{margin-right: 9rem;
+                    button{width:13rem;margin-left: 1rem;margin-bottom: 6.2rem;}
+                }
+
+                
+            }
+  
+ }
+
+}
 
 
 

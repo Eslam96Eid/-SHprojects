@@ -28,6 +28,7 @@ import {CardModule} from 'primeng/card';
 import { SkeletonModule } from 'primeng/skeleton';
 import {DialogModule} from 'primeng/dialog';
 import { TimelineModule } from "primeng/timeline";
+import {AutoCompleteModule} from 'primeng/autocomplete';
 const modules=[
   ToastModule,
   TableModule,
@@ -56,7 +57,8 @@ const modules=[
   TabViewModule,
   SkeletonModule,
   DialogModule,
-  TimelineModule
+  TimelineModule,
+  AutoCompleteModule
 ]
 
 @NgModule({

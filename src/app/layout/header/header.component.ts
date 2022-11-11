@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, NgZone, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, inject, NgZone, OnInit, Output } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { faAngleDown, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,8 +10,8 @@ import { UserService } from 'src/app/core/services/user/user.service';
 import { NotificationService } from 'src/app/modules/notifications/service/notification.service';
 import { slide } from 'src/app/shared/animation/animation';
 import { DashboardPanalEnums } from 'src/app/shared/enums/dashboard-panal/dashboard-panal.enum';
+import { UserScope } from 'src/app/shared/enums/user/user.enum';
 import { RouteListenrService } from 'src/app/shared/services/route-listenr/route-listenr.service';
-import { LayoutService } from '../services/layout/layout.service';
 
 interface MenuItem{
   id:number
@@ -26,6 +26,11 @@ interface MenuItem{
   animations:[slide]
 })
 export class HeaderComponent implements OnInit {
+
+  currentUserScope = inject(UserService).getCurrentUserScope();
+  get ScopeEnum(){return UserScope}
+  YEAR_Id=''
+
   paddingStyle:string="2rem";
   paddingTopStyle:string="2rem";
   @Output() toggleSidebarForMe: EventEmitter<any> = new EventEmitter();
@@ -74,7 +79,7 @@ export class HeaderComponent implements OnInit {
       links:[
         {name: 'المستخدمين',url:'/dashboard/manager-tools/user-information/users-list'},
         {name: 'الادوار الوظيفيه', url:'/dashboard/manager-tools/user-roles/user-roles-list'},
-        {name: 'اعدادات النظام ',url:'/dashboard/managerTools/'},
+        {name: 'اعدادات النظام ',url:'/dashboard/manager-tools/settings'},
         {name: 'قواءم النظام',url:'/dashboard/manager-tools/indexes/indexes-list'},
       ]
     },
@@ -125,7 +130,6 @@ export class HeaderComponent implements OnInit {
     private userService: UserService,
     private routeListenrService:RouteListenrService,
     private zone: NgZone,
-    private layoutService:LayoutService,
     private notificationService: NotificationService
     ) { }
 
@@ -281,4 +285,23 @@ markAsRead(){
     this.toastr.error(err.message)
   })
 }
+
+onScroll()
+  {
+
+    // if(this.notificationsList.length)
+    // {
+    //     this.showSpinner=false;
+    // }
+    // else
+    // { this.showSpinner=true;}
+        this.loadMore();
+  }
+
+  loadMore()
+  {
+    this.searchModel.page = 1
+    this.searchModel.pageSize += 2
+    this.getNotifications(this.searchModel)
+  }
 }

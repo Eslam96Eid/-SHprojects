@@ -36,7 +36,7 @@
         <ng-template pTemplate="body" let-e  >
             <tr  >
                
-                <td  >{{e.jobRoleName.ar|translate}}</td>
+                <td  >{{e.jobRoleName|currentLang}}</td>
                 <td   >{{e.creatorName|translate}}</td>
                 <td ><a (click)="showUserList(e.id)"  *ngIf="e.roleUsers>0" class="users">{{e.roleUsers|translate}}{{'shared.Users'|translate}}</a>
                 <span  *ngIf="e.roleUsers==0"  >{{'shared.not found'|translate}}</span>
@@ -116,7 +116,7 @@
         <div  >
                 <div class="row" *ngIf="!showLoader">
                     <div *ngFor="let user of userListForSpecificRole;let i=index " class="col-lg-6">
-                       {{i+1}}- {{user.name.ar}}
+                       {{i+1}}- {{user.name|currentLang}}
                     </div>
 
                 </div>
@@ -130,6 +130,7 @@
                     <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
                     <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
                     <p-skeleton width="23rem" height="2rem" styleClass="mb-2"></p-skeleton>
+                   
                 </div>
         </div>
 

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Filtration } from 'src/app/core/classes/filtration';
@@ -43,10 +43,9 @@ export class AnnulHolidayListComponent implements OnInit {
 
   submitted=false
   editHolidayForm = this.fb.group({
-    id:[],
     schoolId: [this.schoolId],
-    dateFrom:[],
-    dateTo:[],
+    dateFrom:["", Validators.required],
+    dateTo:["", Validators.required],
     description:[],
     requestStatus:[0]
   },{validators: [
@@ -65,8 +64,6 @@ export class AnnulHolidayListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getHolidays()
-    console.log(new Date('2024-10-13'));
-
   }
 
   getHolidays(){
@@ -75,9 +72,9 @@ export class AnnulHolidayListComponent implements OnInit {
     this.schoolsService.getSchoolAnnualHolidays(this.schoolId,this.filtration)
     .subscribe(res=>{
       this.holidays.loading = false
-      this.holidays.list = res.data || res
+      this.holidays.list = res.data
       this.holidays.totalAllData = res.totalAllData
-      this.holidays.total =res.total || 5
+      this.holidays.total =res.total
     },err=> {
       this.holidays.loading=false
       this.holidays.total=0
@@ -87,10 +84,7 @@ export class AnnulHolidayListComponent implements OnInit {
   editFlexableHoliday(holiday){
 
       this.selectedHoliday= holiday
-      this.holidayForm['id'].setValue(holiday.id)
-
       console.log(this.selectedHoliday);
-
       this.openHolidaytModel=true
   }
 

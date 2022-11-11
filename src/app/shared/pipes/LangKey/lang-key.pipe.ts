@@ -1,0 +1,23 @@
+import { Pipe, PipeTransform } from '@angular/core';
+import { Localization } from 'src/app/core/Models/global/global.model';
+import { TranslationService } from 'src/app/core/services/translation/translation.service';
+
+@Pipe({
+  name: 'langKey'
+})
+export class LangKeyPipe implements PipeTransform {
+
+  constructor(private translationService: TranslationService){}
+  transform(value: Localization, ...args: unknown[]): unknown {
+    if(!value) return null
+    
+    let newVal 
+    
+    let lang = this.translationService.lang
+    lang ==='ar' ? newVal= 'name.ar' : newVal='name.en'
+    console.log(newVal);
+    
+    return newVal;
+  }
+
+}

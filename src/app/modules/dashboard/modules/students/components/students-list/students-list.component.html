@@ -95,7 +95,7 @@
                     </th>
                     <th pSortableColumn="actions"></th> -->
                     <th pSortableColumn="studentDaleelNumber">{{'dashboard.students.daleelNumber'|translate}} <p-sortIcon field="studentDaleelNumber"></p-sortIcon></th>
-                    <th pSortableColumn="arabicName">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="arabicName"></p-sortIcon></th>
+                    <th pSortableColumn="name">{{'dashboard.students.studentName'|translate}} <p-sortIcon field="name"></p-sortIcon></th>
                     <th pSortableColumn="surName">{{'dashboard.students.studentNickname'|translate}} <p-sortIcon field="surName"></p-sortIcon></th>
                     <th pSortableColumn="nationality">{{'shared.nationality'|translate}} <p-sortIcon field="nationality"></p-sortIcon></th>
                     <th pSortableColumn="currentSchoolName">{{'dashboard.students.schoolName'|translate}} <p-sortIcon field="currentSchoolName"></p-sortIcon></th>
@@ -108,23 +108,23 @@
             <ng-template pTemplate="body" let-student >
                 <tr [routerLink]="['student/', student.id]">
                     <td>{{student.studentDaleelNumber}}</td>
-                    <td>{{student.arabicName}}</td>
-                    <td>{{student.surName}}</td>
-                    <td>{{student.nationality}}</td>
+                    <td>{{student.name |currentLang}}</td>
+                    <td>{{student.surName | currentLang}}</td>
+                    <td>{{student.nationality |currentLang}}</td>
                     <td>
-                        <a [routerLink]="['../schools/school/',student.schoolId]" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">{{student.currentSchoolName}}</a>
+                        <a [routerLink]="['../schools/school/',student.schoolId]" role="button" class="text-decoration-underline color-skyBlue-500 fs-3">{{student.currentSchoolName |currentLang}}</a>
                     </td>
                     <td>
                         <!-- <span routerLink="../all-parents/parent/2/all-children">محمد أنوار</span> -->
-                        <span>{{student.guardianName}}</span>
+                        <span>{{student.guardianName |currentLang}}</span>
                     </td>
                     <td>
                         <!-- <span routerLink="../schools/school/2/class/5">الصف الخامس</span> -->
-                        <span>{{student.gradeName}}</span>
+                        <span>{{student.gradeName |currentLang}}</span>
                     </td>
                     <td>
                         <!-- <span routerLink="../schools/school/2/track/7">B 1</span> -->
-                        <span>{{student.divisionName}}</span>
+                        <span>{{student.divisionName |currentLang}}</span>
                     </td>
                     <!-- <td >
                         <app-dropdown [items]="items"></app-dropdown>

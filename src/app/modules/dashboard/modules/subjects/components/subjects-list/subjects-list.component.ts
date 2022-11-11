@@ -26,8 +26,6 @@ export class SubjectsComponent implements OnInit,OnDestroy {
   faEllipsisVertical = faEllipsisVertical;
   evaluationTypeList;
   deletedSubject;
-  first:boolean=true;
-  fixedLength:number=0;
   subscription:Subscription;
   filtration = {...Filtration,evaluation: ''};
   paginationState= {...paginationInitialState};
@@ -80,11 +78,8 @@ export class SubjectsComponent implements OnInit,OnDestroy {
     this.subjectService.getAllSubjects(this.filtration).subscribe((res)=>{
         this.subjects.loading = false;
         this.subjects.total=res.total;
+        this.subjects.totalAllData = res.totalAllData;
         this.subjects.list=res.data;
-     if(this.first)
-     {
-      this.fixedLength=this.subjects.total;
-    }
 
       },(err)=>{
         this.subjects.loading = false;

@@ -1,28 +1,19 @@
 
+import { Localization } from "../global/global.model";
 
 export interface IAnnualHoliday {
-    id?:number;
-    year?:string;
-    annualCalendarName?:string;
-    holidayList:IHoliday[];
-
-
+    id?:number,
+    annualCalendar:Localization,
+    yearId: number,
+    holidayModels:IHoliday[] 
   }
 
   export interface IHoliday {
-    arabicName?:string;
-    dateFrom?: string;
-    dateTo?: string;
-    flexibilityStatus?: string
-    curriculumName?: ICurriculum[];
-    id?:number;
-    createdDate?:string;
-
+        name: Localization,
+        dateFrom: string,
+        dateTo: string,
+        flexibilityStatus:number,
+        curriculumIds: number[]
   }
 
-  export interface ICurriculum {
-    id?:number;
-    name?:string;
-
-  }
 

@@ -26,19 +26,18 @@
                         <!-- <canvas id="bar" baseChart [data]="model.regionSchoolsData" [options]="model.regionSchoolsOptions" [plugins]="model.regionSchoolPlugins" [legend]="false" [type]="'bar'" height="212" width="365" style="font-size: large;">
                         </canvas> -->
                         <div *ngIf="model.schoolCityDatasets">
-                            <canvas id="bar " baseChart [datasets]="model.schoolCityDatasets " [options]="model.schoolCityOptions " [legend]="false" [plugins]="model.regionSchoolPlugins" [type]=" 'bar' " height="212" width="310">
+                            <canvas id="bar" baseChart [datasets]="model.schoolCityDatasets" [options]="model.schoolCityOptions" [legend]="false" [type]="'bar'" height="212" width="310">
                           </canvas>
-
                         </div>
 
                     </div>
                     <div class="col-md-4">
                         <div *ngIf="model.chartData && model.schoolCityChartLabels.length> 0" class="mt-3 Bar-char-Info">
-                            <h2 class="title">عدد المدارس</h2>
+                            <h2 class="title m-3">عدد المدارس</h2>
                             <ul class="chart-Info-bar">
                                 <li *ngFor="let item of model.schoolCityChartLabels" class="second-card">
                                     <span class="color-primary-700 mb-2 percentage">{{item.value || value}}</span>
-                                    <span class="color-gray-300 fs-5 titlechart">{{item.key}}</span>
+                                    <span class="color-gray-300  titlechart">{{item.key}}</span>
                                 </li>
                             </ul>
                         </div>

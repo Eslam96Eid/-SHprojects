@@ -40,13 +40,15 @@ HEAD .color-gray-600 {
 .color-gray-150 {
     color: $color-gray-150;
 }
-
+.color-gray-50 {
+    background-color:$color-gray-50;
+}
 // .color-gray-600 { color: $color-gray-600;}
 // .color-gray-500 { color: $color-gray-500;}
 // .color-gray-400 { color: $color-gray-400;}
 // .color-gray-250 { color: $color-gray-250;}
 // .color-gray-100 { color: $color-gray-100;}
-// .color-gray-50 {color:$color-gray-50;}
+
 .color-skyBlue-700 {
     color: $color-skyBlue-700;
 }
@@ -275,15 +277,11 @@ HEAD .color-gray-600 {
 a {
     cursor: pointer;
     text-decoration: none;
-    transition: all .2s ease-in-out;
+    transition: all .25s ease-in-out;
     &:hover {
-        color: $color-primary;
-    }
-    &:link,
-    &:visited,
-    &:hover,
-    &:active {
-        background-color: transparent;
+        text-decoration: underline;
+        text-underline-offset: 5px;
+        color: $color-primary
     }
 }
 

@@ -5,9 +5,9 @@
         </button>
     </div>
 
-    <div class="tabView"  [class.show-controls]="navListLength > 7">
+    <div class="tabView" [class.show-controls]="navListLength > 7">
 
-            <!-- nav Controls -->
+        <!-- nav Controls -->
         <div class="arrow-left" (click)="scrollLeft(nav)">
             <img src="assets/images/shared/chevron-left.svg" alt="">
         </div>
@@ -25,36 +25,53 @@
             <li class="tabView__nav__link" [class.active]="step==7" (click)="step=7"><span>{{ 'dashboard.schools.schoolSubjects'|translate }}</span></li>
             <li class="tabView__nav__link" [class.active]="step==8" (click)="step=8"><span>{{ 'dashboard.schools.annualHolidays'|translate }}</span></li>
         </ul>
-         <!-- Navigations Options -->
+        <!-- Navigations Options -->
 
         <div class="tabView__content">
 
             <div class=" ">
                 <!-- general Info -->
-                <ng-container *ngIf="step==1">
-                    <div class="general">
 
-                    <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
+                <ng-container *ngIf="step==1">
+
+                    <ng-container *ngIf="!school">
+                        <div class="row g-5">
+                            <div class="col-md-4">
+                                <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                            </div>
+                            <div class="col-md-4">
+                                <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                            </div>
+                            <div class="col-md-4">
+                                <app-skeleton count="6" [style]="{'margin-bottom': '3rem'}"></app-skeleton>
+                            </div>
+                        </div>
+
+                    </ng-container>
+
+                    <div class="general" *ngIf="school">
+
+                        <!-- <h3 class="heading heading--tertiary mb-4"> {{ 'dashboard.schools.SchoolLogo'|translate }}</h3> -->
                         <div class=" row gx-5">
                             <div class="col ">
     
-                                <app-file-upload (onFileUpload)="onLogoFileUpload($event)" [url]="school?.schoolLogoUrl" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
+                                <app-file-upload (onFileUpload)="onLogoFileUpload($event)" [imgUrl]="school?.schoolLogoPath" view="box" title="{{ 'dashboard.schools.SchoolLogo'|translate }}" label=" انقر لإرفاق شعار المدرسة"></app-file-upload>
                             </div>
                             <div class="col flex-grow-0">
                                 <p-divider layout="vertical"></p-divider>
                             </div>
                             <div class="col">
     
-                                <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" [url]="school?.diplomaLogoUrl" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label=" انقر لإرفاق شعار الاعتماد الخاص بالدبلوم"></app-file-upload>
+                                <app-file-upload (onFileUpload)="onDiplomaFileUpload($event)" [imgUrl]="school?.diplomaLogoPath" view="box" title="{{'dashboard.schools.reliableLogo'|translate }}" label=" انقر لإرفاق شعار الاعتماد الخاص بالدبلوم"></app-file-upload>
                             </div>
-    
+
                         </div>
-    
+
 
                         <h4 class="heading heading--tertiary my-5">{{'dashboard.schools.schoolInfo'|translate }}</h4>
 
                         <div class="general__info row ">
-                            <div class="col-md-5 offset-1 grid-container">
+                            <div class="col-md-5  grid-container">
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.enSchoolName'|translate }}</span>
                                 <p class="color-primary">{{school?.name.ar}}</p>
 
@@ -68,22 +85,25 @@
                                 <p class="color-primary">{{school?.code}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolCategory'|translate }}</span>
-                                <p class="color-primary">{{school?.classification?.arabicName}}</p>
+                                <p class="color-primary">{{school?.classification?.name |currentLang}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolEmail'|translate }} </span>
                                 <p class="color-primary">{{school?.email}}</p>
 
                             </div>
-                            <div class="col-md-5   grid-container">
+                            <div class="col-md-4   grid-container">
+
+                                <!-- <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolType'|translate }}</span>
+                                <p class="color-primary">{{school?.type}}</p> -->
                                 
-                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolType'|translate }}</span>
-                                <p class="color-primary">{{school?.type}}</p>
+                                <span class="paragraph paragraph--sm color-gray-300">{{'shared.activated'|translate }}</span>
+                                <p class="color-primary">{{(school?.status=='Active'?'نعم' :'لا')}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolLicenceNumber'|translate }}</span>
                                 <p class="color-primary">{{school?.terkhisNumber}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.course'|translate }}</span>
-                                <p class="color-primary">{{school?.curriculum?.arabicName}}</p>
+                                <p class="color-primary">{{school?.curriculum?.name |currentLang}}</p>
 
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.schoolStudentNumber'|translate }}</span>
                                 <p class="color-primary">{{school?.studentCount}}</p>
@@ -91,40 +111,48 @@
                                 <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.educationalInstitution'|translate }}</span>
                                 <p class=" color-primary">{{school?.educationalInstitution}}</p>
                             </div>
- 
+
+                            <div class="col-md-2 grid-container">
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.daleelNumber'|translate }}</span>
+                                <p class="color-primary">{{school?.daleelId}}</p>
+    
+                                <span class="paragraph paragraph--sm color-gray-300">{{'dashboard.schools.tamamNumber'|translate }}</span>
+                                <p class="color-primary">{{school?.tamamId}}</p>
+                            </div>
+
                         </div>
                     </div>
                 </ng-container>
                 <!-- general Info -->
-        
-        
-        
+
+
+
                 <!-- school Location -->
-                <div class="row gx-5 " >
+                <div class="row gx-5 ">
                     <h4 class="heading heading--tertiary mb-5" [class.d-none]="step!=2">{{'dashboard.schools.schoolLocation'|translate }}</h4>
                     <div class="col-md-6 px-5">
                         <div class="map-container" [class.hide]="step!=2">
 
-                            <div class="row map-container mb-2" >
+                            <div class="row map-container mb-2">
                                 <!-- Google Map -->
-                                <div  id="map" class="map"></div>
+                                <div id="map" class="map"></div>
                             </div>
                             <!-- <p class="paragraph mb-5 color-gray-400 fw-normal">الإحداثيات: 25.081622124 - 55.2164479587 </p> -->
                         </div>
                     </div>
-            
+
                     <ng-container *ngIf="step==2">
                         <div class="col-md-3 align-self-center grid-container">
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.city'|translate }}</span>
-                            <p class="color-primary">{{school?.address?.city}}</p>
+                            <p class="color-primary"> {{school?.address?.city |currentLang}}</p>
 
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.state'|translate }}</span>
                             <p class="color-primary">{{school?.address?.state.name?.ar}}</p>
 
                             <span class="paragraph paragraph--sm color-gray-200">{{'shared.street'|translate }}</span>
-                            <p class="color-primary">{{school?.address?.name.street?.ar}}</p>
+                            <p class="color-primary">{{school?.address?.street.name |currentLang}}</p>
                         </div>
-    
+
                         <div class="col-md-3 align-self-center">
                             <div class="mb-5 pe-4">
                                 <!-- <img src="assets/images/shared/qrc.svg" alt=""> -->
@@ -135,12 +163,12 @@
                             <p class="paragraph paragraph--sm color-gray-800">المرجو قراءة الرمز من الهاتف للحصول على الاتجاهات في خريطة جوجل</p>
 
                         </div>
-                
+
                     </ng-container>
                 </div>
                 <!-- school Location -->
-        
-        
+
+
                 <!-- school manager -->
                 <ng-container *ngIf="step==3">
                     <div class="row align-items-center">
@@ -183,28 +211,28 @@
                             لوريم ايبسوم هو نموذج افتراضي يوضع في التصاميم لتعرض على العميل ليتصور طريقه وضع النصوص بالتصاميم سواء كانت تصاميم مطبوعه ... بروشور او فلاير على سبيل المثال ... او نماذج مواقع انترنت ...
                         </p>
                     </div>
-        
+
                     <hr class="my-6">
 
-                    <app-school-employees [employees]="schoolClasses"></app-school-employees>
+                    <app-school-employees></app-school-employees>
                 </ng-container>
                 <!-- school managar -->
-        
-        
+
+
                 <!-- school Classes -->
                 <ng-container *ngIf="step==4">
-                    <app-school-grades [students]="schoolClasses"></app-school-grades>
+                    <app-school-grades (setActiveTab)="step=$event" (selectedGradeId)="selectedGradeId =$event"></app-school-grades>
                 </ng-container>
                 <!-- school Classes -->
-        
-        
+
+
                 <!-- school Divitions -->
                 <ng-container *ngIf="step==5">
-                    <app-school-divisions [students]="schoolClasses"></app-school-divisions>
+                    <app-school-divisions [selectedGradeId]="selectedGradeId"></app-school-divisions>
                 </ng-container>
                 <!-- School Section -->
-        
-        
+
+
                 <!-- Edit list -->
                 <ng-container *ngIf="step==6">
                     <app-edit-list [editList]="schoolClasses"></app-edit-list>
@@ -223,10 +251,10 @@
                 <ng-container *ngIf="step==8">
                     <app-annul-holiday-list [holidays]="schoolClasses"></app-annul-holiday-list>
                 </ng-container>
-                
+
 
             </div>
         </div>
     </div>
-    
+
 </div>

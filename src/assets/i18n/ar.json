@@ -5,6 +5,8 @@
     "Your email is required": " هذا البريد مطلوب",
     "Please write a valid email": "يرجي كتابه هذا الحقل بالطريقه الصحيحه",
     "Your password": "كلمه المرور",
+    "Enter Your password": "أدخل كلمة المرور",
+    "Confirm ypur Password": "تاكيد كلمة المرور",
     "Your password is required": "هذا الحقل مطلوب",
     "Please write a password contains number , captial and small letters": "يرجي كتابه كلمه المرور بطريقه صحيحه تحتوي علي @ او حروف كبيره و صغيره",
     "forget password": "نسيت كلمه المرور",
@@ -28,7 +30,6 @@
     "Next": "التالي",
     "Sign in with digital identity": "تسجيل الدخول بالهوية الرقمية",
     "Login with": " أنقر تسجيل ",
-    "New account": "حساب جديد",
     "Enter your email address": "أدخل عنوان بريدك الالكتروني",
     "assignments": "الامتحانات",
     "Filter": "فلتر",
@@ -78,42 +79,133 @@
     "Attach a file": "ارفاق ملف",
     "Optional": "اختياري",
     "Search...": "بحث...",
-    "RejectionRegestrationReasons": "أسباب الرفض الرئيسية لطلب التسجيل",
-    "DeletingStudentReasons": "أسباب رفض حذف طالب من مدرسة",
-    "RejectionRegestrationForDeletionReasons": "أسباب رفض طلب لحذف",
-    "StudentWithdrawalReasons": "أسباب سحب الطالب من المدرسة الحالية",
-    "RejectingWithdrawalRequest": "سبب رفض طلب الانسحاب",
-    "StudentTalentType": "نوع موهبة الطالب",
-    "RegradingSchoolStageOrSubjectReasons": "أسباب إعادة مرحلة أو مادة دراسية معينة",
+    "TheMainReasonsForRejectionOfTheApplicationForRegistration": "أسباب الرفض الرئيسية لطلب التسجيل",
+    "ReasonsForRefusingToRemoveAStudentFromASchool": "أسباب رفض حذف طالب من مدرسة",
+    "ReasonsForRefusingARequestToDelete": "أسباب رفض طلب لحذف",
+    "ReasonsForWithdrawingTheStudentFromTheCurrentSchool": "أسباب سحب الطالب من المدرسة الحالية",
+    "TheReasonForRejectingTheWithdrawalRequest": "سبب رفض طلب الانسحاب",
+    "TheTypeOfTalentOfTheStudent": "نوع موهبة الطالب",
+    "ReasonsForRepeatingASpecificCourseOrSubject": "أسباب إعادة مرحلة أو مادة دراسية معينة",
     "DiplomaType": "نوع الدبلوم",
-    "CommunicationMessageType": "نوع رسالة التواصل",
-    "FileAttachmentsForSchoolEmployeeType": "أنواع ارفاق الملف لموظفي لمدرسة",
-    "FileAttachmentsForGuardianType": "نوع ارفاق الملف بالنسبة لولي الأمر",
-    "SharjahCities": "مدن الشارقة",
-    "DubaiCities": "مدن المنطقة الوسطى دبي",
-    "AjmanCities": "مدن المنطقة الشرقية عجمان",
-    "FujairahCities": "مدن الفجيرة",
+    "TtypeOfCommunicationMessage": "نوع رسالة التواصل",
+    "TypesOfFileAttachmentsForSchoolStaff": "أنواع ارفاق الملف لموظفي لمدرسة",
+    "TheTypeOfFileAttachmentForTheParent": "نوع ارفاق الملف بالنسبة لولي الأمر",
+    "CitiesOfSharjah": "مدن الشارقة",
+    "CitiesOfTheCentralRegion": "مدن المنطقة الوسطى",
+    "EasternProvinceCities": "مدن المنطقة الشرقية",
+    "TypesOfGradeImprovement": "أنواع تحسين الدرجات",
+    "ExcusedAbsences": "أسباب الغياب بعذر",
+    "NationalityCategory": "فئة الجنسية",
+    "SpecialEducation": "التربية الخاصة",
     "Active": "فعال",
     "Inactive": "غير فعال",
-    "flexible": "مرنة",
+    "mission Succeeded": "تمت العملية بنجاح",
+    "error happened": "حدث خطأ",
+    "Grades": "درجات",
+    "Discription": "وصف",
+    "Evaluation": "تقييم",
     "warning": "تحذير",
     "updatedSuccessfully": "تم التعديل بنجاح",
     "savedSuccessfully": "تم الحفظ بنجاح",
     "pleaseFillTheAboveRate": "إملا البيانات من فضلك",
-    "Not flexible": "غير مرنة",
-    "mission Succeeded": "تمت العملية بنجاح",
-    "error happened": "حدث خطأ",
+
+    "sign up": {
+        "New account of parent": "تسجيل حساب ولي أمر جديد",
+        "Next": "التالي",
+        "with": "تسجيل حساب جديد بواسطة",
+        "select...": "إختر...",
+        "phoneNumber": "رقم الهاتف المحمول",
+        "digitalIdentity": "رقم الهوية الاماراتية",
+        "email": "البريد الإلكتروني",
+        "enter personal digitalIdentity": "أدخل رقم الهوية الشخصية الاماراتية",
+        "enter phoneNumber": "أدخل رقم الهاتف المحمول",
+        "enter email": "أدخل البريد الالكتروني",
+        "confirmed with OTP": "التحقق بواسطة رمز OTP",
+        "Pleaze enter OTP that send to phoneNumber": "الرجاء ادخال رمز OTP المرسل إلى الرقم",
+        "not have OTP yet ?": "لم تتلقّى رمز OTP حتى الآن ؟ ",
+        "send OTP again": "أعادة طلب الرمز",
+        "through": "خلال",
+        "second": "ثانية",
+        "confirm": "تاكيد",
+        "return": "الرجوع",
+        "in case identity not exist": "بحال عدم وجود هوية",
+        "reason of identity not exist": "سبب عدم وجود هوية",
+        "pleaze upload image to approve that you don’t have digital identity": "يرجى ارفاق صورة تثبت عدم وجود هوية",
+        "Name": "الأسم",
+        "Enter Name": "أدخل الأسم",
+        "NickName": "الكنية",
+        "Enter NickName": "أدخل الكنية",
+        "Gender": "الجنس",
+        "Enter Gender": "أختر الجنس",
+        "Nationality": "الجنسية",
+        "Enter Nationality": "أختر الجنسية",
+        "Birthday": "تاريخ الميلاد"
+    },
     "login": {
+        "New account of parent": "حساب ولي أمر جديد",
         "Login Successfully": "تم تسجيل الدخول بنجاح",
         "Something is wrong,Pleaze login again": "حدث خطأ,من فضلك قم بالتسجيل مجددًا",
         "Login With Digital Identity": "الدخول عن طريق الهوية الرقمية",
         "IdentityNumber,Email,PhoneNumber.Example:971500000000": "رقم الهوية,البريد الإلكتروني,أو رقم الهاتف.مثال:971500000000",
         "remember me": "تذكرني",
         "wrong,pleaze check examples and try again": "معرف خاطي , يرجي التأكد من الأمثلة والمحاولة مرة أخري",
+        "Identity exist": "وجود هوية",
+        "Identity not exist": "عدم وجود هوية",
         "Available": "متاح",
         "Unavailable": "غير متاح",
         "noURLFound": "لا يوجد لينك للتحميل"
+
     },
+
+    "primeng": {
+        "startsWith": "Starts with",
+        "contains": "Contains",
+        "notContains": "Not contains",
+        "endsWith": "Ends with",
+        "equals": "Equals",
+        "notEquals": "Not equals",
+        "noFilter": "No Filter",
+        "lt": "Less than",
+        "lte": "Less than or equal to",
+        "gt": "Greater than",
+        "gte": "Greater than or equal to",
+        "is": "Is",
+        "isNot": "Is not",
+        "before": "Before",
+        "after": "After",
+        "dateIs": "Date is",
+        "dateIsNot": "Date is not",
+        "dateBefore": "Date is before",
+        "dateAfter": "Date is after",
+        "clear": "Clear",
+        "apply": "Apply",
+        "matchAll": "Match All",
+        "matchAny": "Match Any",
+        "addRule": "Add Rule",
+        "removeRule": "Remove Rule",
+        "accept": "Yes",
+        "reject": "No",
+        "choose": "Choose",
+        "upload": "Upload",
+        "cancel": "Cancel",
+        "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+        "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+        "dayNamesMin": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+        "monthNames": ["يناير", "فبراير", "مارس", "ابريل", "مايو", "يونيه", "يوليو", "اغسطس", "سبتمبر", "اكتوبر", "نوفمبر", "ديسمبر"],
+        "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        "dateFormat": "mm/dd/yy",
+        "today": "اليوم",
+        "weekHeader": "Wk",
+        "weak": "الاسبوع",
+        "medium": "Medium",
+        "strong": "Strong",
+        "passwordPrompt": "Enter a password",
+        "emptyMessage": "لا يوجد بيانات",
+        "emptyFilterMessage": "لا يوجد بيانات"
+    },
+
+
+
 
     "sideBar": {
         "schoolsAndStudents": {
@@ -205,11 +297,11 @@
     },
 
     "emptyList": {
-
+        "noData": "لا توجد بيانات",
         "noDataMatch": "يبدو أنه لا توجد عناصر تطابق بحثك ، يرجى المحاولة مرة أخرى!",
         "AnnualHoliday List is empty": "لا توجد أجازات سنوية بعد",
         "Assessment List is empty": "لا توجد تقييمات بعد",
-        "Subject List is Empty": "لا توجد مواد دراسية بعد",
+        "Subject List is Empty": " يبدو انه لا توجد مواد دراسية بعد",
         "Users List is empty": "لا يوجد مستخدمين بعد",
         "Parent List is empty": "لا يوجد اولياءالأمور ",
         "UserRoles List is empty": "لا توجد أدوار وظيفية بعد",
@@ -229,13 +321,19 @@
 
         "No Information setting": "لا توجد بيانات",
         "NoNotification": "لا توجد إشعارات",
+        "registrationRoles": "يبدو انه لا يوجد قواعد تسجيل فى الوقت الحالى",
+        "fileSettings": "يبدو انه لا يوجد اعدادات للملفات",
+
         "Schools not selected yet": "لم يتم تحديد أي مدرسة بعد !",
         "Pleaze, Select School": "يرجى تحديد المدارس المخصصة لهذا الدور",
         "divisions": "يبدو انه لايوجد شعب فى الوقت الحالى ",
         "grades": "يبدو انه لايوجد صفوف فى الوقت الحالى ",
         "editList": "يبدو انه لايوجد تعديلات فى الوقت الحالى ",
-        "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب"
 
+        "studentDegrees": "حتى الآن لم يتم رفع درجات للطالب",
+        "noSons": "لا يوجد أي أبناء مرتبطين بك حتى الآن",
+        "addNewSon": "يمكنك إضافة أبناء عبر الضغط على 'اضافه ابن جديد'",
+        "employee": "يبدو انه لا يوجد موظفين فالوقت الحالى"
     },
 
 
@@ -272,7 +370,8 @@
         "Save": "حفظ",
         "Cancel": "إلغاء",
         "Add": "إضافة",
-        "Edit Role": "تعديل دور وظيفي"
+        "Edit Role": "تعديل دور وظيفي",
+        "Request to issue a certificate": "طلب اصدار شهادة"
 
     },
 
@@ -300,6 +399,8 @@
         "schoolName": "اسم المدرسه",
         "chooseSchool": "اختر المدرسه",
         "grade": "الصف",
+        "grades": "الصفوف",
+        "DefineNewPermission": "تعريف فتره سماح جديدة",
         "gradeName": "اسم الصف",
         "divisionName": "اسم الشعبه",
         "phoneNumber": "رقم الهاتف",
@@ -356,6 +457,8 @@
         "Full Name": "الأسم الكامل",
         "Write Identity Number": "أكتب رقم الهوية",
         "Identity Number": "رقم الهوية",
+        "passportId":"رقم جواز السفر",
+        "expireDate":"تاريخ الانتهاء ",
         "Effective": "فعال",
         "Write Password": "أكتب كلمة المرور",
         "Write Nick Name": "أكتب كنية المستخدم",
@@ -420,7 +523,9 @@
             "notPassed": "راسب",
             "active": "فعال",
             "inActive": "غير فعال",
-            "Deleted": "محذوف"
+            "Deleted": "محذوف",
+            "Flexible": "مرنة",
+            "NotFlexible": "غير مرنة"
 
         },
 
@@ -434,8 +539,17 @@
         "genderType": {
             "Female": "انثى",
             "Male": "ذكر"
-        }
-
+        },
+        "addText":"ادخال نص",
+        "choose":"اختر",
+        "schools":"المدارس",
+        "optionalOrMandatory":"اختيارية / اجبارية",
+        "mandatory":"إجبارية",
+        "optional":"اختيارية",
+        "nationalityCategory":"فئه الجنسيه",
+        "writeReligion":"اكتب الديانه",
+        "Muslim":"مسلم",
+        "UnMuslim":"غير مسلم"
     },
     "Notifications": {
         "Notifications": "الإشعارات",
@@ -540,6 +654,56 @@
             "Maximum GPA": "الحد الأقصي للمعدل التراكمي",
             "Enter Maximum GPA": "إدخل الحد الأقصي للمعدل التراكمي"
         },
+        "SystemSetting": {
+            "graceSession": "فترات السماح",
+            "notificationSetting": "الإشعارات",
+            "RegistrationConditions": " شروط الموافقة على التسجيل",
+            "attachmentCondition": "شروط الملفات المُرفقة",
+            "Type": "النوع",
+            "SchoolNumber": "عدد المدارس",
+            "ClassNumber": "عدد الصفوف",
+            "TimeFrom": "الفتره الزمنيه-من",
+            "TimeTo": "الفتره الزمنيه-إلي",
+            "CreatedBy": "تم إنشائها بواسطه",
+            "CreatedDate": "تم الأنشاء في",
+
+            "NotficationReason": "سبب الأشعار",
+            "Receiver": "المستقبلين",
+            "NotificationContentAr": "(محتوي الإشعار( باللغه العربيه",
+            "NotificationContentEN": "محتوي الإشعار(باللغه الأنجليزيه)",
+            "NotificationChannel": "قناه الأشعار",
+            "attachmentsetting": "إعدادات الملفات المطلوبه",
+            "RegistercurriculumAustraliantoAmericans": "قاعدة التسجيل من المنهج الاسترالي الى المنهج الأميركي",
+            "addNewRole": "إضافه قاعده جديدة",
+            "editNotification": "تعديل الإشعار",
+            "notificationList": "قائمة الإشعارات",
+            "shortMessage": "رسالة قصيرة ",
+            "throwSystem": "عبر النظام",
+            "oldCurriculum": "المناهج القديمة",
+            "newCurriculum": "المناهج الجديدة",
+            "fileSettingList": "قائمة شروط الملفات المرفقة في النظام ",
+            "maxFilesAllowedToUpload": "عدد الملفات المسموح ارفاقها",
+            "fileNameAr": "اسم الملف المطلوب باللغة العربية",
+            "fileNameEn": "اسم الملف المطلوب باللغة الانجليزية",
+            "addNewCondition": "إضافة شرط جديد",
+            "chooseRequest": " اختيار الطلب",
+            "attachmentType": "نوع المرفق",
+            "attachmentSize": "حجم المرفق",
+            "newGracePeriod": "تعريف فترة سماح جديدة",
+            "manageGracePeriod": "ادارة فترات السماح",
+            "gracePeriodType": "نوع فترة السماح  ",
+            "chooseSchoolsThatAllowedToTransferGroup": "اختيار لمدارس المسموحة لارسال طلب النقل الجماعي",
+            "gracePeriodTimePeriod": "الفترة الزمنية المخصصة لفترة السماح",
+            "schoolsAllowedToTransferToIt": "المدارس المسموح النقل اليها ",
+            "gradesAllowedToTransferToIt": "الصفوف المسموح النقل اليه",
+            "divisionsAllowedToTransferToIt": "الشعب المسموح  النقل اليها",
+            "chooseGrades": "اختر الصفوف (اختياري)",
+            "chooseDivisions": "اختر الشعب (اختياري)",
+            "addSchool": "إضافة مدرسة"
+
+
+
+        },
         "schools": {
             "contactWithShoolManagement": "تواصل مع إدارة المدرسة",
             "Typeofcertificate": "نوع الشهادة",
@@ -558,7 +722,6 @@
             "editableList": "قائمة التعديلات",
             "schoolSubjects": "مواد المدرسة",
             "schoolInfo": "معلومات المدرسه",
-            "whoIsSchoolManager": "من هو مدير المدرسه؟",
             "editSchoolInfo": "تعديل معلومات موظف المدرسة",
             "employeeRole": "دور الموظف",
             "employeeStatus": "حالة الموظف",
@@ -661,7 +824,19 @@
             "sendEditHolidayReq": "اارسال طلب تعديل اجازة مرنة",
             "addSubjectToschool": "اضافة مادة دراسيّة للمدرسة",
             "editHolidayReq": "طلب تعديل اجازة مرنة",
-            "maxValueForGpa": "القيمة العظمة للمعدل التراكمي "
+            "maxValueForGpa": "القيمة العظمة للمعدل التراكمي ",
+            "annualDegrees": "الدرجات الفصلية / السنوية ",
+            "optionalOrmandatory": "اجباريه/اختياريه",
+            "evaluation": "التقيم",
+            "raisDegrees": "رفع درجات",
+            "chooseSubject": "اختر المادة",
+            "authoritySubjects": "مواد الهيئة",
+            "daleelNumber": "رقم معرف المدرسة في دليل ",
+            "tamamNumber": "رقم معرف المدرسة في تمام",
+            "SchoolManager": "مدير المدرسه",
+            "editSchoolManager": "تعديل مدير المدرسة",
+            "newManager": "المدير الجديد"
+
         },
         "parents": {
             "attendanceAndAbsence": "تفاصيل الحضور و الغياب",
@@ -751,7 +926,7 @@
             "Unregister": "غير مسجل ف مدرسة",
             "registerSons": "الابناء المسجلين ",
             "UnregisterSons": "الابناء الغير مسجلين ",
-            "selectParents": "اختر  أولياء الأمور"
+            "registerChild": "تسجيل الطالب "
 
         },
         "students": {
@@ -784,6 +959,10 @@
             "editStudentInfo": "تعديل معلومات طالب",
             "forbiddenFromWithdrow": "محظور من الانسحاب:",
             "forbiddenFromCertificate": "محظور من طلب اصدار الشهادة:",
+            "fromAuthority": " من قبل الهيئة:",
+            "fromSchool": " من قبل المدرسة:",
+            "studentUnifiedNumber": "الرقم الموحد للطالب",
+            "manhalNumber": "رقم المنهل",
             "acceptanceInfo": " معلومات القبول الخاصة",
             "absenceAndAttendanceDetails": " تفاصيل الحضور والغياب",
             "veiwStudentDetails": "عرض تفاصيل الطالب",
@@ -819,6 +998,7 @@
             "studentIdentity": "هوية الطالب",
             "transferStudentToAnotherSchool": "نقل الطالب لغير مدرسة",
             "sendRepeateStudyPhaseReqest": "ارسال طلب اعادة مرحلة دراسية",
+            "caseOfRepeateStudyPhase": "سبب اعادة مرحلة دراسية",
             "sendRequestToEditPersonalInfo": "ارسال طلب تعديل معلومات هوية",
             "transferStudentFromDivisionToDivision": "نقل الطالب من شعبة لشعبة",
             "IssuanceOfACertificate": "اصدار شهاده للطالب",
@@ -829,10 +1009,19 @@
             "academic year": "السنه الدراسية",
             "School Name": "اسم المدرسة",
             "Class": "الصف",
-            "school": "المدرسه",
             "insideEmara": "داخل الاماره",
             "outSideEmara": "خارج الاماره",
-            "outsideCountry": "خارج البلد"
+            "outsideCountry": "خارج البلد",
+            "studentStatus": "حالة الطالب",
+            "sendChangeIdentityReq": "ارسال طلب تعديل هوية",
+            "writeNewIdentityNumber": "اكتب رقم الهوية الجديد",
+            "studentBehavior": "سلوك الطالب",
+            "behaviorDescription":"وصف السلوك",
+            "employeeCreatedBehavior":"الموظف الذي أنشأ الوصف",
+            "discribeBehaviorDate":"تاريخ وصف السلوك",
+            "isChildOfAMartyr":"ابناء الشهداء",
+            "isGifted":"يمتلك موهبه"
+
         },
         "Assignments": {
             "Assignment Name": "أسم الأمتحان",
@@ -991,19 +1180,25 @@
             "Date Must be during the school year": "لابد ان يكون التاريخ في فترة السنة الدراسية ",
             "Write Annual Calender Name": "اكتب مسمى التقويم السنوي",
             "Write Holiday Name": "اكتب مسمى الاجازة",
-            "copy content": "نسخ المحتوي"
-
-
+            "copy content": "نسخ المحتوي",
+            "Add Holiday": "إضافة أجازة سنوية",
+            "Edit Holiday": "تعديل أجازة سنوية",
+            "Annual Calender Name in Arabic": "مسمي التقويم السنوي (باللغة العربية)",
+            "Annual Calender Name in English": "مسمي التقويم السنوي (باللغة الأنجليزية)",
+            "Holiday Name in Arabic": "مسمي الأجازة (باللغة العربية)",
+            "Holiday Name in English": "مسمي الأجازة (باللغة الأنجليزية)",
+            "error,please try again": "حدث خطأ. من فضلك حاول مجددا",
+            "Holiday added Successfully": "تمّ إنشاء أجازة سنوية جديد بنجاح"
 
         },
 
         "Subjects": {
-            "Subject Name in Arabic": "إسم المادة باللغة العربية",
-            "Subject Name in English": "إسم المادة باللغة اللإنجليزية",
-            "Name in results screen in Arabic": "الإسم في تقرير الدرجات باللغة العربية",
-            "Name in results screen in English": "الإسم في تقرير الدرجات باللغة الإنجليزية ",
-            "Write Name in results screen in Arabic": "اكتب الإسم في شاشة الدرجات باللغة العربية",
-            "Write Name in results screen in English": "اكتب الإسم في شاشة الدرجات باللغة الإنجليزية",
+            "Subject Name in Arabic": "أسم المادة (باللغة العربية)",
+            "Subject Name in English": "أسم المادة (باللغة الأنجليزية)",
+            "Name in results screen in Arabic": "الأسم في تقرير الدرجات (باللغة العربية)",
+            "Name in results screen in English": "الأسم في تقرير الدرجات (باللغة الأنجليزية)",
+            "Write Name in results screen": "أكتب الأسم في شاشة الدرجات",
+            "Write Subject Name": "أكتب أسم المادة",
             "subjectHours": "الساعات الدراسية للمادة",
             "Hours must be more than or equal 1 hour": "لابد أن تكون عدد الساعات اكثر من أو تساوي ساعة",
             "Number Of Sessions Per Week": "عدد الحصص الدراسية بالأسبوع",
@@ -1020,7 +1215,6 @@
             "Is Contain": "هل تخضع ل ",
             "Subject Minimum grade": "الدرجة الدنيا للمادة",
             "Subject Name Must Be Unique": "لابد أن يكون اسم المادة  لا يتكرر على مستوى المدرسة",
-            "Evaluation": "تقييم",
             "subjectName": "اسم الماده",
             "gpaReliable": "هل تخضع ل GPA",
             "subject Code": "رمز المادة",
@@ -1038,8 +1232,6 @@
             "maximum degree": "الدرجة العظمي",
             "write minmum degree": "أكتب الدرجة الدنيا",
             "write maximum degree": "أكتب الدرجة العظمي",
-            "Grades": "درجات",
-            "Discription": "وصف",
             "explanation": "الشرح",
             "meaning": "المعني",
             "successed": "ناجح",
@@ -1047,7 +1239,11 @@
             "add description": "إضافة وصف",
             "Are you sure that you want to delete Subject": "هل متاكد أنك تريد حذف المادة ",
             "Subject deleted Successfully": "تم حذف هذه المادة بنجاح",
-            "error happened,try again": "حدث خطأ أثناء محاولة حذف مادة. لايمكن حذف هذه المادة"
+            "error happened,try again": "حدث خطأ أثناء محاولة حذف مادة. لايمكن حذف هذه المادة",
+            "isExemptable": "قابلة للاعفاء",
+            "Subject added Successfully": "تمّ إنشاء مادة دراسية جديد بنجاح",
+            "Subject edited Successfully": "تمّ تعديل المادة الدراسية بنجاح",
+            "error,please try again": "حدث خطأ. من فضلك حاول مجددا"
 
         },
         "UserInformation": {
@@ -1108,7 +1304,26 @@
             "Enter the text of the message": "ادخال نص الرساله",
             "Chat Details": "تفاصيل المحادثة",
             "Send Reply": "ارسال رد",
-            "close the conversation": "اغلاق المحاثة"
+            "close the conversation": "اغلاق المحاثة",
+            "descriptionMessage": "هذا الحقل مطلوب",
+            "maxLength": "اكثر حروف مطلوبه 512 حرف",
+            "maxLengtho": "اكثر حروف مطلوبه 32 حرف",
+            "determine": "تحديد المدارس المراد ارسال الرسالة لهم",
+            "Area": "المنطقه",
+            "School": "المدرسه",
+            "curriculum": "المنهج",
+            "senderName": "اظهار اسم المُرسل ",
+            "add guardian": "إضافة ولي الأمر",
+            "MessageType": "نوع الرسالة"
+        },
+        "issue of certificate": {
+            "Please select a student": "المرجو الإختيار الطالب ",
+            "Click here to add the required information": "انقر هنا لاضافة المعلومات المطلوبة",
+            "Certificates to be issued": "الشهادات المُراد إصدارها",
+            "Certificate name": "اسم الشهادة",
+            "Certificate fee": "رسوم الشهادة",
+            "sons name": "اسم الابن",
+            "choose certificate": "اختر الشهادة"
         }
 
 

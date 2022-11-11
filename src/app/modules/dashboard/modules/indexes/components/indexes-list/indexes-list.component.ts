@@ -23,7 +23,7 @@ export class IndexesComponent implements OnInit {
   fixedLength:number=0;
   indexListType;
   indexStatusList;
-  filtration = {...Filtration,IndexTypeId: '',indexStatus:''};
+  filtration = {...Filtration,IndexType: '',IndexStatus:''};
   paginationState= {...paginationInitialState};
   indexes={
     total:0,
@@ -46,7 +46,7 @@ export class IndexesComponent implements OnInit {
       }
     );
     this.indexStatusList = this.indexesService.indexStatusList;
-    this.indexesService. getIndextTypeList().subscribe((res)=>{this.indexListType=res;})
+    this.indexListType=this.indexesService.indexListType;
 
   }
 
@@ -84,8 +84,8 @@ export class IndexesComponent implements OnInit {
   clearFilter(){
 
     this.filtration.KeyWord =''
-    this.filtration.IndexTypeId= null;
-    this.filtration.indexStatus= null;
+    this.filtration.IndexType= null;
+    this.filtration.IndexStatus= null;
     this.getAllIndexes();
   }
 
