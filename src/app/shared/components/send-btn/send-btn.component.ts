@@ -96,6 +96,8 @@ export class SendBtnComponent implements OnInit {
      });
     }
     else{
+      debugger;
+      console.log(this.content.value);
       this.accountModel.id =Number(id);
       this.accountModel.claim = '';
       this.accountModel.hasAzureADAccount = false;
@@ -112,7 +114,7 @@ export class SendBtnComponent implements OnInit {
       this.accountModel.permissionToEnterScore = true;
       this.accountModel.relativeRelationId= 0;
       this.accountModel.scope= "SPEA";
-      this.accountModel.isActive= this.content.value.userStatus;
+      this.accountModel.isActive= !this.content.value.userStatus;
       this.accountModel.nickName = this.content.value.nickName;
       this.accountModel.emiratesIdNumber =this.content.value.identityNumber;
       this.accountModel.password = this.content.value.password;

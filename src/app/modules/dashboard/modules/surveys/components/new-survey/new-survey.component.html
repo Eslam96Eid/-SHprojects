@@ -53,9 +53,12 @@
                                         <label class="label" for="day">خيارات السؤال </label>
                                         <div class="p-inputgroup">
                                             <input type="text" formControlName="questionChoices" pInputText class="form-control basicinput " placeholder="اكتب نص السؤال" name="PID7" id="PID7">
+                                            
+                                            <p-button label="Add" icon="pi pi-plus" iconPos="left" (click)="AddQuestion(i)"></p-button>
                                         </div>
                                         <!-- <p-multiSelect formControlName="questionChoices" [options]="diseases" optionLabel="name" display="chip" appValidationoption></p-multiSelect> -->
                                     </div>
+                                    
                                     <div class="col-md-4" id="div_attachment_{{i}}" [ngStyle]="{'display': 'none'}">
                                         <label class="label" for="day">الملف </label>
 
@@ -63,8 +66,27 @@
                                             <input type="file" name="" id="" hidden #file formControlName="attachment" (change)="uploadFile($event)">
                                             <img src="assets/images/shared/PDFSEC.svg" alt="upload">
 
-                                            <div class="file">{{_fileName[i]==null ? fileName : _fileName[i] }}</div>
+                                <div class="file">{{_fileName[i]==null  ? fileName : _fileName[i] }}</div>
                                             <img src="assets/images/shared/delete.svg" alt="delete file">
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-4 col-lg-4" id="div_Added_1_questionChoices_{{i}}" [ngStyle]="{'display': 'none'}">
+                                        <label class="label" for="day">  </label>
+                                        <div class="p-inputgroup">
+                                            <input type="text"    formControlName="questionChoices1" pInputText class="form-control basicinput " placeholder="اكتب نص السؤال" name="PID7" id="PID7">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-lg-4" id="div_Added_2_questionChoices_{{i}}" [ngStyle]="{'display': 'none'}">
+                                        <label class="label" for="day">  </label>
+                                        <div class="p-inputgroup">
+                                            <input type="text"  formControlName="questionChoices2" pInputText class="form-control basicinput " placeholder="اكتب نص السؤال" name="PID7" id="PID7">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-4 col-lg-4" id="div_Added_3_questionChoices_{{i}}" [ngStyle]="{'display': 'none'}">
+                                        <label class="label" for="day">  </label>
+                                        <div class="p-inputgroup">
+                                            <input type="text" formControlName="questionChoices3" pInputText class="form-control basicinput " placeholder="اكتب نص السؤال" name="PID7" id="PID7">
                                         </div>
                                     </div>
                                 </div>
