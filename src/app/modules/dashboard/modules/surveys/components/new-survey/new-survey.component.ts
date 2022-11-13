@@ -232,21 +232,25 @@ Q3:string;
       case 'اختياري من متعدد': {
         QuestionChoicesDiv.style.display = 'block';
         attachmentDiv.style.display = 'none';
+        this.RemoveQuestion(i)
         break;
       }
       case 'ملف': {
         QuestionChoicesDiv.style.display = 'none';
         attachmentDiv.style.display = 'block';
+        this.RemoveQuestion(i)
         break;
       }
       case 'نجوم': {
         QuestionChoicesDiv.style.display = 'none';
         attachmentDiv.style.display = 'none';
+        this.RemoveQuestion(i)
         break;
       }
       case 'نص حر ': {
         QuestionChoicesDiv.style.display = 'block';
         attachmentDiv.style.display = 'none';
+        this.RemoveQuestion(i)
         break;
       }
       default: {
@@ -256,7 +260,7 @@ Q3:string;
   }
 counter = 0;
   AddQuestion(i: any) {
-    debugger
+   
     this.counter++;
     const QuestionChoicesDiv1 = document.getElementById(`div_Added_1_questionChoices_${i}`) as HTMLInputElement | null;
     const QuestionChoicesDiv2 = document.getElementById(`div_Added_2_questionChoices_${i}`) as HTMLInputElement | null;
@@ -293,4 +297,16 @@ counter = 0;
     // }
 
   }
+
+  RemoveQuestion(i){
+ 
+    const QuestionChoicesDiv1 = document.getElementById(`div_Added_1_questionChoices_${i}`) as HTMLInputElement | null;
+    const QuestionChoicesDiv2 = document.getElementById(`div_Added_2_questionChoices_${i}`) as HTMLInputElement | null;
+    const QuestionChoicesDiv3 = document.getElementById(`div_Added_3_questionChoices_${i}`) as HTMLInputElement | null;
+    QuestionChoicesDiv1.style.display = 'none';
+    QuestionChoicesDiv2.style.display = 'none';
+    QuestionChoicesDiv2.style.display = 'none';
+    QuestionChoicesDiv3.style.display = 'none';
+ 
+}
 }
