@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { faArrowRight, faCheck, faChevronDown, faExclamationCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
-import { IDropdownSettings } from 'ng-multiselect-dropdown/multiselect.model';
 import { MenuItem } from 'primeng/api';
 import {IHeader } from 'src/app/core/Models/header-dashboard';
 import { ISurveyQuestion } from 'src/app/core/Models/IAddSurvey';
@@ -29,6 +28,9 @@ export interface Subject{
   styleUrls: ['./survey-details.component.scss']
 })
 export class SurveyDetailsComponent implements OnInit {
+
+  selectedSurveyType : any;
+  selectedSurveyQuestionType :any;
   surveyType = [
     { name: 'اجباري', code: 1 },
     { name: 'اختياري', code: 0 }
@@ -45,25 +47,22 @@ export class SurveyDetailsComponent implements OnInit {
   assesmentFormGrp: FormGroup;
   faChevronDown = faChevronDown
   dropdownList = [];
-  dropdownSettings:IDropdownSettings;
   selectedItems = [];
   cities: string[];
   choices: string[];
   step =1
   faPlus= faPlus;
-
   exclamationIcon = faExclamationCircle;
   righticon = faArrowRight;
   surveyTpe_SelectedItem=''
-
   faArrowRight = faArrowRight
 
   //popup modals
 
   targetsModalOpend = false
   responsesModalOpend = false
-  diseases=[{name:'سؤال 3'},{name:'سؤال 2'},{name:'سؤال 4'},{name:'سؤال 1'}];
-  questiontype=[{name:'سؤال 3'},{name:'سؤال 2'},{name:'سؤال 4'},{name:'سؤال 1'}];
+
+
   componentHeaderData: IHeader = {
     breadCrump: [
       { label: 'قائمه الاستبيانات',routerLink:'/dashboard/educational-settings/surveys' ,routerLinkActiveOptions:{exact: true}},
@@ -73,7 +72,7 @@ export class SurveyDetailsComponent implements OnInit {
   }
   _fileName :string[] = [];
   fileName = 'file.pdf'
-  values = ['A', 'B']
+
 
   // breadCrumb
   items: MenuItem[] = [
@@ -89,7 +88,7 @@ export class SurveyDetailsComponent implements OnInit {
     private assessmentService: AssessmentService,
     private surveyService: SurveyService,
     private _router: ActivatedRoute,
-    public translationService: TranslationService,) {    const formOptions: AbstractControlOptions = {
+    public translationService: TranslationService) {    const formOptions: AbstractControlOptions = {
 
 
     };
@@ -103,9 +102,7 @@ export class SurveyDetailsComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getSurveyById();
-    this.addSubject();
     this.headerService.changeHeaderdata(this.componentHeaderData)
-
     this.layoutService.changeTheme('dark');
     this.headerService.Header.next(
       {
@@ -115,32 +112,6 @@ export class SurveyDetailsComponent implements OnInit {
           mainTitle: { main: this.translate.instant('dashboard.surveys.sendSurvey') }
       }
     );
-    this.dropdownList = [
-      { item_id: 1, item_text: 'سؤال 1' },
-      { item_id: 2, item_text: 'سؤال 2' },
-      { item_id: 3, item_text: 'سؤال 3' },
-      { item_id: 4, item_text: 'سؤال 4' },
-      { item_id: 5, item_text: 'سؤال 5' },
-      { item_id: 6, item_text: 'سؤال 6' },
-      { item_id: 7, item_text: 'سؤال 7' },
-      { item_id: 8, item_text: 'سؤال 8' }
-    ];
-    this.selectedItems = [
-      { item_id: 3, item_text: 'سؤال 3' },
-      { item_id: 4, item_text: 'سؤال 4' }
-    ];
-    this.dropdownSettings = {
-      singleSelection: false,
-      idField: 'item_id',
-      textField: 'item_text',
-      selectAllText: 'تحديد الكل',
-      unSelectAllText: 'عدم تحديد الكل',
-      itemsShowLimit: 5,
-
-      // allowSeachFilter: true
-   }
-  //  this.cities = this.assessmentService.cities;
-  //  this.choices = this.assessmentService.choices;
   }
 
 
@@ -168,29 +139,32 @@ export class SurveyDetailsComponent implements OnInit {
   }
 
 
-onItemSelect(item: any) {
-  console.log(item);
-}
-onSelectAll(items: any) {
-  console.log(items);
-}
 uploadFile(e) {
   this._fileName.push(e.target.files[0].name)
-  // this.fileName = e.target.files[0].name
 }
+
 getSurveyById()
 {
   this.surveyService.getSurveyById(Number(this._router.snapshot.paramMap.get('surveyId'))).subscribe(response=>{
     this.editSurvey = response ;
+    this.selectedSurveyType = this.editSurvey.surveyType;
+    this.selectedSurveyType == 'Optional' ? 
+    this.selectedSurveyType = this.surveyType[1] :
+    this.selectedSurveyType = this.surveyType[0];
+
+    this.editSurvey.surveyQuestions.forEach((item)=>{
+      this.addDataIntoSubject(item)
+     })
+
     this.assesmentFormGrp.patchValue({
-      surveyType: this.editSurvey.surveyType,
-      surveyTitle: this.editSurvey.surveyTitle.ar,
-      subjects:this.editSurvey.surveyQuestions
+      surveyType: this.selectedSurveyType,
+      surveyTitle: this.editSurvey.surveyTitle.ar
     })
   })
 }
 
 onChangesurveyQuestionType(event: any , i:any) {
+
   const QuestionChoicesDiv = document.getElementById( `div_questionChoices_${i}`) as HTMLInputElement | null;
   const attachmentDiv = document.getElementById( `div_attachment_${i}`) as HTMLInputElement | null;
   let typeOfQuestion = event.value.name.toString();
@@ -220,5 +194,47 @@ onChangesurveyQuestionType(event: any , i:any) {
     }
   }
 }
+
+
+
+
+
+////////////////////////////////////////////////////////
+
+
+addDataIntoSubject(item){
+
+  this.selectedSurveyQuestionType = item.surveyQuestionType;
+
+  switch (this.selectedSurveyQuestionType) {
+    case 'SurveyMultiChoiceQuestion': {
+      this.selectedSurveyQuestionType = this.surveyQuestionType[0];
+      break;
+    }
+    case 'SurveyAttachmentQuestion': {
+      this.selectedSurveyQuestionType = this.surveyQuestionType[1];
+      break;
+    }
+    case 'نجوم': {
+      this.selectedSurveyQuestionType = this.surveyQuestionType[2];
+      break;
+    }
+    case 'SurveyFreeTextQuestion': {
+      this.selectedSurveyQuestionType = this.surveyQuestionType[3];
+      break;
+    }
+    default: {
+      break;
+    }
+  }
+
+    this.classSubjects.push(this.fb.group({
+      surveyQuestionType: [this.selectedSurveyQuestionType],
+      questionText: [item.questionText],
+      attachment: [item.attachment],
+      questionChoices: [item.questionChoices]
+    }))
+}
+
 
 }

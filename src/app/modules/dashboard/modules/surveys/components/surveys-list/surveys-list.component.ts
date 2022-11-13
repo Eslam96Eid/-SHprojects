@@ -30,7 +30,7 @@ export class SurveysListComponent implements OnInit {
   @ViewChild('pagination') pagination: Paginator;
   page: number = 1;
   first = 1
-  rows = 4
+  rows = 6
   pagesArrOptions = []
   totalItems: number = 1;
   currentActivePage = { page: 1 }

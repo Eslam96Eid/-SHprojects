@@ -42,10 +42,10 @@ Q3:string;
     { name: 'اختياري', code: 0 }
   ];
   surveyQuestionType = [
-    { name: 'اختياري من متعدد', code: 0 },
-    { name: 'ملف', code: 1 },
-    { name: 'نجوم', code: 2 },
-    { name: 'نص حر ', code: 3 }
+    { name: 'اختياري من متعدد', code: 1 },
+    { name: 'ملف', code: 2 },
+    { name: 'نجوم', code: 3 },
+    { name: 'نص حر ', code: 0 }
   ];
   exclamationIcon = faExclamationCircle;
   righticon = faArrowRight;
