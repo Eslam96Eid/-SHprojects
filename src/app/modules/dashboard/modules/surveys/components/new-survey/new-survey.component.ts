@@ -157,7 +157,7 @@ Q3:string;
     })
   }
   addSubject() {
-    this.classSubjects.push(this.newSubjectGroup())
+    this.classSubjects.push(this.newSubjectGroup());
   }
 
   onItemSelect(item: any) {
@@ -167,11 +167,12 @@ Q3:string;
 
   }
 
-  uploadFile(e) {
+  uploadFile(e,i) {
     debugger;
     console.log(e.target.files[0].name);
     console.log(this._fileName);
-    this._fileName.push(e.target.files[0].name)
+    this._fileName[i] = e.target.files[0].name;
+   // this._fileName.push(e.target.files[0].name)
     console.log(this._fileName);
     // this.fileName = e.target.files[0].name
   }

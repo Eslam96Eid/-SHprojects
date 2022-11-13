@@ -63,7 +63,7 @@
                                         <label class="label" for="day">الملف </label>
 
                                         <div class="file-upload" (click)="file.click()">
-                                            <input type="file" name="" id="" hidden #file formControlName="attachment" (change)="uploadFile($event)">
+                                            <input type="file" name="" id="" hidden #file formControlName="attachment" (change)="uploadFile($event,i)">
                                             <img src="assets/images/shared/PDFSEC.svg" alt="upload">
 
                                 <div class="file">{{_fileName[i]==null  ? fileName : _fileName[i] }}</div>

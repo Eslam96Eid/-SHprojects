@@ -69,7 +69,6 @@ export class ViewListOfUsersComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.translationService.lang);
     this.getRoleList();
     this.initForm();
 
@@ -81,7 +80,8 @@ export class ViewListOfUsersComponent implements OnInit {
         ],
       }
     );
-    this.cities = this.userInformation.cities;
+    // this.cities = this.userInformation.cities;
+    this.getUsersList();
     this.getUsersList();
   }
   selectedUsersStatus:any;
@@ -106,7 +106,7 @@ export class ViewListOfUsersComponent implements OnInit {
       }
     }
     this.userInformation.getUsersList(this.filtration).subscribe(response => {
-      this.users_List = response?.data;
+      this.users_List = [...response?.data];
       this.indexes.totalAllData = response.total
       this.totalItems =response.total;
       this.indexes.loading = false;

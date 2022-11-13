@@ -132,8 +132,11 @@ export class SendBtnComponent implements OnInit {
        this.userService.EditAccount(this.accountModel).subscribe(res => {
        console.log(res);
        this.toastr.success(this.translate.instant('Updated Successfully'),'');
+      },err=> {
+        this.toastr.error('Failed!!','');
       });
     }
+    this.router.navigate([this.routeUrl],{relativeTo:this.route});
   }
 
   UploadAssignment(){
