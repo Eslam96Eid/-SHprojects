@@ -1,0 +1,50 @@
+<app-add-btn fs-4 [backGroundColor]="'btn-primary'" [route]="'register'" [content]="'breadcrumb.Studentregister'">
+</app-add-btn>
+
+<form [formGroup]="registernewchildform" class="container-fluid ">
+    <div class="radius-15 border p-5 mb-5 bg-white">
+        <div class="row gx-5 form-set  custom-form ">
+            <div class="col-md-4">
+                <label class="label" for="day">رقم الهوية</label>
+                <input type="text" formControlName="surveyTitle" id="day" pInputText placeholder="اكتب عنوان الاستبيان" />
+            </div>
+
+            <div class="col-md-4">
+                <label class="label" for="day">نوع الصلة</label>
+                <p-dropdown [options]="" formControlName="surveyType" optionLabel="name" placeholder="نوع الصلة"></p-dropdown>
+            </div>
+        </div>
+    </div>
+
+    <!-----------------------------add row------------------------------->
+    <div class="row">
+        <ul class="subjects" formArrayName="subjects">
+            <div class="row">
+                <div class="col-md-8">
+                    <P>يرجى ارفاق صورة الهوية</P>
+                    <app-file-upload view="full" title="ارفاق ملف"></app-file-upload>
+                </div>
+                <div class="col-md-4">
+                    <P>صورة الابن الشخصية</P>
+                    <app-file-upload view="full" title="ارفاق ملف"></app-file-upload>
+                </div>
+            </div>
+        </ul>
+    </div>
+
+    <div class="row">
+        <ul class="subjects" formArrayName="subjects">
+            <h3>المرفقات المطلوبة</h3>
+            <div class="row">
+                <div class="col-md-6 gap-3">
+                    <P>صورة اثبات تاريخ الميلاد</P>
+                    <app-file-upload view="full" title="ارفاق ملف"></app-file-upload>
+                </div>
+                <div class="col-md-4">
+                    <P>ملاحظة (اختيارية)</P>
+                    <textarea [rows]="5" [cols]="30" pInputTextarea [autoResize]="true"></textarea>
+                </div>
+            </div>
+        </ul>
+    </div>
+</form>

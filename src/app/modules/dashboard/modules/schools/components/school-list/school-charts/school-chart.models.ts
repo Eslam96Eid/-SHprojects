@@ -15,9 +15,10 @@ export class SchoolChartsModel {
     schoolCityDatasets: ChartConfiguration<'bar'>['data']['datasets'];
     schoolCityOptions: ChartConfiguration<'bar'>['options'] = {
       responsive: false, };
-    schoolCityChartLabels: Array<KeyValue<string, number>> = [];
+       schoolCityChartLabels: Array<KeyValue<string, number>> = [];
+       schoolCityChartStringLabels: Array<string> = [];
      // schoolCityChartLabels= ['المنطقة الوسطى', 'المنطقة الشرقية', 'المنطقة الشارقة'];
-
+      
 
     activeSchoolsDatasets: ChartConfiguration<'doughnut'>['data']['datasets'];
     activeSchoolsChartLabels = ['مفعلة', 'غير مفعلة'];

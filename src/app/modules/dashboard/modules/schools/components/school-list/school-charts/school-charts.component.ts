@@ -28,7 +28,7 @@ export class SchoolChartsComponent implements OnInit {
     private sharedService: SharedService,
  ) {
     this.initModels();
-    Chart.defaults.font.size = 13;
+    Chart.defaults.font.size = 11;
     Chart.defaults.font.family='Droid',
     Chart.defaults.scale.grid.display=false;
 
@@ -62,9 +62,9 @@ export class SchoolChartsComponent implements OnInit {
 
   private setCurriculumChartChartData(): void {
     const schoolCurriculum = this.model.chartData.schoolCurriculum;
+
     if (schoolCurriculum) {
       const schoolCurriculumValues = Object.values(schoolCurriculum);
-      console.log(schoolCurriculumValues)
       const isArabic = this.translate.currentLang === 'ar';
       this.model.schoolCurriculumDatasets = [{data: schoolCurriculumValues, backgroundColor:["#CD578A","#5BCEDD", "#F8C073","#f1f2f4","#93d9d9","#c1d6e1","#ff9776"]}];
       for (const key in schoolCurriculum) {
@@ -80,15 +80,17 @@ export class SchoolChartsComponent implements OnInit {
   private setRegionSchoolsChartData(): void {
     const schoolCity = this.model.chartData.schoolCity;
     if (schoolCity) {
+
       const schoolCityValues = Object.values(schoolCity);
       const isArabic = this.translate.currentLang === 'ar';
-      this.model.schoolCityDatasets = [{data: schoolCityValues,backgroundColor:["#CD578A","#CD578A","#5CD0DF", "#fefefe"]}];
-      console.log(this.model.schoolCityDatasets)
+      this.model.schoolCityDatasets = [{data: schoolCityValues, backgroundColor:["#CD578A","#5BCEDD","#5CD0DF", "#fefefe"], barThickness:30,barPercentage:0.7,borderRadius:25,}];
       for (const key in schoolCity) {
+        const name = isArabic ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length);
         this.model.schoolCityChartLabels.push({
-          key: isArabic ? key.slice(3, key.indexOf(',')) : key.slice(key.lastIndexOf(':') + 1, key.length),
+          key: name,
           value: schoolCity[key]
         });
+        this.model.schoolCityChartStringLabels.push(name);
       }
     }
   }
@@ -118,8 +120,8 @@ export class SchoolChartsComponent implements OnInit {
     this.model.activeSchoolsDatasets = [
       {
         data: [chartData.activeSchoolCount, chartData.inActiveSchoolCount],
-        backgroundColor: ["#F8C073", "#5CD0DF"]
-      },
+        backgroundColor: ["#F8C073", "#5CD0DF"]},
+
     ];
   }
 

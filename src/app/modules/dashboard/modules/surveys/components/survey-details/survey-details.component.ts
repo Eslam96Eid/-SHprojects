@@ -34,10 +34,10 @@ export class SurveyDetailsComponent implements OnInit {
     { name: 'اختياري', code: 0 }
   ];
   surveyQuestionType = [
-    { name: 'اختياري من متعدد', code: 0 },
-    { name: 'ملف', code: 1 },
-    { name: 'نجوم', code: 2 },
-    { name: 'نص حر ', code: 3 }
+    { name: 'اختياري من متعدد', code: 1 },
+    { name: 'ملف', code: 2 },
+    { name: 'نجوم', code: 3 },
+    { name: 'نص حر ', code: 0 }
   ];
   editSurvey: IEditSurvey = <IEditSurvey>{};
   subjects: ISurveyQuestion[]
@@ -82,7 +82,7 @@ export class SurveyDetailsComponent implements OnInit {
 
   ];
   get classSubjects(){ return this.assesmentFormGrp.controls['subjects'] as FormArray }
- 
+
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService, private fb:FormBuilder,    private layoutService: LayoutService,
@@ -99,7 +99,7 @@ export class SurveyDetailsComponent implements OnInit {
       subjects: this.fb.array([])
 
     }, formOptions);
- 
+
   }
   ngOnInit(): void {
     this.getSurveyById();
@@ -166,7 +166,7 @@ export class SurveyDetailsComponent implements OnInit {
   addSubject(){
     this.classSubjects.push(this.newSubjectGroup())
   }
- 
+
 
 onItemSelect(item: any) {
   console.log(item);
