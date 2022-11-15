@@ -2,6 +2,103 @@
 @import '../../../../../../../assets/css/components/breadcrumb';
 @import '../../../../../../../assets/css/components/forms.scss';
 @import '../../../../../../../assets/css/components/model';
+
+@import '../../../../../../../assets/css/utils/variables.scss';
+@import '../../../../../../../assets/css/components//forms.scss';
+
+%model{
+    position: absolute;
+    top: 140%;
+    left: 0;
+    background-color: #fff;
+    border-radius: 15px;
+    transition: all .3s ease-out;
+    box-shadow: 0 5px 2rem 1rem rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10;
+
+    &.show {
+        opacity: 1;
+        visibility: visible;
+        top: 117%;
+    }
+}
+
+
+.caption {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    padding: 1.25rem ;
+    margin-bottom: 1.5rem;
+    border-radius: 15px;
+    background-color: #F8FAFB;
+    &__filter {
+        // Search box and Buttons
+        &--actions {
+            display: flex;
+            column-gap: 1rem;
+        }
+        // Filter Box
+        &--box {
+            border: 1px solid $color-gray-100;
+            padding: 1rem;
+            border-radius: 12px;
+            font-size: 1.7rem;
+        }
+    }
+    // Import Export
+    .actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-inline-start: auto;
+
+        .filter {
+            position: relative;
+
+            &__model {
+                width: 40vw;
+                padding: 3rem;
+                &.sm{
+                    width: 30vw;
+            
+                }
+                .actions{
+                    .sm{
+                        font-size: 1.6rem !important;
+                    }
+                }
+
+                @extend %model;
+            }
+
+        }
+
+        .export{
+            position: relative;
+            &.sm{
+                display: none;
+        
+            }
+            &__model{
+
+                @extend %model;
+                top: 140%;
+                width: 10vw;
+                padding: 0.5rem 2rem 1rem 1rem;
+
+                p{color: $color-primary ;font-weight: 400;font-size: 1.5rem;}
+
+            }
+
+        }
+    }
+
+}
+
 .survey {
     &__content {
         padding: 4.5rem 3rem;

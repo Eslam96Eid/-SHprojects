@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, from, map, of, share, shareReplay, take } from 'rxjs';
-import { Curriculum, Division, Grade, Track } from 'src/app/core/models/global/global.model';
+import { Curriculum, Division, Grade, shool_DDL, Track } from 'src/app/core/models/global/global.model';
+import { School } from 'src/app/core/models/schools/school.model';
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { GenderEnum, ReligionEnum } from '../../enums/global/global.enum';
 import { StatusEnum } from '../../enums/status/status.enum';
@@ -12,6 +13,8 @@ import { StatusEnum } from '../../enums/status/status.enum';
 export class SharedService {
   allDivisions:Division[]
   allCurriculum: Curriculum[]
+  allSchools: shool_DDL[]
+  
   allGrades: Grade[]
   allTraks: Track[]
   allOptionalSubjects
@@ -84,5 +87,15 @@ export class SharedService {
   getAllOptionalSubjects(params){
     return this.http.get('/Subject/elective-subjects',params).pipe(take(1))
   }
-
+  getSchoolsByCurriculumId(curriculumId){
+    return this.http.get('/School/dropdowen?curriculumId='+curriculumId)
+    .pipe(
+      take(1),
+      map((res)=> {
+        debugger;
+        console.log(res)
+        this.allSchools = res
+        return res
+      }))
+  }
 }

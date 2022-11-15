@@ -1,11 +1,13 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AbstractControlOptions, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowRight, faCheck, faChevronDown, faExclamationCircle, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
 import { MenuItem } from 'primeng/api';
 import {IHeader } from 'src/app/core/Models/header-dashboard';
 import { ISurveyQuestion } from 'src/app/core/Models/IAddSurvey';
+import { IEditNewSurvey } from 'src/app/core/Models/IEditNewSurvey';
 import { IEditSurvey } from 'src/app/core/Models/IeditSurvey';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
@@ -88,7 +90,9 @@ export class SurveyDetailsComponent implements OnInit {
     private assessmentService: AssessmentService,
     private surveyService: SurveyService,
     private _router: ActivatedRoute,
-    public translationService: TranslationService) {    const formOptions: AbstractControlOptions = {
+    public translationService: TranslationService,
+    private toastr: ToastrService,
+    private router: Router) {    const formOptions: AbstractControlOptions = {
 
 
     };
@@ -147,6 +151,7 @@ getSurveyById()
 {
   this.surveyService.getSurveyById(Number(this._router.snapshot.paramMap.get('surveyId'))).subscribe(response=>{
     this.editSurvey = response ;
+    console.log(this.editSurvey);
     this.selectedSurveyType = this.editSurvey.surveyType;
     this.selectedSurveyType == 'Optional' ? 
     this.selectedSurveyType = this.surveyType[1] :
@@ -235,6 +240,52 @@ addDataIntoSubject(item){
       questionChoices: [item.questionChoices]
     }))
 }
+editNewSurvey: IEditNewSurvey = <IEditNewSurvey>{};
+addsurveyQuestion: ISurveyQuestion = <ISurveyQuestion>{};
+goToEditSurvey() {
+  debugger
+  console.log(this.assesmentFormGrp.value);
+  this.editNewSurvey.surveyQuestions = [];
+  this.editNewSurvey.title = { ar: '', en: '' };
+  this.editNewSurvey.title.ar = this.assesmentFormGrp.value.surveyTitle;
+  this.editNewSurvey.title.en = this.assesmentFormGrp.value.surveyTitle;
+  this.editNewSurvey.surveytype = this.assesmentFormGrp.value.surveyType.code;
 
 
+  this.assesmentFormGrp.value.subjects.forEach(element => {
+    this.addsurveyQuestion.questionChoices = [];
+
+    this.addsurveyQuestion.attachment = element.attachment;
+    this.addsurveyQuestion.questionText = element.questionText;
+    this.addsurveyQuestion.surveyQuestionType = element.surveyQuestionType.code;
+
+    
+    if (element.questionChoices != "" ) {
+      this.addsurveyQuestion.questionChoices.push(element.questionChoices);
+    }
+    if (element.questionChoices1 != "") {
+      this.addsurveyQuestion.questionChoices.push(element.questionChoices1);
+    }
+    if (element.questionChoices2 != "") {
+      this.addsurveyQuestion.questionChoices.push(element.questionChoices2);
+    }
+    if (element.questionChoices3 != "") {
+      this.addsurveyQuestion.questionChoices.push(element.questionChoices3);
+    }
+    let clone = {...this.addsurveyQuestion};
+    //this.editNewSurvey.surveyQuestions.push(clone);
+    
+  })
+
+ 
+  console.log("--- object to EDIT ---");
+  console.log(this.editNewSurvey);
+
+  // this.surveyService.Editsurvey(38,this.editNewSurvey).subscribe(res => {
+  //   console.log(res);
+  //   this.toastr.success('Add Successfully', '');
+  //   this.router.navigateByUrl('/dashboard/educational-settings/surveys');
+  // });
+
+}
 }

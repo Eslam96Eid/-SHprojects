@@ -11,7 +11,8 @@
     <div class="submit-btn d-flex justify-content-end position-absolute bottom-100 mb-5 downloadbtn "
         *ngIf="step==2 || step==1">
         <!-- <app-add-btn [backGroundColor]="'btn-primary'" [content]="'breadcrumb.downloadfiles'"></app-add-btn> -->
-        <button class="btn btn-primary btn--md">
+        <button class="btn btn-primary btn--md"
+        (click)="goToEditSurvey()">
             <span>{{'shared.save'| translate}}</span>
         </button>
         <button class="btn color-orange-200 cancelbtn" routerLink="/dashboard/educational-settings/surveys">

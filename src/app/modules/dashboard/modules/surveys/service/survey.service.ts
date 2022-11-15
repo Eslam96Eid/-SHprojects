@@ -6,6 +6,8 @@ import { map } from 'rxjs';
 
 import { HttpHandlerService } from 'src/app/core/services/http/http-handler.service';
 import { ISurvey } from 'src/app/core/Models/ISurvey';
+import { IAddSurvey } from 'src/app/core/Models/IAddSurvey';
+import { IEditNewSurvey } from 'src/app/core/Models/IEditNewSurvey';
 
 @Injectable({
   providedIn: 'root'
@@ -35,8 +37,7 @@ export class SurveyService {
     )
   }
 
-  GetSchoolsList(curriculumId:number) {
-    
+  GetSchoolsList(curriculumId:number) { 
     let params = new HttpParams();
     if(curriculumId !== null && curriculumId !== undefined ){
       params = params.append('curriculumId' , curriculumId.toString());
@@ -90,6 +91,15 @@ export class SurveyService {
     'zumo-api-version': '2.0.0',
 
 });
+
+
+Editsurvey(id : number ,data: IEditNewSurvey): Observable<any> {
+  return this.http.put(`${this.baseUrl}/Survey/${id}`, data);
+}
+
+SendSurvey(data: any): Observable<any> {
+  return this.http.post(`${this.baseUrl}`+'/Survey/send-survey', data);
+}
 
 }
 

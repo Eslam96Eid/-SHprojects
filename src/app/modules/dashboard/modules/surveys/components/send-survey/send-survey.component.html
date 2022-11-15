@@ -16,12 +16,16 @@
                 <div class="row gx-5 form-set">
                     <div class="col-md-4">
                         <label class="label" for="day">تاريخ ظهور الاستبيان </label>
-                        <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-calendar" [showIcon]="true" placeholder="dd/mm/yy" (onSelect)="selectedDate($event)"></p-calendar>
+                        <!-- <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-calendar" [showIcon]="true" placeholder="dd/mm/yy" (onSelect)="selectedDate($event)" formControlName="appearanceDate"></p-calendar> -->
+                        <p-calendar formControlName="appearanceDate" [showIcon]="true" inputId="icon" [style]="{'font-size': '1.6rem'}" (onSelect)="selectedDate($event)"  [minDate]="minDateValue" appValidation placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
                     </div>
 
                     <div class="col-md-4">
                         <label class="label" for="day">وقت ظهور الاستبيان </label>
-                        <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-clock" [showIcon]="true" placeholder="4:00 PM" (onSelect)="selectedDate($event)"></p-calendar>
+                        <!-- <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-clock" [showIcon]="true" placeholder="4:00 PM" (onSelect)="selectedDate($event)" formControlName="appearanceTime"></p-calendar> -->
+
+                        <p-calendar [style]="{'font-size': '1.6rem'}" formControlName="appearanceTime" icon="pi pi-clock" [timeOnly]="true" showIcon="true" (onSelect)="selectedDate($event)"  [hourFormat]="12" inputId="timeonly"></p-calendar>
+
                     </div>
                 </div>
 
@@ -30,12 +34,20 @@
                 <div class="row gx-5 form-set">
                     <div class="col-md-4">
                         <label class="label" for="day">تاريخ اختفاء الاستبيان </label>
-                        <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-calendar" [showIcon]="true" placeholder="dd/mm/yy" (onSelect)="selectedDate($event)"></p-calendar>
+                        <!-- <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-calendar" [showIcon]="true" placeholder="dd/mm/yy" (onSelect)="selectedDate($event)"
+                        formControlName="disAppearanceDate"></p-calendar> -->
+
+                        <p-calendar formControlName="disAppearanceDate" [showIcon]="true" inputId="icon" [style]="{'font-size': '1.6rem'}" (onSelect)="selectedDate($event)"  [minDate]="minDateValue" appValidation placeholder="dd/mm/yy" [readonlyInput]="true" dateFormat="dd/mm/yy"></p-calendar>
                     </div>
 
                     <div class="col-md-4">
                         <label class="label" for="day">وقت اختفاء الاستبيان</label>
-                        <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-clock" [showIcon]="true" placeholder="4:00 PM" (onSelect)="selectedDate($event)"></p-calendar>
+                        <!-- <p-calendar [style]="{'font-size': '1.6rem'}" timeOnly="true" icon="pi pi-clock" [showIcon]="true" placeholder="4:00 PM" (onSelect)="selectedDate($event)"
+                        formControlName="disAppearanceTime"></p-calendar> -->
+
+
+                        <p-calendar [style]="{'font-size': '1.6rem'}" formControlName="disAppearanceTime"
+                        (onSelect)="selectedDate($event)" icon="pi pi-clock" [timeOnly]="true" showIcon="true" [hourFormat]="12" inputId="timeonly"></p-calendar>
                     </div>
                 </div>
 
@@ -47,7 +59,7 @@
                         <div class="flex-grow-1">
 
                             <!-- <p-chips name="chronicDiseases" formControlName="chronicDiseases"  placeholder=""></p-chips> -->
-                            <p-multiSelect [options]="diseases" formControlName="chronicDiseases" optionLabel="name" display="chip"></p-multiSelect>
+                            <p-multiSelect [options]="parenNametList" formControlName="chronicDiseases" optionLabel="name" display="chip"></p-multiSelect>
 
 
 
@@ -84,7 +96,7 @@
             <!-- ACTIONS -->
             <ng-container *ngIf="step ==1">
                 <div class="actions d-flex  align-items-center justify-content-end ">
-                    <button type="button" class="btn btn-primary btn--md" (click)="showDialog()" icon="pi pi-info-circle" label="Show">
+                    <button type="button" class="btn btn-primary btn--md" (click)="SendSurvey()" icon="pi pi-info-circle" label="Show">
                     <span>{{'shared.send'| translate}} </span>
 
                   </button>
@@ -98,7 +110,7 @@
 
                 <div class="actions d-flex align-items-center gap-3 justify-content-end">
                     <div class="next-btn d-flex  align-items-center  ">
-                        <button class="btn btn-primary btn--md px-5" routerLink="./../survey-report">
+                        <button class="btn btn-primary btn--md px-5"  routerLink="./../survey-report">
                             <div class="icon">
                                 <img src="assets/images/shared/send.svg" alt="">
                             </div>
@@ -123,18 +135,69 @@
 
     <p-dialog header="اختيار  أولياء الأمور" [(visible)]="parentsModelOpened" [draggable]="false" [modal]="true" [style]="{width: '45vw',height:'67vh'}">
         <ng-template pTemplate="content">
+                
             <div class="custom-form parent-modal">
 
                 <div class="myInput myInput--full myInput--search p-input-icon-left ms-auto mb-5 mt-4">
-                    <i class="pi pi-search fs-3"></i>
-                    <input class="input rounded-4" type="text" pInputText placeholder="البحث برقم الهوية ID، الإسم..." [(ngModel)]="searchText" />
+       
+                    <div class="caption">
+                        <!-- Serach and Filter Button -->
+                        <div class="col-8  caption__filter caption__filter--actions">
+                            <div class="myInput myInput--full myInput--search p-input-icon-right ms-auto">
+                                <i class="pi pi-search fs-3"></i>
+                                <input class="input rounded-4" type="text" pInputText placeholder="البحث برقم الهوية ID، الإسم..."
+                                    [(ngModel)]="searchText" />
+                            </div>
+                        </div>
+                    
+                    
+                        <!-- Import Export -->
+                        <div class="col-3 actions">
+                            <div class="filter" (clickOutside)="showFilterModel=false">
+                                <button class="btn btn--sm btn-secondary" (click)="showFilterModel=!showFilterModel">
+                                    <img class="icon" src="assets/images/shared/filter.svg" alt="">
+                                    <span>{{'shared.filter'|translate}}</span>
+                                </button>
+                    
+                                <div class="filter__model custom-form" [class.show]="showFilterModel" [ngClass]="small?'sm':''">
+
+                                    <div class="row gx-5 form-set">
+
+                                        <div class="col">
+                                            <label class="label" for="curriculum">{{'shared.curriculum'|translate }}  </label>
+                                            <p-dropdown (onChange)="getSchoolBycurriculumId($event)" [options]="(curriculums$ | async)" [(ngModel)]="filtration.curricuulumId" optionValue="id" inputId="curriculum" optionLabel="name.ar" placeholder="{{'shared.chooseCurriculum'|translate }}"></p-dropdown>
+                                        </div>
+
+                                        <div class="col">
+                                            <label class="label" for="schools">{{'Schools'|translate }}  </label>
+                                            <p-dropdown (onChange)="getParentBySchoolId($event)" [options]="(schools$ |async)" [(ngModel)]="filtration.SchoolId" optionValue="id" inputId="schools" optionLabel="name.ar" placeholder="{{'shared.chooseSchool'|translate }}"></p-dropdown>
+                                        </div>
+                                  
+                                    </div>
+
+                        
+                    
+
+
+                                    <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
+                                        <span role="button" class="color-red-500 text-decoration-underline" [ngClass]="small?'sm':''" (click)="clearFilter()">امسح الكل</span>
+                                        <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">بحث</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                  
                 </div>
 
                 <div class="row gx-5 gy-4 form-set">
                     <ng-container *ngFor="let p of parentsList; let i = index">
                         <div class="col-md-6 d-flex align-items-center justify-content-between">
-                            <label class="label label--sm" for=""> {{p.firstName}} {{p.lastName}}</label>
-                            <p-checkbox name="subjects" [value]="p" [(ngModel)]="selectedParents"></p-checkbox>
+                            <label class="label label--sm" for=""> {{p.name.ar}} </label>
+                            <p-checkbox name="subjects" [value]="p" [(ngModel)]="selectedParents" (click)="AddToTextArea(p)"></p-checkbox>
                         </div>
                     </ng-container>
 

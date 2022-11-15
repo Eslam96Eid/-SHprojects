@@ -7,30 +7,6 @@
         </div>
     </div>
 
-    <!-- Filter Box -->
-    <!-- <ng-container *ngIf="showFilterBox">
-        <div class="caption__filter caption__filter--box custom-form">
-            <div class="row gx-5 mb-0" [formGroup]="filterForm">
-                <div class="col ">
-                    <label for="description">{{'shared.status'|translate }} </label>
-                    <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                </div>
-                <div class="col ">
-                    <label for="description">{{'shared.state'|translate }} </label>
-                    <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                </div>
-                <div class="col ">
-                    <label for="description">{{'shared.city'|translate }} </label>
-                    <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                </div>
-                <div class="col ">
-                    <label for="description">{{'shared.course'|translate }} </label>
-                    <p-dropdown formControlName="control" [options]="['yes', 'now']" inputId="description" optionLabel="name"></p-dropdown>
-                </div>
-            </div>
-        </div>
-    </ng-container> -->
-
 
     <!-- Import Export -->
     <div class="col-3 actions">
@@ -46,22 +22,6 @@
                 <div class="actions d-flex align-items-center justify-content-end mt-3 gap-5">
                     <span role="button" class="color-red-500 text-decoration-underline" [ngClass]="small?'sm':''" (click)="clearFilter()">امسح الكل</span>
                     <button class="btn btn-primary btn-sm" (click)="onFilterActivated()">بحث</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="export" *ngIf="hasExport" (clickOutside)="showExportModel=false" [ngClass]="small?'sm':''">
-            <button class="btn btn--sm btn-secondary" (click)="showExportModel=!showExportModel">
-                <img class="icon" src="assets/images/shared/download.svg" alt="">
-                <span>{{'shared.downloadFiles'|translate}}</span>
-            </button>
-            <div class="export__model " [class.show]="showExportModel">
-                <div role="button" (click)="exportCsv()">
-                    <p>{{'shared.export file as'|translate}}.csv</p>
-                </div>
-                <hr>
-                <div role="button" (click)="exportXslx()">
-                    <p>{{'shared.export file as'|translate}}.xslx</p>
                 </div>
             </div>
         </div>
