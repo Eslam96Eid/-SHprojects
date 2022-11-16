@@ -132,7 +132,7 @@
                                                 <div class="col-xs-4 col-lg-4" id="div_questionChoices_{{i}}"
                                                     [ngStyle]="{'display': 'none'}">
                                                     <label class="label" for="day">خيارات السؤال </label>
-                                                    <input type="text"  pInputText
+                                                    <input type="text"  pInputText formControlName="questionChoices"
                                                         class="form-control basicinput " placeholder="اكتب نص السؤال"
                                                         name="PID7" id="PID7">
                                                 </div>
@@ -142,7 +142,7 @@
 
                                                     <div class="file-upload" (click)="file.click()">
                                                         <input type="file" name="" id="" hidden #file
-                                                            formControlName="attachment" (change)="uploadFile($event)">
+                                                            formControlName="attachment" (change)="uploadFile($event,i)">
                                                         <img src="assets/images/shared/PDFSEC.svg" alt="upload">
 
                                                         <div class="file">{{_fileName[i]==null ? fileName : _fileName[i]
@@ -150,13 +150,15 @@
                                                         <img src="assets/images/shared/delete.svg" alt="delete file">
                                                     </div>
                                                 </div>
-                                                <div class="col-xs-4 col-lg-4" *ngFor="let item of subject.controls.questionChoices.value">
+                                                <div class="col-xs-4 col-lg-4" *ngFor="let item of AllList[i] ;let x=index">
                                                     <label class="label" for="day"> </label>
                                                     <div class="p-inputgroup" >
                                                         <input type="text"  
                                                             pInputText
                                                             class="form-control basicinput"
                                                             value="{{item}}"
+                                                            [(ngModel)]="AllList[i][x]"
+                                                            [ngModelOptions]="{standalone: true}"
                                                             placeholder="اكتب نص السؤال" name="PID7" id="PID7">
                                                     </div>
                                                 </div>

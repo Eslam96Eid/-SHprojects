@@ -1,7 +1,7 @@
 export interface IEditNewSurvey {
     title: ITitle
     surveytype: number
-    surveyQuestions: ISurveyQuestion[]
+    surveyQuestions: ISurveyQuestionEdit[]
   }
   
   export interface ITitle {
@@ -9,7 +9,7 @@ export interface IEditNewSurvey {
     ar: string
   }
   
-  export interface ISurveyQuestion {
+  export interface ISurveyQuestionEdit {
     surveyQuestionType: number
     questionText: string
     optionalAttachment: any
