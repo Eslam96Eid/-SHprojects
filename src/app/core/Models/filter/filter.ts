@@ -42,6 +42,10 @@ export interface Filter{
       status?:boolean |StatusEnum
       isactive?:boolean
 
+      //survey
+      SurveyType?:string;
+      SurveyStatus?:string;
+
   }
 
 

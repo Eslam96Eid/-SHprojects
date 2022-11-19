@@ -377,6 +377,7 @@
 
 
     "shared": {
+        "surveyStatus":"حالة الاستبيان",
         "not found": "لا يوجد",
         "cancel": "إلغاء",
         "close": "إغلاق",

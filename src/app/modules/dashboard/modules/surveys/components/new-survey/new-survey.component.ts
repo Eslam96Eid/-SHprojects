@@ -39,8 +39,8 @@ Q3:string;
   isQuestionChoicesShow = false;
   isAttachShow = false;
   surveyType = [
-    { name: 'اجباري', code: 1 },
-    { name: 'اختياري', code: 0 }
+    { name: 'اجباري', code: 0 },
+    { name: 'اختياري', code: 1 }
   ];
   surveyQuestionType = [
     { name: 'اختياري من متعدد', code: 1 },

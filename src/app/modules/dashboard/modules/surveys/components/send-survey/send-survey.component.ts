@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { faArrowLeft, faArrowRight, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { TranslateService } from '@ngx-translate/core';
@@ -164,10 +164,10 @@ export class SendSurveyComponent implements OnInit {
 
      // << FORMS >> //
      medicalFileForm= this.fb.group({
-      appearanceDate:'',
-      disAppearanceDate:'',
-      appearanceTime:'',
-      disAppearanceTime:'',
+      appearanceDate:['', [Validators.required]],
+      disAppearanceDate:['', [Validators.required]],
+      appearanceTime:['', [Validators.required]],
+      disAppearanceTime:['', [Validators.required]],
       surveyLink:'',
       chronicDiseases: [],
 

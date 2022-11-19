@@ -96,9 +96,8 @@
             <!-- ACTIONS -->
             <ng-container *ngIf="step ==1">
                 <div class="actions d-flex  align-items-center justify-content-end ">
-                    <button type="button" class="btn btn-primary btn--md" (click)="SendSurvey()" icon="pi pi-info-circle" label="Show">
+                    <button type="button" class="btn btn-primary btn--md"   [disabled]="!medicalFileForm.valid" (click)="SendSurvey()" icon="pi pi-info-circle" label="Show">
                     <span>{{'shared.send'| translate}} </span>
-
                   </button>
                     <!-- <button class="btn btn-outline-primary btn--md" (click)="step=2">
 

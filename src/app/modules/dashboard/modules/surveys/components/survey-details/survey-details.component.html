@@ -138,22 +138,7 @@
                                                         name="PID7" id="PID7">
                                                 </div>
                                                 <div class="col-md-4" id="div_attachment_{{i}}"
-                                                    [ngStyle]="{'display': 'none'}">
-                                                    <label class="label" for="day">الملف </label>
-
-                                                    <div class="file-upload" (click)="file.click()">
-                                                        <input type="file" name="" id="" hidden #file
-                                                            formControlName="attachment" (change)="uploadFile($event,i)">
-                                                        <img src="assets/images/shared/PDFSEC.svg" alt="upload">
-
-                                                        <div class="file">{{_fileName[i]==null ? fileName : _fileName[i]
-                                                            }}</div>
-                                                        <img src="assets/images/shared/delete.svg" alt="delete file">
-                                                    </div>
-                                                </div>
-
-
-                                                <div class="col-md-4" *ngIf="attachmentFlag">
+                                                    [ngStyle]="{'display' : (subject.get('surveyQuestionType').value.code ==2 ) ? 'block': 'none'}">
                                                     <label class="label" for="day">الملف </label>
                                                 
                                                     <div class="file-upload" (click)="file.click()">
@@ -165,8 +150,6 @@
                                                         <img src="assets/images/shared/delete.svg" alt="delete file">
                                                     </div>
                                                 </div>
-
-
 
                                                 <div class="col-xs-4 col-lg-4" *ngFor="let item of AllList[i] ;let x=index">
                                                     <label class="label" for="day"> </label>

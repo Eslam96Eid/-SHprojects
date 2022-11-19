@@ -7,10 +7,34 @@
 
 <div class="parents">
 
-    <div class="prim-table " *ngIf="isLoaded">
-        <p-table #dt [value]="assignmentList" [paginator]="true" [(rows)]="rows" [(first)]="first" sortMode="multiple">
+    <div class="prim-table" *ngIf="isLoaded">
+        <p-table  #dt [lazy]="true" [value]="surveyList.list" (onSort)="onSort($event)">
 
 
+        <!-- Table Caption -->
+        <ng-template pTemplate="caption">
+            <app-table-caption 
+            (onExport)="onExport($event)" 
+            (onFilter)="getSurveyList()" 
+            (onSearch)="filtration.KeyWord = $event; getSurveyList()" 
+            (onClear)="clearFilter()">
+
+                <div class="row gx-5 form-set">
+                    <div class="col">
+                        <label class="label" for="day">نوع الاستبيان </label>
+                        <p-dropdown [options]="surveyType"
+                        [(ngModel)]="filtration.SurveyType"  optionLabel="name"
+                        optionValue="code" placeholder="اجباري / اختياري"></p-dropdown>
+                    </div>
+                    <div class="col">
+                        <label class="label" for="curriculum">{{'shared.surveyStatus'|translate }}  </label>
+                        <p-dropdown [options]="surveyStatus" [(ngModel)]="filtration.SurveyStatus" optionValue="code" 
+                        inputId="curriculum" optionLabel="name" placeholder="مرسل / جديد"></p-dropdown>
+                    </div>
+                </div>
+            </app-table-caption>
+
+        </ng-template>
 
             <ng-template pTemplate="header">
                 <tr>
@@ -86,8 +110,7 @@
 
 
         <div>
-
-            <app-pagination [totalItems]="assignmentList.length " (paginationChanged)="onTableDataChange($event) ">
+            <app-pagination [totalItems]="surveyList.totalAllData " (paginationChanged)="onTableDataChange($event) ">
             </app-pagination>
         </div>
 

@@ -18,6 +18,10 @@ import { TranslationService } from 'src/app/core/services/translation/translatio
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
 import { SurveyService } from '../../service/survey.service';
+import { FileEnum } from 'src/app/shared/enums/file/file.enum';
+import { Table } from 'primeng/table';
+import { ExportService } from 'src/app/shared/services/export/export.service';
+import { Filter } from 'src/app/core/models/filter/filter';
 
 
 @Component({
@@ -26,8 +30,16 @@ import { SurveyService } from '../../service/survey.service';
   styleUrls: ['./surveys-list.component.scss']
 })
 export class SurveysListComponent implements OnInit {
-
+  surveyType = [
+    { name: 'اجباري', code: 0 },
+    { name: 'اختياري', code: 1 }
+  ];
+  surveyStatus = [
+    { name: 'جديد', code: 0 },
+    { name: 'مرسل', code: 1}
+  ];
   @ViewChild('pagination') pagination: Paginator;
+  isLoaded = false;
   page: number = 1;
   first = 1
   rows = 6
@@ -35,12 +47,11 @@ export class SurveysListComponent implements OnInit {
   totalItems: number = 1;
   currentActivePage = { page: 1 }
   paginationState: paginationState = { ...paginationInitialState }
-  isLoaded = false;
   assignmentList: ISurvey[] = [];
   pageNum = 1;
   pageSize = 50;
   searchKey: string = '';
-  filtration = {...Filtration,IndexTypeId: '',indexStatus:''};
+ // filtration = {...Filtration,IndexTypeId: '',indexStatus:''};
      @ViewChild('namebutton', { read: ElementRef, static:false }) namebutton: ElementRef;
   faEllipsisVertical = faEllipsisVertical;
 
@@ -66,18 +77,46 @@ export class SurveysListComponent implements OnInit {
     private translate: TranslateService,
     private router: Router,
     private Surveyservice: SurveyService,
-    private toastrService:ToastService) { }
-
-
-    getSurveyList(search = '', sortby = '', pageNum = 1, pageSize = 100, sortColumn = '', sortDir = '') {
-    this.Surveyservice.getSurveyList(search, sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
-
-      this.assignmentList = response?.data;
-      this.totalItems = this.assignmentList.length;
-      this.isLoaded = true;
+    private toastrService:ToastService,
+    private exportService: ExportService) { }
+    filtration :Filter = {...Filtration, SurveyType: '', SurveyStatus:''}
+    surveyList={
+      totalAllData:0,
+      total:0,
+      list:[],
+      loading:true
+      }
+    getSurveyList(){
+      debugger
+      console.log(this.filtration)
+      this.surveyList.loading=true
+      this.surveyList.list=[]
+      this.Surveyservice.getSurveyList(this.filtration).subscribe((res)=>{
+        this.surveyList.loading = false
+        this.surveyList.list = res.data
+        this.surveyList.totalAllData = res.totalAllData
+        this.surveyList.total =res.total
+        this.isLoaded = true;
+    }  ,err=> {
+        this.surveyList.loading=false
+        this.surveyList.total=0
     })
+    }
+    onSort(e){
+      console.log(e);
+      if(e.order==1) this.filtration.SortBy= 'old'
+      else if(e.order == -1) this.filtration.SortBy= 'update'
+      this.getSurveyList()
+    }
 
-  }
+  //   getSurveyList(search = '', sortby = '', pageNum = 1, pageSize = 100, sortColumn = '', sortDir = '') {
+  //   this.Surveyservice.getSurveyList(search, sortby, pageNum, pageSize, sortColumn, sortDir).subscribe(response => {
+
+  //     this.assignmentList = response?.data;
+  //     this.totalItems = this.assignmentList.length;
+  //   })
+
+  // }
 
   pageChanged(event: any) {
     this.pageNum = event.page;
@@ -116,8 +155,11 @@ export class SurveysListComponent implements OnInit {
     );
   }
   onTableDataChange(event: paginationState) {
-    this.first = event.first
-    this.rows = event.rows
+    this.filtration.Page = event.page
+		this.first = event.first
+		this.rows = event.rows;
+		this.getSurveyList();
+
 
   }
   onSearchClear() {
@@ -127,7 +169,7 @@ export class SurveysListComponent implements OnInit {
 
   applyFilter() {
     let searchData = this.searchKey.trim().toLowerCase();
-    this.getSurveyList(searchData, '', 1, 50, '', "asc");
+    this.getSurveyList();
   }
 
 
@@ -135,4 +177,19 @@ export class SurveysListComponent implements OnInit {
    notAvailable(): void {
     this.toastrService.warning(this.translate.instant('noURLFound'));
    }
+
+   onExport(fileType: FileEnum, table:Table){
+    this.exportService.exportFile(fileType, table, this.assignmentList)
+  }
+  clearFilter(){
+    this.filtration.KeyWord =''
+    this.filtration.SurveyStatus= null
+    this.filtration.SurveyType= null
+    this.getSurveyList()
+  }
+  paginationChanged(event: paginationState) {
+    this.filtration.Page = event.page
+    this.getSurveyList();
+
+  }
 }

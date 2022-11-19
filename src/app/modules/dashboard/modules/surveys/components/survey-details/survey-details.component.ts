@@ -35,8 +35,8 @@ export class SurveyDetailsComponent implements OnInit {
   selectedSurveyType : any;
   selectedSurveyQuestionType :any;
   surveyType = [
-    { name: 'اجباري', code: 1 },
-    { name: 'اختياري', code: 0 }
+    { name: 'اجباري', code: 0 },
+    { name: 'اختياري', code: 1 }
   ];
   surveyQuestionType = [
     { name: 'اختياري من متعدد', code: 1 },
@@ -165,7 +165,6 @@ getSurveyById()
 {
   this.surveyService.getSurveyById(Number(this._router.snapshot.paramMap.get('surveyId'))).subscribe(response=>{
     this.editSurvey = response ;
-    console.log(this.editSurvey);
     this.selectedSurveyType = this.editSurvey.surveyType;
     this.selectedSurveyType == 'Optional' ? 
     this.selectedSurveyType = this.surveyType[1] :
@@ -255,9 +254,19 @@ addDataIntoSubject(item){
   if(item.questionChoices){
     
     item.questionChoices.forEach((element)=>{
+      debugger;
+      console.log( this.list_names);
+      console.log( this.AllList);
+
       this.list_names.push(element);
       this.AllList[this.counter].push(element);
+
+      console.log( this.list_names);
+      console.log( this.AllList);
     })
+  }
+  if(item.attachment != null && item.attachment != ""){
+    this._fileName[this.counter] = item.attachment;
   }
     this.classSubjects.push(this.fb.group({
       surveyQuestionType: [this.selectedSurveyQuestionType],
@@ -270,8 +279,6 @@ addDataIntoSubject(item){
 editNewSurvey: IEditNewSurvey = <IEditNewSurvey>{};
 addsurveyQuestion: ISurveyQuestionEdit = <ISurveyQuestionEdit>{};
 goToEditSurvey() {
-  debugger;
-  console.log(this.assesmentFormGrp.value);
   this.editNewSurvey.surveyQuestions = [];
   this.editNewSurvey.title = { ar: '', en: '' };
   this.editNewSurvey.title.ar = this.assesmentFormGrp.value.surveyTitle;
@@ -281,17 +288,22 @@ goToEditSurvey() {
 
   this.assesmentFormGrp.value.subjects.forEach((element , index) => {
     this.addsurveyQuestion.questionChoices = [];
-    debugger;
-    console.log(element)
     this.addsurveyQuestion.attachment = element.attachment;
     this.addsurveyQuestion.optionalAttachment = element.attachment;
     this.addsurveyQuestion.questionText = element.questionText.toString();
     this.addsurveyQuestion.surveyQuestionType =Number(element.surveyQuestionType.code);
     this.addsurveyQuestion.questionChoices.push(element.questionChoices);
-    if(this.AllList[index]){
+    debugger
+    console.log(this.AllList[index]);
+    if(this.AllList[index] != undefined && this.AllList[index].length > 0){
+      debugger
+      console.log(this.AllList[index]);
+      let objList : string[]=[];
       this.AllList[index].forEach((list=>{
-        this.addsurveyQuestion.questionChoices.push(list);
+        objList.push(list)
+        //this.addsurveyQuestion.questionChoices.push(list);
       }))
+      this.addsurveyQuestion.questionChoices = objList;
     }
    
     let clone = {...this.addsurveyQuestion};
@@ -305,7 +317,7 @@ goToEditSurvey() {
 
   this.surveyService.Editsurvey(Number(this._router.snapshot.paramMap.get('surveyId')),this.editNewSurvey).subscribe(res => {
     console.log(res);
-    this.toastr.success('Add Successfully', '');
+    this.toastr.success('Edit Successfully', '');
     this.router.navigateByUrl('/dashboard/educational-settings/surveys');
   });
 
