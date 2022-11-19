@@ -10,6 +10,7 @@ import { IHeader, ITitle } from 'src/app/core/Models/header-dashboard';
 import { IAddSurvey, ISurveyQuestion } from 'src/app/core/Models/IAddSurvey';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { SurveyService } from './../../service/survey.service';
 
 
@@ -75,13 +76,20 @@ Q3:string;
 
   ];
   get classSubjects() { return this.assesmentFormGrp.controls['subjects'] as FormArray }
+  get canAddSubjects(): boolean {
+    return this.assesmentFormGrp.get('subjects').valid; 
+  }
+  private getTranslateValue(key: string): string {
+    return this.translate.instant(key);
+  }
   constructor(
     private layoutService: LayoutService,
     private translate: TranslateService,
     private headerService: HeaderService,
     private fb: FormBuilder,
     private router: Router, private Surveyservice: SurveyService,
-    private toastr: ToastrService) {
+    private toastr: ToastrService,
+    private toastService: ToastService) {
     const formOptions: AbstractControlOptions = {};
 
     this.assesmentFormGrp = fb.group({
@@ -94,7 +102,7 @@ Q3:string;
 
 
   ngOnInit(): void {
-    this.addSubject()
+    this.add_Subject();
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark');
     this.headerService.Header.next(
@@ -147,8 +155,8 @@ Q3:string;
 
   newSubjectGroup() {
     return this.fb.group({
-      surveyQuestionType: [''],
-      questionText: [''],
+      surveyQuestionType: ['', [Validators.required]],
+      questionText: ['', [Validators.required]],
       attachment: [''],
       questionChoices: [''],
       questionChoices1: [''],
@@ -157,8 +165,17 @@ Q3:string;
     })
   }
   addSubject() {
-    this.classSubjects.push(this.newSubjectGroup());
+    if(this.canAddSubjects){
+      this.classSubjects.push(this.newSubjectGroup());
+    }else{
+      this.toastService.warning(
+        this.getTranslateValue('pleaseFillTheAboveRate'),
+        this.getTranslateValue('warning'),
+        {timeOut: 3000}
+      );
+    }
   }
+  add_Subject() { this.classSubjects.push(this.newSubjectGroup()); }
 
   onItemSelect(item: any) {
 

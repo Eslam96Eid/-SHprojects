@@ -1,7 +1,8 @@
 <!-- <app-send-btn [route]="'/dashboard/educational-settings/surveys'" [content]="assesmentFormGrp"
     [typeOfAdd]="'AddSurvey'">
 </app-send-btn> -->
-<button class="btn btn-primary leftbtn align-items-center " role="button" (click)="goToAddNew()">
+<button class="btn btn-primary leftbtn align-items-center " role="button" (click)="goToAddNew()"
+[disabled]="!assesmentFormGrp.valid" >
     <!-- <fa-icon [icon]="checkIcon" class="icon "></fa-icon> -->
     {{'breadcrumb.Save'|translate}}
 
@@ -47,6 +48,12 @@
                                         <label for="PID7" class="label"><b>نص السؤال </b></label>
                                         <div class="p-inputgroup">
                                             <input type="text" formControlName="questionText" pInputText class="form-control basicinput " placeholder="اكتب نص السؤال" name="PID7" id="PID7">
+                                            <div *ngIf="classSubjects.controls[i].get('questionText').errors?.required && classSubjects.controls[i].get('questionText').touched">
+                                                <small id="helpId" class="form-text text-muted d-block" class="alert-danger">
+                                                  {{'shared.This Field is Required'|translate}}
+                                                  <fa-icon [icon]="exclamationIcon" class="dangericon ms-1"></fa-icon>
+                                              </small>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-xs-4 col-lg-4" id="div_questionChoices_{{i}}" [ngStyle]="{'display': 'none'}">

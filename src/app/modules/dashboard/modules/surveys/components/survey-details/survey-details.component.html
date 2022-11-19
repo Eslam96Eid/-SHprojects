@@ -12,7 +12,8 @@
         *ngIf="step==2 || step==1">
         <!-- <app-add-btn [backGroundColor]="'btn-primary'" [content]="'breadcrumb.downloadfiles'"></app-add-btn> -->
         <button class="btn btn-primary btn--md"
-        (click)="goToEditSurvey()">
+        (click)="goToEditSurvey()"
+        [disabled]="!assesmentFormGrp.valid">
             <span>{{'shared.save'| translate}}</span>
         </button>
         <button class="btn color-orange-200 cancelbtn" routerLink="/dashboard/educational-settings/surveys">
@@ -150,6 +151,23 @@
                                                         <img src="assets/images/shared/delete.svg" alt="delete file">
                                                     </div>
                                                 </div>
+
+
+                                                <div class="col-md-4" *ngIf="attachmentFlag">
+                                                    <label class="label" for="day">الملف </label>
+                                                
+                                                    <div class="file-upload" (click)="file.click()">
+                                                        <input type="file" name="" id="" hidden #file formControlName="attachment" (change)="uploadFile($event,i)">
+                                                        <img src="assets/images/shared/PDFSEC.svg" alt="upload">
+                                                
+                                                        <div class="file">{{_fileName[i]==null ? fileName : _fileName[i]
+                                                            }}</div>
+                                                        <img src="assets/images/shared/delete.svg" alt="delete file">
+                                                    </div>
+                                                </div>
+
+
+
                                                 <div class="col-xs-4 col-lg-4" *ngFor="let item of AllList[i] ;let x=index">
                                                     <label class="label" for="day"> </label>
                                                     <div class="p-inputgroup" >

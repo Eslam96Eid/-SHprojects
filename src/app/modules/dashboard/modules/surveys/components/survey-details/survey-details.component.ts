@@ -12,6 +12,7 @@ import { IEditSurvey } from 'src/app/core/Models/IeditSurvey';
 import { HeaderService } from 'src/app/core/services/header-service/header.service';
 import { TranslationService } from 'src/app/core/services/translation/translation.service';
 import { LayoutService } from 'src/app/layout/services/layout/layout.service';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
 import { AssessmentService } from '../../../assessment/service/assessment.service';
 import { SurveyService } from '../../service/survey.service';
 
@@ -83,7 +84,12 @@ export class SurveyDetailsComponent implements OnInit {
 
   ];
   get classSubjects(){ return this.assesmentFormGrp.controls['subjects'] as FormArray }
-
+  private getTranslateValue(key: string): string {
+    return this.translate.instant(key);
+  }
+  get canAddSubjects(): boolean {
+    return this.assesmentFormGrp.get('subjects').valid; 
+  }
   constructor(
     private translate: TranslateService,
     private headerService: HeaderService, private fb:FormBuilder,    private layoutService: LayoutService,
@@ -92,10 +98,8 @@ export class SurveyDetailsComponent implements OnInit {
     private _router: ActivatedRoute,
     public translationService: TranslationService,
     private toastr: ToastrService,
-    private router: Router) {    const formOptions: AbstractControlOptions = {
-
-
-    };
+    private router: Router,
+    private toastService: ToastService) {const formOptions: AbstractControlOptions = {};
     this.assesmentFormGrp = fb.group({
       surveyType: ['', [Validators.required]],
       surveyTitle: ['', [Validators.required]],
@@ -132,14 +136,23 @@ export class SurveyDetailsComponent implements OnInit {
 
   newSubjectGroup(){
     return this.fb.group({
-      surveyQuestionType: [''],
-      questionText: [''],
+      surveyQuestionType: ['', [Validators.required]],
+      questionText: ['', [Validators.required]],
       attachment: [''],
       questionChoices: ['']
     })
   }
   addSubject(){
-    this.classSubjects.push(this.newSubjectGroup())
+    if(this.canAddSubjects){
+      this.classSubjects.push(this.newSubjectGroup());
+    }else{
+      this.toastService.warning(
+        this.getTranslateValue('pleaseFillTheAboveRate'),
+        this.getTranslateValue('warning'),
+        {timeOut: 3000}
+      );
+    }
+    //this.classSubjects.push(this.newSubjectGroup())
   }
 
 
@@ -225,7 +238,7 @@ addDataIntoSubject(item){
       this.selectedSurveyQuestionType = this.surveyQuestionType[1];
       break;
     }
-    case 'نجوم': {
+    case 'SurveyRateQuestion': {
       this.selectedSurveyQuestionType = this.surveyQuestionType[2];
       break;
     }
@@ -253,8 +266,6 @@ addDataIntoSubject(item){
       questionChoices: [item.questionChoices]
     }))
     this.counter++;
-    debugger;
-    console.log(this.AllList)
 }
 editNewSurvey: IEditNewSurvey = <IEditNewSurvey>{};
 addsurveyQuestion: ISurveyQuestionEdit = <ISurveyQuestionEdit>{};
