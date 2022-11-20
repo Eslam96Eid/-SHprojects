@@ -21,6 +21,7 @@ import { FileEnum } from 'src/app/shared/enums/file/file.enum';
 import { Table } from 'primeng/table';
 import { ExportService } from 'src/app/shared/services/export/export.service';
 import { filter } from 'rxjs';
+import { UserInformationService } from '../../service/user-information.service';
 
 
 
@@ -31,6 +32,7 @@ import { filter } from 'rxjs';
 })
 export class ViewListOfUsersComponent implements OnInit {
   filtration :Filter = {...Filtration, roleId: '', isactive:null}
+  clearFiltration :Filter = {...Filtration, roleId: '', isactive:null}
   selectedRole:any
   paginationState= {...paginationInitialState}
   @Input('hasFilter') hasFilter:boolean=true;
@@ -63,7 +65,7 @@ export class ViewListOfUsersComponent implements OnInit {
     }
   filterForm
   isSkeletonVisible = true;
-  constructor(    private exportService: ExportService,private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserService,private fb:FormBuilder,private sharedService: SharedService,
+  constructor(    private exportService: ExportService,private headerService: HeaderService, private translate: TranslateService, private router: Router, private userInformation: UserInformationService,private fb:FormBuilder,private sharedService: SharedService,
     public translationService: TranslationService) {}
   users_List: IAccount[] = [];
 
@@ -81,15 +83,17 @@ export class ViewListOfUsersComponent implements OnInit {
       }
     );
     // this.cities = this.userInformation.cities;
-    this.getUsersList();
-    this.getUsersList();
+    this.getUsersList_init();
+    this.getUsersList_init();
   }
   selectedUsersStatus:any;
   getUsersList(){
     this.isSkeletonVisible = true;
     this.indexes.loading=true
-
-    this.selectedRole == undefined ? null : this.filtration.roleId = this.selectedRole.id;
+debugger
+    this.selectedRole == undefined ? 
+    this.filtration.roleId = "" : 
+    this.filtration.roleId = this.selectedRole.id;
     switch(this.selectedUsersStatus) {
       case 'Active': {
         this.filtration.isactive =true;
@@ -106,6 +110,23 @@ export class ViewListOfUsersComponent implements OnInit {
       }
     }
     this.userInformation.getUsersList(this.filtration).subscribe(response => {
+      this.users_List = [...response?.data];
+      this.indexes.totalAllData = response.total
+      this.totalItems =response.total;
+      this.indexes.loading = false;
+      this.isLoaded = true;
+
+    },err=> {
+      this.indexes.loading=false
+      this.indexes.total=0;
+    })
+  }
+
+
+  getUsersList_init(){
+    this.isSkeletonVisible = true;
+    this.indexes.loading=true;
+    this.userInformation.getUsersList_init().subscribe(response => {
       this.users_List = [...response?.data];
       this.indexes.totalAllData = response.total
       this.totalItems =response.total;
@@ -175,7 +196,9 @@ export class ViewListOfUsersComponent implements OnInit {
     this.filtration.KeyWord = ''
     this.filtration.roleId = null
     this.filtration.isactive = null
-    this.getUsersList();
+    this.selectedUsersStatus =''
+    this.selectedRole = undefined
+    this.getUsersList_init();
   }
 
   onExport(fileType: FileEnum, table:Table){

@@ -37,6 +37,7 @@ import { CardStudentComponent } from './components/card-student/card-student.com
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown/dropdown';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { UserInformationService } from '../modules/dashboard/modules/user-information/service/user-information.service';
 registerLocaleData(localeAr);
 
 
@@ -124,9 +125,7 @@ registerLocaleData(localeAr);
     ConfirmModelComponent,
     SendMessageComponent,
     CurrentLangPipe,
-    CardStudentComponent,
-    
-
-  ]
+    CardStudentComponent, ],
+    providers:[UserInformationService]
 })
 export class SharedModule { }

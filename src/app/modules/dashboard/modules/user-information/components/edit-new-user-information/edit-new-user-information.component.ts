@@ -109,8 +109,17 @@ export class AddEditUserInformationComponent implements OnInit {
       })
     })
   }
-
+  
+  getRoleList(){
+    this.userInformation.GetRoleList().subscribe(response => {
+		  this.roles = response;
+		})
+  }
   ngOnInit(): void {
+    this.userFormGrp.patchValue({
+      userStatus: false
+    })
+    this.getRoleList();
     this.getUserById();
     this.headerService.changeHeaderdata(this.componentHeaderData)
     this.layoutService.changeTheme('dark');
