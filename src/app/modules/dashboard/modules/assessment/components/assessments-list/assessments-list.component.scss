@@ -115,6 +115,19 @@ h3 {
     color: #A8A6A6;
 }
 
+::ng-deep .p-card {
+    .p-component {
+        width: 40rem;
+    }
+    .p-card-body {
+        padding: 0rem 1.3rem;
+    }
+}
+
+.edit-evaluation {
+    width: 100%;
+}
+
 ::ng-deep #cardSize {
     overflow-y: auto!important;
     height: 210px;

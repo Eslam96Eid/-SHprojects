@@ -16,6 +16,9 @@ import { ExportService } from 'src/app/shared/services/export/export.service';
 import { paginationInitialState } from 'src/app/core/classes/pagination';
 import { IHeader } from 'src/app/core/Models/header-dashboard';
 import { paginationState } from 'src/app/core/models/pagination/pagination.model';
+import { ToastService } from 'src/app/shared/services/toast/toast.service';
+import { ConfirmModelService } from 'src/app/shared/services/confirm-model/confirm-model.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-assessments-list',
   templateUrl: './assessments-list.component.html',
@@ -27,6 +30,8 @@ export class AssessmentsListComponent implements OnInit {
   checked:boolean=true;
   faEllipsisVertical = faEllipsisVertical;
   paginationState= {...paginationInitialState}
+  deleteValuation;
+  subscription:Subscription;
   //assessmentList: IAssesment[] = [];
   first = 0;
   rows = 3;
@@ -55,10 +60,16 @@ export class AssessmentsListComponent implements OnInit {
     loading: true
   }
 
-  constructor(private exportService: ExportService, private headerService: HeaderService,
-    private assessmentService: AssessmentService, private translate: TranslateService, private router: Router) { }
+  constructor(private exportService: ExportService,
+     private headerService: HeaderService,
+     private toastService: ToastService,
+    public confirmModelService: ConfirmModelService,
+    private assessmentService: AssessmentService,
+    private translate: TranslateService,
+     private router: Router) { }
    isAdmin =false;
   ngOnInit(): void {
+    this.confirmModelService.isOpend$.subscribe(val => this.isOpend = val)
     let userRole =JSON.parse(localStorage.getItem('$AJ$user'));
     userRole.roles.forEach(element => {
       if(element.name=='Admin'){
@@ -106,6 +117,36 @@ export class AssessmentsListComponent implements OnInit {
     else if (e.order == -1) this.filtration.SortBy = 'update'
     this.getRate()
   }
+  confirmDeleteListener(){
+    this.subscription=this.confirmModelService.confirmed$.subscribe(val => {
+      console.log(val);
+
+      if (val) this.deleteeValuation(this.deleteValuation)
+
+    })
+  }
+  deleteeValuation(id)
+  {
+        this.assessmentService.deleteRate(id).subscribe((res)=>{
+          console.log(res)
+          this.getRate();
+          console.log(this.getRate);
+
+          this.toastService.success(this.translate.instant('dashboard.Subjects.Subject deleted Successfully'));
+        }
+        ,
+        (err)=>{
+          this.getRate();
+
+          this.toastService.error(this.translate.instant('dashboard.Subjects.error happened,try again'));
+
+        })
+
+
+
+}
+
+
   onExport(fileType: FileEnum, table: Table) {
     this.exportService.exportFile(fileType, table, this.assessmentList.list)
   }
@@ -139,6 +180,17 @@ export class AssessmentsListComponent implements OnInit {
   }
   onChange(event: any ) {
     this.selectedStatus= event.value;
+}
+//////////////////////////////
+
+isOpend
+deletedSubject : any;
+confirm(){
+  debugger
+  console.log(this.deletedSubject.id);
+  this.deleteeValuation(this.deletedSubject.id)
+  this.confirmModelService.confirmed$.next(true)
+  this.confirmModelService.closeModel()
 }
 
 }

@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { IuploadAssignment } from 'src/app/core/Models/IuploadAssignment';
 import { IAccountAddOrEdit } from 'src/app/core/Models/IAccountAddOrEdit';
 import { UserService } from 'src/app/core/services/user/user.service';
+import { UserInformationService } from 'src/app/modules/dashboard/modules/user-information/service/user-information.service';
 
 @Component({
   selector: 'app-send-btn',
@@ -33,7 +34,7 @@ export class SendBtnComponent implements OnInit {
 
 
   constructor(private _router: ActivatedRoute,private router: Router,private route:ActivatedRoute ,
-    private userService : UserService, private translate: TranslateService,
+    private userService : UserInformationService, private translate: TranslateService,
     private assignmentService : AssignmentServiceService, private toastr: ToastrService) { }
 
   ngOnInit(): void {

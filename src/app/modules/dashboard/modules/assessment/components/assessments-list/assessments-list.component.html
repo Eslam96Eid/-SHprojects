@@ -1,7 +1,7 @@
 <app-add-btn bg-primary [backGroundColor]="'btn-outline-primary'" [route]="'/dashboard/educational-settings/assessments/new-assessment'" [content]="'breadcrumb.AddASSesment'">
     <fa-icon [icon]="plusIcon" class="icon "></fa-icon>
 </app-add-btn>
-<div class="prim-table" *ngIf="assessmentList.totalAllData || assessmentList.loading" >
+<div class="prim-table" *ngIf="assessmentList.totalAllData || assessmentList.loading">
 
 
     <p-table #dt [value]="assessmentList.list" (onSort)="onSort($event)" [lazy]="true">
@@ -24,8 +24,8 @@
     <div class="row">
         <ng-container *ngIf="assessmentList.list.length > 0">
             <ng-container *ngFor="let rate of assessmentList.list">
-                <div class="col-md-4 ml-3">
-                    <p-card class="p-5 m-4 radius-5">
+                <div class="col-md-4 col-sm-12 ml-3 align-self-center">
+                    <p-card class="p-5 m-2 radius-5 card-evaluation">
                         <ng-template pTemplate="header">
                             <div class="row  p-3  radius-5">
                                 <div class="col-md-6">
@@ -84,25 +84,59 @@
                                 </ng-container>
                             </ng-container>
                         </div>
-                        <ng-template pTemplate="footer">
-                            <div class="btn btn-primary " role="button" (click)="navigateToEditAssessment(rate.id)">
-                                <fa-icon class="icon" [icon]="checkIcon"></fa-icon>
-                                {{'shared.Edit'|translate}}
+                        <ng-template pTemplate="footer mb-3">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <button class="btn btn-primary edit-evaluation" (click)="navigateToEditAssessment(rate.id) " width="120">
+                                      <img src="assets/images/shared/pen.svg" alt="">
+                                        {{'shared.Edit'|translate}}
+                                    </button>
+                                </div>
+                                <div class="col-md-2">
+                                    <a class="link" (click)="this.confirmModelService.openModel(); deletedSubject=rate">
+                                        <img src=" assets/images/shared/DeleteRate.svg " alt="delete">
+                                    </a>
+                                    <!-- <button (click)="deletedSubject(rate.id)">
+                                      <img src=" assets/images/shared/DeleteRate.svg " alt="delete">
+                                        </button> -->
+                                </div>
                             </div>
+
+
                         </ng-template>
                     </p-card>
                 </div>
             </ng-container>
         </ng-container>
     </div>
-    <div *ngIf="assessmentList.total > paginationState.rows">
+    <div *ngIf="assessmentList.total> paginationState.rows">
         <app-pagination [totalItems]="assessmentList.total" (paginationChanged)="paginationChanged($event)"></app-pagination>
     </div>
 
-    
-    <ng-container *ngIf="assessmentList.total == 0" >
+
+    <ng-container *ngIf="assessmentList.total == 0">
         <app-informative-block title="{{'emptyList.Assessment List is empty' |translate}}" src="assets/images/empty-list/empty-list.svg"></app-informative-block>
     </ng-container>
 
     <app-loader></app-loader>
+</div>
+
+
+
+
+<div class="confirm-model">
+
+    <p-dialog [(visible)]="isOpend" [modal]="true" [style]="{width: '35vw'}" >
+        <ng-template pTemplate="content">
+           <div class="d-flex flex-column justify-content-center align-items-center gap-4">
+            <img src="assets/images/empty-list/basket.svg" alt="">
+            <p class="fs-3">{{'shared.confirmDelete' |translate}}</p>
+            <div class="d-flex align-items-center gap-4 mt-3">
+                <button (click)="confirm()" class="btn btn-primary">{{'shared.yes' |translate}}</button>
+                <button (click)="this.confirmModelService.closeModel()" class="btn btn-secondary">{{'shared.no' |translate}}</button>
+    
+            </div>
+           </div>
+        </ng-template>
+    </p-dialog>
 </div>

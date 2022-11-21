@@ -34,11 +34,12 @@ export class AssessmentService {
   updateRate(data: IRate): Observable<any> {
     return this.http.put('/Rate', data);
   }
+  deleteRate(id:number): Observable<any> {
+    return this.http.delete(`/Rate/${id}`).pipe(take(1));
+  }
 
   getRateById(id: number): Observable<any> {
-    return this.http.get(`/Rate/${id}`, {}, {
-
-    });
+    return this.http.get(`/Rate/${id}`, {}, {});
   }
 
 }
